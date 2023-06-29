@@ -37,7 +37,7 @@ const Onboarding: React.FC<OnboardingProps> = ({
 
   return (
     <Container>
-      <div className="flex flex-col items-center justify-center min-h-screen relative">
+      <div className="flex flex-col items-center justify-center min-h-screen py-10 relative">
         {header}
         <motion.div
           animate={{ opacity: 1, x: 0 }}
@@ -78,7 +78,7 @@ const Onboarding: React.FC<OnboardingProps> = ({
               <h2 className="text-[8.5vw] min-[400px]:text-4xl font-bold text-black dark:text-[#ffffffdd] mt-12">
                 {title}
               </h2>
-              <p className="text-[17px] text-black dark:text-[#ffffffdd] mt-6 max-w-md text-center relative z-10">
+              <p className="text-[17px] text-black dark:text-[#ffffffdd] mt-6 max-w-sm text-center relative z-10">
                 {text}
               </p>
             </div>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
+import Link from 'next/link';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { motion } from 'framer-motion';
 
@@ -62,7 +63,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="w-full min-[475px]:w-fit flex items-center justify-end mt-14 min-[475px]:mt-8 md:absolute md:bottom-12 md:right-10">
+      <footer className="w-full min-[475px]:w-fit flex items-center justify-center mt-14 min-[475px]:mt-8 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Next"
           onClick={() => {
@@ -70,6 +71,7 @@ export default function Home() {
           }}
           filled
           upperCase
+          small
         />
       </footer>
     );
@@ -109,6 +111,7 @@ export default function Home() {
             setStep(1);
           }}
           upperCase
+          small
         />
         <Button
           label="Next"
@@ -117,6 +120,7 @@ export default function Home() {
           }}
           filled
           upperCase
+          small
         />
       </footer>
     );
@@ -155,6 +159,7 @@ export default function Home() {
             setStep(2);
           }}
           upperCase
+          small
         />
         <Button
           label="Get Started"
@@ -163,6 +168,7 @@ export default function Home() {
           }}
           filled
           upperCase
+          small
         />
       </footer>
     );
@@ -183,7 +189,7 @@ export default function Home() {
   if (STEPS.FOURTH_SLIDE === step) {
     bodyContent = (
       <Container>
-        <div className="flex flex-col items-center justify-center min-h-screen relative">
+        <div className="flex flex-col items-center justify-center min-h-screen py-10 relative">
           <header className="absolute top-12 left-0">
             <MdArrowBackIosNew
               className="text-white text-2xl hover:text-gray-300 transition cursor-pointer"
@@ -204,23 +210,28 @@ export default function Home() {
                 Welcome to UpTodo
               </h2>
               <p className="text-[17px] text-black dark:text-[#ffffffdd] mt-6 max-w-md text-center relative z-10">
-                Please login to your account or create a new account
-                to continue
+                Please login to your account or create a new account to continue
               </p>
             </main>
             <footer className="w-full sm:w-fit flex flex-col sm:flex-row items-center justify-between gap-8 mt-16">
-              <Button
-                label="Login"
-                onClick={() => {}}
-                filled
-                upperCase
-              />
-              <Button
-                label="Register"
-                onClick={() => {}}
-                outline
-                upperCase
-              />
+              <Link href="login" className="w-full max-w-sm">
+                <Button
+                  label="Login"
+                  onClick={() => {}}
+                  filled
+                  upperCase
+                  small
+                />
+              </Link>
+              <Link href="register" className="w-full max-w-sm">
+                <Button
+                  label="Register"
+                  onClick={() => {}}
+                  outline
+                  upperCase
+                  small
+                />
+              </Link>
             </footer>
           </motion.div>
         </div>
