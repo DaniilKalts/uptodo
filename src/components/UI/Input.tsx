@@ -1,7 +1,8 @@
 'use client';
 
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import React, { FC } from 'react';
+
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
 interface InputProps {
   id: string;
@@ -26,15 +27,16 @@ const Input: FC<InputProps> = ({
   errors,
   errorMessage,
 }) => (
-  <div className="flex flex-col mb-5">
+  <div className="flex flex-col mb-4 min-[400px]:mb-5">
     {label && (
       <label
         htmlFor={id}
         className={`
-        text-lg
-        min-[400px]:text-xl
-        text-black
-        dark:text-[#ffffffdd] mb-2
+          text-lg
+          min-[400px]:text-xl
+          text-[#3d3d3d]
+          dark:text-[#ffffffdd] 
+          mb-2
         `}
       >
         {label}
@@ -45,23 +47,25 @@ const Input: FC<InputProps> = ({
       type={type}
       value={value}
       placeholder={placeholder}
-      {...register(id, { required: 'You have to fill this field!' })}
-      autoComplete="off"
       className={`
         px-4
-        py-3
+        py-[10px]
         text-base
-        min-[400px]:text-${small ? 'lg' : 'xl'}
-      bg-[#1D1D1D] 
-      text-white
+        ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
+      text-[#1D1D1D] 
+      dark:text-white
+      dark:bg-[#1D1D1D] 
         border 
         border-[#979797] 
         rounded-lg
         shadow-sm
-        ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
+        min-[400px]:py-3
+        min-[400px]:text-${small ? 'lg' : 'xl'}
       `}
+      autoComplete="off"
+      {...register(id, { required: 'You have to fill this field!' })}
     />
-    {errors[id] && <p className="text-red-500 mt-1">{errorMessage}</p>}
+    {errors[id] && <p className="mt-1 text-red-500">{errorMessage}</p>}
   </div>
 );
 

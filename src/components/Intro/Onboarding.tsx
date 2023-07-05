@@ -1,9 +1,10 @@
 import React from 'react';
 
 import Image from 'next/image';
+
 import { motion } from 'framer-motion';
 
-import Container from '../Container';
+import Container from '../UI/Container';
 
 interface OnboardingProps {
   step: number;
@@ -27,9 +28,9 @@ const Onboarding: React.FC<OnboardingProps> = ({
       case 1:
         return 256;
       case 2:
-        return 305;
+        return 275;
       case 3:
-        return 305;
+        return 275;
       default:
         return 256;
     }
@@ -37,7 +38,7 @@ const Onboarding: React.FC<OnboardingProps> = ({
 
   return (
     <Container>
-      <div className="flex flex-col items-center justify-center min-h-screen py-10 relative">
+      <div className="relative flex flex-col items-center justify-center min-h-screen py-10">
         {header}
         <motion.div
           animate={{ opacity: 1, x: 0 }}
@@ -46,17 +47,17 @@ const Onboarding: React.FC<OnboardingProps> = ({
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center justify-center"
         >
-          <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
+          <div className="flex flex-col items-center justify-center md:flex-row md:justify-between">
             <div className="flex flex-col items-center justify-center">
               <Image
                 src={imageSrc}
                 width={imageSize()}
                 height={imageSize()}
                 alt="Management"
-                className="min-[475px]:w-80 md:w-96 mt-6"
+                className="mt-6 min-[400px]:w-80 md:w-96"
                 priority
               />
-              <div className="flex items-center justify-center gap-3 w-36 mt-16">
+              <div className="flex items-center justify-center gap-3 mt-16 w-36">
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
@@ -75,10 +76,10 @@ const Onboarding: React.FC<OnboardingProps> = ({
               </div>
             </div>
             <div className="flex flex-col items-center justify-center md:ml-9">
-              <h2 className="text-[8.5vw] min-[400px]:text-4xl font-bold text-black dark:text-[#ffffffdd] mt-12">
+              <h2 className="text-[1.75rem] font-bold text-[#3d3d3d] dark:text-[#ffffffdd] text-center mt-12 min-[400px]:text-4xl">
                 {title}
               </h2>
-              <p className="text-[17px] text-black dark:text-[#ffffffdd] mt-6 max-w-sm text-center relative z-10">
+              <p className="text-sm min-[400px]:text-base text-[#3d3d3d] dark:text-[#ffffffdd] mt-3 min-[400px]:mt-6 max-w-sm text-center relative z-10">
                 {text}
               </p>
             </div>

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* enlarging size of loading spinner */
+.go1858758034 {
+  width: 16px !important;
+  height: 16px !important;
+}

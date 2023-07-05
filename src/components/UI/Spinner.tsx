@@ -4,11 +4,11 @@ import Image from 'next/image';
 
 const Spinner = () => (
   <Image
-    width={28}
-    height={28}
+    width={24}
+    height={24}
     src="/images/icons/spinner.svg"
     alt="spinner"
-    className="inline animate-spin"
+    className="inline sm:w-7 sm:h-7 animate-spin"
   />
 );
 
