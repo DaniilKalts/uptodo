@@ -18,12 +18,6 @@ const Welcome = () => {
   return (
     <Container>
       <div className="relative flex flex-col items-center justify-center min-h-screen py-10">
-        <header className="absolute left-0 top-12">
-          <MdArrowBackIosNew
-            className="text-2xl text-white transition cursor-pointer hover:text-gray-300"
-            onClick={() => router.back()}
-          />
-        </header>
         <motion.div
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
@@ -31,6 +25,12 @@ const Welcome = () => {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center justify-center"
         >
+          <header className="absolute left-0 top-12">
+            <MdArrowBackIosNew
+              className="text-2xl text-white transition cursor-pointer hover:text-gray-300"
+              onClick={() => router.back()}
+            />
+          </header>
           <main className="flex flex-col items-center justify-center w-full">
             <h2 className="text-[8.5vw] min-[400px]:text-4xl font-bold text-center text-[#3d3d3d] dark:text-[#ffffffdd] mt-12">
               Welcome to UpTodo

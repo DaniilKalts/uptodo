@@ -16,14 +16,13 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillGithub } from 'react-icons/ai';
 
-import Container from '../../components/UI/Container';
-import Input from '../../components/UI/Input';
-import Button from '../../components/UI/Button';
+import Container from '../../../components/UI/Container';
+import Input from '../../../components/UI/Input';
+import Button from '../../../components/UI/Button';
 
-interface RegisterInputs extends FieldValues {
+interface LoginInputs extends FieldValues {
   userName: string;
   password: string;
-  confirmPassword: string;
 }
 
 const schema = yup.object().shape({
@@ -45,32 +44,26 @@ const schema = yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
       'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character',
     ),
-  confirmPassword: yup
-    .string()
-    .required('Confirm password is required')
-    .oneOf([yup.ref('password')], 'Confirm Password must match the Password'),
 });
 
-const Register = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-  } = useForm<RegisterInputs>({
+  } = useForm<LoginInputs>({
     mode: 'all',
     defaultValues: {
       userName: '',
       password: '',
-      confirmPassword: '',
     },
     resolver: yupResolver(schema),
   });
 
   const userName = watch('userName');
   const password = watch('password');
-  const confirmPassword = watch('confirmPassword');
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
@@ -80,7 +73,7 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data, event) => {
     event?.preventDefault();
-    if (userName.length && password.length && confirmPassword.length) {
+    if (userName.length && password.length) {
       setIsLoading(true);
       const toastLoading = toast.loading('Loading...');
 
@@ -88,35 +81,43 @@ const Register = () => {
         setIsLoading(false);
 
         toast.remove(toastLoading);
-        toast.error('Failed to register!', {
+        toast.error('Invalid email or password!', {
           duration: 3000,
         });
+
+        router.push('home');
 
         reset();
       }, 2000);
     }
   };
 
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     setIsGoogleLoading(true);
 
-    setTimeout(() => {
-      setIsGoogleLoading(false);
+    try {
+      // signIn('google');
+    } catch (err) {
       toast.error('Something went wrong!', {
         duration: 3000,
       });
-    }, 2000);
+    } finally {
+      setIsGoogleLoading(false);
+    }
   };
 
   const githubSignIn = () => {
     setIsGithubLoading(true);
 
-    setTimeout(() => {
-      setIsGithubLoading(false);
+    try {
+      // signIn('github');
+    } catch (err) {
       toast.error('Something went wrong!', {
         duration: 3000,
       });
-    }, 2000);
+    } finally {
+      setIsGithubLoading(false);
+    }
   };
 
   return (
@@ -129,7 +130,7 @@ const Register = () => {
           />
         </header>
         <h1 className="text-4xl min-[400px]:text-5xl font-semibold text-[#3d3d3d] dark:text-[#ffffffdd] mb-8 min-[400px]:mb-10">
-          Register
+          Login
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
@@ -155,20 +156,9 @@ const Register = () => {
               errors={errors}
               errorMessage={errors.password?.message as string}
             />
-            <Input
-              id="confirmPassword"
-              type="password"
-              value={confirmPassword}
-              placeholder="Confirm Password"
-              register={register}
-              label="Confirm Password"
-              small
-              errors={errors}
-              errorMessage={errors.confirmPassword?.message as string}
-            />
           </div>
           <Button
-            label="Register"
+            label="Login"
             onClick={onSubmit}
             filled
             isLoading={isLoading}
@@ -185,14 +175,14 @@ const Register = () => {
         </div>
         <div className="flex flex-col gap-6 mb-6">
           <Button
-            label="Register with Google"
+            label="Login with Google"
             onClick={googleSignIn}
             outline
             disabled={isGoogleLoading}
             icon={FcGoogle}
           />
           <Button
-            label="Register with Github"
+            label="Login with Github"
             onClick={githubSignIn}
             outline
             disabled={isGithubLoading}
@@ -200,12 +190,12 @@ const Register = () => {
           />
         </div>
         <p className="text-[#979797] text-center">
-          Already have an account?{' '}
+          Don’t have an account?{' '}
           <Link
-            href="login"
+            href="register"
             className="text-[#8875FF] dark:text-[#ffffffdd] hover:underline cursor-pointer"
           >
-            Login
+            Register
           </Link>
         </p>
       </div>
@@ -213,4 +203,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
