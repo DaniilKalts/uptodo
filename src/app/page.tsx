@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 
-import Logo from '../components/Intro/Logo';
-import Onboarding from '../components/Intro/Onboarding';
-import Button from '../components/UI/Button';
+import Logo from '@/components/Intro/Logo';
+import Onboarding from '@/components/Intro/Onboarding';
+import Button from '@/components/UI/Button';
 
 import step1 from '../../public/images/intro/step1.svg';
 import step2 from '../../public/images/intro/step2.svg';
@@ -51,7 +51,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[400px]:text-lg cursor-pointer"
+          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[475px]:text-lg cursor-pointer"
         >
           Skip
         </Link>
@@ -59,7 +59,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="w-full min-[400px]:w-fit flex items-center justify-center mt-10 md:absolute md:bottom-12 md:right-10">
+      <footer className="w-full min-[475px]:w-fit flex items-center justify-center mt-10 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Next"
           onClick={() => {
@@ -90,7 +90,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[400px]:text-lg cursor-pointer"
+          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[475px]:text-lg cursor-pointer"
         >
           Skip
         </Link>
@@ -98,7 +98,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="w-full min-[400px]:w-fit min-[400px]:gap-8 flex items-center justify-between mt-10 md:absolute md:bottom-12 md:right-10">
+      <footer className="w-full flex items-center justify-between mt-10  min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Back"
           onClick={() => {
@@ -136,7 +136,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[400px]:text-lg cursor-pointer"
+          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[475px]:text-lg cursor-pointer"
         >
           Skip
         </Link>
@@ -144,7 +144,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="w-full min-[400px]:w-fit min-[400px]:gap-8 flex items-center justify-between mt-16 md:absolute md:bottom-12 md:right-10">
+      <footer className="w-full flex items-center justify-between mt-16 min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Back"
           onClick={() => {

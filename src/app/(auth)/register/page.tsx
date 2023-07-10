@@ -16,9 +16,9 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillGithub } from 'react-icons/ai';
 
-import Container from '../../../components/UI/Container';
-import Input from '../../../components/UI/Input';
-import Button from '../../../components/UI/Button';
+import Container from '@/components/UI/Container';
+import Input from '@/components/UI/Input';
+import Button from '@/components/UI/Button';
 
 interface RegisterInputs extends FieldValues {
   userName: string;
@@ -127,14 +127,14 @@ const Register = () => {
 
   return (
     <Container>
-      <div className="w-full min-h-screen flex flex-col justify-center max-w-[425px] pt-24 pb-12 min-[400px]:py-10 mx-auto relative">
-        <header className="min-[400px]:hidden absolute top-10 left-0">
+      <div className="w-full min-h-screen flex flex-col justify-center max-w-[425px] pt-24 pb-12 md:py-10 mx-auto relative">
+        <header className="absolute left-0 top-10 md:hidden">
           <MdArrowBackIosNew
             className="text-2xl text-white transition cursor-pointer hover:text-gray-300"
             onClick={() => router.back()}
           />
         </header>
-        <h1 className="text-4xl min-[400px]:text-5xl font-semibold text-[#3d3d3d] dark:text-[#ffffffdd] mb-8 min-[400px]:mb-10">
+        <h1 className="text-4xl font-semibold text-[#3d3d3d] dark:text-[#ffffffdd] mb-8 md:text-5xl md:mb-10">
           Register
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -181,10 +181,10 @@ const Register = () => {
             disabled={!!Object.keys(errors).length}
           />
         </form>
-        <div className="inline-flex items-center justify-center w-full my-6 min-[400px]:my-8">
+        <div className="inline-flex items-center justify-center w-full my-6 md:my-8">
           <hr className="w-full h-[2px] my-4 border-0 rounded bg-[#3d3d3d]" />
-          <div className="absolute px-2 -translate-x-1/2 left-1/2 bg-white dark:bg-[#121212]">
-            <span className="text-lg min-[400px]:text-[22px] text-[#121212] dark:text-[#e5e5e5]">
+          <div className="absolute -translate-x-1/2 px-2 left-1/2 bg-white dark:bg-[#121212]">
+            <span className="text-lg text-[#121212] dark:text-[#e5e5e5] md:text-[22px]">
               or
             </span>
           </div>

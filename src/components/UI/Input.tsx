@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
@@ -16,7 +16,7 @@ interface InputProps {
   errorMessage: string;
 }
 
-const Input: FC<InputProps> = ({
+const Input: React.FC<InputProps> = ({
   id,
   type,
   value,
@@ -27,16 +27,16 @@ const Input: FC<InputProps> = ({
   errors,
   errorMessage,
 }) => (
-  <div className="flex flex-col mb-4 min-[400px]:mb-5">
+  <div className="flex flex-col mb-4 min-[475px]:mb-5">
     {label && (
       <label
         htmlFor={id}
         className={`
           text-lg
-          min-[400px]:text-xl
           text-[#3d3d3d]
           dark:text-[#ffffffdd] 
           mb-2
+          min-[475px]:text-xl
         `}
       >
         {label}
@@ -59,8 +59,8 @@ const Input: FC<InputProps> = ({
         border-[#979797] 
         rounded-lg
         shadow-sm
-        min-[400px]:py-3
-        min-[400px]:text-${small ? 'lg' : 'xl'}
+        min-[475px]:py-3
+        min-[475px]:text-${small ? 'lg' : 'xl'}
       `}
       autoComplete="off"
       {...register(id, { required: 'You have to fill this field!' })}

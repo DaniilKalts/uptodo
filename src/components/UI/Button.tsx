@@ -63,7 +63,7 @@ const Button: React.FC<ButtonProps> = ({
       whitespace-nowrap
       disabled:cursor-not-allowed 
       disabled:opacity-70 
-      min-[400px]:text-${small ? 'base' : 'lg'}
+      min-[475px]:text-${small ? 'base' : 'lg'}
     `}
     disabled={disabled || isLoading}
     onClick={onClick}

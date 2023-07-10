@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* enlarging size of loading spinner */
+/* enlarging size of loading toast spinner */
 .go1858758034 {
   width: 16px !important;
   height: 16px !important;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 12px;
+  background-color: #d6d6d6;
 }

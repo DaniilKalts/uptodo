@@ -54,7 +54,7 @@ const Onboarding: React.FC<OnboardingProps> = ({
                 width={imageSize()}
                 height={imageSize()}
                 alt="Management"
-                className="mt-6 min-[400px]:w-80 md:w-96"
+                className="mt-6 min-[475px]:w-80 md:w-96"
                 priority
               />
               <div className="flex items-center justify-center gap-3 mt-16 w-36">
@@ -76,10 +76,10 @@ const Onboarding: React.FC<OnboardingProps> = ({
               </div>
             </div>
             <div className="flex flex-col items-center justify-center md:ml-9">
-              <h2 className="text-[1.75rem] font-bold text-[#3d3d3d] dark:text-[#ffffffdd] text-center mt-12 min-[400px]:text-4xl">
+              <h2 className="text-[1.75rem] font-bold text-[#3d3d3d] dark:text-[#ffffffdd] text-center mt-12 min-[475px]:text-4xl">
                 {title}
               </h2>
-              <p className="text-sm min-[400px]:text-base text-[#3d3d3d] dark:text-[#ffffffdd] mt-3 min-[400px]:mt-6 max-w-sm text-center relative z-10">
+              <p className="text-sm text-[#3d3d3d] dark:text-[#ffffffdd] mt-3 max-w-sm text-center relative z-10 min-[475px]:text-base min-[475px]:mt-6">
                 {text}
               </p>
             </div>
