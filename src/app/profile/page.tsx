@@ -261,7 +261,7 @@ const Profile = () => (
               link="login"
               svg={
                 <svg
-                  className="text-[#FF4949] group-hover:text-[#e72525]"
+                  className="text-[#FF4949] group-hover:text-[#e03b3b]"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"

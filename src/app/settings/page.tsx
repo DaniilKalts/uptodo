@@ -39,7 +39,7 @@ const Settings = () => (
             </h5>
             <ProfileLink
               text="Change app color"
-              link="settings"
+              onClick={() => document.documentElement.classList.toggle('dark')}
               svg={
                 <svg
                   className="text-[#3d3d3d] group-hover:text-black dark:text-[#ffffffdd] dark:group-hover:text-white"
@@ -121,7 +121,6 @@ const Settings = () => (
                   />
                   <path
                     fill="currentColor"
-                    fill-opacity=".87"
                     d="M15 22.75H9c-5.43 0-7.75-2.32-7.75-7.75V9c0-5.43 2.32-7.75 7.75-7.75h6c5.43 0 7.75 2.32 7.75 7.75v6c0 5.43-2.32 7.75-7.75 7.75Zm-6-20C4.39 2.75 2.75 4.39 2.75 9v6c0 4.61 1.64 6.25 6.25 6.25h6c4.61 0 6.25-1.64 6.25-6.25V9c0-4.61-1.64-6.25-6.25-6.25H9Z"
                   />
                 </svg>
