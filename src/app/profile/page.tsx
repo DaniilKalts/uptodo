@@ -9,7 +9,7 @@ import Container from '@/components/UI/Container';
 import ProfileLink from '@/components/Profile/ProfileTypography';
 
 const Profile = () => (
-  <div className="pb-36">
+  <div className="pb-36 md:pb-40">
     <Container>
       <div className="flex flex-col items-center justify-center mx-auto mt-8">
         <header>
