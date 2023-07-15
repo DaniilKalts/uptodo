@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({
       w-full
       max-w-${small ? 'sm' : 'md'}
       gap-2
-      px-8
+      px-5
       py-3
       text-base
       ${
@@ -46,8 +46,13 @@ const Button: React.FC<ButtonProps> = ({
           : ''
       }
       ${
-        !filled && !outline
+        label === 'Back'
           ? 'text-[#ffffff70] bg-transparent hover:text-[#d9d9d970]'
+          : ''
+      }
+      ${
+        label === 'Cancel'
+          ? 'text-[#8875FF] hover:text-[#7969e1] bg-transparent'
           : ''
       }
       ${
@@ -64,6 +69,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled:cursor-not-allowed 
       disabled:opacity-70 
       min-[475px]:text-${small ? 'base' : 'lg'}
+      min-[475px]:px-8
     `}
     disabled={disabled || isLoading}
     onClick={onClick}

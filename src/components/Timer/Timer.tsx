@@ -1,13 +1,20 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 
 import Button from '../UI/Button';
 
-const Timer = () => {
-  const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+interface TimerInterface {
+  timerSeconds: number;
+  onEdit: () => void;
+}
+
+const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
   const [timerLabel, setTimerLabel] = useState<string>('Start');
 
-  const initialSecons: number = 10;
-  const [seconds, setSeconds] = useState<number>(initialSecons);
+  const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+
+  const [seconds, setSeconds] = useState<number>(timerSeconds);
 
   const [accumulativeSecond, setAccumulativeSecond] = useState<number>(0);
 
@@ -28,7 +35,7 @@ const Timer = () => {
 
   const onTimerReset = () => {
     setCircluarIndicator(initialCircularIndicator);
-    setSeconds(initialSecons);
+    setSeconds(timerSeconds);
     setAccumulativeSecond(0);
     setTimerLabel('Start');
     setIsTimerRunning(false);
@@ -43,7 +50,7 @@ const Timer = () => {
         setCircluarIndicator(
           (prev) =>
             // eslint-disable-next-line implicit-arrow-linebreak
-            Math.max(prev - 691 / initialSecons / 100, 64),
+            Math.max(prev - 691 / timerSeconds / 100, 64),
           // eslint-disable-next-line function-paren-newline
         );
       }, 10);
@@ -61,7 +68,7 @@ const Timer = () => {
       accumulativeSecond !== 0
     ) {
       setSeconds(
-        Math.max(initialSecons - parseFloat(accumulativeSecond.toFixed(3)), 0),
+        Math.max(timerSeconds - parseFloat(accumulativeSecond.toFixed(3)), 0),
       );
     }
   }, [accumulativeSecond]);
@@ -72,6 +79,10 @@ const Timer = () => {
       setIsTimerRunning(false);
     }
   }, [seconds]);
+
+  useEffect(() => {
+    setSeconds(timerSeconds);
+  }, [timerSeconds]);
 
   return (
     <div className="flex flex-col items-center mb-12">
@@ -119,7 +130,7 @@ const Timer = () => {
                 ? 'text-red-500'
                 : ''
             }
-            ${!seconds && 'blink-hard'}
+            ${!seconds && timerSeconds > 0 && 'blink-hard'}
             absolute
           `}
         >
@@ -133,8 +144,8 @@ const Timer = () => {
         <div className="w-1/4">
           <Button
             label="Edit"
-            onClick={() => {}}
-            disabled={isTimerRunning}
+            onClick={() => onEdit()}
+            disabled={accumulativeSecond > 0}
             outline
           />
         </div>
@@ -150,7 +161,7 @@ const Timer = () => {
           <Button
             label="Reset"
             onClick={onTimerReset}
-            disabled={timerLabel === 'Start' && seconds > 0}
+            disabled={seconds === timerSeconds || isTimerRunning}
             outline
           />
         </div>

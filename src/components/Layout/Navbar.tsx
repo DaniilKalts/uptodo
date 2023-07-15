@@ -9,7 +9,7 @@ const Navbar = () => {
   const currentRoute = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 z-50 w-full h-20 bg-[#363636] md:h-24">
+    <nav className="fixed bottom-0 left-0 z-40 w-full h-20 bg-[#363636] md:h-24">
       <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
         <Link
           href="home"
