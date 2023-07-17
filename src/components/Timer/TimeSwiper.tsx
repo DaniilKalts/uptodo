@@ -2,14 +2,20 @@ import React from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { Mousewheel } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 interface TimerSwiperInterface {
+  initialSlide: number;
   setTime: (seconds: number) => void;
 }
 
-const TimerSwiper: React.FC<TimerSwiperInterface> = ({ setTime }) => (
+const TimerSwiper: React.FC<TimerSwiperInterface> = ({
+  initialSlide,
+  setTime,
+}) => (
   <div id="swiper">
     <Swiper
       className="mySwiper"
@@ -19,7 +25,10 @@ const TimerSwiper: React.FC<TimerSwiperInterface> = ({ setTime }) => (
       }}
       speed={200}
       loop={true}
+      mousewheel={true}
+      modules={[Mousewheel]}
       grabCursor
+      initialSlide={initialSlide}
       onSlideChange={(swiper) => setTime(swiper.realIndex)}
     >
       {Array.from({ length: 60 }, (_, index) => index).map((minute) => (

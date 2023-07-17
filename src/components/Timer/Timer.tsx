@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 
 import Button from '../UI/Button';
 
+import expiredSound from '../../../public/sounds/expiredSound.mp3';
+
 interface TimerInterface {
   timerSeconds: number;
   onEdit: () => void;
@@ -17,6 +19,12 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
   const [seconds, setSeconds] = useState<number>(timerSeconds);
 
   const [accumulativeSecond, setAccumulativeSecond] = useState<number>(0);
+
+  const [timerSound, setTimerSound] = useState<any>(null);
+
+  useEffect(() => {
+    setTimerSound(new Audio(expiredSound));
+  }, []);
 
   const initialCircularIndicator: number = 755;
   const [circluarIndicator, setCircluarIndicator] = useState<number>(
@@ -34,6 +42,8 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
   };
 
   const onTimerReset = () => {
+    timerSound?.pause();
+    timerSound.currentTime = 0;
     setCircluarIndicator(initialCircularIndicator);
     setSeconds(timerSeconds);
     setAccumulativeSecond(0);
@@ -74,7 +84,9 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
   }, [accumulativeSecond]);
 
   useEffect(() => {
-    if (seconds === 0) {
+    if (seconds === 0 && isTimerRunning) {
+      timerSound.play();
+
       setTimerLabel('Start');
       setIsTimerRunning(false);
     }
@@ -137,8 +149,8 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
           {minutesString}:{secondsString}
         </p>
       </div>
-      <p className="text-base text-center text-[#3d3d3d] dark:text-white mt-4 mb-6 max-w-md min-[475px]:text-lg">
-        While your focus mode is on, all of your notifications should be off
+      <p className="text-base text-center text-[#3d3d3d] dark:text-white mt-4 mb-6 max-w-sm min-[475px]:text-lg">
+        {"While your focus mode is on, make sure, you don't leave the app"}
       </p>
       <div className="flex items-center justify-between w-full max-w-sm gap-5">
         <div className="w-1/4">
@@ -161,7 +173,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
           <Button
             label="Reset"
             onClick={onTimerReset}
-            disabled={seconds === timerSeconds || isTimerRunning}
+            disabled={isTimerRunning || accumulativeSecond === 0}
             outline
           />
         </div>

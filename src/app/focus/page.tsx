@@ -17,12 +17,14 @@ const Focus = () => {
     <div className="pb-36 md:pb-40">
       <Container>
         <TimerModal
+          timerSeconds={timerSeconds}
           isModal={isChooseTimeModal}
           onCancel={() => {
             document.body.style.overflow = 'auto';
             setIsChooseTimeModal(false);
           }}
           onSave={(seconds: number) => {
+            document.body.style.overflow = 'auto';
             setIsChooseTimeModal(false);
             setTimerSeconds(seconds);
           }}
