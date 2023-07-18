@@ -1,10 +1,7 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "airbnb-base",
-    "airbnb-typescript"
-  ],
+  "extends": ["next/core-web-vitals", "airbnb-base", "airbnb-typescript"],
   "parserOptions": {
     "project": "./tsconfig.json"
-  }
+  },
+  "ignorePatterns": ["src/utils/FocusData.js"]
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import TimerSwiper from '@/components/Timer/TimeSwiper';
 
-import Modal from '../Modal';
+import Modal from './Modal';
 import Button from '../Button';
 
 interface TimerModalInterface {

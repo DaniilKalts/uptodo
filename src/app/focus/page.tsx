@@ -2,11 +2,14 @@
 
 import React, { useState } from 'react';
 
+import { chartData, chartOptions } from '@/utils/FocusConfig';
+
 import TimerModal from '@/components/UI/Modals/TimerModal';
 import Navbar from '@/components/Layout/Navbar';
 import Container from '@/components/UI/Container';
 import FocusTask from '@/components/Focus/FocusTask';
 import Timer from '@/components/Timer/Timer';
+import FocusChart from '@/components/Focus/FocusChart/FocusChart';
 
 const Focus = () => {
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
@@ -43,7 +46,13 @@ const Focus = () => {
                 setIsChooseTimeModal((prev) => !prev);
               }}
             />
-            <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] mb-5 min-[475px]:text-2xl">
+            <div>
+              <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] mb-4 min-[475px]:text-2xl min-[475px]:mb-8">
+                Overview:
+              </h4>
+              <FocusChart chartData={chartData} chartOptions={chartOptions} />
+            </div>
+            <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] mt-12 mb-5 min-[475px]:text-2xl">
               Time Spent:
             </h4>
             <FocusTask
