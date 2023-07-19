@@ -2,7 +2,12 @@
 
 import React, { useState } from 'react';
 
-import { chartData, chartOptions } from '@/utils/FocusConfig';
+import {
+  barChartData,
+  barChartOptions,
+  pieChartData,
+  pieChartOptions,
+} from '@/utils/FocusConfig';
 
 import TimerModal from '@/components/UI/Modals/TimerModal';
 import Navbar from '@/components/Layout/Navbar';
@@ -10,6 +15,7 @@ import Container from '@/components/UI/Container';
 import FocusTask from '@/components/Focus/FocusTask';
 import Timer from '@/components/Timer/Timer';
 import FocusChart from '@/components/Focus/FocusChart/FocusChart';
+import Select from '@/components/UI/Select';
 
 const Focus = () => {
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
@@ -47,10 +53,18 @@ const Focus = () => {
               }}
             />
             <div>
-              <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] mb-4 min-[475px]:text-2xl min-[475px]:mb-8">
-                Overview:
-              </h4>
-              <FocusChart chartData={chartData} chartOptions={chartOptions} />
+              <div className="flex justify-between items-center mb-10 min-[475px]:mb-6">
+                <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
+                  Overview:
+                </h4>
+                <Select />
+              </div>
+              <FocusChart
+                pieChartData={pieChartData}
+                pieChartOptions={pieChartOptions}
+                barChartData={barChartData}
+                barChartOptions={barChartOptions}
+              />
             </div>
             <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] mt-12 mb-5 min-[475px]:text-2xl">
               Time Spent:
@@ -95,7 +109,7 @@ const Focus = () => {
                 </div>
               }
               title="Work"
-              text="You spent 6 hours on Workout today"
+              text="You spent 6 hours on Work today"
             />
             <FocusTask
               logo={

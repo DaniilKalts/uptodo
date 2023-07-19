@@ -97,7 +97,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
   }, [timerSeconds]);
 
   return (
-    <div className="flex flex-col items-center mb-12">
+    <div className="flex flex-col items-center mb-14">
       <div className="flex items-center justify-center">
         <svg className="transform -rotate-90 w-[250px] h-[250px]">
           <circle
