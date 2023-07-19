@@ -16,7 +16,6 @@ interface ButtonProps {
   upperCase?: boolean;
   small?: boolean;
   icon?: IconType;
-  iconSide?: 'left' | 'right';
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -29,21 +28,12 @@ const Button: React.FC<ButtonProps> = ({
   upperCase,
   small,
   icon: Icon,
-  iconSide,
 }) => (
   <button
     className={`
       flex
       items-center
       justify-center
-      ${
-        // eslint-disable-next-line no-nested-ternary
-        iconSide === 'left'
-          ? 'flex-row'
-          : iconSide === 'right'
-          ? 'flex-row-reverse'
-          : ''
-      }
       w-full
       max-w-${small ? 'sm' : 'md'}
       gap-2
