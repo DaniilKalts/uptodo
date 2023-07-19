@@ -6,7 +6,7 @@ import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar, Doughnut } from 'react-chartjs-2';
 
 import { useMediaQuery } from 'react-responsive';
 
@@ -32,7 +32,7 @@ const FocusChart: React.FC<FocusChartInterface> = ({
     <>
       {isMobileDevice ? (
         <>
-          <Pie
+          <Doughnut
             className="overflow-hidden rounded-3xl"
             width="1050"
             height="650"

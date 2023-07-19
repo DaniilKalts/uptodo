@@ -146,7 +146,7 @@ export const pieChartData = {
       ],
       datalabels: {
         anchor: 'center',
-        align: 'end',
+        align: 'center',
         formatter(_, context) {
           return `${
             [
