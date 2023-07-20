@@ -1,12 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
-  barChartData,
-  barChartOptions,
-  pieChartData,
-  pieChartOptions,
+  weekBarChartData,
+  weekBarChartOptions,
+  weekDoughnutChartData,
+  weekDoughnutChartOptions,
+  todayBarChartData,
+  todayBarChartOptions,
+  todayDoughnutChartData,
+  todayDoughnutChartOptions,
+  specificBarChartData,
+  specificDoughnutChartOptions,
+  specificDoughnutChartData,
 } from '@/utils/FocusConfig';
 
 import TimerModal from '@/components/UI/Modals/TimerModal';
@@ -17,10 +24,71 @@ import Timer from '@/components/Timer/Timer';
 import FocusChart from '@/components/Focus/FocusChart/FocusChart';
 import Select from '@/components/UI/Select';
 
+import { ChartConfig } from '@/types';
+
 const Focus = () => {
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
-
   const [isChooseTimeModal, setIsChooseTimeModal] = useState<boolean>(false);
+
+  const [stats, setStats] = useState<string>('This Week');
+  const [chartConfig, setChartConfig] = useState<ChartConfig>({
+    barChartData: weekBarChartData,
+    barChartOptions: weekBarChartOptions,
+    doughnutChartData: weekDoughnutChartData,
+    doughnutChartOptions: weekDoughnutChartOptions,
+  });
+
+  useEffect(() => {
+    if (stats === 'This Week') {
+      setChartConfig({
+        barChartData: weekBarChartData,
+        barChartOptions: weekBarChartOptions,
+        doughnutChartData: weekDoughnutChartData,
+        doughnutChartOptions: weekDoughnutChartOptions,
+      });
+    } else if (stats === 'Today') {
+      setChartConfig({
+        barChartData: todayBarChartData,
+        barChartOptions: todayBarChartOptions,
+        doughnutChartData: todayDoughnutChartData,
+        doughnutChartOptions: todayDoughnutChartOptions,
+      });
+    } else if (stats === 'Specific Task') {
+      const chartData = specificBarChartData;
+
+      chartData.datasets[0].label = 'Time spent';
+      chartData.datasets[0].data = [0.5, 2, 0.5, 3, 0.5, 1, 0, 6];
+      chartData.datasets[0].backgroundColor = [
+        '#A5A5A5',
+        '#A5A5A5',
+        '#A5A5A5',
+        '#A5A5A5',
+        '#A5A5A5',
+        '#8875FF',
+        '#A5A5A5',
+      ];
+      chartData.datasets[0].hoverBackgroundColor = [
+        '#838383',
+        '#838383',
+        '#838383',
+        '#838383',
+        '#838383',
+        '#7969e1',
+        '#838383',
+      ];
+
+      const donught = specificDoughnutChartData;
+
+      donught.datasets[0].data = [0.5, 2, 0.5, 3, 0.5, 1, 0];
+
+      setChartConfig({
+        barChartData: chartData,
+        barChartOptions: weekBarChartOptions,
+        doughnutChartData: donught,
+        doughnutChartOptions: specificDoughnutChartOptions,
+      });
+    }
+  }, [stats]);
 
   return (
     <div className="pb-36 md:pb-40">
@@ -57,14 +125,13 @@ const Focus = () => {
                 <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
                   Overview:
                 </h4>
-                <Select />
+                <Select
+                  value={stats}
+                  setValue={(newValue: string) => setStats(newValue)}
+                  options={['This Week', 'Today', 'Specific Task']}
+                />
               </div>
-              <FocusChart
-                pieChartData={pieChartData}
-                pieChartOptions={pieChartOptions}
-                barChartData={barChartData}
-                barChartOptions={barChartOptions}
-              />
+              <FocusChart chartConfig={chartConfig} />
             </div>
             <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] mt-12 mb-5 min-[475px]:text-2xl">
               Time Spent:

@@ -9,23 +9,16 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar, Doughnut } from 'react-chartjs-2';
 
 import { useMediaQuery } from 'react-responsive';
+import { ChartConfig } from '@/types';
 
 interface FocusChartInterface {
-  pieChartData: any;
-  pieChartOptions: any;
-  barChartData: any;
-  barChartOptions: any;
+  chartConfig: ChartConfig;
 }
 
 Chart.register(CategoryScale);
 Chart.register(ChartDataLabels);
 
-const FocusChart: React.FC<FocusChartInterface> = ({
-  pieChartData,
-  pieChartOptions,
-  barChartData,
-  barChartOptions,
-}) => {
+const FocusChart: React.FC<FocusChartInterface> = ({ chartConfig }) => {
   const isMobileDevice = useMediaQuery({ maxWidth: 475 });
 
   return (
@@ -36,8 +29,8 @@ const FocusChart: React.FC<FocusChartInterface> = ({
             className="overflow-hidden rounded-3xl"
             width="1050"
             height="650"
-            data={pieChartData}
-            options={pieChartOptions}
+            data={chartConfig.doughnutChartData}
+            options={chartConfig.doughnutChartOptions}
           />
         </>
       ) : (
@@ -45,8 +38,8 @@ const FocusChart: React.FC<FocusChartInterface> = ({
           className="overflow-hidden rounded-3xl"
           width="1050"
           height="650"
-          data={barChartData}
-          options={barChartOptions}
+          data={chartConfig.barChartData}
+          options={chartConfig.barChartOptions}
         />
       )}
     </>
