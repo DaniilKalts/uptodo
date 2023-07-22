@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 
-import Button from '../UI/Button';
+import Button from '../../../UI/Button';
 
-import expiredSound from '../../../public/sounds/expiredSound.mp3';
+import expiredSound from '../../../../../public/sounds/expiredSound.mp3';
 
 interface TimerInterface {
   timerSeconds: number;
@@ -16,22 +16,17 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
 
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
 
+  const [accumulativeSecond, setAccumulativeSecond] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(timerSeconds);
 
-  const [accumulativeSecond, setAccumulativeSecond] = useState<number>(0);
-
   const [timerSound, setTimerSound] = useState<any>(null);
-
-  useEffect(() => {
-    setTimerSound(new Audio(expiredSound));
-  }, []);
 
   const initialCircularIndicator: number = 755;
   const [circluarIndicator, setCircluarIndicator] = useState<number>(
     initialCircularIndicator,
   );
 
-  const secondsString = String(seconds % 60).padStart(2, '0');
+  const secondsString: string = String(seconds % 60).padStart(2, '0');
   const minutesString = String(Math.floor(seconds / 60)).padStart(2, '0');
 
   const isDanger: boolean = seconds > 0 && seconds <= 5;
@@ -44,12 +39,24 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
   const onTimerReset = () => {
     timerSound?.pause();
     timerSound.currentTime = 0;
-    setCircluarIndicator(initialCircularIndicator);
+
+    setTimerLabel('Start');
+
+    setIsTimerRunning(false);
+
     setSeconds(timerSeconds);
     setAccumulativeSecond(0);
-    setTimerLabel('Start');
-    setIsTimerRunning(false);
+
+    setCircluarIndicator(initialCircularIndicator);
   };
+
+  useEffect(() => {
+    setTimerSound(new Audio(expiredSound));
+  }, []);
+
+  useEffect(() => {
+    setSeconds(timerSeconds);
+  }, [timerSeconds]);
 
   useEffect(() => {
     if (isTimerRunning) {
@@ -65,7 +72,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
         clearInterval(circluarIndicatorInterval);
       };
     }
-  }, [isTimerRunning]);
+  }, [isTimerRunning, timerSeconds]);
 
   useEffect(() => {
     if (
@@ -76,7 +83,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
         Math.max(timerSeconds - parseFloat(accumulativeSecond.toFixed(3)), 0),
       );
     }
-  }, [accumulativeSecond]);
+  }, [accumulativeSecond, timerSeconds]);
 
   useEffect(() => {
     if (seconds === 0 && isTimerRunning) {
@@ -85,11 +92,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
       setTimerLabel('Start');
       setIsTimerRunning(false);
     }
-  }, [seconds]);
-
-  useEffect(() => {
-    setSeconds(timerSeconds);
-  }, [timerSeconds]);
+  }, [isTimerRunning, seconds, timerSound]);
 
   return (
     <div className="mb-14 flex flex-col items-center">
@@ -124,7 +127,11 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
           className={`
             text-5xl 
             font-medium
-            ${isTimerRunning && !isDanger && 'text-[#3d3d3d] dark:text-white'}
+            ${
+              isTimerRunning && !isDanger
+                ? 'text-[#3d3d3d] dark:text-white'
+                : ''
+            }
             ${
               (!isTimerRunning && !isDanger) ||
               circluarIndicator === initialCircularIndicator
@@ -136,7 +143,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
                 ? 'text-red-500'
                 : ''
             }
-            ${!seconds && timerSeconds > 0 && 'blink-hard'}
+            ${!seconds && timerSeconds > 0 ? 'blink-hard' : ''}
             absolute
           `}
         >

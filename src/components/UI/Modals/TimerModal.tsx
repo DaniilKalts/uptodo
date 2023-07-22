@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
-import TimerSwiper from '@/components/Timer/TimerSwiper';
+import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
 
 import Modal from './Modal';
 import Button from '../Button';
 
 interface TimerModalInterface {
-  timerSeconds: number;
   isModal: boolean;
+  timerSeconds: number;
   onCancel: () => void;
   onSave: (seconds: number) => void;
 }
 
 const TimerModal: React.FC<TimerModalInterface> = ({
-  timerSeconds,
   isModal,
+  timerSeconds,
   onCancel,
   onSave,
 }) => {
@@ -63,7 +63,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
         />,
       );
     }
-  }, [isModal]);
+  }, [isModal, timerSeconds]);
 
   return (
     <Modal
@@ -72,14 +72,14 @@ const TimerModal: React.FC<TimerModalInterface> = ({
       body={
         <div className="mb-8 flex items-center justify-center gap-4">
           <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-[#272727] font-bold min-[475px]:h-24 min-[475px]:w-24">
-            <p className="absolute -top-6 text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:-top-7 min-[475px]:text-lg">
+            <p className="absolute -top-6 text-[#ffffffdd] min-[475px]:-top-7 min-[475px]:text-lg">
               Minutes
             </p>
             {minutesSwiper}
           </div>
           <p className="text-3xl text-[#3d3d3d] dark:text-[#ffffffdd]">:</p>
           <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-[#272727] font-bold min-[475px]:h-24 min-[475px]:w-24">
-            <p className="absolute -top-6 text-base text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:-top-7 min-[475px]:text-lg">
+            <p className="absolute -top-6 text-base text-[#ffffffdd] min-[475px]:-top-7 min-[475px]:text-lg">
               Seconds
             </p>
             {secondsSwiper}

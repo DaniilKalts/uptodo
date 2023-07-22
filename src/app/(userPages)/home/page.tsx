@@ -4,7 +4,6 @@ import React from 'react';
 
 import Image from 'next/image';
 
-import Navbar from '@/components/Layout/Navbar/Navbar';
 import Container from '@/components/UI/Container';
 
 const Home = () => (
@@ -51,7 +50,6 @@ const Home = () => (
         </p>
       </main>
     </Container>
-    <Navbar />
   </div>
 );
 

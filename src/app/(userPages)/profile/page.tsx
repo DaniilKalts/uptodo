@@ -5,8 +5,7 @@ import React from 'react';
 import Image from 'next/image';
 
 import Container from '@/components/UI/Container';
-import Navbar from '@/components/Layout/Navbar/Navbar';
-import ProfileLink from '@/components/Profile/ProfileTypography';
+import ProfileLink from '@/components/userPages/Profile/ProfileTypography';
 
 import {
   SettingsIcon,
@@ -18,7 +17,7 @@ import {
   FeedbackIcon,
   SupportIcon,
   LogOutIcon,
-} from '@/components/Profile/Icons/Profile';
+} from '@/components/userPages/Profile/Icons/Profile';
 
 const Profile = () => (
   <div className="pb-36 md:pb-40">
@@ -39,13 +38,13 @@ const Profile = () => (
             Tadanobu Asano
           </h5>
           <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
-            <div className="w-2/4 rounded-md border border-[#363636] bg-[#ffffffdd] px-6 py-4 dark:bg-[#363636]">
-              <p className="text-center text-[15px] text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-lg">
+            <div className="w-2/4 rounded-md border border-[#363636] bg-[#363636] px-6 py-4">
+              <p className="text-center text-[15px] text-[#ffffffdd] min-[475px]:text-lg">
                 10 Task left
               </p>
             </div>
-            <div className="w-2/4 rounded-md border border-[#363636] bg-[#ffffffdd] px-6 py-4 dark:bg-[#363636]">
-              <p className="text-center text-[15px] text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-lg">
+            <div className="w-2/4 rounded-md border border-[#363636] bg-[#363636] px-6 py-4">
+              <p className="text-center text-[15px] text-[#ffffffdd] min-[475px]:text-lg">
                 5 Task done
               </p>
             </div>
@@ -99,7 +98,6 @@ const Profile = () => (
         </main>
       </div>
     </Container>
-    <Navbar />
   </div>
 );
 

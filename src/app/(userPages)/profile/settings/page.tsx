@@ -5,15 +5,14 @@ import React from 'react';
 import Link from 'next/link';
 
 import Container from '@/components/UI/Container';
-import ProfileLink from '@/components/Profile/ProfileTypography';
-import Navbar from '@/components/Layout/Navbar/Navbar';
+import ProfileLink from '@/components/userPages/Profile/ProfileTypography';
 
 import {
   AppColorIcon,
   AppLanguageIcon,
   AppTypographyIcon,
   GoogleCalendarIcon,
-} from '@/components/Profile/Icons/Settings';
+} from '@/components/userPages/Profile/Icons/Settings';
 import BackIcon from '@/components/UI/Icons/BackIcon';
 
 const Settings = () => (
@@ -62,7 +61,6 @@ const Settings = () => (
         </main>
       </div>
     </Container>
-    <Navbar />
   </div>
 );
 

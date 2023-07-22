@@ -18,11 +18,9 @@ import {
   specificDoughnutChartData,
 } from '@/utils/FocusConfig';
 
-import Navbar from '@/components/Layout/Navbar/Navbar';
-
-import Timer from '@/components/Timer/Timer';
-import FocusChart from '@/components/Focus/FocusChart';
-import FocusTask from '@/components/Focus/FocusTask';
+import Timer from '@/components/userPages/Focus/Timer/Timer';
+import FocusChart from '@/components/userPages/Focus/FocusChart';
+import FocusTask from '@/components/userPages/Focus/FocusTask';
 
 import {
   WorkoutIcon,
@@ -30,16 +28,16 @@ import {
   MusickIcon,
   HealthIcon,
   UniversityIcon,
-} from '../../components/UI/Icons/Categories';
+} from '../../../components/UI/Icons/Categories';
 
-import { Select } from '../../components/UI';
+import { Select } from '../../../components/UI';
 
-import TimerModal from '../../components/UI/Modals/TimerModal';
-import Container from '../../components/UI/Container';
+import TimerModal from '../../../components/UI/Modals/TimerModal';
+import Container from '../../../components/UI/Container';
 
 const Focus = () => {
-  const [timerSeconds, setTimerSeconds] = useState<number>(0);
   const [isChooseTimeModal, setIsChooseTimeModal] = useState<boolean>(false);
+  const [timerSeconds, setTimerSeconds] = useState<number>(0);
 
   const [stats, setStats] = useState<string>('This Week');
   const [chartConfig, setChartConfig] = useState<ChartConfig>({
@@ -105,8 +103,8 @@ const Focus = () => {
     <div className="pb-36 md:pb-40">
       <Container>
         <TimerModal
-          timerSeconds={timerSeconds}
           isModal={isChooseTimeModal}
+          timerSeconds={timerSeconds}
           onCancel={() => {
             document.body.style.overflow = 'auto';
             setIsChooseTimeModal(false);
@@ -175,7 +173,6 @@ const Focus = () => {
           </main>
         </div>
       </Container>
-      <Navbar />
     </div>
   );
 };

@@ -27,7 +27,7 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
   return (
     <div className="relative min-w-[125px]">
       <button
-        className="z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg bg-[#ffffff35] px-4 py-2.5 text-center text-base font-medium text-[#ffffffdd]"
+        className="z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg bg-[#444444] px-4 py-2.5 text-center text-base font-medium text-[#ffffffdd] dark:bg-[#ffffff35]"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {value}
