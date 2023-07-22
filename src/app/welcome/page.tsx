@@ -9,15 +9,15 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 
 import { motion } from 'framer-motion';
 
-import Container from '@/components/UI/Container';
-import Button from '@/components/UI/Button';
+import { Button } from '../../components/UI';
+import Container from '../../components/UI/Container';
 
 const Welcome = () => {
   const router = useRouter();
 
   return (
     <Container>
-      <div className="relative flex flex-col items-center justify-center min-h-screen py-10">
+      <div className="relative flex min-h-screen flex-col items-center justify-center py-10">
         <motion.div
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
@@ -27,19 +27,19 @@ const Welcome = () => {
         >
           <header className="absolute left-0 top-12">
             <MdArrowBackIosNew
-              className="text-2xl text-white transition cursor-pointer hover:text-gray-300"
+              className="cursor-pointer text-2xl text-white transition hover:text-gray-300"
               onClick={() => router.back()}
             />
           </header>
-          <main className="flex flex-col items-center justify-center w-full">
-            <h2 className="text-[8.5vw] font-bold text-center text-[#3d3d3d] dark:text-[#ffffffdd] mt-12 min-[475px]:text-4xl">
+          <main className="flex w-full flex-col items-center justify-center">
+            <h2 className="mt-12 text-center text-[8.5vw] font-bold text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-4xl">
               Welcome to UpTodo
             </h2>
-            <p className="text-sm text-[#3d3d3d] dark:text-[#ffffffdd] mt-6 max-w-md text-center relative z-10 min-[475px]:text-[17px]">
+            <p className="relative z-10 mt-6 max-w-md text-center text-sm text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-[17px]">
               Please login to your account or create a new account to continue
             </p>
           </main>
-          <footer className="w-fit flex items-center justify-between gap-4 mt-12 min-[475px]:gap-8">
+          <footer className="mt-12 flex w-fit items-center justify-between gap-4 min-[475px]:gap-8">
             <Link href="login" className="w-full max-w-sm">
               <Button label="Login" onClick={() => {}} filled upperCase small />
             </Link>

@@ -3,5 +3,11 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["src/utils/FocusData.js"]
+  "rules": {
+    "consistent-return": "off",
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off",
+    "function-paren-newline": "off",
+    "object-curly-newline": "off"
+  }
 }

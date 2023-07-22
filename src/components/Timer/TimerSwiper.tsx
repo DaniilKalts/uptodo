@@ -34,14 +34,14 @@ const TimerSwiper: React.FC<TimerSwiperInterface> = ({
       {Array.from({ length: 60 }, (_, index) => index).map((minute) => (
         <SwiperSlide key={minute}>
           {minute - 1 >= 0 && (
-            <p className="text-[#ffffff1a] absolute top-0 text-2xl pointer-events-none">
+            <p className="pointer-events-none absolute top-0 text-2xl text-[#ffffff1a]">
               {String(minute - 1).padStart(2, '0')}
             </p>
           )}
-          <p className="text-[#3d3d3d] dark:text-[#ffffffdd] text-4xl pointer-events-none">
+          <p className="pointer-events-none text-4xl text-[#3d3d3d] dark:text-[#ffffffdd]">
             {String(minute).padStart(2, '0')}
           </p>
-          <p className="text-[#ffffff1a] absolute bottom-0 text-2xl pointer-events-none">
+          <p className="pointer-events-none absolute bottom-0 text-2xl text-[#ffffff1a]">
             {minute + 1 >= 60 ? '00' : String(minute + 1).padStart(2, '0')}
           </p>
         </SwiperSlide>

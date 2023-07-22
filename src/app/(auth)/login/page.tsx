@@ -16,9 +16,8 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillGithub } from 'react-icons/ai';
 
-import Container from '@/components/UI/Container';
-import Input from '@/components/UI/Input';
-import Button from '@/components/UI/Button';
+import { Input, Button } from '../../../components/UI';
+import Container from '../../../components/UI/Container';
 
 interface LoginInputs extends FieldValues {
   userName: string;
@@ -71,7 +70,7 @@ const Login = () => {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data, event) => {
+  const onSubmit: SubmitHandler<FieldValues> = (_, event) => {
     event?.preventDefault();
     if (userName.length && password.length) {
       setIsLoading(true);
@@ -122,14 +121,14 @@ const Login = () => {
 
   return (
     <Container>
-      <div className="relative w-full min-h-screen flex flex-col justify-center max-w-[425px] pt-24 pb-12 md:py-10 mx-auto">
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[425px] flex-col justify-center pb-12 pt-24 md:py-10">
         <header className="absolute left-0 top-10 md:hidden">
           <MdArrowBackIosNew
-            className="text-2xl text-white transition cursor-pointer hover:text-gray-300"
+            className="cursor-pointer text-2xl text-white transition hover:text-gray-300"
             onClick={() => router.back()}
           />
         </header>
-        <h1 className="text-4xl font-semibold text-[#3d3d3d] dark:text-[#ffffffdd] mb-8 md:text-5xl md:mb-10">
+        <h1 className="mb-8 text-4xl font-semibold text-[#3d3d3d] dark:text-[#ffffffdd] md:mb-10 md:text-5xl">
           Login
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -165,15 +164,15 @@ const Login = () => {
             disabled={!!Object.keys(errors).length}
           />
         </form>
-        <div className="inline-flex items-center justify-center w-full my-6 md:my-8">
-          <hr className="w-full h-[2px] my-4 border-0 rounded bg-[#3d3d3d]" />
-          <div className="absolute -translate-x-1/2 left-1/2 px-2 bg-white dark:bg-[#121212]">
+        <div className="my-6 inline-flex w-full items-center justify-center md:my-8">
+          <hr className="my-4 h-[2px] w-full rounded border-0 bg-[#3d3d3d]" />
+          <div className="absolute left-1/2 -translate-x-1/2 bg-white px-2 dark:bg-[#121212]">
             <span className="text-lg text-[#121212] dark:text-[#e5e5e5] md:text-[22px]">
               or
             </span>
           </div>
         </div>
-        <div className="flex flex-col gap-6 mb-6">
+        <div className="mb-6 flex flex-col gap-6">
           <Button
             label="Login with Google"
             onClick={googleSignIn}
@@ -189,11 +188,11 @@ const Login = () => {
             icon={AiFillGithub}
           />
         </div>
-        <p className="text-[#979797] text-center">
+        <p className="text-center text-[#979797]">
           Don’t have an account?{' '}
           <Link
             href="register"
-            className="text-[#8875FF] dark:text-[#ffffffdd] hover:underline cursor-pointer"
+            className="cursor-pointer text-[#8875FF] hover:underline dark:text-[#ffffffdd]"
           >
             Register
           </Link>

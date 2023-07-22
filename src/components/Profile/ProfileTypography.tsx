@@ -56,7 +56,7 @@ const ProfileTypography: React.FC<ProfileTypographyInterface> = ({
     <>
       {link && (
         <Link
-          className="flex items-center justify-between w-full py-3 group"
+          className="group flex w-full items-center justify-between py-3"
           href={link}
         >
           {body}
@@ -64,7 +64,7 @@ const ProfileTypography: React.FC<ProfileTypographyInterface> = ({
       )}
       {!link && onClick && (
         <div
-          className="flex items-center justify-between w-full py-3 cursor-pointer group"
+          className="group flex w-full cursor-pointer items-center justify-between py-3"
           onClick={onClick}
         >
           {body}

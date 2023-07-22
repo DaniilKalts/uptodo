@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import TimerSwiper from '@/components/Timer/TimeSwiper';
+import TimerSwiper from '@/components/Timer/TimerSwiper';
 
 import Modal from './Modal';
 import Button from '../Button';
@@ -24,7 +24,6 @@ const TimerModal: React.FC<TimerModalInterface> = ({
     <TimerSwiper
       initialSlide={Math.floor(timerSeconds / 60)}
       setTime={(seconds: number) =>
-        // eslint-disable-next-line implicit-arrow-linebreak
         setModalSeconds((prev) => seconds * 60 + (prev % 60))
       }
     />,
@@ -34,7 +33,6 @@ const TimerModal: React.FC<TimerModalInterface> = ({
     <TimerSwiper
       initialSlide={timerSeconds % 60}
       setTime={(seconds: number) =>
-        // eslint-disable-next-line implicit-arrow-linebreak
         setModalSeconds((prev) => Math.floor(prev / 60) * 60 + seconds)
       }
     />,
@@ -51,7 +49,6 @@ const TimerModal: React.FC<TimerModalInterface> = ({
         <TimerSwiper
           initialSlide={Math.floor(timerSeconds / 60)}
           setTime={(seconds: number) =>
-            // eslint-disable-next-line implicit-arrow-linebreak
             setModalSeconds((prev) => seconds * 60 + (prev % 60))
           }
         />,
@@ -61,7 +58,6 @@ const TimerModal: React.FC<TimerModalInterface> = ({
         <TimerSwiper
           initialSlide={timerSeconds % 60}
           setTime={(seconds: number) =>
-            // eslint-disable-next-line implicit-arrow-linebreak
             setModalSeconds((prev) => Math.floor(prev / 60) * 60 + seconds)
           }
         />,
@@ -74,16 +70,16 @@ const TimerModal: React.FC<TimerModalInterface> = ({
       isOpen={isModal}
       title="Choose time to focus"
       body={
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="w-[5.5rem] h-[5.5rem] relative font-bold bg-[#272727] flex flex-col justify-center items-center min-[475px]:w-24 min-[475px]:h-24">
-            <p className="text-[#3d3d3d] dark:text-[#ffffffdd] absolute -top-6 min-[475px]:-top-7 min-[475px]:text-lg">
+        <div className="mb-8 flex items-center justify-center gap-4">
+          <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-[#272727] font-bold min-[475px]:h-24 min-[475px]:w-24">
+            <p className="absolute -top-6 text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:-top-7 min-[475px]:text-lg">
               Minutes
             </p>
             {minutesSwiper}
           </div>
           <p className="text-3xl text-[#3d3d3d] dark:text-[#ffffffdd]">:</p>
-          <div className="w-[5.5rem] h-[5.5rem] relative font-bold bg-[#272727] flex flex-col justify-center items-center min-[475px]:w-24 min-[475px]:h-24">
-            <p className="text-base text-[#3d3d3d] dark:text-[#ffffffdd] absolute -top-6 min-[475px]:-top-7 min-[475px]:text-lg">
+          <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-[#272727] font-bold min-[475px]:h-24 min-[475px]:w-24">
+            <p className="absolute -top-6 text-base text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:-top-7 min-[475px]:text-lg">
               Seconds
             </p>
             {secondsSwiper}

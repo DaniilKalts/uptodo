@@ -4,13 +4,13 @@ import React from 'react';
 
 import Image from 'next/image';
 
-import Navbar from '@/components/Layout/Navbar';
+import Navbar from '@/components/Layout/Navbar/Navbar';
 import Container from '@/components/UI/Container';
 
 const Home = () => (
   <div className="pb-48">
     <Container>
-      <div className="flex items-center justify-between max-w-4xl mx-auto mt-6">
+      <header className="mx-auto mt-6 flex max-w-4xl items-center justify-between">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="text-[#3d3d3d] dark:text-[#ffffffdd]"
@@ -34,8 +34,8 @@ const Home = () => (
           height={48}
           alt="Avatar"
         />
-      </div>
-      <div className="flex flex-col items-center justify-center mt-8 min-[475px]:mt-12 lg:mt-20">
+      </header>
+      <main className="mt-8 flex flex-col items-center justify-center min-[475px]:mt-12 lg:mt-20">
         <Image
           src="/images/home/banner.svg"
           width={250}
@@ -43,13 +43,13 @@ const Home = () => (
           className="min-[475px]:w-80"
           alt="Banner"
         />
-        <h6 className="text-[#3d3d3d] dark:text-[#ffffffdd] text-center text-[1.35rem] mb-2 min-[475px]:text-2xl">
+        <h6 className="mb-2 text-center text-[1.35rem] text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
           What do you want to do today?
         </h6>
-        <p className="text-[#3d3d3d] dark:text-[#ffffffdd] text-center text-[1.1rem] min-[475px]:text-xl">
+        <p className="text-center text-[1.1rem] text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-xl">
           Tap + to add your tasks
         </p>
-      </div>
+      </main>
     </Container>
     <Navbar />
   </div>

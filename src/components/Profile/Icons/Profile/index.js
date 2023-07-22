@@ -1,0 +1,9 @@
+export { default as SettingsIcon } from './SettingsIcon';
+export { default as ProfileNameIcon } from './ProfileNameIcon';
+export { default as ProfileImageIcon } from './ProfileImageIcon';
+export { default as ProfilePasswordIcon } from './ProfilePasswordIcon';
+export { default as AboutUsIcon } from './AboutUsIcon';
+export { default as FaqIcon } from './FaqIcon';
+export { default as FeedbackIcon } from './FeedbackIcon';
+export { default as SupportIcon } from './SupportIcon';
+export { default as LogOutIcon } from './LogOutIcon';

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '../UI/Button';
 
@@ -51,17 +51,13 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
     setIsTimerRunning(false);
   };
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (isTimerRunning) {
       const circluarIndicatorInterval = setInterval(() => {
         setAccumulativeSecond((prev) => prev + 0.01);
 
-        setCircluarIndicator(
-          (prev) =>
-            // eslint-disable-next-line implicit-arrow-linebreak
-            Math.max(prev - 691 / timerSeconds / 100, 64),
-          // eslint-disable-next-line function-paren-newline
+        setCircluarIndicator((prev) =>
+          Math.max(prev - 691 / timerSeconds / 100, 64),
         );
       }, 10);
 
@@ -73,7 +69,6 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
 
   useEffect(() => {
     if (
-      // eslint-disable-next-line operator-linebreak
       parseFloat(accumulativeSecond.toFixed(3)) % 1 === 0 &&
       accumulativeSecond !== 0
     ) {
@@ -97,9 +92,9 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
   }, [timerSeconds]);
 
   return (
-    <div className="flex flex-col items-center mb-14">
+    <div className="mb-14 flex flex-col items-center">
       <div className="flex items-center justify-center">
-        <svg className="transform -rotate-90 w-[250px] h-[250px]">
+        <svg className="h-[250px] w-[250px] -rotate-90 transform">
           <circle
             cx="125"
             cy="125"
@@ -131,7 +126,6 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
             font-medium
             ${isTimerRunning && !isDanger && 'text-[#3d3d3d] dark:text-white'}
             ${
-              // eslint-disable-next-line operator-linebreak
               (!isTimerRunning && !isDanger) ||
               circluarIndicator === initialCircularIndicator
                 ? 'text-[#3d3d3d] dark:text-[#ffffffdd]'
@@ -149,10 +143,10 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
           {minutesString}:{secondsString}
         </p>
       </div>
-      <p className="text-base text-center text-[#3d3d3d] dark:text-white mt-4 mb-6 max-w-sm min-[475px]:text-lg">
+      <p className="mb-6 mt-4 max-w-sm text-center text-base text-[#3d3d3d] dark:text-white min-[475px]:text-lg">
         {"While your focus mode is on, make sure, you don't leave the app"}
       </p>
-      <div className="flex items-center justify-between w-full max-w-sm gap-5">
+      <div className="flex w-full max-w-sm items-center justify-between gap-5">
         <div className="w-1/4">
           <Button
             label="Edit"

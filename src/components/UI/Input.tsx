@@ -27,15 +27,15 @@ const Input: React.FC<InputProps> = ({
   errors,
   errorMessage,
 }) => (
-  <div className="flex flex-col mb-4 min-[475px]:mb-5">
+  <div className="mb-4 flex flex-col min-[475px]:mb-5">
     {label && (
       <label
         htmlFor={id}
         className={`
-          text-lg
-          text-[#3d3d3d]
-          dark:text-[#ffffffdd] 
           mb-2
+          text-lg
+          text-[#3d3d3d] 
+          dark:text-[#ffffffdd]
           min-[475px]:text-xl
         `}
       >
@@ -52,13 +52,13 @@ const Input: React.FC<InputProps> = ({
         py-[10px]
         text-base
         ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
-      text-[#1D1D1D] 
-      dark:text-white
-      dark:bg-[#1D1D1D] 
-        border 
-        border-[#979797] 
-        rounded-lg
-        shadow-sm
+      rounded-lg 
+      border
+      border-[#979797] 
+        text-[#1D1D1D] 
+        shadow-sm 
+        dark:bg-[#1D1D1D]
+        dark:text-white
         min-[475px]:py-3
         min-[475px]:text-${small ? 'lg' : 'xl'}
       `}

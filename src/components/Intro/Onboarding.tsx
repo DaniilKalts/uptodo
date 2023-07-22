@@ -38,7 +38,7 @@ const Onboarding: React.FC<OnboardingProps> = ({
 
   return (
     <Container>
-      <div className="relative flex flex-col items-center justify-center min-h-screen py-10">
+      <div className="relative flex min-h-screen flex-col items-center justify-center py-10">
         {header}
         <motion.div
           animate={{ opacity: 1, x: 0 }}
@@ -57,7 +57,7 @@ const Onboarding: React.FC<OnboardingProps> = ({
                 className="mt-6 min-[475px]:w-80 md:w-96"
                 priority
               />
-              <div className="flex items-center justify-center gap-3 mt-16 w-36">
+              <div className="mt-16 flex w-36 items-center justify-center gap-3">
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
@@ -67,8 +67,8 @@ const Onboarding: React.FC<OnboardingProps> = ({
                             ? 'bg-[#000000dd] dark:bg-[#ffffffdd]'
                             : 'bg-[#AFAFAF]'
                         } 
-                        w-[30%]
-                        h-[6px] 
+                        h-[6px]
+                        w-[30%] 
                         rounded-xl
                       `}
                   ></div>
@@ -76,10 +76,10 @@ const Onboarding: React.FC<OnboardingProps> = ({
               </div>
             </div>
             <div className="flex flex-col items-center justify-center md:ml-9">
-              <h2 className="text-[1.75rem] font-bold text-[#3d3d3d] dark:text-[#ffffffdd] text-center mt-12 min-[475px]:text-4xl">
+              <h2 className="mt-12 text-center text-[1.75rem] font-bold text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-4xl">
                 {title}
               </h2>
-              <p className="text-sm text-[#3d3d3d] dark:text-[#ffffffdd] mt-3 max-w-sm text-center relative z-10 min-[475px]:text-base min-[475px]:mt-6">
+              <p className="relative z-10 mt-3 max-w-sm text-center text-sm text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:mt-6 min-[475px]:text-base">
                 {text}
               </p>
             </div>

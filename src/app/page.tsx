@@ -24,7 +24,7 @@ export default function Home() {
   const [step, setStep] = useState<number | null>(null);
 
   let bodyContent = (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex h-screen flex-col items-center justify-center">
       <motion.div
         animate={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: 15 }}
@@ -33,7 +33,7 @@ export default function Home() {
         className="flex flex-col items-center justify-center"
       >
         <Logo />
-        <h1 className="text-[2.25rem] sm:text-5xl font-bold text-center text-[#3d3d3d] dark:text-white">
+        <h1 className="text-center text-[2.25rem] font-bold text-[#3d3d3d] dark:text-white sm:text-5xl">
           UpTodo
         </h1>
       </motion.div>
@@ -51,7 +51,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[475px]:text-lg cursor-pointer"
+          className="cursor-pointer text-base text-[#ffffff70] hover:text-[#d9d9d970] min-[475px]:text-lg"
         >
           Skip
         </Link>
@@ -59,7 +59,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="w-full min-[475px]:w-fit flex items-center justify-center mt-10 md:absolute md:bottom-12 md:right-10">
+      <footer className="mt-10 flex w-full items-center justify-center min-[475px]:w-fit md:absolute md:bottom-12 md:right-10">
         <Button
           label="Next"
           onClick={() => {
@@ -90,7 +90,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[475px]:text-lg cursor-pointer"
+          className="cursor-pointer text-base text-[#ffffff70] hover:text-[#d9d9d970] min-[475px]:text-lg"
         >
           Skip
         </Link>
@@ -98,7 +98,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="w-full flex items-center justify-between mt-10  min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
+      <footer className="mt-10 flex w-full items-center justify-between  min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Back"
           onClick={() => {
@@ -136,7 +136,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="text-[#ffffff70] hover:text-[#d9d9d970] text-base min-[475px]:text-lg cursor-pointer"
+          className="cursor-pointer text-base text-[#ffffff70] hover:text-[#d9d9d970] min-[475px]:text-lg"
         >
           Skip
         </Link>
@@ -144,7 +144,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="w-full flex items-center justify-between mt-16 min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
+      <footer className="mt-16 flex w-full items-center justify-between min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Back"
           onClick={() => {

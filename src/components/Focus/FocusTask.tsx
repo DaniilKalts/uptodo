@@ -7,12 +7,12 @@ interface FocusTaskInterface {
 }
 
 const FocusTask: React.FC<FocusTaskInterface> = ({ logo, title, text }) => (
-  <div className="flex items-center justify-between py-4 px-5 mb-6 border border-[#363636] bg-[#ffffffdd] dark:bg-[#4C4C4C] rounded-lg">
-    <div className="flex items-center justify-between w-full">
+  <div className="mb-6 flex items-center justify-between rounded-lg border border-[#363636] bg-[#ffffffdd] px-5 py-4 dark:bg-[#4C4C4C]">
+    <div className="flex w-full items-center justify-between">
       <div className="flex items-center">
         {logo}
         <div>
-          <h6 className="text-base text-[#3d3d3d] dark:text-[#ffffffdd] mb-1 min-[475px]:text-xl">
+          <h6 className="mb-1 text-base text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-xl">
             {title}
           </h6>
           <p className="text-sm text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-lg">
@@ -20,9 +20,9 @@ const FocusTask: React.FC<FocusTaskInterface> = ({ logo, title, text }) => (
           </p>
         </div>
       </div>
-      <div className="h-full border-l-[2px] ml-4 min-[475px]:ml-6 py-3 border-[#979797] min-[475px]:border-l-[3px]">
+      <div className="ml-4 h-full border-l-[2px] border-[#979797] py-3 min-[475px]:ml-6 min-[475px]:border-l-[3px]">
         <svg
-          className="w-6 h-6 ml-4 text-[#3d3d3d] dark:text-[#ffffffdd] cursor-pointer min-[475px]:w-8 min-[475px]:h-8"
+          className="ml-4 h-6 w-6 cursor-pointer text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:h-8 min-[475px]:w-8"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"

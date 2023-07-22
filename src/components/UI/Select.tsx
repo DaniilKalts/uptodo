@@ -27,12 +27,12 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
   return (
     <div className="relative min-w-[125px]">
       <button
-        className="w-full flex-shrink-0 z-10 inline-flex justify-between items-center py-2.5 px-4 text-base font-medium text-center text-[#ffffffdd] bg-[#ffffff35] rounded-lg"
+        className="z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg bg-[#ffffff35] px-4 py-2.5 text-center text-base font-medium text-[#ffffffdd]"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {value}
         <svg
-          className="w-3 h-3 ml-4"
+          className="ml-4 h-3 w-3"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -51,14 +51,14 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
         id="dropdown-states"
         className={`${
           isOpen ? 'block' : 'hidden'
-        } absolute right-0 z-40 w-full bg-[#444444] rounded-lg shadow`}
+        } absolute right-0 z-40 w-full rounded-lg bg-[#444444] shadow`}
       >
-        <ul className="text-sm rounded-lg">
+        <ul className="rounded-lg text-sm">
           {options.map((option, id) => (
             <li key={option}>
               <button
                 disabled={value === option}
-                className={`inline-flex w-full py-2 px-4 text-[#ffffffdd] bg-[#444444] hover:bg-[#dddddd35] cursor-pointer ${roundedClass(
+                className={`inline-flex w-full cursor-pointer bg-[#444444] px-4 py-2 text-[#ffffffdd] hover:bg-[#dddddd35] ${roundedClass(
                   id,
                 )} rounded-tr-lg disabled:bg-[#333333]`}
                 onClick={() => onChange(option)}

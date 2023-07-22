@@ -32,9 +32,9 @@ const Button: React.FC<ButtonProps> = ({
   <button
     className={`
       flex
+      w-full
       items-center
       justify-center
-      w-full
       max-w-${small ? 'sm' : 'md'}
       gap-2
       px-5
@@ -42,30 +42,30 @@ const Button: React.FC<ButtonProps> = ({
       text-base
       ${
         filled
-          ? 'text-white bg-[#8875FF] hover:bg-[#7969e1] focus:ring-[#a79aff] focus:ring-4 focus:outline-none'
+          ? 'bg-[#8875FF] text-white hover:bg-[#7969e1] focus:outline-none focus:ring-4 focus:ring-[#a79aff]'
           : ''
       }
       ${
         label === 'Back'
-          ? 'text-[#ffffff70] bg-transparent hover:text-[#d9d9d970]'
+          ? 'bg-transparent text-[#ffffff70] hover:text-[#d9d9d970]'
           : ''
       }
       ${
         label === 'Cancel'
-          ? 'text-[#8875FF] hover:text-[#7969e1] bg-transparent'
+          ? 'bg-transparent text-[#8875FF] hover:text-[#7969e1]'
           : ''
       }
       ${
         outline
-          ? 'text-[#3d3d3d] dark:text-white bg-transparent outline outline-2 outline-[#a79aff] focus:ring-4 focus:ring-[#a79aff]'
+          ? 'bg-transparent text-[#3d3d3d] outline outline-2 outline-[#a79aff] focus:ring-4 focus:ring-[#a79aff] dark:text-white'
           : ''
       }
       ${disabled && filled ? 'hover:bg-[#8875FF]' : ''}
-      ${isLoading ? 'bg-[#8875FF] hover:bg-[#8875FF] opacity-70 ring-0' : ''}
+      ${isLoading ? 'bg-[#8875FF] opacity-70 ring-0 hover:bg-[#8875FF]' : ''}
       ${upperCase ? 'uppercase' : ''}
       overflow-hidden
-      rounded-md
       whitespace-nowrap
+      rounded-md
       disabled:cursor-not-allowed 
       disabled:opacity-70 
       min-[475px]:text-${small ? 'base' : 'lg'}

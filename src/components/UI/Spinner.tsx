@@ -8,7 +8,7 @@ const Spinner = () => (
     height={24}
     src="/images/icons/spinner.svg"
     alt="spinner"
-    className="inline sm:w-7 sm:h-7 animate-spin"
+    className="inline animate-spin sm:h-7 sm:w-7"
   />
 );
 
