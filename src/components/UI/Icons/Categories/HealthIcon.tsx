@@ -1,9 +1,9 @@
 import React from 'react';
 
 const HealthIcon: React.ReactNode = (
-  <div className="mr-5 flex justify-center bg-[#80FFA3] p-1">
+  <div className="mr-5 flex justify-center bg-mint-light p-1">
     <svg
-      className="text-[#00A3A3]"
+      className="text-teal-dark"
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"

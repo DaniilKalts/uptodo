@@ -1,9 +1,9 @@
 import React from 'react';
 
 const WorkIcon: React.ReactNode = (
-  <div className="mr-5 flex justify-center bg-[#FF9680] p-1">
+  <div className="mr-5 flex justify-center bg-beige-light p-1">
     <svg
-      className="text-[#A31D00]"
+      className="text-beige-dark"
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"

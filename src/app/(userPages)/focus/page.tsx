@@ -8,15 +8,13 @@ import {
   weekBarChartData,
   weekBarChartOptions,
   weekDoughnutChartData,
-  weekDoughnutChartOptions,
   todayBarChartData,
   todayBarChartOptions,
   todayDoughnutChartData,
-  todayDoughnutChartOptions,
   specificBarChartData,
-  specificDoughnutChartOptions,
   specificDoughnutChartData,
-} from '@/utils/FocusConfig';
+  commonDoughnutChartOptions,
+} from '@/utils/FocusChartConfig';
 
 import Timer from '@/components/userPages/Focus/Timer/Timer';
 import FocusChart from '@/components/userPages/Focus/FocusChart';
@@ -44,7 +42,7 @@ const Focus = () => {
     barChartData: weekBarChartData,
     barChartOptions: weekBarChartOptions,
     doughnutChartData: weekDoughnutChartData,
-    doughnutChartOptions: weekDoughnutChartOptions,
+    doughnutChartOptions: commonDoughnutChartOptions,
   });
 
   useEffect(() => {
@@ -53,21 +51,21 @@ const Focus = () => {
         barChartData: weekBarChartData,
         barChartOptions: weekBarChartOptions,
         doughnutChartData: weekDoughnutChartData,
-        doughnutChartOptions: weekDoughnutChartOptions,
+        doughnutChartOptions: commonDoughnutChartOptions,
       });
     } else if (stats === 'Today') {
       setChartConfig({
         barChartData: todayBarChartData,
         barChartOptions: todayBarChartOptions,
         doughnutChartData: todayDoughnutChartData,
-        doughnutChartOptions: todayDoughnutChartOptions,
+        doughnutChartOptions: commonDoughnutChartOptions,
       });
     } else if (stats === 'Specific Task') {
-      const chartData = specificBarChartData;
+      const barChartData = specificBarChartData;
 
-      chartData.datasets[0].label = 'Time spent';
-      chartData.datasets[0].data = [0.5, 2, 0.5, 3, 0.5, 1, 0, 6];
-      chartData.datasets[0].backgroundColor = [
+      barChartData.datasets[0].label = 'Time spent';
+      barChartData.datasets[0].data = [0.5, 2, 0.5, 3, 0.5, 1, 0, 6];
+      barChartData.datasets[0].backgroundColor = [
         '#A5A5A5',
         '#A5A5A5',
         '#A5A5A5',
@@ -76,7 +74,7 @@ const Focus = () => {
         '#8875FF',
         '#A5A5A5',
       ];
-      chartData.datasets[0].hoverBackgroundColor = [
+      barChartData.datasets[0].hoverBackgroundColor = [
         '#838383',
         '#838383',
         '#838383',
@@ -86,15 +84,15 @@ const Focus = () => {
         '#838383',
       ];
 
-      const donught = specificDoughnutChartData;
+      const doughnutChartData = specificDoughnutChartData;
 
-      donught.datasets[0].data = [0.5, 2, 0.5, 3, 0.5, 1, 0];
+      doughnutChartData.datasets[0].data = [0.5, 2, 0.5, 3, 0.5, 1, 0];
 
       setChartConfig({
-        barChartData: chartData,
+        barChartData,
         barChartOptions: weekBarChartOptions,
-        doughnutChartData: donught,
-        doughnutChartOptions: specificDoughnutChartOptions,
+        doughnutChartData,
+        doughnutChartOptions: commonDoughnutChartOptions,
       });
     }
   }, [stats]);
@@ -117,7 +115,7 @@ const Focus = () => {
         />
         <div className="mx-auto mt-8 flex flex-col items-center justify-center">
           <header>
-            <h6 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
+            <h6 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
               Focus Mode
             </h6>
           </header>
@@ -131,7 +129,7 @@ const Focus = () => {
             />
             <section>
               <div className="mb-10 flex items-center justify-between min-[475px]:mb-6">
-                <h4 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
+                <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
                   Overview:
                 </h4>
                 <Select
@@ -142,7 +140,7 @@ const Focus = () => {
               </div>
               <FocusChart chartConfig={chartConfig} />
             </section>
-            <h4 className="mb-5 mt-12 text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
+            <h4 className="mb-5 mt-12 text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
               Time Spent:
             </h4>
             <FocusTask

@@ -1,9 +1,9 @@
 import React from 'react';
 
 const WorkoutIcon: React.ReactNode = (
-  <div className="mr-5 flex justify-center bg-[#80FFFF] p-1">
+  <div className="mr-5 flex justify-center bg-cyan-light p-1">
     <svg
-      className="mt-1 text-[#00A32F]"
+      className="mt-1 text-green-dark"
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="33"

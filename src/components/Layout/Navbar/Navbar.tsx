@@ -11,14 +11,14 @@ const Navbar = () => {
   const currentRoute = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 z-40 h-20 w-full bg-[#363636] md:h-24">
+    <nav className="fixed bottom-0 left-0 z-40 h-20 w-full bg-gray-700 md:h-24">
       <div className="mx-auto grid h-full max-w-lg grid-cols-5 font-medium">
         <Link
           href="/home"
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <IndexIcon isActive={currentRoute === '/home'} />
-          <span className="text-sm text-[#ffffffdd] min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[475px]:text-base">
             Index
           </span>
         </Link>
@@ -27,7 +27,7 @@ const Navbar = () => {
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <CalendarIcon isActive={currentRoute === '/calendar'} />
-          <span className="text-sm text-[#ffffffdd] min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[475px]:text-base">
             Calendar
           </span>
         </Link>
@@ -35,10 +35,10 @@ const Navbar = () => {
           <button
             data-tooltip-target="tooltip-new"
             type="button"
-            className="group relative bottom-10 inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#8875FF] font-medium hover:bg-[#7969e1] min-[475px]:bottom-12 min-[475px]:h-[4.5rem] min-[475px]:w-[4.5rem]"
+            className="group relative bottom-10 inline-flex h-16 w-16 items-center justify-center rounded-full bg-purple font-medium hover:bg-purple-dark min-[475px]:bottom-12 min-[475px]:h-[4.5rem] min-[475px]:w-[4.5rem]"
           >
             <svg
-              className="h-6 w-6 text-[#ffffffdd]"
+              className="h-6 w-6 text-white-pale"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -60,7 +60,7 @@ const Navbar = () => {
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <FocusIcon isActive={currentRoute === '/focus'} />
-          <span className="text-sm text-[#ffffffdd] min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[475px]:text-base">
             Focus
           </span>
         </Link>
@@ -69,7 +69,7 @@ const Navbar = () => {
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <ProfileIcon />
-          <span className="text-sm text-[#ffffffdd] min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[475px]:text-base">
             Profile
           </span>
         </Link>

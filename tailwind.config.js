@@ -8,6 +8,60 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        // white colors:
+        white: {
+          DEFAULT: '#fff',
+          pale: '#ffffffdd',
+          darker: '#cbd5e1',
+        },
+
+        // gray colors:
+        gray: {
+          dark: '#3d3d3d',
+          light: '#555',
+          100: '#e5e5e5',
+          200: '#AFAFAF',
+          300: '#979797',
+          400: '#ffffff70',
+          500: '#4C4C4C',
+          600: '#444444',
+          700: '#363636',
+          800: '#272727',
+        },
+
+        // black colors:
+        black: {
+          DEFAULT: '#000',
+          pre: '#121212',
+          light: '#1D1D1D',
+        },
+
+        // purple colors:
+        purple: {
+          DEFAULT: '#8875FF',
+          dark: '#7969e1',
+          light: '#a79aff',
+        },
+
+        // red colors:
+        red: {
+          DEFAULT: '#FF4949',
+          dark: '#e03b3b',
+        },
+
+        // category colors:
+        'cyan-light': '#80FFFF',
+        'green-dark': '#00A32F',
+        'beige-light': '#FF9680',
+        'beige-dark': '#A31D00',
+        'blue-light': '#809CFF',
+        'blue-dark': '#0055A3',
+        'pink-light': '#FC80FF',
+        'pink-dark': '#A000A3',
+        'mint-light': '#80FFA3',
+        'teal-dark': '#00A3A3',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

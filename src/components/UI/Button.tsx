@@ -42,26 +42,26 @@ const Button: React.FC<ButtonProps> = ({
       text-base
       ${
         filled
-          ? 'bg-[#8875FF] text-white hover:bg-[#7969e1] focus:outline-none focus:ring-4 focus:ring-[#a79aff]'
+          ? 'bg-purple text-white hover:bg-purple-dark focus:outline-none focus:ring-4 focus:ring-purple-light'
           : ''
       }
       ${
         label === 'Back'
-          ? 'bg-transparent text-[#ffffff70] hover:text-[#d9d9d970]'
+          ? 'bg-transparent text-gray-300 hover:text-gray-800 dark:hover:text-gray-400'
           : ''
       }
       ${
         label === 'Cancel'
-          ? 'bg-transparent text-[#8875FF] hover:text-[#7969e1]'
+          ? 'bg-transparent text-purple hover:text-purple-dark'
           : ''
       }
       ${
         outline
-          ? 'bg-transparent text-[#3d3d3d] outline outline-2 outline-[#a79aff] focus:ring-4 focus:ring-[#a79aff] dark:text-white'
+          ? 'bg-transparent text-gray-dark outline outline-2 outline-purple-light focus:ring-4 focus:ring-purple-light dark:text-white'
           : ''
       }
-      ${disabled && filled ? 'hover:bg-[#8875FF]' : ''}
-      ${isLoading ? 'bg-[#8875FF] opacity-70 ring-0 hover:bg-[#8875FF]' : ''}
+      ${disabled && filled ? 'hover:bg-purple' : ''}
+      ${isLoading ? 'bg-purple opacity-70 ring-0 hover:bg-purple' : ''}
       ${upperCase ? 'uppercase' : ''}
       overflow-hidden
       whitespace-nowrap

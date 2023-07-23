@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import { useMediaQuery } from 'react-responsive';
 
 import { motion } from 'framer-motion';
 
@@ -21,7 +24,10 @@ enum STEPS {
 }
 
 export default function Home() {
+  const isMobileDevice = useMediaQuery({ maxWidth: 992 });
   const [step, setStep] = useState<number | null>(null);
+
+  const router = useRouter();
 
   let bodyContent = (
     <div className="flex h-screen flex-col items-center justify-center">
@@ -33,7 +39,7 @@ export default function Home() {
         className="flex flex-col items-center justify-center"
       >
         <Logo />
-        <h1 className="text-center text-[2.25rem] font-bold text-[#3d3d3d] dark:text-white sm:text-5xl">
+        <h1 className="text-center text-[2.25rem] font-bold text-gray-dark dark:text-white sm:text-5xl">
           UpTodo
         </h1>
       </motion.div>
@@ -42,16 +48,20 @@ export default function Home() {
 
   useEffect(() => {
     setTimeout(() => {
-      setStep(1);
+      if (isMobileDevice) {
+        router.push('welcome');
+      } else {
+        setStep(1);
+      }
     }, 1625);
-  }, []);
+  }, [isMobileDevice, router]);
 
   if (STEPS.FIRST_SLIDE === step) {
     const HeaderContent = (
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="cursor-pointer text-base text-[#ffffff70] hover:text-[#d9d9d970] min-[475px]:text-lg"
+          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[475px]:text-lg"
         >
           Skip
         </Link>
@@ -90,7 +100,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="cursor-pointer text-base text-[#ffffff70] hover:text-[#d9d9d970] min-[475px]:text-lg"
+          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[475px]:text-lg"
         >
           Skip
         </Link>
@@ -136,7 +146,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="cursor-pointer text-base text-[#ffffff70] hover:text-[#d9d9d970] min-[475px]:text-lg"
+          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[475px]:text-lg"
         >
           Skip
         </Link>
@@ -156,9 +166,7 @@ export default function Home() {
         <Link href="welcome" className="w-full max-w-sm">
           <Button
             label="Get Started"
-            onClick={() => {
-              setStep(4);
-            }}
+            onClick={() => {}}
             filled
             upperCase
             small

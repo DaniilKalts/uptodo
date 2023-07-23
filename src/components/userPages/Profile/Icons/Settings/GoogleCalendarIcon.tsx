@@ -2,7 +2,7 @@ import React from 'react';
 
 const GoogleCalendarIcon: React.ReactNode = (
   <svg
-    className="text-[#3d3d3d] group-hover:text-black dark:text-[#ffffffdd] dark:group-hover:text-white"
+    className="group-hover:text-black text-gray-dark dark:text-white-pale dark:group-hover:text-white"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"

@@ -9,5 +9,6 @@
     "operator-linebreak": "off",
     "function-paren-newline": "off",
     "object-curly-newline": "off"
-  }
+  },
+  "ignorePatterns": ["tailwind.config.js"]
 }

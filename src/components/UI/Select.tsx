@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 interface SelectInterface {
   value: string;
@@ -8,6 +8,7 @@ interface SelectInterface {
 
 const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const selectRef = useRef<HTMLDivElement>(null);
 
   const onChange = (newValue: string) => {
     setIsOpen((prev) => !prev);
@@ -24,10 +25,23 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
     return '';
   };
 
+  const outsideClick = useCallback((e: MouseEvent) => {
+    if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('click', outsideClick);
+    return () => {
+      window.removeEventListener('click', outsideClick);
+    };
+  }, [outsideClick]);
+
   return (
-    <div className="relative min-w-[125px]">
+    <div className="relative min-w-[125px]" ref={selectRef}>
       <button
-        className="z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg bg-[#444444] px-4 py-2.5 text-center text-base font-medium text-[#ffffffdd] dark:bg-[#ffffff35]"
+        className="z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg bg-gray-500 px-4 py-2.5 text-center text-base font-medium text-white-pale dark:bg-gray-600"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {value}
@@ -51,16 +65,16 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
         id="dropdown-states"
         className={`${
           isOpen ? 'block' : 'hidden'
-        } absolute right-0 z-40 w-full rounded-lg bg-[#444444] shadow`}
+        } absolute right-0 z-40 w-full rounded-lg bg-gray-500 shadow dark:bg-gray-600`}
       >
         <ul className="rounded-lg text-sm">
           {options.map((option, id) => (
             <li key={option}>
               <button
                 disabled={value === option}
-                className={`inline-flex w-full cursor-pointer bg-[#444444] px-4 py-2 text-[#ffffffdd] hover:bg-[#dddddd35] ${roundedClass(
+                className={`inline-flex w-full cursor-pointer bg-gray-600 px-4 py-2 text-white-pale hover:bg-gray-500 ${roundedClass(
                   id,
-                )} rounded-tr-lg disabled:bg-[#333333]`}
+                )} disabled:bg-gray-700`}
                 onClick={() => onChange(option)}
               >
                 <div className="inline-flex items-center">{option}</div>

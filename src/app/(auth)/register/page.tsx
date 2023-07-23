@@ -129,11 +129,11 @@ const Register = () => {
       <div className="relative mx-auto flex min-h-screen w-full max-w-[425px] flex-col justify-center pb-12 pt-24 md:py-10">
         <header className="absolute left-0 top-10 md:hidden">
           <MdArrowBackIosNew
-            className="cursor-pointer text-2xl text-white transition hover:text-gray-300"
+            className="cursor-pointer text-2xl text-white transition hover:text-white-darker"
             onClick={() => router.back()}
           />
         </header>
-        <h1 className="mb-8 text-4xl font-semibold text-[#3d3d3d] dark:text-[#ffffffdd] md:mb-10 md:text-5xl">
+        <h1 className="mb-8 text-4xl font-semibold text-gray-dark dark:text-white-pale md:mb-10 md:text-5xl">
           Register
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -181,9 +181,9 @@ const Register = () => {
           />
         </form>
         <div className="my-6 inline-flex w-full items-center justify-center md:my-8">
-          <hr className="my-4 h-[2px] w-full rounded border-0 bg-[#3d3d3d]" />
-          <div className="absolute left-1/2 -translate-x-1/2 bg-white px-2 dark:bg-[#121212]">
-            <span className="text-lg text-[#121212] dark:text-[#e5e5e5] md:text-[22px]">
+          <hr className="my-4 h-[2px] w-full rounded border-0 bg-gray-dark" />
+          <div className="absolute left-1/2 -translate-x-1/2 bg-white-pale px-2 dark:bg-black-pre">
+            <span className="text-lg text-black-pre dark:text-gray-100 md:text-[22px]">
               or
             </span>
           </div>
@@ -204,11 +204,11 @@ const Register = () => {
             icon={AiFillGithub}
           />
         </div>
-        <p className="text-center text-[#979797]">
+        <p className="text-center text-gray-300">
           Already have an account?{' '}
           <Link
             href="login"
-            className="cursor-pointer text-[#8875FF] hover:underline dark:text-[#ffffffdd]"
+            className="cursor-pointer text-purple hover:underline dark:text-white-pale"
           >
             Login
           </Link>

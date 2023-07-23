@@ -6,7 +6,7 @@ interface FocusIconInterface {
 
 const FocusIcon: React.FC<FocusIconInterface> = ({ isActive }) => (
   <svg
-    className="mb-2 h-6 w-6 text-[#ffffffdd]"
+    className="mb-2 h-6 w-6 text-white-pale"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="none"

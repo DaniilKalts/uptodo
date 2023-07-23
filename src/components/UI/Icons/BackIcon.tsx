@@ -2,7 +2,7 @@ import React from 'react';
 
 const BackIcon: React.ReactNode = (
   <svg
-    className="absolute left-0 top-1 text-[#3d3d3d] dark:text-[#ffffffdd] dark:group-hover:text-white"
+    className="absolute left-0 top-1 text-gray-dark dark:text-white-pale dark:group-hover:text-white"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"

@@ -27,15 +27,15 @@ const Welcome = () => {
         >
           <header className="absolute left-0 top-12">
             <MdArrowBackIosNew
-              className="cursor-pointer text-2xl text-white transition hover:text-gray-300"
+              className="text-black cursor-pointer text-2xl transition hover:text-gray-dark dark:text-white dark:hover:text-white-pale"
               onClick={() => router.back()}
             />
           </header>
           <main className="flex w-full flex-col items-center justify-center">
-            <h2 className="mt-12 text-center text-[8.5vw] font-bold text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-4xl">
+            <h2 className="mt-12 text-center text-[8.5vw] font-bold text-gray-dark dark:text-white-pale min-[475px]:text-4xl">
               Welcome to UpTodo
             </h2>
-            <p className="relative z-10 mt-6 max-w-md text-center text-sm text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-[17px]">
+            <p className="relative z-10 mt-6 max-w-md text-center text-sm text-gray-dark dark:text-white-pale min-[475px]:text-[17px]">
               Please login to your account or create a new account to continue
             </p>
           </main>

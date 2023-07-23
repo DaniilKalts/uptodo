@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${lato.className} bg-white dark:bg-[#121212]`}>
+      <body className={`${lato.className} bg-white-pale dark:bg-black-pre`}>
         <ToasterProvider />
         {children}
       </body>

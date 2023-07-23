@@ -24,7 +24,7 @@ const Profile = () => (
     <Container>
       <div className="mx-auto mt-8 flex flex-col items-center justify-center">
         <header className="flex w-full flex-col items-center justify-center">
-          <h6 className="mb-4 text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
+          <h6 className="mb-4 text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
             Profile
           </h6>
           <Image
@@ -34,17 +34,17 @@ const Profile = () => (
             height={96}
             alt="Avatar"
           />
-          <h5 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
-            Tadanobu Asano
+          <h5 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            Kalts Daniil
           </h5>
           <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
-            <div className="w-2/4 rounded-md border border-[#363636] bg-[#363636] px-6 py-4">
-              <p className="text-center text-[15px] text-[#ffffffdd] min-[475px]:text-lg">
+            <div className="w-2/4 rounded-md border border-gray-700 bg-gray-700 px-6 py-4">
+              <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
                 10 Task left
               </p>
             </div>
-            <div className="w-2/4 rounded-md border border-[#363636] bg-[#363636] px-6 py-4">
-              <p className="text-center text-[15px] text-[#ffffffdd] min-[475px]:text-lg">
+            <div className="w-2/4 rounded-md border border-gray-700 bg-gray-700 px-6 py-4">
+              <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
                 5 Task done
               </p>
             </div>
@@ -52,7 +52,7 @@ const Profile = () => (
         </header>
         <main className="mt-6 flex w-full max-w-lg flex-col justify-start">
           <section className="mt-5">
-            <h5 className="text-sm text-[#3d3d3d] dark:text-[#AFAFAF] min-[475px]:text-lg">
+            <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
               Settings
             </h5>
             <ProfileLink
@@ -62,7 +62,7 @@ const Profile = () => (
             />
           </section>
           <section className="mt-5">
-            <h5 className="text-sm text-[#3d3d3d] dark:text-[#AFAFAF] min-[475px]:text-lg">
+            <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
               Account
             </h5>
             <ProfileLink
@@ -82,7 +82,7 @@ const Profile = () => (
             />
           </section>
           <section className="mt-5">
-            <h5 className="text-sm text-[#3d3d3d] dark:text-[#AFAFAF] min-[475px]:text-lg">
+            <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
               Uptodo
             </h5>
             <ProfileLink text="About US" link="profile" svg={AboutUsIcon} />

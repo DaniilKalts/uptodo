@@ -2,7 +2,7 @@ import React from 'react';
 
 const LogOutIcon: React.ReactNode = (
   <svg
-    className="text-[#FF4949] group-hover:text-[#e03b3b]"
+    className="text-red group-hover:text-red-dark"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"

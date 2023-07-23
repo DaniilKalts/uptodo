@@ -23,13 +23,13 @@ const Settings = () => (
           <Link href="/profile" className="group">
             {BackIcon}
           </Link>
-          <h6 className="text-xl text-[#3d3d3d] dark:text-[#ffffffdd] min-[475px]:text-2xl">
+          <h6 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
             Settings
           </h6>
         </header>
         <main className="mt-6 flex w-full max-w-lg flex-col justify-start">
           <div className="mt-5">
-            <h5 className="text-sm text-[#3d3d3d] dark:text-[#AFAFAF] min-[475px]:text-lg">
+            <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
               Settings
             </h5>
             <ProfileLink
@@ -39,7 +39,7 @@ const Settings = () => (
             />
           </div>
           <div className="mt-5">
-            <h5 className="text-sm text-[#3d3d3d] dark:text-[#AFAFAF] min-[475px]:text-lg">
+            <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
               Account
             </h5>
             <ProfileLink

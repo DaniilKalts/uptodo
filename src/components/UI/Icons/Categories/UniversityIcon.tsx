@@ -1,9 +1,9 @@
 import React from 'react';
 
 const UniversityIcon: React.ReactNode = (
-  <div className="mr-5 flex justify-center bg-[#809CFF] p-1">
+  <div className="mr-5 flex justify-center bg-blue-light p-1">
     <svg
-      className="text-[#0055A3]"
+      className="text-blue-dark"
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"

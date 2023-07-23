@@ -1,3 +1,10 @@
+import {
+  CommonBarChartData,
+  CommonBarChartOptions,
+  CommonDoughnutChartData,
+  CommonDoughnutChartOptions,
+} from '../types/index';
+
 const daysOfTheWeek = [
   'Monday',
   'Tuesday',
@@ -8,12 +15,28 @@ const daysOfTheWeek = [
   'Sunday',
 ];
 
-const commonBarChartData: {
-  borderRadius: number;
-  borderSkipped: boolean;
-  categoryPercentage: number;
-  datalabels: {};
-} = {
+const commonChartColors = {
+  backgroundColor: [
+    '#A5A5A5',
+    '#A5A5A5',
+    '#A5A5A5',
+    '#A5A5A5',
+    '#A5A5A5',
+    '#8875FF',
+    '#A5A5A5',
+  ],
+  hoverBackgroundColor: [
+    '#838383',
+    '#838383',
+    '#838383',
+    '#838383',
+    '#838383',
+    '#7969e1',
+    '#838383',
+  ],
+};
+
+const commonBarChartData: CommonBarChartData = {
   borderRadius: 6,
   borderSkipped: false,
   categoryPercentage: 0.75,
@@ -36,31 +59,55 @@ const commonBarChartData: {
   },
 };
 
-const commonBarChartOptions = {
-  y: {
-    ticks: {
-      padding: 10,
-      color: '#ffffffdd',
-      font: {
-        size: 16,
+const commonBarChartOptions: CommonBarChartOptions = {
+  scales: {
+    x: {
+      ticks: {
+        padding: 10,
+        font: {
+          size: 16,
+        },
+        color(context: any) {
+          return context.index === 2 || context.index === 5
+            ? '#FF4949'
+            : '#ffffffdd';
+        },
       },
-      callback(value: number) {
-        return `${value}h`;
+      grid: {
+        lineWidth: 3,
+        color(context: any) {
+          if (context.index === 0) {
+            return '#ffffffdd';
+          }
+          return '';
+        },
       },
     },
-    grid: {
-      lineWidth: 3,
-      color(context: any) {
-        if (context.index === 0) {
-          return '#ffffffdd';
-        }
-        return '';
+    y: {
+      ticks: {
+        padding: 10,
+        color: '#ffffffdd',
+        font: {
+          size: 16,
+        },
+        callback(value: number) {
+          return `${value}h`;
+        },
+      },
+      grid: {
+        lineWidth: 3,
+        color(context: any) {
+          if (context.index === 0) {
+            return '#ffffffdd';
+          }
+          return '';
+        },
       },
     },
   },
 };
 
-const commonDoughnutChartOptions = {
+export const commonDoughnutChartOptions: CommonDoughnutChartOptions = {
   scales: {
     x: {
       display: false,
@@ -116,55 +163,14 @@ export const weekBarChartData: {
     {
       label: 'Time spent',
       data: [2.5, 3.5, 5, 3, 4, 4.5, 2, 6],
-      backgroundColor: [
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#8875FF',
-        '#A5A5A5',
-      ],
-      hoverBackgroundColor: [
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#7969e1',
-        '#838383',
-      ],
+      ...commonChartColors,
       ...commonBarChartData,
     },
   ],
 };
 
 export const weekBarChartOptions = {
-  scales: {
-    x: {
-      ticks: {
-        padding: 10,
-        font: {
-          size: 16,
-        },
-        color(context: any) {
-          return context.index === 2 || context.index === 5
-            ? '#FF4949'
-            : '#ffffffdd';
-        },
-      },
-      grid: {
-        lineWidth: 3,
-        color(context: any) {
-          if (context.index === 0) {
-            return '#ffffffdd';
-          }
-          return '';
-        },
-      },
-    },
-    ...commonBarChartOptions,
-  },
+  ...commonBarChartOptions,
   plugins: {
     legend: {
       display: false,
@@ -187,38 +193,13 @@ export const weekBarChartOptions = {
 };
 
 export const weekDoughnutChartData = {
-  labels: [
-    'MONDAY',
-    'TUESDAY',
-    'WEDNSDAY',
-    'THURSDAY',
-    'FRIDAY',
-    'SATURDAY',
-    'SUNDAY',
-  ],
+  labels: daysOfTheWeek,
   datasets: [
     {
       label: 'Time spent',
       data: [2.5, 3.5, 5, 3, 4, 4.5, 2],
       categoryPercentage: 0.75,
-      backgroundColor: [
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#8875FF',
-        '#A5A5A5',
-      ],
-      hoverBackgroundColor: [
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#7969e1',
-        '#838383',
-      ],
+      ...commonChartColors,
       datalabels: {
         anchor: 'center',
         align: 'center',
@@ -228,10 +209,6 @@ export const weekDoughnutChartData = {
       },
     },
   ],
-};
-
-export const weekDoughnutChartOptions = {
-  ...commonDoughnutChartOptions,
 };
 
 export const todayBarChartData: {
@@ -270,29 +247,7 @@ export const todayBarChartData: {
 };
 
 export const todayBarChartOptions = {
-  scales: {
-    x: {
-      ticks: {
-        padding: 10,
-        font: {
-          size: 16,
-        },
-        color(context: any) {
-          return context.index === 1 ? '#FF4949' : '#ffffffdd';
-        },
-      },
-      grid: {
-        lineWidth: 3,
-        color(context: any) {
-          if (context.index === 0) {
-            return '#ffffffdd';
-          }
-          return '';
-        },
-      },
-    },
-    ...commonBarChartOptions,
-  },
+  ...commonBarChartOptions,
   plugins: {
     legend: {
       display: false,
@@ -314,7 +269,7 @@ export const todayBarChartOptions = {
   },
 };
 
-export const todayDoughnutChartData = {
+export const todayDoughnutChartData: CommonDoughnutChartData = {
   labels: ['Workout', 'Work', 'Musick', 'Health', 'University'],
   datasets: [
     {
@@ -344,71 +299,25 @@ export const todayDoughnutChartData = {
   ],
 };
 
-export const todayDoughnutChartOptions = {
-  ...commonDoughnutChartOptions,
-};
-
 export const specificBarChartData = {
   labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
   datasets: [
     {
       label: 'Time spent',
       data: [2.5, 3.5, 5, 3, 4, 4.5, 2, 6],
-      backgroundColor: [
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#8875FF',
-        '#A5A5A5',
-      ],
-      hoverBackgroundColor: [
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#7969e1',
-        '#838383',
-      ],
+      ...commonChartColors,
     },
   ],
 };
 
-export const specificDoughnutChartData = {
-  labels: [
-    'MONDAY',
-    'TUESDAY',
-    'WEDNSDAY',
-    'THURSDAY',
-    'FRIDAY',
-    'SATURDAY',
-    'SUNDAY',
-  ],
+export const specificDoughnutChartData: CommonDoughnutChartData = {
+  labels: daysOfTheWeek,
   datasets: [
     {
       label: 'Time spent',
       data: [2.5, 3.5, 5, 3, 4, 4.5, 2],
       categoryPercentage: 0.75,
-      backgroundColor: [
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#A5A5A5',
-        '#8875FF',
-        '#A5A5A5',
-      ],
-      hoverBackgroundColor: [
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#838383',
-        '#7969e1',
-        '#838383',
-      ],
+      ...commonChartColors,
       datalabels: {
         anchor: 'center',
         align: 'center',
@@ -418,8 +327,4 @@ export const specificDoughnutChartData = {
       },
     },
   ],
-};
-
-export const specificDoughnutChartOptions = {
-  ...commonDoughnutChartOptions,
 };

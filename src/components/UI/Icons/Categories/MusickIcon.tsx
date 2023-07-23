@@ -1,9 +1,9 @@
 import React from 'react';
 
 const MusickIcon: React.ReactNode = (
-  <div className="mr-5 flex justify-center bg-[#FC80FF] p-1">
+  <div className="mr-5 flex justify-center bg-pink-light p-1">
     <svg
-      className="text-[#A000A3]"
+      className="text-pink-dark"
       xmlns="http://www.w3.org/2000/svg"
       width="29"
       height="29"

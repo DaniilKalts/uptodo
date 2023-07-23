@@ -34,8 +34,8 @@ const Input: React.FC<InputProps> = ({
         className={`
           mb-2
           text-lg
-          text-[#3d3d3d] 
-          dark:text-[#ffffffdd]
+          text-gray-dark 
+          dark:text-white-pale
           min-[475px]:text-xl
         `}
       >
@@ -54,18 +54,19 @@ const Input: React.FC<InputProps> = ({
         ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
       rounded-lg 
       border
-      border-[#979797] 
-        text-[#1D1D1D] 
+        border-gray-300
+      text-black-light 
+      placeholder-gray-200
         shadow-sm 
-        dark:bg-[#1D1D1D]
-        dark:text-white
+        dark:bg-black-light
+        dark:text-white-pale
         min-[475px]:py-3
         min-[475px]:text-${small ? 'lg' : 'xl'}
       `}
       autoComplete="off"
       {...register(id, { required: 'You have to fill this field!' })}
     />
-    {errors[id] && <p className="mt-1 text-red-500">{errorMessage}</p>}
+    {errors[id] && <p className="mt-1 text-red">{errorMessage}</p>}
   </div>
 );
 

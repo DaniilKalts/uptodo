@@ -105,7 +105,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
             stroke="currentColor"
             strokeWidth="13"
             fill="transparent"
-            className="text-[#555]"
+            className="text-gray-light"
           ></circle>
           <circle
             cx="125"
@@ -114,7 +114,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
             stroke="currentColor"
             strokeWidth="13"
             fill="transparent"
-            className="text-[#8875FF]"
+            className="text-purple"
             strokeDasharray="755"
             strokeDashoffset={
               circluarIndicator === initialCircularIndicator
@@ -129,18 +129,18 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
             font-medium
             ${
               isTimerRunning && !isDanger
-                ? 'text-[#3d3d3d] dark:text-white'
+                ? 'text-gray-dark dark:text-white-pale'
                 : ''
             }
             ${
               (!isTimerRunning && !isDanger) ||
               circluarIndicator === initialCircularIndicator
-                ? 'text-[#3d3d3d] dark:text-[#ffffffdd]'
+                ? 'text-gray-dark dark:text-white-pale'
                 : ''
             }
             ${
               isDanger && circluarIndicator !== initialCircularIndicator
-                ? 'text-red-500'
+                ? 'text-red'
                 : ''
             }
             ${!seconds && timerSeconds > 0 ? 'blink-hard' : ''}
@@ -150,7 +150,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
           {minutesString}:{secondsString}
         </p>
       </div>
-      <p className="mb-6 mt-4 max-w-sm text-center text-base text-[#3d3d3d] dark:text-white min-[475px]:text-lg">
+      <p className="mb-6 mt-4 max-w-sm text-center text-base text-gray-dark dark:text-white min-[475px]:text-lg">
         {"While your focus mode is on, make sure, you don't leave the app"}
       </p>
       <div className="flex w-full max-w-sm items-center justify-between gap-5">

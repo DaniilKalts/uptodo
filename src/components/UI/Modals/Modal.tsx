@@ -26,9 +26,9 @@ const Modal: React.FC<ModalInterface> = ({ isOpen, title, body, footer }) => (
       px-6
     `}
   >
-    <div className="w-full max-w-[475px] bg-[#363636] px-5 py-5">
+    <div className="w-full max-w-[475px] bg-gray-700 px-5 py-5">
       <header className="border-b pb-4">
-        <h3 className="text-center text-xl text-[#ffffffdd] min-[475px]:text-2xl">
+        <h3 className="text-center text-xl text-white-pale min-[475px]:text-2xl">
           {title}
         </h3>
       </header>
