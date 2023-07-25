@@ -6,14 +6,14 @@ import Modal from './Modal';
 import Button from '../Button';
 
 interface TimerModalInterface {
-  isModal: boolean;
+  isOpen: boolean;
   timerSeconds: number;
   onCancel: () => void;
   onSave: (seconds: number) => void;
 }
 
 const TimerModal: React.FC<TimerModalInterface> = ({
-  isModal,
+  isOpen,
   timerSeconds,
   onCancel,
   onSave,
@@ -41,7 +41,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
   useEffect(() => {
     setModalSeconds(timerSeconds);
 
-    if (!isModal) {
+    if (!isOpen) {
       setMinutesSwiper(null);
       setSecondsSwiper(null);
     } else {
@@ -63,11 +63,12 @@ const TimerModal: React.FC<TimerModalInterface> = ({
         />,
       );
     }
-  }, [isModal, timerSeconds]);
+  }, [isOpen, timerSeconds]);
 
   return (
     <Modal
-      isOpen={isModal}
+      isOpen={isOpen}
+      onClose={onCancel}
       title="Choose time to focus"
       body={
         <div className="mb-8 flex items-center justify-center gap-4">
@@ -97,6 +98,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
           />
         </div>
       }
+      bgType="dark"
     />
   );
 };

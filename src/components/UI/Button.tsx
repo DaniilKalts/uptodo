@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({
       justify-center
       max-w-${small ? 'sm' : 'md'}
       gap-2
-      px-5
+      px-8
       py-3
       text-base
       ${
@@ -69,7 +69,6 @@ const Button: React.FC<ButtonProps> = ({
       disabled:cursor-not-allowed 
       disabled:opacity-70 
       min-[475px]:text-${small ? 'base' : 'lg'}
-      min-[475px]:px-8
     `}
     disabled={disabled || isLoading}
     onClick={onClick}

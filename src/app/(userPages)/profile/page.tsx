@@ -29,7 +29,7 @@ const Profile = () => (
           </h6>
           <Image
             src="/images/home/demo_avatar.svg"
-            className="mb-4 min-[475px]:w-32"
+            className="mb-4 rounded-full min-[475px]:w-32"
             width={96}
             height={96}
             alt="Avatar"
@@ -50,7 +50,7 @@ const Profile = () => (
             </div>
           </div>
         </header>
-        <main className="mt-6 flex w-full max-w-lg flex-col justify-start">
+        <main className="mt-4 flex w-full max-w-lg flex-col justify-start">
           <section className="mt-5">
             <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
               Settings

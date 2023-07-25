@@ -100,19 +100,21 @@ const Focus = () => {
   return (
     <div className="pb-36 md:pb-40">
       <Container>
-        <TimerModal
-          isModal={isChooseTimeModal}
-          timerSeconds={timerSeconds}
-          onCancel={() => {
-            document.body.style.overflow = 'auto';
-            setIsChooseTimeModal(false);
-          }}
-          onSave={(seconds: number) => {
-            document.body.style.overflow = 'auto';
-            setIsChooseTimeModal(false);
-            setTimerSeconds(seconds);
-          }}
-        />
+        {isChooseTimeModal && (
+          <TimerModal
+            isOpen={isChooseTimeModal}
+            timerSeconds={timerSeconds}
+            onCancel={() => {
+              document.body.style.overflow = 'auto';
+              setIsChooseTimeModal(false);
+            }}
+            onSave={(seconds: number) => {
+              document.body.style.overflow = 'auto';
+              setIsChooseTimeModal(false);
+              setTimerSeconds(seconds);
+            }}
+          />
+        )}
         <div className="mx-auto mt-8 flex flex-col items-center justify-center">
           <header>
             <h6 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
@@ -140,7 +142,7 @@ const Focus = () => {
               </div>
               <FocusChart chartConfig={chartConfig} />
             </section>
-            <h4 className="mb-5 mt-12 text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            <h4 className="mb-5 mt-6 text-xl text-gray-dark dark:text-white-pale min-[475px]:mt-12 min-[475px]:text-2xl">
               Time Spent:
             </h4>
             <FocusTask
