@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import { IndexIcon, CalendarIcon, FocusIcon, ProfileIcon } from './Icons';
 
 const Navbar = () => {
-  const currentRoute = usePathname();
+  const currentPathName = usePathname();
 
   return (
     <nav className="fixed bottom-0 left-0 z-40 h-20 w-full bg-gray-700 md:h-24">
@@ -17,16 +17,21 @@ const Navbar = () => {
           href="/home"
           className="group inline-flex flex-col items-center justify-center px-5"
         >
-          <IndexIcon isActive={currentRoute === '/home'} />
+          <IndexIcon isActive={currentPathName === '/home'} />
           <span className="text-sm text-white-pale min-[475px]:text-base">
             Index
           </span>
         </Link>
         <Link
-          href="/calendar"
+          href="/calendar/today"
           className="group inline-flex flex-col items-center justify-center px-5"
         >
-          <CalendarIcon isActive={currentRoute === '/calendar'} />
+          <CalendarIcon
+            isActive={
+              currentPathName === '/calendar/today' ||
+              currentPathName === '/calendar/completed'
+            }
+          />
           <span className="text-sm text-white-pale min-[475px]:text-base">
             Calendar
           </span>
@@ -59,7 +64,7 @@ const Navbar = () => {
           href="/focus"
           className="group inline-flex flex-col items-center justify-center px-5"
         >
-          <FocusIcon isActive={currentRoute === '/focus'} />
+          <FocusIcon isActive={currentPathName === '/focus'} />
           <span className="text-sm text-white-pale min-[475px]:text-base">
             Focus
           </span>

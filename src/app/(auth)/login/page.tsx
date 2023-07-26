@@ -176,14 +176,14 @@ const Login = () => {
           <Button
             label="Login with Google"
             onClick={googleSignIn}
-            outline
+            outline="purple"
             disabled={isGoogleLoading}
             icon={FcGoogle}
           />
           <Button
             label="Login with Github"
             onClick={githubSignIn}
-            outline
+            outline="purple"
             disabled={isGithubLoading}
             icon={AiFillGithub}
           />

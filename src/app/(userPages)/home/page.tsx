@@ -38,9 +38,9 @@ const Home = () => {
               d="M21 7.75H3c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h18c.41 0 .75.34.75.75s-.34.75-.75.75ZM18 12.75H6c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h12c.41 0 .75.34.75.75s-.34.75-.75.75ZM14 17.75h-4c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75Z"
             />
           </svg>
-          <h6 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+          <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
             Index
-          </h6>
+          </h4>
           <Image
             src="/images/home/demo_avatar.svg"
             className="w-11 cursor-pointer min-[475px]:w-12"

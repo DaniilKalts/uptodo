@@ -11,7 +11,7 @@ interface ButtonProps {
   onClick: (() => void) | ((data: FieldValues) => void);
   disabled?: boolean;
   isLoading?: boolean;
-  outline?: boolean;
+  outline?: 'gray' | 'purple';
   filled?: boolean;
   upperCase?: boolean;
   small?: boolean;
@@ -28,9 +28,19 @@ const Button: React.FC<ButtonProps> = ({
   upperCase,
   small,
   icon: Icon,
-}) => (
-  <button
-    className={`
+}) => {
+  const outlineStyles = () => {
+    if (outline === 'gray') {
+      return 'bg-transparent text-white-pale outline outline-2 outline-gray-300 focus:ring-4 focus:ring-gray-300 dark:text-white';
+    }
+    if (outline === 'purple') {
+      return 'bg-transparent text-gray-dark outline outline-2 outline-purple-light focus:ring-4 focus:ring-purple-light dark:text-white';
+    }
+  };
+
+  return (
+    <button
+      className={`
       flex
       w-full
       items-center
@@ -55,11 +65,7 @@ const Button: React.FC<ButtonProps> = ({
           ? 'bg-transparent text-purple hover:text-purple-dark'
           : ''
       }
-      ${
-        outline
-          ? 'bg-transparent text-gray-dark outline outline-2 outline-purple-light focus:ring-4 focus:ring-purple-light dark:text-white'
-          : ''
-      }
+      ${outline ? outlineStyles : ''}
       ${disabled && filled ? 'hover:bg-purple' : ''}
       ${isLoading ? 'bg-purple opacity-70 ring-0 hover:bg-purple' : ''}
       ${upperCase ? 'uppercase' : ''}
@@ -70,13 +76,14 @@ const Button: React.FC<ButtonProps> = ({
       disabled:opacity-70 
       min-[475px]:text-${small ? 'base' : 'lg'}
     `}
-    disabled={disabled || isLoading}
-    onClick={onClick}
-  >
-    {Icon && disabled && <Spinner />}
-    {Icon && !disabled && <Icon size={24} />}
-    {isLoading ? 'Please wait...' : label}
-  </button>
-);
+      disabled={disabled || isLoading}
+      onClick={onClick}
+    >
+      {Icon && disabled && <Spinner />}
+      {Icon && !disabled && <Icon size={24} />}
+      {isLoading ? 'Please wait...' : label}
+    </button>
+  );
+};
 
 export default Button;

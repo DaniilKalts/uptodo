@@ -159,7 +159,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
             label="Edit"
             onClick={() => onEdit()}
             disabled={accumulativeSecond > 0}
-            outline
+            outline="purple"
           />
         </div>
         <div className="w-2/4">
@@ -175,7 +175,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
             label="Reset"
             onClick={onTimerReset}
             disabled={isTimerRunning || accumulativeSecond === 0}
-            outline
+            outline="purple"
           />
         </div>
       </div>

@@ -27,7 +27,7 @@ const Welcome = () => {
         >
           <header className="absolute left-0 top-12">
             <MdArrowBackIosNew
-              className="text-black cursor-pointer text-2xl transition hover:text-gray-dark dark:text-white dark:hover:text-white-pale"
+              className="cursor-pointer text-2xl text-black transition hover:text-gray-dark dark:text-white dark:hover:text-white-pale"
               onClick={() => router.back()}
             />
           </header>
@@ -47,7 +47,7 @@ const Welcome = () => {
               <Button
                 label="Register"
                 onClick={() => {}}
-                outline
+                outline="purple"
                 upperCase
                 small
               />

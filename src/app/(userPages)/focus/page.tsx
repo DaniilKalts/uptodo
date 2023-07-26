@@ -117,9 +117,9 @@ const Focus = () => {
         )}
         <div className="mx-auto mt-8 flex flex-col items-center justify-center">
           <header>
-            <h6 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
               Focus Mode
-            </h6>
+            </h4>
           </header>
           <main className="mt-4 flex w-full max-w-lg flex-col justify-start min-[475px]:mt-8">
             <Timer

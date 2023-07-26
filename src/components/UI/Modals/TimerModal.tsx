@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 
 import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
@@ -99,6 +101,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
         </div>
       }
       bgType="dark"
+      motionConfig={null}
     />
   );
 };

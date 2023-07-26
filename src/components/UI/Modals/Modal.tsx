@@ -9,7 +9,7 @@ interface ModalInterface {
   body: React.ReactNode;
   footer?: React.ReactNode;
   bgType: 'blur' | 'dark';
-  motionConfig: object;
+  motionConfig: null | object;
 }
 
 const Modal: React.FC<ModalInterface> = ({

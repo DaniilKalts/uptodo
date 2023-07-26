@@ -192,14 +192,14 @@ const Register = () => {
           <Button
             label="Register with Google"
             onClick={googleSignIn}
-            outline
+            outline="purple"
             disabled={isGoogleLoading}
             icon={FcGoogle}
           />
           <Button
             label="Register with Github"
             onClick={githubSignIn}
-            outline
+            outline="purple"
             disabled={isGithubLoading}
             icon={AiFillGithub}
           />

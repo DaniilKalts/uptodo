@@ -23,9 +23,9 @@ const Settings = () => (
           <Link href="/profile" className="group">
             {BackIcon}
           </Link>
-          <h6 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+          <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
             Settings
-          </h6>
+          </h4>
         </header>
         <main className="mt-6 flex w-full max-w-lg flex-col justify-start">
           <div className="mt-5">
