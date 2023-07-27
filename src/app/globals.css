@@ -65,3 +65,8 @@
   height: 100%;
   object-fit: cover;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  display: none !important;
+}

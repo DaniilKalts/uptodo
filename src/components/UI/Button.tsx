@@ -47,12 +47,13 @@ const Button: React.FC<ButtonProps> = ({
       justify-center
       max-w-${small ? 'sm' : 'md'}
       gap-2
-      px-8
+      px-4
       py-3
       text-base
+      min-[475px]:px-8
       ${
         filled
-          ? 'bg-purple text-white hover:bg-purple-dark focus:outline-none focus:ring-4 focus:ring-purple-light'
+          ? 'bg-purple text-white outline outline-2 outline-purple hover:bg-purple-dark hover:outline-purple-dark focus:outline-none focus:ring-4 focus:ring-purple-light'
           : ''
       }
       ${
@@ -65,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({
           ? 'bg-transparent text-purple hover:text-purple-dark'
           : ''
       }
-      ${outline ? outlineStyles : ''}
+      ${outline ? outlineStyles() : ''}
       ${disabled && filled ? 'hover:bg-purple' : ''}
       ${isLoading ? 'bg-purple opacity-70 ring-0 hover:bg-purple' : ''}
       ${upperCase ? 'uppercase' : ''}

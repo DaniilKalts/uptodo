@@ -23,12 +23,12 @@ const Navbar = () => {
           </span>
         </Link>
         <Link
-          href="/calendar/today"
+          href="/calendar/incompleted"
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <CalendarIcon
             isActive={
-              currentPathName === '/calendar/today' ||
+              currentPathName === '/calendar/incompleted' ||
               currentPathName === '/calendar/completed'
             }
           />
