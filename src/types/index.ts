@@ -107,3 +107,27 @@ export type CommonDoughnutChartOptions = {
     };
   };
 };
+
+export type IncompletedTaskInterface = {
+  id: number;
+  title: string;
+  deadline: number;
+  category: {
+    icon: React.ReactNode;
+    bgColor: string;
+    label: string;
+  };
+  priority: number;
+};
+
+export type CompletedTaskInterface = {
+  id: number;
+  title: string;
+  deadline: number;
+  completedAt: number;
+  category: {
+    icon: React.ReactNode;
+    label: string;
+  };
+  priority: number;
+};

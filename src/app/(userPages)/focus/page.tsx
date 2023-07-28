@@ -146,27 +146,27 @@ const Focus = () => {
               Time Spent:
             </h4>
             <FocusTask
-              logo={WorkoutIcon}
+              icon={WorkoutIcon}
               title="Workout"
               text="You spent 1 hour on Workout today"
             />
             <FocusTask
-              logo={WorkIcon}
+              icon={WorkIcon}
               title="Work"
               text="You spent 6 hours on Work today"
             />
             <FocusTask
-              logo={MusickIcon}
+              icon={MusickIcon}
               title="Musick"
               text="You spent 2 hours on Musick today"
             />
             <FocusTask
-              logo={HealthIcon}
+              icon={HealthIcon}
               title="Health"
               text="You spent 1 hour on Health today"
             />
             <FocusTask
-              logo={UniversityIcon}
+              icon={UniversityIcon}
               title="University"
               text="You spent 3 hours on University today"
             />

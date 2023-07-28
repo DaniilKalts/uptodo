@@ -1,14 +1,29 @@
+/* eslint-disable @typescript-eslint/indent */
+
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useTasksStore from '@/store/useTasksStore';
 
+import { IncompletedTaskInterface } from '@/types';
+
+import IncompletedTask from '@/components/userPages/Calendar/IncompleteTask';
 import Container from '@/components/UI/Container';
-import IncompletedTask from '@/components/Calendar/IncompleteTask';
 
 const Incompleted = () => {
-  const { incompletedTasks, addCompletedTask } = useTasksStore();
+  const storeIncompletedTasks = useTasksStore(
+    (state) => state.incompletedTasks,
+  );
+  const addCompletedTask = useTasksStore((state) => state.addCompletedTask);
+
+  const [incompletedTasks, setIncompletedTasks] = useState<
+    IncompletedTaskInterface[]
+  >([]);
+
+  useEffect(() => {
+    setIncompletedTasks(storeIncompletedTasks);
+  }, [storeIncompletedTasks]);
 
   return (
     <Container>
@@ -20,6 +35,7 @@ const Incompleted = () => {
                 <IncompletedTask
                   title={task.title}
                   deadline={task.deadline}
+                  category={task.category}
                   priority={task.priority}
                   onComplete={() =>
                     addCompletedTask({

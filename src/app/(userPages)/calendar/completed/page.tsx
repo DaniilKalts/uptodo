@@ -1,14 +1,26 @@
+/* eslint-disable @typescript-eslint/indent */
+
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useTasksStore from '@/store/useTasksStore';
+import { CompletedTaskInterface } from '@/types';
 
+import CompletedTask from '@/components/userPages/Calendar/CompletedTask';
 import Container from '@/components/UI/Container';
-import CompletedTask from '@/components/Calendar/CompletedTask';
 
 const Completed = () => {
-  const { completedTasks, addIncompletedTask } = useTasksStore();
+  const storeCompletedTasks = useTasksStore((state) => state.completedTasks);
+  const addIncompletedTask = useTasksStore((state) => state.addIncompletedTask);
+
+  const [completedTasks, setCompletedTasks] = useState<
+    CompletedTaskInterface[]
+  >([]);
+
+  useEffect(() => {
+    setCompletedTasks(storeCompletedTasks);
+  }, [storeCompletedTasks]);
 
   return (
     <Container>
