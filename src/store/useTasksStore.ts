@@ -6,6 +6,7 @@ import {
   HealthIcon,
   UniversityIcon,
   WorkIcon,
+  WorkoutIcon,
 } from '@/components/UI/Icons/Categories';
 import GroceryIcon from '@/components/UI/Icons/Categories/GroceryIcon';
 
@@ -57,6 +58,17 @@ const useTasksStore = create(
           },
           priority: 10,
         },
+        {
+          id: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
+          title: 'Do workout',
+          todayAt: new Date(2023, 6, 29, 20, 35).getTime(),
+          category: {
+            icon: WorkoutIcon,
+            bgColor: 'cyan-light',
+            label: 'Workout',
+          },
+          priority: 8,
+        },
       ],
       completedTasks: [],
       addIncompletedTask: (incompletedTask: CompletedTaskInterface) =>
@@ -85,38 +97,6 @@ const useTasksStore = create(
             ),
           completedTasks: [completedTask, ...state.completedTasks],
         })),
-      // sortIncompletedTasks: (
-      //   order: 'earliest' | 'latest',
-      //   priority: 'default' | 'low' | 'high',
-      // ) =>
-      //   set((state: any) => ({
-      //     incompletedTasks: state.incompletedTasks
-      //       .sort(
-      //         (
-      //           taskA: IncompletedTaskInterface,
-      //           taskB: IncompletedTaskInterface,
-      //         ) => {
-      //           if (order === 'latest') {
-      //             return taskA.todayAt - taskB.todayAt;
-      //           }
-      //           return taskB.todayAt - taskA.todayAt;
-      //         },
-      //       )
-      //       .sort(
-      //         (
-      //           taskA: IncompletedTaskInterface,
-      //           taskB: IncompletedTaskInterface,
-      //         ) => {
-      //           if (priority === 'default') {
-      //             return;
-      //           }
-      //           if (priority === 'low') {
-      //             return taskA.priority - taskB.priority;
-      //           }
-      //           return taskB.priority - taskA.priority;
-      //         },
-      //       ),
-      //   })),
     }),
     { name: 'tasks' },
   ),

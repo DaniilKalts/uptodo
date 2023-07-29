@@ -21,7 +21,26 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
 }) => {
   const getTimeString = (time: number) => String(time).padStart(2, '0');
 
-  const getCategoryBgColor = () => `bg-${category.bgColor}`;
+  const getCategoryBgColor = () => {
+    switch (category.bgColor) {
+      case 'blue-light':
+        return 'bg-blue-light';
+      case 'mint-light':
+        return 'bg-mint-light';
+      case 'lemon-light':
+        return 'bg-lemon-light';
+      case 'lemon-chiffon':
+        return 'bg-lemon-chiffon';
+      case 'beige-light':
+        return 'bg-beige-light';
+      case 'cyan-light':
+        return 'bg-cyan-light';
+      case 'pink-light':
+        return 'bg-pink-light';
+      default:
+        return '';
+    }
+  };
 
   const convertToJSX = (data: any): any => {
     const { type, props } = data;

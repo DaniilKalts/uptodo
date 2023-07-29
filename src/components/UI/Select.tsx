@@ -120,7 +120,8 @@ const Select: React.FC<SelectInterface> = ({
                 ${theme === 'gray' ? 'bg-gray-600' : 'bg-purple'} 
                 px-4 
                 py-2 
-                text-white-pale 
+                text-base
+                text-white-pale
                 ${hoverClass()} ${roundedClass(id)} ${disabledClass()}`}
                 onClick={() => onChange(option)}
               >
