@@ -14,7 +14,7 @@ const CompletedTask: React.FC<CompletedTaskInterface> = ({
   const getTimeString = (time: number) => String(time).padStart(2, '0');
 
   return (
-    <div className="relative flex flex-wrap items-center justify-between gap-4 rounded-md bg-gray-700 p-4">
+    <div className="relative flex cursor-pointer flex-wrap items-center justify-between gap-4 rounded-md bg-gray-700 p-4 hover:bg-gray-600">
       <div className="flex items-center gap-4">
         <div
           className="flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent"
@@ -29,7 +29,7 @@ const CompletedTask: React.FC<CompletedTaskInterface> = ({
           <p className="text-base text-gray-200 min-[475px]:text-base">
             Completed At:{' '}
             {`${getTimeString(
-              new Date(completedAt).getHours() % 12 || 12,
+              new Date(completedAt).getHours() % 12 || 0,
             )}:${getTimeString(new Date(completedAt).getMinutes())} ${
               new Date(completedAt).getHours() >= 12 ? 'pm' : 'am'
             }`}

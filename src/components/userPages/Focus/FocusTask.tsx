@@ -2,15 +2,31 @@ import React from 'react';
 
 interface FocusTaskInterface {
   icon: React.ReactNode;
+  bgIconColor: string;
   title: string;
   text: string;
 }
 
-const FocusTask: React.FC<FocusTaskInterface> = ({ icon, title, text }) => (
+const FocusTask: React.FC<FocusTaskInterface> = ({
+  icon,
+  bgIconColor,
+  title,
+  text,
+}) => (
   <div className="mb-6 flex items-center justify-between rounded-lg border border-gray-700 bg-gray-500 px-5 py-4">
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center">
-        {icon}
+        <div
+          className={`
+            mr-5 
+            flex 
+            justify-center 
+            bg-${bgIconColor}
+            p-1
+          `}
+        >
+          {icon}
+        </div>
         <div>
           <h6 className="mb-1 text-base text-white-pale min-[475px]:text-xl">
             {title}

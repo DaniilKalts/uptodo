@@ -138,6 +138,7 @@ const Focus = () => {
                   value={stats}
                   setValue={(newValue: string) => setStats(newValue)}
                   options={['This Week', 'Today', 'Specific Task']}
+                  theme="gray"
                 />
               </div>
               <FocusChart chartConfig={chartConfig} />
@@ -147,26 +148,31 @@ const Focus = () => {
             </h4>
             <FocusTask
               icon={WorkoutIcon}
+              bgIconColor="cyan-light"
               title="Workout"
               text="You spent 1 hour on Workout today"
             />
             <FocusTask
               icon={WorkIcon}
+              bgIconColor="beige-light"
               title="Work"
               text="You spent 6 hours on Work today"
             />
             <FocusTask
               icon={MusickIcon}
+              bgIconColor="pink-light"
               title="Musick"
               text="You spent 2 hours on Musick today"
             />
             <FocusTask
               icon={HealthIcon}
+              bgIconColor="mint-light"
               title="Health"
               text="You spent 1 hour on Health today"
             />
             <FocusTask
               icon={UniversityIcon}
+              bgIconColor="blue-light"
               title="University"
               text="You spent 3 hours on University today"
             />

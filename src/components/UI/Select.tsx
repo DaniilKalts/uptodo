@@ -4,15 +4,28 @@ interface SelectInterface {
   value: string;
   setValue: (newValue: string) => void;
   options: string[];
+  theme: 'purple' | 'gray';
 }
 
-const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
+const Select: React.FC<SelectInterface> = ({
+  value,
+  setValue,
+  options,
+  theme,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
   const onChange = (newValue: string) => {
     setIsOpen((prev) => !prev);
     setValue(newValue);
+  };
+
+  const hoverClass = () => {
+    if (theme === 'gray') {
+      return 'hover:bg-gray-500';
+    }
+    return 'hover:bg-purple-light';
   };
 
   const roundedClass = (id: number) => {
@@ -23,6 +36,13 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
       return 'rounded-bl-lg rounded-br-lg';
     }
     return '';
+  };
+
+  const disabledClass = () => {
+    if (theme === 'gray') {
+      return 'disabled:bg-gray-700';
+    }
+    return 'disabled:bg-purple-dark';
   };
 
   const outsideClick = useCallback((e: MouseEvent) => {
@@ -41,7 +61,22 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
   return (
     <div className="relative min-w-[125px]" ref={selectRef}>
       <button
-        className="z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg bg-gray-500 px-4 py-2.5 text-center text-base font-medium text-white-pale dark:bg-gray-600"
+        className={`
+          z-10 
+          inline-flex 
+          w-full 
+          flex-shrink-0 
+          items-center 
+          justify-between 
+          rounded-lg 
+          ${theme === 'gray' ? 'bg-gray-600' : 'bg-purple'}
+          px-4 
+          py-2.5 
+          text-center 
+          text-base 
+          font-medium 
+          text-white-pale 
+        `}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {value}
@@ -63,18 +98,30 @@ const Select: React.FC<SelectInterface> = ({ value, setValue, options }) => {
       </button>
       <div
         id="dropdown-states"
-        className={`${
-          isOpen ? 'block' : 'hidden'
-        } absolute right-0 z-40 w-full rounded-lg bg-gray-500 shadow dark:bg-gray-600`}
+        className={`
+        ${isOpen ? 'block' : 'hidden'} 
+        absolute 
+        right-0 
+        z-40 
+        w-full 
+        rounded-lg 
+        ${theme === 'gray' ? 'bg-gray-700' : 'bg-purple-light'}
+        shadow`}
       >
         <ul className="rounded-lg text-sm">
           {options.map((option, id) => (
             <li key={option}>
               <button
                 disabled={value === option}
-                className={`inline-flex w-full cursor-pointer bg-gray-600 px-4 py-2 text-white-pale hover:bg-gray-500 ${roundedClass(
-                  id,
-                )} disabled:bg-gray-700`}
+                className={`
+                inline-flex 
+                w-full 
+                cursor-pointer
+                ${theme === 'gray' ? 'bg-gray-600' : 'bg-purple'} 
+                px-4 
+                py-2 
+                text-white-pale 
+                ${hoverClass()} ${roundedClass(id)} ${disabledClass()}`}
                 onClick={() => onChange(option)}
               >
                 <div className="inline-flex items-center">{option}</div>

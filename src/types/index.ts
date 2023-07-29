@@ -111,7 +111,7 @@ export type CommonDoughnutChartOptions = {
 export type IncompletedTaskInterface = {
   id: number;
   title: string;
-  deadline: number;
+  todayAt: number;
   category: {
     icon: React.ReactNode;
     bgColor: string;
@@ -123,7 +123,7 @@ export type IncompletedTaskInterface = {
 export type CompletedTaskInterface = {
   id: number;
   title: string;
-  deadline: number;
+  todayAt: number;
   completedAt: number;
   category: {
     icon: React.ReactNode;

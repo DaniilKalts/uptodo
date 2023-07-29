@@ -52,15 +52,11 @@ module.exports = {
 
         // category colors:
         'cyan-light': '#80FFFF',
-        'green-dark': '#00A32F',
         'beige-light': '#FF9680',
-        'beige-dark': '#A31D00',
         'blue-light': '#809CFF',
-        'blue-dark': '#0055A3',
         'pink-light': '#FC80FF',
-        'pink-dark': '#A000A3',
         'mint-light': '#80FFA3',
-        'teal-dark': '#00A3A3',
+        'lemon-chiffon': '#CCFF80',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

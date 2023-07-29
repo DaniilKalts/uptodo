@@ -2,7 +2,7 @@ import React from 'react';
 
 interface IncompletedTaskInterface {
   title: string;
-  deadline: number;
+  todayAt: number;
   category: {
     icon: React.ReactNode;
     bgColor: string;
@@ -14,14 +14,14 @@ interface IncompletedTaskInterface {
 
 const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
   title,
-  deadline,
+  todayAt,
   category,
   priority,
   onComplete,
 }) => {
   const getTimeString = (time: number) => String(time).padStart(2, '0');
 
-  const bgCategoryColor = () => `bg-[${category.bgColor}]`;
+  const getCategoryBgColor = () => `bg-${category.bgColor}`;
 
   const convertToJSX = (data: any): any => {
     const { type, props } = data;
@@ -36,9 +36,9 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
   };
 
   return (
-    <div className="relative flex flex-wrap items-center gap-4 rounded-md bg-gray-700 p-4">
+    <div className="relative flex cursor-pointer flex-wrap items-center gap-4 rounded-md bg-gray-700 p-4 hover:bg-gray-600">
       <div
-        className="h-5 w-5 cursor-pointer rounded-full border-2 border-white-pale bg-transparent"
+        className="h-5 w-5 rounded-full border-2 border-white-pale bg-transparent"
         onClick={() => onComplete()}
       ></div>
       <div>
@@ -46,17 +46,17 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
           {title}
         </h6>
         <p className="text-base text-gray-200 min-[475px]:text-base">
-          Deadline:{' '}
+          Today At:{' '}
           {`${getTimeString(
-            new Date(deadline).getHours() % 12 || 12,
-          )}:${getTimeString(new Date(deadline).getMinutes())} ${
-            new Date(deadline).getHours() >= 12 ? 'pm' : 'am'
+            new Date(todayAt).getHours() % 12 || 0,
+          )}:${getTimeString(new Date(todayAt).getMinutes())} ${
+            new Date(todayAt).getHours() >= 12 ? 'pm' : 'am'
           }`}
         </p>
       </div>
       <div className="flex gap-4 min-[475px]:absolute min-[475px]:bottom-1 min-[475px]:right-2">
         <div
-          className={`flex h-10 items-center gap-3 rounded-md px-3 ${bgCategoryColor()}`}
+          className={`flex h-10 items-center gap-3 rounded-md ${getCategoryBgColor()} px-3`}
         >
           {convertToJSX(category.icon)}
           <p className="text-sm text-white min-[475px]:text-base">
