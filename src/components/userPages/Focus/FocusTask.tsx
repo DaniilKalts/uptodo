@@ -60,7 +60,7 @@ const FocusTask: React.FC<FocusTaskInterface> = ({
         </div>
         <div className="ml-4 h-full border-l-[2px] border-gray-300 py-3 min-[475px]:ml-6 min-[475px]:border-l-[3px]">
           <svg
-            className="ml-4 h-6 w-6 cursor-pointer text-white-pale min-[475px]:h-8 min-[475px]:w-8"
+            className="ml-4 h-7 w-7 cursor-pointer text-white-pale min-[475px]:h-8 min-[475px]:w-8"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"

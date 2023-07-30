@@ -2,15 +2,15 @@
 
 'use client';
 
-import React, { useEffect, useState, CSSProperties } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 
-import { PuffLoader } from 'react-spinners';
-
-import { motion } from 'framer-motion';
-
+import { CompletedTaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
 
-import { CompletedTaskInterface } from '@/types';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { PuffLoader } from 'react-spinners';
+import { toast } from 'react-hot-toast';
 
 import CompletedTask from '@/components/userPages/Calendar/CompletedTask';
 
@@ -25,7 +25,7 @@ const override: CSSProperties = {
 };
 
 const Completed = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
     'time',
   );
@@ -33,9 +33,7 @@ const Completed = () => {
   const storeCompletedTasks = useTasksStore((state) => state.completedTasks);
   const addIncompletedTask = useTasksStore((state) => state.addIncompletedTask);
 
-  const [completedTasks, setCompletedTasks] = useState<
-    CompletedTaskInterface[]
-  >([]);
+  const [completedTasks, setCompletedTasks] = useState<CompletedTaskType[]>([]);
 
   const [timeSortValue, setTimeSortValue] =
     useState<string>('By time (earliest)');
@@ -68,12 +66,7 @@ const Completed = () => {
   };
 
   useEffect(() => {
-    loadingIndicator();
-    setTimeout(() => {
-      setCompletedTasks(storeCompletedTasks);
-      sortByTime();
-    }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCompletedTasks(storeCompletedTasks);
   }, [storeCompletedTasks]);
 
   const sortByPriority = () => {
@@ -120,47 +113,57 @@ const Completed = () => {
             initial={{ opacity: 0, y: 15 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="flex w-full max-w-[575px] flex-col justify-start"
+            className="mt-7 flex w-full max-w-[575px] flex-col items-center"
           >
-            <section className="mx-auto mt-7 flex w-full flex-col justify-center gap-6 min-[525px]:w-11/12 min-[575px]:w-10/12">
-              {completedTasks.length ? (
-                <div className="flex flex-wrap items-center gap-6 min-[575px]:flex-nowrap">
-                  <div className="w-full min-[575px]:w-1/2">
-                    <Select
-                      value={timeSortValue}
-                      setValue={setTimeSortValue}
-                      options={timeOptions}
-                      theme={currentSelect === 'time' ? 'purple' : 'gray'}
-                    />
+            {completedTasks.length ? (
+              <>
+                <section className="w-full min-[525px]:w-11/12 min-[575px]:w-10/12">
+                  <div className="flex flex-wrap items-center gap-6 min-[600px]:flex-nowrap">
+                    <div className="w-full min-[600px]:w-1/2">
+                      <Select
+                        value={timeSortValue}
+                        setValue={setTimeSortValue}
+                        options={timeOptions}
+                        theme={currentSelect === 'time' ? 'purple' : 'gray'}
+                      />
+                    </div>
+                    <div className="w-full min-[600px]:w-1/2">
+                      <Select
+                        value={prioritySortValue}
+                        setValue={setPrioritySortValue}
+                        options={priorityOptions}
+                        theme={currentSelect === 'priority' ? 'purple' : 'gray'}
+                      />
+                    </div>
                   </div>
-                  <div className="w-full min-[575px]:w-1/2">
-                    <Select
-                      value={prioritySortValue}
-                      setValue={setPrioritySortValue}
-                      options={priorityOptions}
-                      theme={currentSelect === 'priority' ? 'purple' : 'gray'}
-                    />
-                  </div>
-                </div>
-              ) : (
-                ''
-              )}
-              {completedTasks.length ? (
-                completedTasks?.map((task, id) => (
-                  <CompletedTask
-                    onIcomplete={() => addIncompletedTask({ ...task })}
-                    key={id}
-                    title={task.title}
-                    completedAt={task.completedAt}
-                    priority={task.priority}
-                  />
-                ))
-              ) : (
-                <h3 className="text-center text-lg text-gray-dark dark:text-white-pale">
-                  Hey! You should work on Incompleted Tasks! &#128513;
-                </h3>
-              )}
-            </section>
+                </section>
+                <span className="mt-7 h-[3px] w-full bg-white-pale min-[525px]:w-11/12 min-[575px]:w-10/12"></span>
+                <section className="mt-7 flex w-full flex-col justify-center gap-6 min-[525px]:w-11/12 min-[575px]:w-10/12">
+                  <AnimatePresence>
+                    {completedTasks?.map((task) => (
+                      <motion.div
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.25 }}
+                        key={task.id}
+                      >
+                        <CompletedTask
+                          task={task}
+                          onIcomplete={() => {
+                            addIncompletedTask({ ...task });
+                            toast.success('Added to Inompleted!');
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </section>
+              </>
+            ) : (
+              <h3 className="text-center text-lg text-gray-dark dark:text-white-pale">
+                Hey! You should work on Incompleted Tasks! &#128513;
+              </h3>
+            )}
           </motion.main>
         )}
       </div>

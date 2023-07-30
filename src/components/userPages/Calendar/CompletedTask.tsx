@@ -1,64 +1,63 @@
 import React from 'react';
 
+import { CompletedTaskType } from '@/types';
+
 interface CompletedTaskInterface {
-  title: string;
-  completedAt: number;
+  task: CompletedTaskType;
   onIcomplete: () => void;
-  priority: number;
 }
 
 const CompletedTask: React.FC<CompletedTaskInterface> = ({
-  title,
-  completedAt,
+  task,
   onIcomplete,
-  priority,
 }) => {
   const getTimeString = (time: number) => String(time).padStart(2, '0');
 
   return (
-    <div className="relative flex cursor-pointer flex-wrap items-center justify-between gap-4 rounded-md bg-gray-700 p-4 hover:bg-gray-600">
+    <div className="relative flex cursor-pointer items-center justify-between gap-4 rounded-md bg-gray-700 p-4 hover:bg-gray-600">
       <div className="flex items-center gap-4">
         <div
-          className="flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent"
+          className="flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:h-6 min-[475px]:w-6"
           onClick={() => onIcomplete()}
         >
-          <div className="h-[6px] w-[6px] rounded-full bg-white-pale"></div>
+          <div className="h-[6px] w-[6px] rounded-full bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
         </div>
         <div>
           <h6 className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl">
-            {title}
+            {task.title}
           </h6>
-          <p className="text-base text-gray-200 min-[475px]:text-base">
+          <p className="text-sm text-gray-200 min-[475px]:text-base">
             Completed At:{' '}
             {`${getTimeString(
-              new Date(completedAt).getHours() % 12 || 0,
-            )}:${getTimeString(new Date(completedAt).getMinutes())} ${
-              new Date(completedAt).getHours() >= 12 ? 'pm' : 'am'
+              new Date(task.completedAt).getHours() % 12 || 0,
+            )}:${getTimeString(new Date(task.completedAt).getMinutes())} ${
+              new Date(task.completedAt).getHours() >= 12 ? 'pm' : 'am'
             }`}
           </p>
         </div>
       </div>
-      <div className="flex h-10 items-center justify-center gap-1 rounded-lg border-2 border-purple-light px-3 py-2">
+      <div className="ml-4 h-full border-l-[2px] border-gray-300 py-3 min-[475px]:ml-6 min-[475px]:border-l-[3px]">
         <svg
-          className="h-5 w-5 text-white-pale"
+          className="ml-4 h-7 w-7 cursor-pointer text-white-pale min-[475px]:h-8 min-[475px]:w-8"
           xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="15"
-          viewBox="0 0 14 15"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
           fill="none"
         >
           <path
-            d="M3.00415 13.7708C2.76498 13.7708 2.56665 13.5725 2.56665 13.3333V1.66663C2.56665 1.42746 2.76498 1.22913 3.00415 1.22913C3.24332 1.22913 3.44165 1.42746 3.44165 1.66663V13.3333C3.44165 13.5725 3.24332 13.7708 3.00415 13.7708Z"
+            d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12C1.25 6.07 6.07 1.25 12 1.25C17.93 1.25 22.75 6.07 22.75 12C22.75 17.93 17.93 22.75 12 22.75ZM12 2.75C6.9 2.75 2.75 6.9 2.75 12C2.75 17.1 6.9 21.25 12 21.25C17.1 21.25 21.25 17.1 21.25 12C21.25 6.9 17.1 2.75 12 2.75Z"
             fill="currentColor"
           />
           <path
-            d="M9.53749 10.2709H3.00415C2.76498 10.2709 2.56665 10.0725 2.56665 9.83337C2.56665 9.59421 2.76498 9.39587 3.00415 9.39587H9.53749C10.1733 9.39587 10.4708 9.22671 10.5292 9.08087C10.5875 8.93504 10.5 8.60837 10.045 8.15921L9.34499 7.45921C9.05915 7.20837 8.88415 6.82921 8.86665 6.40921C8.84915 5.96587 9.02415 5.52837 9.34499 5.20754L10.045 4.50754C10.4767 4.07587 10.6108 3.72587 10.5467 3.57421C10.4825 3.42254 10.15 3.27087 9.53749 3.27087H3.00415C2.75915 3.27087 2.56665 3.07254 2.56665 2.83337C2.56665 2.59421 2.76498 2.39587 3.00415 2.39587H9.53749C10.815 2.39587 11.2233 2.92671 11.3575 3.24171C11.4858 3.55671 11.5733 4.22171 10.6633 5.13171L9.96332 5.83171C9.81749 5.97754 9.73582 6.18171 9.74165 6.38587C9.74749 6.56087 9.81749 6.71837 9.93999 6.82921L10.6633 7.54671C11.5558 8.43921 11.4683 9.10421 11.34 9.42504C11.2058 9.73421 10.7917 10.2709 9.53749 10.2709Z"
+            d="M12 13.75C11.59 13.75 11.25 13.41 11.25 13V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V13C12.75 13.41 12.41 13.75 12 13.75Z"
+            fill="currentColor"
+          />
+          <path
+            d="M12 16.9999C11.87 16.9999 11.74 16.9699 11.62 16.9199C11.5 16.8699 11.39 16.7999 11.29 16.7099C11.2 16.6099 11.13 16.5099 11.08 16.3799C11.03 16.2599 11 16.1299 11 15.9999C11 15.8699 11.03 15.7399 11.08 15.6199C11.13 15.4999 11.2 15.3899 11.29 15.2899C11.39 15.1999 11.5 15.1299 11.62 15.0799C11.86 14.9799 12.14 14.9799 12.38 15.0799C12.5 15.1299 12.61 15.1999 12.71 15.2899C12.8 15.3899 12.87 15.4999 12.92 15.6199C12.97 15.7399 13 15.8699 13 15.9999C13 16.1299 12.97 16.2599 12.92 16.3799C12.87 16.5099 12.8 16.6099 12.71 16.7099C12.61 16.7999 12.5 16.8699 12.38 16.9199C12.26 16.9699 12.13 16.9999 12 16.9999Z"
             fill="currentColor"
           />
         </svg>
-        <p className="text-sm text-gray-dark dark:text-white-pale min-[475px]:text-base">
-          {priority}
-        </p>
       </div>
     </div>
   );

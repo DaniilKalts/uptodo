@@ -11,8 +11,8 @@ import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
-import { Button } from '@/components/UI';
 import Container from '@/components/UI/Container';
+import { Button } from '@/components/UI';
 
 export default function RootLayout({
   children,

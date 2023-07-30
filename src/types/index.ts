@@ -108,7 +108,7 @@ export type CommonDoughnutChartOptions = {
   };
 };
 
-export type IncompletedTaskInterface = {
+export type IncompletedTaskType = {
   id: number;
   title: string;
   todayAt: number;
@@ -120,7 +120,7 @@ export type IncompletedTaskInterface = {
   priority: number;
 };
 
-export type CompletedTaskInterface = {
+export type CompletedTaskType = {
   id: number;
   title: string;
   todayAt: number;

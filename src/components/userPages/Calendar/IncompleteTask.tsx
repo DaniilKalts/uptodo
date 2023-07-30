@@ -57,14 +57,16 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
   return (
     <div className="relative flex cursor-pointer flex-wrap items-center gap-4 rounded-md bg-gray-700 p-4 hover:bg-gray-600">
       <div
-        className="h-5 w-5 rounded-full border-2 border-white-pale bg-transparent"
+        className="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:h-6 min-[475px]:w-6"
         onClick={() => onComplete()}
-      ></div>
+      >
+        <div className="h-[6px] w-[6px] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 min-[475px]:h-2 min-[475px]:w-2"></div>
+      </div>
       <div>
         <h6 className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl">
           {title}
         </h6>
-        <p className="text-base text-gray-200 min-[475px]:text-base">
+        <p className="text-sm text-gray-200 min-[475px]:text-base">
           Today At:{' '}
           {`${getTimeString(
             new Date(todayAt).getHours() % 12 || 0,
@@ -85,7 +87,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         {
           <div className="flex h-10 items-center justify-center gap-1 rounded-lg border-2 border-purple-light px-3 py-2">
             <svg
-              className="h-5 w-5 text-white-pale"
+              className="h-6 w-6 text-white-pale"
               xmlns="http://www.w3.org/2000/svg"
               width="14"
               height="15"

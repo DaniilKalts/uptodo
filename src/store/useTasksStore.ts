@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { CompletedTaskInterface, IncompletedTaskInterface } from '@/types';
+import { CompletedTaskType, IncompletedTaskType } from '@/types';
 import {
   HealthIcon,
   UniversityIcon,
@@ -71,29 +71,23 @@ const useTasksStore = create(
         },
       ],
       completedTasks: [],
-      addIncompletedTask: (incompletedTask: CompletedTaskInterface) =>
+      addIncompletedTask: (incompletedTask: CompletedTaskType) =>
         set((state: any) => ({
           completedTasks: state.completedTasks.filter(
-            (task: CompletedTaskInterface) => task.id !== incompletedTask.id,
+            (task: CompletedTaskType) => task.id !== incompletedTask.id,
           ),
           incompletedTasks: [incompletedTask, ...state.incompletedTasks].sort(
-            (
-              taskA: IncompletedTaskInterface,
-              taskB: IncompletedTaskInterface,
-            ) => taskA.todayAt - taskB.todayAt,
+            (taskA: IncompletedTaskType, taskB: IncompletedTaskType) =>
+              taskA.todayAt - taskB.todayAt,
           ),
         })),
-      addCompletedTask: (completedTask: CompletedTaskInterface) =>
+      addCompletedTask: (completedTask: CompletedTaskType) =>
         set((state: any) => ({
           incompletedTasks: state.incompletedTasks
-            .filter(
-              (task: IncompletedTaskInterface) => task.id !== completedTask.id,
-            )
+            .filter((task: IncompletedTaskType) => task.id !== completedTask.id)
             .sort(
-              (
-                taskA: IncompletedTaskInterface,
-                taskB: IncompletedTaskInterface,
-              ) => taskA.todayAt - taskB.todayAt,
+              (taskA: IncompletedTaskType, taskB: IncompletedTaskType) =>
+                taskA.todayAt - taskB.todayAt,
             ),
           completedTasks: [completedTask, ...state.completedTasks],
         })),
