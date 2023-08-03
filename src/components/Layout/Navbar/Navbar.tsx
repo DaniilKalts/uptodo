@@ -1,17 +1,27 @@
 'use clinet';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+import NewTaskModal from '@/components/UI/Modals/NewTaskModal';
 
 import { IndexIcon, CalendarIcon, FocusIcon, ProfileIcon } from './Icons';
 
 const Navbar = () => {
   const currentPathName = usePathname();
 
+  const [isNewTaskModal, setIsNewTaskModal] = useState<boolean>(false);
+
   return (
     <nav className="fixed bottom-0 left-0 z-40 h-20 w-full bg-gray-700 md:h-24">
+      {isNewTaskModal && (
+        <NewTaskModal
+          isOpen={isNewTaskModal}
+          onClose={() => setIsNewTaskModal((prev) => !prev)}
+        />
+      )}
       <div className="mx-auto grid h-full max-w-lg grid-cols-5 font-medium">
         <Link
           href="/home"
@@ -41,6 +51,7 @@ const Navbar = () => {
             data-tooltip-target="tooltip-new"
             type="button"
             className="group relative bottom-10 inline-flex h-16 w-16 items-center justify-center rounded-full bg-purple font-medium hover:bg-purple-dark min-[475px]:bottom-12 min-[475px]:h-[4.5rem] min-[475px]:w-[4.5rem]"
+            onClick={() => setIsNewTaskModal((prev) => !prev)}
           >
             <svg
               className="h-6 w-6 text-white-pale"

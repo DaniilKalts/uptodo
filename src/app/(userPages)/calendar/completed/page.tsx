@@ -52,15 +52,29 @@ const Completed = () => {
   };
 
   const sortByTime = () => {
+    loadingIndicator();
+
     if (timeSortValue === timeOptions[0]) {
-      loadingIndicator();
       setCompletedTasks((prev) =>
         [...prev].sort((taskA, taskB) => taskA.completedAt - taskB.completedAt),
       );
     } else {
-      loadingIndicator();
       setCompletedTasks((prev) =>
         [...prev].sort((taskA, taskB) => taskB.completedAt - taskA.completedAt),
+      );
+    }
+  };
+
+  const sortByPriority = () => {
+    loadingIndicator();
+
+    if (prioritySortValue === priorityOptions[0]) {
+      setCompletedTasks((prev) =>
+        [...prev].sort((taskA, taskB) => taskA.priority - taskB.priority),
+      );
+    } else if (prioritySortValue === priorityOptions[1]) {
+      setCompletedTasks((prev) =>
+        [...prev].sort((taskA, taskB) => taskB.priority - taskA.priority),
       );
     }
   };
@@ -68,20 +82,6 @@ const Completed = () => {
   useEffect(() => {
     setCompletedTasks(storeCompletedTasks);
   }, [storeCompletedTasks]);
-
-  const sortByPriority = () => {
-    if (prioritySortValue === priorityOptions[0]) {
-      loadingIndicator();
-      setCompletedTasks((prev) =>
-        [...prev].sort((taskA, taskB) => taskA.priority - taskB.priority),
-      );
-    } else if (prioritySortValue === priorityOptions[1]) {
-      loadingIndicator();
-      setCompletedTasks((prev) =>
-        [...prev].sort((taskA, taskB) => taskB.priority - taskA.priority),
-      );
-    }
-  };
 
   useEffect(() => {
     setCurrentSelect('priority');
@@ -151,7 +151,7 @@ const Completed = () => {
                           task={task}
                           onIcomplete={() => {
                             addIncompletedTask({ ...task });
-                            toast.success('Added to Inompleted!');
+                            toast.success('Added to Incompleted!');
                           }}
                         />
                       </motion.div>

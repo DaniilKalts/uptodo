@@ -17,6 +17,8 @@ const useTasksStore = create(
         {
           id: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
           title: 'Do math homework',
+          description:
+            'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
           todayAt: new Date(2023, 6, 29, 8, 45).getTime(),
           category: {
             icon: UniversityIcon,
@@ -28,6 +30,8 @@ const useTasksStore = create(
         {
           id: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
           title: 'Go swimming',
+          description:
+            'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
           todayAt: new Date(2023, 6, 29, 14, 45).getTime(),
           category: {
             icon: HealthIcon,
@@ -39,6 +43,8 @@ const useTasksStore = create(
         {
           id: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
           title: 'Buy grocery',
+          description:
+            'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
           todayAt: new Date(2023, 6, 29, 18, 0).getTime(),
           category: {
             icon: GroceryIcon,
@@ -50,6 +56,8 @@ const useTasksStore = create(
         {
           id: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
           title: 'Have a meeting',
+          description:
+            'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
           todayAt: new Date(2023, 6, 29, 19, 15).getTime(),
           category: {
             icon: WorkIcon,
@@ -61,6 +69,8 @@ const useTasksStore = create(
         {
           id: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
           title: 'Do workout',
+          description:
+            'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
           todayAt: new Date(2023, 6, 29, 20, 35).getTime(),
           category: {
             icon: WorkoutIcon,

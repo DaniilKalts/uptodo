@@ -39,7 +39,7 @@ const Welcome = () => {
               Please login to your account or create a new account to continue
             </p>
           </main>
-          <footer className="mt-12 flex w-fit items-center justify-between gap-4 min-[475px]:gap-8">
+          <footer className="mt-12 flex w-fit items-center justify-between gap-6 px-2 max-[475px]:w-full min-[475px]:gap-8">
             <Link href="login" className="w-full max-w-sm">
               <Button label="Login" onClick={() => {}} filled upperCase small />
             </Link>

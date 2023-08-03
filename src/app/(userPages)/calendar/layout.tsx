@@ -106,7 +106,9 @@ export default function RootLayout({
                 justify-center 
                 rounded-md 
                 ${
-                  slide === 9 ? 'bg-purple' : 'bg-gray-800 hover:bg-black-light'
+                  slide === new Date().getDate()
+                    ? 'bg-purple'
+                    : 'bg-gray-800 hover:bg-black-light'
                 }
                 px-3
                 py-2 

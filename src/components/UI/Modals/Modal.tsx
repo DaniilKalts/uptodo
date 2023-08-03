@@ -51,22 +51,22 @@ const Modal: React.FC<ModalInterface> = ({
       `}
       onClick={onClose}
     >
-      {title ? (
-        <div
-          className="w-full max-w-[475px] bg-gray-700 px-5 py-5"
-          onClick={(e) => e.stopPropagation()}
-        >
+      <div
+        className={footer ? 'w-full max-w-[475px] bg-gray-700 px-5 py-5' : ''}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {title ? (
           <header className="border-b pb-4">
             <h3 className="text-center text-xl text-white-pale min-[475px]:text-2xl">
               {title}
             </h3>
           </header>
-          <main className="mt-12">{body}</main>
-          <footer>{footer}</footer>
-        </div>
-      ) : (
-        <div onClick={(e) => e.stopPropagation()}>{body}</div>
-      )}
+        ) : (
+          ''
+        )}
+        <main className="flex justify-center">{body}</main>
+        <footer>{footer}</footer>
+      </div>
     </motion.div>
   );
 };

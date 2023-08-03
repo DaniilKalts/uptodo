@@ -3,3 +3,5 @@ export { default as MusickIcon } from './MusickIcon';
 export { default as UniversityIcon } from './UniversityIcon';
 export { default as WorkIcon } from './WorkIcon';
 export { default as WorkoutIcon } from './WorkoutIcon';
+export { default as GroceryIcon } from './GroceryIcon';
+export { default as DesignIcon } from './DesignIcon';

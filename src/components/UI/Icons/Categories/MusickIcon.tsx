@@ -1,10 +1,9 @@
 import React from 'react';
 
-const MusickIcon: React.ReactNode = (
+const MusickIcon: React.FC<{ customStyles: string }> = ({ customStyles }) => (
   <svg
+    className={customStyles}
     xmlns="http://www.w3.org/2000/svg"
-    width="29"
-    height="29"
     viewBox="0 0 29 29"
     fill="none"
   >

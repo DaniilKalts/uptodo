@@ -43,6 +43,10 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
   };
 
   const convertToJSX = (data: any): any => {
+    if (!data) {
+      return null;
+    }
+
     const { type, props } = data;
     if (type === 'svg') {
       const { children, ...attributes } = props;

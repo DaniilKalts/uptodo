@@ -56,18 +56,14 @@ const Incompleted = () => {
     }, 1000);
   };
 
-  useEffect(() => {
-    setIncompletedTasks(storeIncompletedTasks);
-  }, [storeIncompletedTasks]);
-
   const sortByTime = () => {
+    loadingIndicator();
+
     if (timeSortValue === timeOptions[0]) {
-      loadingIndicator();
       setIncompletedTasks((prev) =>
         [...prev].sort((taskA, taskB) => taskA.todayAt - taskB.todayAt),
       );
     } else {
-      loadingIndicator();
       setIncompletedTasks((prev) =>
         [...prev].sort((taskA, taskB) => taskB.todayAt - taskA.todayAt),
       );
@@ -75,18 +71,22 @@ const Incompleted = () => {
   };
 
   const sortByPriority = () => {
+    loadingIndicator();
+
     if (prioritySortValue === priorityOptions[0]) {
-      loadingIndicator();
       setIncompletedTasks((prev) =>
         [...prev].sort((taskA, taskB) => taskA.priority - taskB.priority),
       );
     } else if (prioritySortValue === priorityOptions[1]) {
-      loadingIndicator();
       setIncompletedTasks((prev) =>
         [...prev].sort((taskA, taskB) => taskB.priority - taskA.priority),
       );
     }
   };
+
+  useEffect(() => {
+    setIncompletedTasks(storeIncompletedTasks);
+  }, [storeIncompletedTasks]);
 
   useEffect(() => {
     setCurrentSelect('priority');

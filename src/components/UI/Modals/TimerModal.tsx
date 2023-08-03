@@ -73,7 +73,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
       onClose={onCancel}
       title="Choose time to focus"
       body={
-        <div className="mb-8 flex items-center justify-center gap-4">
+        <div className="mb-8 mt-12 flex items-center justify-center gap-4">
           <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
             <p className="absolute -top-6 text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
               Minutes

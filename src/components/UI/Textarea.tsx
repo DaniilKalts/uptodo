@@ -6,7 +6,6 @@ import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
 interface InputProps {
   id: string;
-  type: string;
   value: string;
   placeholder: string;
   register: UseFormRegister<any>;
@@ -17,9 +16,8 @@ interface InputProps {
   errorMessage: string;
 }
 
-const Input: React.FC<InputProps> = ({
+const Textarea: React.FC<InputProps> = ({
   id,
-  type,
   value,
   placeholder,
   register,
@@ -36,7 +34,6 @@ const Input: React.FC<InputProps> = ({
         px-4
         py-[10px]
         focus-within:px-4
-        ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
         rounded-lg 
         border       
         text-white-pale
@@ -45,6 +42,8 @@ const Input: React.FC<InputProps> = ({
         min-[475px]:py-3
         min-[475px]:text-${small ? 'lg' : 'xl'} 
         bg-transparent
+        h-48
+        resize-none
       `;
     }
 
@@ -52,7 +51,7 @@ const Input: React.FC<InputProps> = ({
       px-4
       py-[10px]
       text-base
-      ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
+      ${value.length ? ' tracking-[0.35rem]' : ''}
       rounded-lg 
       border
       border-gray-300
@@ -81,9 +80,8 @@ const Input: React.FC<InputProps> = ({
           {label}
         </label>
       )}
-      <input
+      <textarea
         id={id}
-        type={type}
         value={value}
         placeholder={placeholder}
         className={inputStyles()}
@@ -95,4 +93,4 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default Textarea;

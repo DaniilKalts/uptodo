@@ -5,6 +5,8 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
   ],
   theme: {
     extend: {
@@ -57,6 +59,11 @@ module.exports = {
         'pink-light': '#FC80FF',
         'mint-light': '#80FFA3',
         'lemon-chiffon': '#CCFF80',
+        'aquamarine-mist': '#80FFD9',
+        'raspberry-sorbet': '#FF80EB',
+        'sky-blue': '#80D1FF',
+        'coral-pink': '#FF8080',
+        'turquoise-haze': '#80FFD1',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
