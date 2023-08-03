@@ -114,7 +114,7 @@ export type IncompletedTaskType = {
   description: string;
   todayAt: number;
   category: {
-    icon: React.ReactNode;
+    icon: any;
     bgColor: string;
     label: string;
   };
@@ -128,7 +128,7 @@ export type CompletedTaskType = {
   todayAt: number;
   completedAt: number;
   category: {
-    icon: React.ReactNode;
+    icon: any;
     label: string;
   };
   priority: number;

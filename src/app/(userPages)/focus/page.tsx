@@ -18,15 +18,15 @@ import {
 
 import Timer from '@/components/userPages/Focus/Timer/Timer';
 import FocusChart from '@/components/userPages/Focus/FocusChart';
-import FocusTask from '@/components/userPages/Focus/FocusTask';
+// import FocusTask from '@/components/userPages/Focus/FocusTask';
 
-import {
-  WorkoutIcon,
-  WorkIcon,
-  MusickIcon,
-  HealthIcon,
-  UniversityIcon,
-} from '../../../components/UI/Icons/Categories';
+// import {
+//   WorkoutIcon,
+//   WorkIcon,
+//   MusickIcon,
+//   HealthIcon,
+//   UniversityIcon,
+// } from '../../../components/UI/Icons/Categories';
 
 import { Select } from '../../../components/UI';
 
@@ -146,7 +146,7 @@ const Focus = () => {
             <h4 className="mb-5 mt-6 text-xl text-gray-dark dark:text-white-pale min-[475px]:mt-12 min-[475px]:text-2xl">
               Time Spent:
             </h4>
-            <FocusTask
+            {/* <FocusTask
               icon={WorkoutIcon}
               bgIconColor="cyan-light"
               title="Workout"
@@ -175,7 +175,7 @@ const Focus = () => {
               bgIconColor="blue-light"
               title="University"
               text="You spent 3 hours on University today"
-            />
+            /> */}
           </main>
         </div>
       </Container>

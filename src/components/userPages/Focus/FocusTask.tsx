@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FocusTaskInterface {
-  icon: React.ReactNode;
+  icon: any;
   bgIconColor: string;
   title: string;
   text: string;

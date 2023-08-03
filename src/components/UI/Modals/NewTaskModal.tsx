@@ -383,7 +383,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     modalTitle = 'Choose Category';
 
     bodyContent = (
-      <div className="mt-6 grid grid-cols-3 gap-x-5 max-[475px]:mx-auto max-[475px]:max-w-[300px] min-[475px]:px-8">
+      <div className="mt-6 grid w-full max-w-sm grid-cols-3 gap-x-5 max-[475px]:mx-auto max-[475px]:max-w-[300px]">
         {categories.map(({ icon, bgColor, label, customStyles }, id) => (
           <div
             className={`mb-4 flex flex-col items-center ${
