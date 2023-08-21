@@ -494,31 +494,31 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         </div>
         <div className="mx-auto my-3 h-[0.5px] w-full bg-white-pale"></div>
         <div className="mb-5 grid grid-cols-7 gap-x-7 gap-y-4">
-          <div className="text-center text-sm font-semibold uppercase text-red min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
             Sun
           </div>
-          <div className="text-center text-sm font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
             Mon
           </div>
-          <div className="text-center text-sm font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
             Tue
           </div>
-          <div className="text-center text-sm font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
             Wed
           </div>
-          <div className="text-center text-sm font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
             Thu
           </div>
-          <div className="text-center text-sm font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
             Fri
           </div>
-          <div className="text-center text-sm font-semibold uppercase text-red min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
             Sat
           </div>
           {getDaysInMonth().map((date, index) => (
             <div
               key={index}
-              className={`flex h-9 w-9 items-center justify-center rounded-lg ${getDateStylings(
+              className={`flex h-7 w-7 items-center justify-center rounded-lg min-[475px]:h-9 min-[475px]:w-9 ${getDateStylings(
                 date,
               )}`}
               onClick={() => {
@@ -550,7 +550,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
               }}
             >
               <p
-                className={`font-semibold ${
+                className={`text-sm font-semibold min-[475px]:text-base ${
                   date.getMonth() === selectedDate.getMonth()
                     ? 'text-white-pale'
                     : 'text-gray-200'
@@ -589,6 +589,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
 
   if (STEPS.TIME === step) {
     modalTitle = 'Choose Time';
+    // console.log(potentialMinutes);
 
     const hoursSwiper: null | React.JSX.Element = (
       <TimerSwiper

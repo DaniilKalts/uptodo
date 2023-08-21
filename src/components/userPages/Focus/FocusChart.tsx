@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import { ChartConfig } from '@/types';
-
 import { useMediaQuery } from 'react-responsive';
 
 import Chart from 'chart.js/auto';
@@ -13,7 +11,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar, Doughnut } from 'react-chartjs-2';
 
 interface FocusChartInterface {
-  chartConfig: ChartConfig;
+  chartConfig: any;
 }
 
 Chart.register(CategoryScale);
