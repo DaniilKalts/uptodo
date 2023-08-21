@@ -1,8 +1,10 @@
 import React from 'react';
 
-const DesignIcon: React.FC<{ customStyles: string }> = ({ customStyles }) => (
+import { CategoryIconType } from '@/types';
+
+const DesignIcon: CategoryIconType = ({ IconStyles }) => (
   <svg
-    className={customStyles}
+    className={IconStyles}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
     fill="none"

@@ -21,6 +21,7 @@
     "framer-motion": "^10.12.16",
     "next": "13.4.6",
     "postcss": "8.4.24",
+    "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",

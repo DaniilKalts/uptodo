@@ -1,7 +1,10 @@
 import React from 'react';
 
+import { CategoryIconType } from '@/types';
+
 interface FocusTaskInterface {
-  icon: any;
+  icon: CategoryIconType;
+  IconStyles: string;
   bgIconColor: string;
   title: string;
   text: string;
@@ -9,6 +12,7 @@ interface FocusTaskInterface {
 
 const FocusTask: React.FC<FocusTaskInterface> = ({
   icon,
+  IconStyles,
   bgIconColor,
   title,
   text,
@@ -47,7 +51,7 @@ const FocusTask: React.FC<FocusTaskInterface> = ({
             p-1
           `}
           >
-            {icon}
+            {icon({ IconStyles })}
           </div>
           <div>
             <h6 className="mb-1 text-base text-white-pale min-[475px]:text-xl">

@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { ChartConfig } from '@/types';
-
 import {
   weekBarChartData,
   weekBarChartOptions,
@@ -18,15 +16,15 @@ import {
 
 import Timer from '@/components/userPages/Focus/Timer/Timer';
 import FocusChart from '@/components/userPages/Focus/FocusChart';
-// import FocusTask from '@/components/userPages/Focus/FocusTask';
+import FocusTask from '@/components/userPages/Focus/FocusTask';
 
-// import {
-//   WorkoutIcon,
-//   WorkIcon,
-//   MusickIcon,
-//   HealthIcon,
-//   UniversityIcon,
-// } from '../../../components/UI/Icons/Categories';
+import {
+  WorkoutIcon,
+  WorkIcon,
+  MusickIcon,
+  HealthIcon,
+  UniversityIcon,
+} from '../../../components/UI/Icons/Categories';
 
 import { Select } from '../../../components/UI';
 
@@ -38,7 +36,7 @@ const Focus = () => {
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
 
   const [stats, setStats] = useState<string>('This Week');
-  const [chartConfig, setChartConfig] = useState<ChartConfig>({
+  const [chartConfig, setChartConfig] = useState<any>({
     barChartData: weekBarChartData,
     barChartOptions: weekBarChartOptions,
     doughnutChartData: weekDoughnutChartData,
@@ -146,36 +144,41 @@ const Focus = () => {
             <h4 className="mb-5 mt-6 text-xl text-gray-dark dark:text-white-pale min-[475px]:mt-12 min-[475px]:text-2xl">
               Time Spent:
             </h4>
-            {/* <FocusTask
+            <FocusTask
               icon={WorkoutIcon}
+              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
               bgIconColor="cyan-light"
               title="Workout"
               text="You spent 1 hour on Workout today"
             />
             <FocusTask
               icon={WorkIcon}
+              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
               bgIconColor="beige-light"
               title="Work"
               text="You spent 6 hours on Work today"
             />
             <FocusTask
               icon={MusickIcon}
+              IconStyles={'w-7 h-7 min-[475px]:w-9 min-[475px]:h-9'}
               bgIconColor="pink-light"
               title="Musick"
               text="You spent 2 hours on Musick today"
             />
             <FocusTask
               icon={HealthIcon}
+              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
               bgIconColor="mint-light"
               title="Health"
               text="You spent 1 hour on Health today"
             />
             <FocusTask
               icon={UniversityIcon}
+              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
               bgIconColor="blue-light"
               title="University"
               text="You spent 3 hours on University today"
-            /> */}
+            />
           </main>
         </div>
       </Container>

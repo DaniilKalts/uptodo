@@ -13,9 +13,9 @@ import Logo from '@/components/Intro/Logo';
 import Onboarding from '@/components/Intro/Onboarding';
 import Button from '@/components/UI/Button';
 
-import step1 from '../../public/images/intro/step1.svg';
-import step2 from '../../public/images/intro/step2.svg';
-import step3 from '../../public/images/intro/step3.svg';
+import step1 from '../../../public/images/intro/step1.svg';
+import step2 from '../../../public/images/intro/step2.svg';
+import step3 from '../../../public/images/intro/step3.svg';
 
 enum STEPS {
   FIRST_SLIDE = 1,

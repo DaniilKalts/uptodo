@@ -24,15 +24,16 @@ const TimerModal: React.FC<TimerModalInterface> = ({
 
   const [minutesSwiper, setMinutesSwiper] = useState<null | React.JSX.Element>(
     <TimerSwiper
+      maxValue={59}
       initialSlide={Math.floor(timerSeconds / 60)}
       setTime={(seconds: number) =>
         setModalSeconds((prev) => seconds * 60 + (prev % 60))
       }
     />,
   );
-
   const [secondsSwiper, setSecondsSwiper] = useState<null | React.JSX.Element>(
     <TimerSwiper
+      maxValue={59}
       initialSlide={timerSeconds % 60}
       setTime={(seconds: number) =>
         setModalSeconds((prev) => Math.floor(prev / 60) * 60 + seconds)
@@ -49,6 +50,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
     } else {
       setMinutesSwiper(
         <TimerSwiper
+          maxValue={59}
           initialSlide={Math.floor(timerSeconds / 60)}
           setTime={(seconds: number) =>
             setModalSeconds((prev) => seconds * 60 + (prev % 60))
@@ -58,6 +60,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
 
       setSecondsSwiper(
         <TimerSwiper
+          maxValue={59}
           initialSlide={timerSeconds % 60}
           setTime={(seconds: number) =>
             setModalSeconds((prev) => Math.floor(prev / 60) * 60 + seconds)

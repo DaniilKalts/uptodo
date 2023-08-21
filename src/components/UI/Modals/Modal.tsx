@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 interface ModalInterface {
   isOpen: boolean;
   onClose: () => void;
+  outsideClose?: boolean;
   title?: string;
   body: React.ReactNode;
   footer?: React.ReactNode;
@@ -15,6 +16,7 @@ interface ModalInterface {
 const Modal: React.FC<ModalInterface> = ({
   isOpen,
   onClose,
+  outsideClose,
   title,
   body,
   footer,
@@ -49,7 +51,7 @@ const Modal: React.FC<ModalInterface> = ({
         ${bgClassName()}
         px-6
       `}
-      onClick={onClose}
+      onClick={outsideClose ? () => onClose() : () => {}}
     >
       <div
         className={footer ? 'w-full max-w-[475px] bg-gray-700 px-5 py-5' : ''}

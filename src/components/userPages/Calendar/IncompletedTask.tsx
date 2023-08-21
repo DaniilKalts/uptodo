@@ -1,24 +1,20 @@
 import React from 'react';
 
+import { TaskType } from '@/types';
+
 interface IncompletedTaskInterface {
-  title: string;
-  todayAt: number;
-  category: {
-    icon: React.ReactNode;
-    bgColor: string;
-    label: string;
-  };
-  priority: number;
+  task: TaskType;
+  deadlineStatus: 'late' | 'present' | 'future';
   onComplete: () => void;
 }
 
 const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
-  title,
-  todayAt,
-  category,
-  priority,
+  task,
+  deadlineStatus,
   onComplete,
 }) => {
+  const { title, todayAt, category, priority } = task;
+
   const getTimeString = (time: number) => String(time).padStart(2, '0');
 
   const getCategoryBgColor = () => {
@@ -37,12 +33,33 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         return 'bg-cyan-light';
       case 'pink-light':
         return 'bg-pink-light';
+      case 'aquamarine-mist':
+        return 'bg-aquamarine-mist';
+      case 'raspberry-sorbet':
+        return 'bg-raspberry-sorbet';
+      case 'sky-blue':
+        return 'bg-sky-blue';
+      case 'coral-pink':
+        return 'bg-coral-pink';
+      case 'turquoise-haze':
+        return 'bg-turquoise-haze';
       default:
         return '';
     }
   };
 
-  const convertToJSX = (data: any): any => {
+  const getTodayAtColor = () => {
+    if (deadlineStatus === 'late') {
+      return 'text-red';
+    }
+    if (deadlineStatus === 'present') {
+      return 'text-orange-300';
+    }
+
+    return 'text-gray-200';
+  };
+
+  const convertToJSX = (data: any): React.ReactNode => {
     if (!data) {
       return null;
     }
@@ -70,7 +87,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         <h6 className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl">
           {title}
         </h6>
-        <p className="text-sm text-gray-200 min-[475px]:text-base">
+        <p className={`text-sm ${getTodayAtColor()} min-[475px]:text-base`}>
           Today At:{' '}
           {`${getTimeString(
             new Date(todayAt).getHours() % 12 || 0,

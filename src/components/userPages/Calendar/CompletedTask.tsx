@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { CompletedTaskType } from '@/types';
+import { TaskType } from '@/types';
 
 interface CompletedTaskInterface {
-  task: CompletedTaskType;
+  task: TaskType;
   onIcomplete: () => void;
 }
 

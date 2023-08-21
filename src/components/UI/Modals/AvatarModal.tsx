@@ -18,6 +18,7 @@ const AvatarModal: React.FC<AvatarModalInterface> = ({
   <Modal
     isOpen={isOpen}
     onClose={onClose}
+    outsideClose
     body={
       <Image
         src={imageUrl}

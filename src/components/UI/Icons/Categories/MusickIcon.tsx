@@ -1,8 +1,10 @@
 import React from 'react';
 
-const MusickIcon: React.FC<{ customStyles: string }> = ({ customStyles }) => (
+import { CategoryIconType } from '@/types';
+
+const MusickIcon: CategoryIconType = ({ IconStyles }) => (
   <svg
-    className={customStyles}
+    className={IconStyles}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 29 29"
     fill="none"

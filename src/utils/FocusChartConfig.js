@@ -1,10 +1,3 @@
-import {
-  CommonBarChartData,
-  CommonBarChartOptions,
-  CommonDoughnutChartData,
-  CommonDoughnutChartOptions,
-} from '../types/index';
-
 const daysOfTheWeek = [
   'Monday',
   'Tuesday',
@@ -36,7 +29,7 @@ const commonChartColors = {
   ],
 };
 
-const commonBarChartData: CommonBarChartData = {
+const commonBarChartData = {
   borderRadius: 6,
   borderSkipped: false,
   categoryPercentage: 0.75,
@@ -48,7 +41,7 @@ const commonBarChartData: CommonBarChartData = {
     font: {
       size: 13,
     },
-    formatter(value: number) {
+    formatter(value) {
       if (Number.isInteger(value)) {
         return `${value}h`;
       }
@@ -59,7 +52,7 @@ const commonBarChartData: CommonBarChartData = {
   },
 };
 
-const commonBarChartOptions: CommonBarChartOptions = {
+const commonBarChartOptions = {
   scales: {
     x: {
       ticks: {
@@ -67,7 +60,7 @@ const commonBarChartOptions: CommonBarChartOptions = {
         font: {
           size: 16,
         },
-        color(context: any) {
+        color(context) {
           return context.index === 2 || context.index === 5
             ? '#FF4949'
             : '#ffffffdd';
@@ -75,7 +68,7 @@ const commonBarChartOptions: CommonBarChartOptions = {
       },
       grid: {
         lineWidth: 3,
-        color(context: any) {
+        color(context) {
           if (context.index === 0) {
             return '#ffffffdd';
           }
@@ -90,13 +83,13 @@ const commonBarChartOptions: CommonBarChartOptions = {
         font: {
           size: 16,
         },
-        callback(value: number) {
+        callback(value) {
           return `${value}h`;
         },
       },
       grid: {
         lineWidth: 3,
-        color(context: any) {
+        color(context) {
           if (context.index === 0) {
             return '#ffffffdd';
           }
@@ -107,7 +100,7 @@ const commonBarChartOptions: CommonBarChartOptions = {
   },
 };
 
-export const commonDoughnutChartOptions: CommonDoughnutChartOptions = {
+export const commonDoughnutChartOptions = {
   scales: {
     x: {
       display: false,
@@ -125,7 +118,7 @@ export const commonDoughnutChartOptions: CommonDoughnutChartOptions = {
     },
     tooltip: {
       callbacks: {
-        label(context: any) {
+        label(context) {
           let label = context.dataset.label || '';
           if (label) {
             label += ': ';
@@ -147,17 +140,7 @@ export const commonDoughnutChartOptions: CommonDoughnutChartOptions = {
   },
 };
 
-export const weekBarChartData: {
-  labels: string[];
-  datasets: [
-    {
-      label: string;
-      data: number[];
-      backgroundColor: string[];
-      hoverBackgroundColor: string[];
-    },
-  ];
-} = {
+export const weekBarChartData = {
   labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
   datasets: [
     {
@@ -177,7 +160,7 @@ export const weekBarChartOptions = {
     },
     tooltip: {
       callbacks: {
-        label(context: any) {
+        label(context) {
           let label = context.dataset.label || '';
           if (label) {
             label += ': ';
@@ -203,7 +186,7 @@ export const weekDoughnutChartData = {
       datalabels: {
         anchor: 'center',
         align: 'center',
-        formatter(value: number, context: any) {
+        formatter(value, context) {
           return value ? `${daysOfTheWeek[context.dataIndex]}` : '';
         },
       },
@@ -211,20 +194,7 @@ export const weekDoughnutChartData = {
   ],
 };
 
-export const todayBarChartData: {
-  labels: string[];
-  datasets: [
-    {
-      label: string;
-      data: number[];
-      borderRadius: number;
-      borderSkipped: boolean;
-      categoryPercentage: number;
-      backgroundColor: string[];
-      hoverBackgroundColor: string[];
-    },
-  ];
-} = {
+export const todayBarChartData = {
   labels: ['Workout', 'Work', 'Musick', 'Health', 'University'],
   datasets: [
     {
@@ -254,7 +224,7 @@ export const todayBarChartOptions = {
     },
     tooltip: {
       callbacks: {
-        label(context: any) {
+        label(context) {
           let label = context.dataset.label || '';
           if (label) {
             label += ': ';
@@ -269,7 +239,7 @@ export const todayBarChartOptions = {
   },
 };
 
-export const todayDoughnutChartData: CommonDoughnutChartData = {
+export const todayDoughnutChartData = {
   labels: ['Workout', 'Work', 'Musick', 'Health', 'University'],
   datasets: [
     {
@@ -287,7 +257,7 @@ export const todayDoughnutChartData: CommonDoughnutChartData = {
       datalabels: {
         anchor: 'center',
         align: 'center',
-        formatter(_: any, context: any) {
+        formatter(_, context) {
           return `${
             ['Workout', 'Work', 'Musick', 'Health', 'University'][
               context.dataIndex
@@ -310,7 +280,7 @@ export const specificBarChartData = {
   ],
 };
 
-export const specificDoughnutChartData: CommonDoughnutChartData = {
+export const specificDoughnutChartData = {
   labels: daysOfTheWeek,
   datasets: [
     {
@@ -321,7 +291,7 @@ export const specificDoughnutChartData: CommonDoughnutChartData = {
       datalabels: {
         anchor: 'center',
         align: 'center',
-        formatter(value: number, context: any) {
+        formatter(value, context) {
           return value ? `${daysOfTheWeek[context.dataIndex]}` : '';
         },
       },
