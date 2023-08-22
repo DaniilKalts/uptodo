@@ -31,28 +31,15 @@ const TimeSwiper: React.FC<TimerSwiperInterface> = ({
     >
       {['AM', 'PM'].map((timeValue) => (
         <SwiperSlide key={timeValue}>
-          <p className="pointer-events-none absolute top-0 text-2xl text-gray-dark">
+          <p className="pointer-events-none absolute top-0 text-xl text-gray-dark min-[475px]:text-2xl">
             {timeValue === 'PM' && 'AM'}
           </p>
-          <p className="pointer-events-none text-4xl text-white-pale">
+          <p className="pointer-events-none text-3xl text-white-pale min-[475px]:text-4xl">
             {timeValue}
           </p>
-          <p className="pointer-events-none absolute bottom-0 text-2xl text-gray-dark">
+          <p className="pointer-events-none absolute bottom-0 text-xl text-gray-dark min-[475px]:text-2xl">
             {timeValue === 'AM' && 'PM'}
           </p>
-          {/* <p className="pointer-events-none absolute top-0 text-2xl text-gray-dark">
-            {timeValue - 1 >= 0
-              ? String(timeValue - 1).padStart(2, '0')
-              : maxValue}
-          </p>
-          <p className="pointer-events-none text-4xl text-white-pale">
-            {String(timeValue).padStart(2, '0')}
-          </p>
-          <p className="pointer-events-none absolute bottom-0 text-2xl text-gray-dark">
-            {timeValue === maxValue
-              ? '00'
-              : String(timeValue + 1).padStart(2, '0')}
-          </p> */}
         </SwiperSlide>
       ))}
     </Swiper>

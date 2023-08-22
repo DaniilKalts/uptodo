@@ -4,10 +4,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import React, { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
-import useTasksStore from '@/store/useTasksStore';
+import qs from 'query-string';
 
 import Container from '@/components/UI/Container';
 import { Button } from '@/components/UI';
@@ -18,8 +17,30 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const currentPathName = usePathname();
-  const storeTodayAtDate = useTasksStore((state) => state.todayAtDate);
+
+  const onClick = (route: 'incompleted' | 'completed') => {
+    let newRoute = window.location.href;
+
+    if (route === 'incompleted') {
+      if (newRoute.includes('incompleted')) {
+        return;
+      }
+      newRoute = newRoute.replace('completed', 'incompleted');
+    } else if (route === 'completed') {
+      newRoute = newRoute.replace('incompleted', 'completed');
+    }
+
+    const url = qs.stringifyUrl(
+      {
+        url: newRoute,
+      },
+      { skipNull: true },
+    );
+
+    router.push(url);
+  };
 
   const [mounted, setMounted] = useState(false);
 
@@ -42,26 +63,32 @@ export default function RootLayout({
       <Container>
         <section className="mx-auto max-w-[575px]">
           <div className="mx-auto mt-7 flex w-full justify-center gap-4 rounded-md bg-gray-500 p-4 min-[475px]:gap-8 min-[525px]:w-11/12 min-[575px]:w-10/12">
-            <Link
-              href={`/calendar/incompleted/${storeTodayAtDate}`}
-              className="w-full"
-            >
-              {currentPathName.includes('incompleted') ? (
-                <Button label="Incompleted" onClick={() => {}} filled />
-              ) : (
-                <Button label="Incompleted" onClick={() => {}} outline="gray" />
-              )}
-            </Link>
-            <Link
-              href={`/calendar/completed/${storeTodayAtDate}`}
-              className="w-full"
-            >
-              {currentPathName.includes('/completed') ? (
-                <Button label="Completed" onClick={() => {}} filled />
-              ) : (
-                <Button label="Completed" onClick={() => {}} outline="gray" />
-              )}
-            </Link>
+            {currentPathName.includes('incompleted') ? (
+              <Button
+                label="Incompleted"
+                onClick={() => onClick('incompleted')}
+                filled
+              />
+            ) : (
+              <Button
+                label="Incompleted"
+                onClick={() => onClick('incompleted')}
+                outline="gray"
+              />
+            )}
+            {currentPathName.includes('/completed') ? (
+              <Button
+                label="Completed"
+                onClick={() => onClick('completed')}
+                filled
+              />
+            ) : (
+              <Button
+                label="Completed"
+                onClick={() => onClick('completed')}
+                outline="gray"
+              />
+            )}
           </div>
         </section>
       </Container>

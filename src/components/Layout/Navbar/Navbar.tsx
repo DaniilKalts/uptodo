@@ -1,11 +1,9 @@
 'use clinet';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-import useTasksStore from '@/store/useTasksStore';
 
 import NewTaskModal from '@/components/UI/Modals/NewTaskModal/NewTaskModal';
 
@@ -15,17 +13,6 @@ const Navbar = () => {
   const currentPathName = usePathname();
 
   const [isNewTaskModal, setIsNewTaskModal] = useState<boolean>(false);
-  const storeTodayAtDate = useTasksStore((state) => state.todayAtDate);
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <nav className="fixed bottom-0 left-0 z-40 h-20 w-full bg-gray-700 md:h-24">
@@ -46,7 +33,7 @@ const Navbar = () => {
           </span>
         </Link>
         <Link
-          href={`/calendar/incompleted/${storeTodayAtDate}`}
+          href={'/calendar/incompleted'}
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <CalendarIcon isActive={currentPathName.includes('/calendar')} />

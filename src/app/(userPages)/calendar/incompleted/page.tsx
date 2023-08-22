@@ -4,6 +4,7 @@
 'use client';
 
 import React, { useState, useEffect, CSSProperties } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
@@ -26,6 +27,7 @@ const override: CSSProperties = {
 };
 
 const Incompleted = () => {
+  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
@@ -40,8 +42,6 @@ const Incompleted = () => {
   );
   const priorityOptions = ['By priority (increase)', 'By priority (decrease)'];
 
-  const storeTodayAtDate = useTasksStore((state) => state.todayAtDate);
-
   const storeIncompletedTasks = useTasksStore(
     (state) => state.incompletedTasks,
   );
@@ -50,7 +50,7 @@ const Incompleted = () => {
   const [incompletedTasks, setIncompletedTasks] = useState<TaskType[]>([]);
 
   const deadlineStatus = (task: TaskType) => {
-    const myDate = new Date(storeTodayAtDate);
+    const myDate = new Date();
     myDate.setHours(new Date().getHours());
     myDate.setMinutes(new Date().getMinutes());
     myDate.setSeconds(new Date().getSeconds());
@@ -81,8 +81,7 @@ const Incompleted = () => {
       if (
         task ===
         incompletedTasks.find(
-          (incompletedTask) =>
-            incompletedTask.todayAt < new Date(storeTodayAtDate).getTime(),
+          (incompletedTask) => incompletedTask.todayAt < new Date().getTime(),
         )
       ) {
         return 'present';
@@ -90,8 +89,7 @@ const Incompleted = () => {
       if (
         task.todayAt <
         incompletedTasks.find(
-          (incompletedTask) =>
-            incompletedTask.todayAt < new Date(storeTodayAtDate).getTime(),
+          (incompletedTask) => incompletedTask.todayAt < new Date().getTime(),
         )?.todayAt!
       ) {
         return 'late';
@@ -137,7 +135,10 @@ const Incompleted = () => {
   };
 
   function isMatchingDate(inputDate: Date) {
-    const today = new Date(storeTodayAtDate);
+    const todayAtDate =
+      Number(searchParams.get('dateTime')) || new Date().getTime();
+
+    const today = new Date(todayAtDate);
 
     return (
       inputDate.getDate() === today.getDate() &&
@@ -168,7 +169,7 @@ const Incompleted = () => {
     }
 
     setIncompletedTasks(sortedTasks);
-  }, [storeIncompletedTasks]);
+  }, [storeIncompletedTasks, searchParams]);
 
   useEffect(() => {
     setCurrentSelect('priority');

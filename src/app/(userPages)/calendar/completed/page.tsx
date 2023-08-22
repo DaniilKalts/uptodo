@@ -47,8 +47,6 @@ const Completed = () => {
   );
   const priorityOptions = ['By priority (increase)', 'By priority (decrease)'];
 
-  const storeTodayAtDate = useTasksStore((state) => state.todayAtDate);
-
   const loadingIndicator = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -102,7 +100,10 @@ const Completed = () => {
   }, []);
 
   function isMatchingDate(inputDate: Date) {
-    const today = new Date(storeTodayAtDate);
+    const todayAtDate =
+      Number(searchParams.get('dateTime')) || new Date().getTime();
+
+    const today = new Date(todayAtDate);
 
     return (
       inputDate.getDate() === today.getDate() &&
@@ -118,7 +119,7 @@ const Completed = () => {
     setCompletedTasks(sortedTasks);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [storeCompletedTasks]);
+  }, [storeCompletedTasks, searchParams]);
 
   useEffect(() => {
     setCurrentSelect('priority');

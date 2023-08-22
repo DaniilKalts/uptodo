@@ -4,8 +4,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { CategoryIconType, TaskType } from '@/types';
+
+import qs from 'query-string';
 
 import {
   FieldValues,
@@ -95,6 +98,8 @@ interface NewTaskModalInterface {
 }
 
 const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -275,6 +280,20 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     }
 
     onClose();
+
+    if (window.location.href.includes('calendar')) {
+      const query = { dateTime: taskDate.getTime() };
+
+      const url = qs.stringifyUrl(
+        {
+          url: window.location.href,
+          query,
+        },
+        { skipNull: true },
+      );
+
+      router.push(url);
+    }
   };
 
   const setCustomValue = (id: string, value: TaskPropsValue) => {
@@ -447,7 +466,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     modalTitle = '';
 
     bodyContent = (
-      <div className="w-full px-2">
+      <div className="w-full min-[475px]:px-2">
         <div className="flex items-center justify-between px-3">
           <svg
             onClick={goToPreviousMonth}
@@ -493,7 +512,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
           </svg>
         </div>
         <div className="mx-auto my-3 h-[0.5px] w-full bg-white-pale"></div>
-        <div className="mb-5 grid grid-cols-7 gap-x-7 gap-y-4">
+        <div className="mb-5 grid grid-cols-7 gap-x-4 gap-y-4 min-[475px]:gap-x-7">
           <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
             Sun
           </div>
@@ -589,7 +608,6 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
 
   if (STEPS.TIME === step) {
     modalTitle = 'Choose Time';
-    // console.log(potentialMinutes);
 
     const hoursSwiper: null | React.JSX.Element = (
       <TimerSwiper
@@ -612,7 +630,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     );
 
     bodyContent = (
-      <div className="mb-8 mt-12 flex items-center justify-center gap-4">
+      <div className="mb-8 mt-12 flex w-full items-center justify-center gap-4">
         <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
           <p className="absolute -top-6 text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
             Hours

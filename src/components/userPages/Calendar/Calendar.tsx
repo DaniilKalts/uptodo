@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+import qs from 'query-string';
 
 import useTasksStore from '@/store/useTasksStore';
 
@@ -11,15 +13,18 @@ type DayType = {
   month: number;
   year: number;
   dayOfWeek: string;
+  anyIncompletedTasks: boolean;
 };
 
 const Calendar = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const storeIncompletedTasks = useTasksStore(
+    (state) => state.incompletedTasks,
+  );
 
   const [daysInRange, setDaysInRange] = useState<DayType[]>([]);
-
-  const storeTodayAtDate = useTasksStore((state) => state.todayAtDate);
-  const storeSetTodayAtDate = useTasksStore((state) => state.setTodayAt);
 
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -43,6 +48,15 @@ const Calendar = () => {
       'Sat',
     ];
 
+    function isMatchingDate(inputDate: Date) {
+      return !!storeIncompletedTasks.find(
+        (task) =>
+          new Date(task.todayAt).getDate() === inputDate.getDate() &&
+          new Date(task.todayAt).getMonth() === inputDate.getMonth() &&
+          new Date(task.todayAt).getFullYear() === inputDate.getFullYear(),
+      );
+    }
+
     for (let dayOffset = 0; dayOffset <= 364; dayOffset += 1) {
       const date = new Date(year, month, currentDay + dayOffset);
       const dayOfWeekAbbreviated = daysOfWeekAbbreviated[date.getDay()];
@@ -52,6 +66,7 @@ const Calendar = () => {
         month: date.getMonth(),
         year: date.getFullYear(),
         dayOfWeek: dayOfWeekAbbreviated,
+        anyIncompletedTasks: isMatchingDate(date),
       });
     }
 
@@ -78,9 +93,12 @@ const Calendar = () => {
   };
 
   const getDateBgColor = (date: DayType) => {
+    const todayAtDate =
+      Number(searchParams.get('dateTime')) || new Date().getTime();
+
     if (
-      date.day === new Date(storeTodayAtDate).getDate() &&
-      date.month === new Date(storeTodayAtDate).getMonth()
+      date.day === new Date(todayAtDate).getDate() &&
+      date.month === new Date(todayAtDate).getMonth()
     ) {
       if (date.dayOfWeek === 'Sat' || date.dayOfWeek === 'Sun') {
         return 'bg-red';
@@ -92,7 +110,10 @@ const Calendar = () => {
   };
 
   const getDayOfWeekColor = (day: number, dayOfWeek: string) => {
-    if (day === new Date(storeTodayAtDate).getDate()) {
+    const todayAtDate =
+      Number(searchParams.get('dateTime')) || new Date().getTime();
+
+    if (day === new Date(todayAtDate).getDate()) {
       return 'text-white';
     }
     if (dayOfWeek === 'Sat' || dayOfWeek === 'Sun') {
@@ -102,11 +123,58 @@ const Calendar = () => {
     return 'text-white';
   };
 
+  const onClick = (id: number) => {
+    const query = { dateTime: id };
+
+    const url = qs.stringifyUrl(
+      {
+        url: window.location.href,
+        query,
+      },
+      { skipNull: true },
+    );
+
+    router.push(url);
+  };
+
   useEffect(() => {
+    // const todayAtDate =
+    //   Number(searchParams.get('dateTime')) || new Date().getTime();
+
+    if (daysInRange.length) {
+      const lastIncompletedTask = storeIncompletedTasks.at(-1);
+
+      if (!lastIncompletedTask) {
+        return;
+      }
+
+      const lastIncompletedTaskDate = new Date(lastIncompletedTask.todayAt);
+
+      const targetIndex = daysInRange.findIndex((day) => {
+        const dayDate = new Date(day.year, day.month, day.day);
+
+        return (
+          lastIncompletedTaskDate.getDate() === dayDate.getDate() &&
+          lastIncompletedTaskDate.getMonth() === dayDate.getMonth() &&
+          lastIncompletedTaskDate.getFullYear() === dayDate.getFullYear()
+        );
+      });
+
+      if (!targetIndex) {
+        return;
+      }
+
+      (swiperRef.current as any).swiper.slideTo(targetIndex);
+    }
+
     const days = getDaysInRange();
 
     setDaysInRange(days as []);
-  }, []);
+
+    // todayAtDate === new Date(day.year, day.month, day.day).getTime();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storeIncompletedTasks]);
 
   return (
     <section className="mx-auto max-w-xl bg-gray-700 py-3">
@@ -180,15 +248,9 @@ const Calendar = () => {
         {daysInRange.map((date, id) => (
           <SwiperSlide
             key={id}
-            onClick={() => {
-              storeSetTodayAtDate(
-                new Date(date.year, date.month, date.day).getTime(),
-              );
-
-              router.push(
-                `${new Date(date.year, date.month, date.day).getTime()}`,
-              );
-            }}
+            onClick={() =>
+              onClick(new Date(date.year, date.month, date.day).getTime())
+            }
             className="px-[10px]"
           >
             <div
@@ -219,6 +281,9 @@ const Calendar = () => {
               <h6 className="text-base font-bold text-white min-[475px]:text-lg">
                 {date.day}
               </h6>
+              {date.anyIncompletedTasks && (
+                <div className="mt-[2px] h-[6px] w-[6px] rounded-full bg-white"></div>
+              )}
             </div>
           </SwiperSlide>
         ))}

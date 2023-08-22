@@ -22,8 +22,6 @@ import {
 } from '@/components/userPages/Profile/Icons/Profile';
 
 const Profile = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const storeIncompletedCount = useTasksStore(
     (state) => state.incompletedTasks.length,
   );
@@ -35,19 +33,11 @@ const Profile = () => {
   const [completedCount, setCompletedCount] = useState<number>(0);
 
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIcompletedCount(storeIncompletedCount);
-      setIsLoading(false);
-    }, 250);
+    setIcompletedCount(storeIncompletedCount);
   }, [storeIncompletedCount]);
 
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setCompletedCount(storeCompletedCount);
-      setIsLoading(false);
-    }, 250);
+    setCompletedCount(storeCompletedCount);
   }, [storeCompletedCount]);
 
   return (
@@ -71,12 +61,12 @@ const Profile = () => {
             <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
               <div className="w-2/4 rounded-md border border-gray-700 bg-gray-700 px-6 py-4">
                 <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
-                  {isLoading ? 'Loading...' : `${incompletedCount} Task left`}
+                  {incompletedCount} Task left
                 </p>
               </div>
               <div className="w-2/4 rounded-md border border-gray-700 bg-gray-700 px-6 py-4">
                 <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
-                  {isLoading ? 'Loading...' : `${completedCount} Task left`}
+                  {completedCount} Task left
                 </p>
               </div>
             </div>

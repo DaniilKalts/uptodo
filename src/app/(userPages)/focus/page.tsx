@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { CSSProperties, useState, useEffect } from 'react';
 
 import {
   weekBarChartData,
@@ -13,6 +13,8 @@ import {
   specificDoughnutChartData,
   commonDoughnutChartOptions,
 } from '@/utils/FocusChartConfig';
+
+import { PuffLoader } from 'react-spinners';
 
 import Timer from '@/components/userPages/Focus/Timer/Timer';
 import FocusChart from '@/components/userPages/Focus/FocusChart';
@@ -31,7 +33,15 @@ import { Select } from '../../../components/UI';
 import TimerModal from '../../../components/UI/Modals/TimerModal';
 import Container from '../../../components/UI/Container';
 
+const override: CSSProperties = {
+  display: 'block',
+  margin: '0 auto',
+  borderColor: 'red',
+  marginTop: '28px',
+};
+
 const Focus = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const [isChooseTimeModal, setIsChooseTimeModal] = useState<boolean>(false);
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
 
@@ -42,6 +52,10 @@ const Focus = () => {
     doughnutChartData: weekDoughnutChartData,
     doughnutChartOptions: commonDoughnutChartOptions,
   });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (stats === 'This Week') {
@@ -139,7 +153,18 @@ const Focus = () => {
                   theme="gray"
                 />
               </div>
-              <FocusChart chartConfig={chartConfig} />
+              {isMounted ? (
+                <FocusChart chartConfig={chartConfig} />
+              ) : (
+                <PuffLoader
+                  color={'#8875FF'}
+                  loading={true}
+                  cssOverride={override}
+                  size={150}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              )}
             </section>
             <h4 className="mb-5 mt-6 text-xl text-gray-dark dark:text-white-pale min-[475px]:mt-12 min-[475px]:text-2xl">
               Time Spent:

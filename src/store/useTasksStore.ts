@@ -12,8 +12,6 @@ import {
 import GroceryIcon from '@/components/UI/Icons/Categories/GroceryIcon';
 
 interface TaskStoreInterface {
-  todayAtDate: number;
-  setTodayAt: (time: number) => void;
   incompletedTasks: TaskType[];
   completedTasks: TaskType[];
   addIncompletedTask: (incompletedTask: TaskType) => void;
@@ -28,19 +26,14 @@ type MyPersist = (
 const useTasksStore = create<TaskStoreInterface, []>(
   (persist as MyPersist)(
     (set): TaskStoreInterface => ({
-      todayAtDate: new Date().getTime(),
-      setTodayAt: (time: number) =>
-        set(() => ({
-          todayAtDate: time,
-        })),
       incompletedTasks: [
         {
           id: Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000,
           title: 'Watch Kungdu Panda 4',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 21, 6, 0).getTime(),
-          todayAt: new Date(2023, 7, 21, 7, 15).getTime(),
+          createdAt: new Date(2023, 7, 22, 6, 0).getTime(),
+          todayAt: new Date(2023, 7, 22, 7, 15).getTime(),
           completedAt: 0,
           category: {
             icon: MovieIcon,
@@ -54,8 +47,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Do math homework',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 21, 8, 45).getTime(),
-          todayAt: new Date(2023, 7, 21, 9, 0).getTime(),
+          createdAt: new Date(2023, 7, 22, 8, 45).getTime(),
+          todayAt: new Date(2023, 7, 22, 9, 0).getTime(),
           completedAt: 0,
           category: {
             icon: UniversityIcon,
@@ -69,8 +62,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Go swimming',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 21, 8, 48).getTime(),
-          todayAt: new Date(2023, 7, 21, 14, 0).getTime(),
+          createdAt: new Date(2023, 7, 22, 8, 48).getTime(),
+          todayAt: new Date(2023, 7, 22, 14, 0).getTime(),
           completedAt: 0,
           category: {
             icon: HealthIcon,
@@ -84,8 +77,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Buy grocery',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 21, 8, 51).getTime(),
-          todayAt: new Date(2023, 7, 21, 15, 45).getTime(),
+          createdAt: new Date(2023, 7, 22, 8, 51).getTime(),
+          todayAt: new Date(2023, 7, 22, 15, 45).getTime(),
           completedAt: 0,
           category: {
             icon: GroceryIcon,
@@ -99,8 +92,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Have a meeting',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 21, 8, 53).getTime(),
-          todayAt: new Date(2023, 7, 21, 17, 30).getTime(),
+          createdAt: new Date(2023, 7, 22, 8, 53).getTime(),
+          todayAt: new Date(2023, 7, 22, 17, 30).getTime(),
           completedAt: 0,
           category: {
             icon: WorkIcon,
@@ -114,8 +107,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Do workout',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 21, 18, 45).getTime(),
-          todayAt: new Date(2023, 7, 21, 19, 15).getTime(),
+          createdAt: new Date(2023, 7, 22, 18, 45).getTime(),
+          todayAt: new Date(2023, 7, 22, 19, 15).getTime(),
           completedAt: 0,
           category: {
             icon: WorkoutIcon,
