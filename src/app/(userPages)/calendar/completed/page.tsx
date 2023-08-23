@@ -201,7 +201,7 @@ const Completed = () => {
               </>
             ) : (
               <h3 className="text-center text-lg text-gray-dark dark:text-white-pale">
-                Hey! You should work on Incompleted Tasks! &#128513;
+                There is no completed tasks yet. &#128528;
               </h3>
             )}
           </motion.main>

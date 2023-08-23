@@ -269,7 +269,6 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         todayAt: taskDate.getTime(),
         completedAt: 0,
         category: {
-          icon: taskCategory?.icon!,
           bgColor: taskCategory?.bgColor!,
           label: taskCategory?.label!,
         },
@@ -591,7 +590,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             setPotentialMinutes(selectedMinutes);
             setPotentialDate(taskDate);
             setSelectedDate(taskDate);
-            setTimeOption(new Date().getHours() < 12 ? 'AM' : 'PM');
+            setTimeOption(new Date().getHours() < 13 ? 'AM' : 'PM');
             setStep(null);
           }}
         />
@@ -671,6 +670,8 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             const hours = Math.floor(potentialMinutes / 60);
 
             const updatedDate = new Date(potentialDate);
+            updatedDate.setSeconds(0);
+            updatedDate.setMilliseconds(0);
             updatedDate.setMinutes(minutes);
             updatedDate.setHours(timeOption === 'PM' ? hours + 12 : hours);
             setPotentialDate(updatedDate);

@@ -2,6 +2,18 @@ import React from 'react';
 
 import { TaskType } from '@/types';
 
+import {
+  DesignIcon,
+  GroceryIcon,
+  HealthIcon,
+  HomeIcon,
+  MovieIcon,
+  SocialIcon,
+  UniversityIcon,
+  WorkIcon,
+  WorkoutIcon,
+} from '@/components/UI/Icons/Categories';
+
 interface IncompletedTaskInterface {
   task: TaskType;
   deadlineStatus: 'late' | 'present' | 'future';
@@ -59,20 +71,38 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
     return 'text-gray-200';
   };
 
-  const convertToJSX = (data: any): React.ReactNode => {
-    if (!data) {
+  const getCategoryIcon = (label: string, iustonStyles: string) => {
+    if (!label) {
       return null;
     }
 
-    const { type, props } = data;
-    if (type === 'svg') {
-      const { children, ...attributes } = props;
-      return React.createElement(type, attributes, convertToJSX(children));
+    if (label === 'Grocery') {
+      return <GroceryIcon IconStyles={iustonStyles} />;
     }
-    if (type === 'path') {
-      return React.createElement(type, props);
+    if (label === 'Work') {
+      return <WorkIcon IconStyles={iustonStyles} />;
     }
-    return null;
+    if (label === 'Workout') {
+      return <WorkoutIcon IconStyles={iustonStyles} />;
+    }
+    if (label === 'Design') {
+      return <DesignIcon IconStyles={iustonStyles} />;
+    }
+    if (label === 'University') {
+      return <UniversityIcon IconStyles={iustonStyles} />;
+    }
+    if (label === 'Social') {
+      return <SocialIcon IconStyles={iustonStyles} />;
+    }
+    if (label === 'Health') {
+      return <HealthIcon IconStyles={iustonStyles} />;
+    }
+    if (label === 'Movie') {
+      return <MovieIcon IconStyles={iustonStyles} />;
+    }
+    if (label === 'Home') {
+      return <HomeIcon IconStyles={iustonStyles} />;
+    }
   };
 
   return (
@@ -90,7 +120,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         <p className={`text-sm ${getTodayAtColor()} min-[475px]:text-base`}>
           Today At:{' '}
           {`${getTimeString(
-            new Date(todayAt).getHours() % 12 || 0,
+            new Date(todayAt).getHours() % 12 || 12,
           )}:${getTimeString(new Date(todayAt).getMinutes())} ${
             new Date(todayAt).getHours() >= 12 ? 'pm' : 'am'
           }`}
@@ -100,7 +130,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         <div
           className={`flex h-10 items-center gap-3 rounded-md ${getCategoryBgColor()} px-3`}
         >
-          {convertToJSX(category.icon)}
+          {getCategoryIcon(category.label, 'w-6 h-6')}
           <p className="text-sm text-white min-[475px]:text-base">
             {category.label}
           </p>

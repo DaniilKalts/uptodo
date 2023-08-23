@@ -4,7 +4,9 @@
 'use client';
 
 import React, { useState, useEffect, CSSProperties } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+import qs from 'query-string';
 
 import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
@@ -27,20 +29,28 @@ const override: CSSProperties = {
 };
 
 const Incompleted = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
-    'time',
-  );
-  const [timeSortValue, setTimeSortValue] =
-    useState<string>('By time (earliest)');
-  const timeOptions = ['By time (earliest)', 'By time (latest)'];
+  const [mounted, setMounted] = useState(false);
 
-  const [prioritySortValue, setPrioritySortValue] = useState<string>(
-    'By priority (increase)',
+  const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
+    searchParams.get('sortType') as 'time' | 'priority',
   );
+  const timeOptions = ['By time (earliest)', 'By time (latest)'];
+  const [timeSortValue, setTimeSortValue] = useState<string>(
+    timeOptions.includes(searchParams.get('sortValue') as string)
+      ? (searchParams.get('sortValue') as string)
+      : 'By time (earliest)',
+  );
+
   const priorityOptions = ['By priority (increase)', 'By priority (decrease)'];
+  const [prioritySortValue, setPrioritySortValue] = useState<string>(
+    priorityOptions.includes(searchParams.get('sortValue') as string)
+      ? (searchParams.get('sortValue') as string)
+      : 'By priority (increase)',
+  );
 
   const storeIncompletedTasks = useTasksStore(
     (state) => state.incompletedTasks,
@@ -147,6 +157,46 @@ const Incompleted = () => {
     );
   }
 
+  const queryTimeParamsHandler = () => {
+    if (currentSelect === 'time' && mounted) {
+      const query = { sortType: 'time', sortValue: timeSortValue };
+      const newRoute = window.location.href;
+
+      const url = qs.stringifyUrl(
+        {
+          url: newRoute,
+          query,
+        },
+        { skipNull: true },
+      );
+
+      router.push(url);
+    }
+  };
+
+  const queryPriorityParamsHandler = () => {
+    if (currentSelect === 'priority' && mounted) {
+      const query = { sortType: 'priority', sortValue: prioritySortValue };
+      const newRoute = window.location.href;
+
+      const url = qs.stringifyUrl(
+        {
+          url: newRoute,
+          query,
+        },
+        { skipNull: true },
+      );
+
+      router.push(url);
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMounted(true);
+    }, 1500);
+  }, []);
+
   useEffect(() => {
     const sortedTasks = storeIncompletedTasks.filter((incompletedTask) =>
       isMatchingDate(new Date(incompletedTask.todayAt)),
@@ -172,14 +222,34 @@ const Incompleted = () => {
   }, [storeIncompletedTasks, searchParams]);
 
   useEffect(() => {
+    if (searchParams.get('sortType') === 'time' && !mounted) {
+      return;
+    }
+
     setCurrentSelect('priority');
     sortByPriority();
+
+    queryPriorityParamsHandler();
   }, [prioritySortValue]);
 
   useEffect(() => {
+    if (searchParams.get('sortType') === 'priority' && !mounted) {
+      return;
+    }
+
     setCurrentSelect('time');
     sortByTime();
+
+    queryTimeParamsHandler();
   }, [timeSortValue]);
+
+  useEffect(() => {
+    if (currentSelect === 'priority') {
+      queryPriorityParamsHandler();
+    } else {
+      queryTimeParamsHandler();
+    }
+  }, [currentSelect]);
 
   return (
     <Container>
@@ -255,8 +325,8 @@ const Incompleted = () => {
                 </section>
               </>
             ) : (
-              <h3 className="text-center text-lg text-gray-dark dark:text-white-pale">
-                Good job, bro! <br /> You did all tasks for today! &#128293;
+              <h3 className="text-center text-lg font-medium text-gray-dark dark:text-white-pale">
+                You have no incompleted tasks for this day! &#128528;
               </h3>
             )}
           </motion.main>

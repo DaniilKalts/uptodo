@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/indent */
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+
+// import { TaskType } from '@/types';
 
 import qs from 'query-string';
 
@@ -31,6 +34,15 @@ const Calendar = () => {
 
   const swiperRef = React.useRef(null);
 
+  function isMatchingDate(inputDate: Date) {
+    return !!storeIncompletedTasks.find(
+      (task) =>
+        new Date(task.todayAt).getDate() === inputDate.getDate() &&
+        new Date(task.todayAt).getMonth() === inputDate.getMonth() &&
+        new Date(task.todayAt).getFullYear() === inputDate.getFullYear(),
+    );
+  }
+
   function getDaysInRange() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -48,15 +60,6 @@ const Calendar = () => {
       'Sat',
     ];
 
-    function isMatchingDate(inputDate: Date) {
-      return !!storeIncompletedTasks.find(
-        (task) =>
-          new Date(task.todayAt).getDate() === inputDate.getDate() &&
-          new Date(task.todayAt).getMonth() === inputDate.getMonth() &&
-          new Date(task.todayAt).getFullYear() === inputDate.getFullYear(),
-      );
-    }
-
     for (let dayOffset = 0; dayOffset <= 364; dayOffset += 1) {
       const date = new Date(year, month, currentDay + dayOffset);
       const dayOfWeekAbbreviated = daysOfWeekAbbreviated[date.getDay()];
@@ -68,6 +71,17 @@ const Calendar = () => {
         dayOfWeek: dayOfWeekAbbreviated,
         anyIncompletedTasks: isMatchingDate(date),
       });
+
+      const todayAtDate =
+        Number(searchParams.get('dateTime')) || new Date().getTime();
+
+      if (
+        new Date(todayAtDate).getDate() === date.getDate() &&
+        new Date(todayAtDate).getMonth() === date.getMonth() &&
+        new Date(todayAtDate).getFullYear() === date.getFullYear()
+      ) {
+        (swiperRef.current as any).swiper.slideTo(dayOffset);
+      }
     }
 
     return daysArray as DayType[];
@@ -138,43 +152,31 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    // const todayAtDate =
-    //   Number(searchParams.get('dateTime')) || new Date().getTime();
-
-    if (daysInRange.length) {
-      const lastIncompletedTask = storeIncompletedTasks.at(-1);
-
-      if (!lastIncompletedTask) {
-        return;
-      }
-
-      const lastIncompletedTaskDate = new Date(lastIncompletedTask.todayAt);
-
-      const targetIndex = daysInRange.findIndex((day) => {
-        const dayDate = new Date(day.year, day.month, day.day);
-
-        return (
-          lastIncompletedTaskDate.getDate() === dayDate.getDate() &&
-          lastIncompletedTaskDate.getMonth() === dayDate.getMonth() &&
-          lastIncompletedTaskDate.getFullYear() === dayDate.getFullYear()
-        );
-      });
-
-      if (!targetIndex) {
-        return;
-      }
-
-      (swiperRef.current as any).swiper.slideTo(targetIndex);
-    }
-
     const days = getDaysInRange();
 
     setDaysInRange(days as []);
 
-    // todayAtDate === new Date(day.year, day.month, day.day).getTime();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeIncompletedTasks]);
+
+  useEffect(() => {
+    const todayAtDate =
+      Number(searchParams.get('dateTime')) || new Date().getTime();
+
+    const targetIndex = daysInRange.findIndex((day) => {
+      const dayDate = new Date(day.year, day.month, day.day);
+
+      return (
+        new Date(todayAtDate).getDate() === dayDate.getDate() &&
+        new Date(todayAtDate).getMonth() === dayDate.getMonth() &&
+        new Date(todayAtDate).getFullYear() === dayDate.getFullYear()
+      );
+    });
+
+    if (targetIndex > 0) {
+      (swiperRef.current as any).swiper.slideTo(targetIndex);
+    }
+  }, [searchParams]);
 
   return (
     <section className="mx-auto max-w-xl bg-gray-700 py-3">
@@ -194,12 +196,12 @@ const Calendar = () => {
           />
         </svg>
         <div className="flex flex-col items-center">
-          <h4 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-lg">
+          <h4 className="text-lg text-gray-dark dark:text-white-pale">
             {new Date(2020, currentMonth)
               .toLocaleString('en-US', { month: 'long' })
               .toUpperCase()}
           </h4>
-          <p className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-base">
+          <p className="text-base text-gray-dark dark:text-gray-200">
             {currentYear}
           </p>
         </div>
@@ -224,13 +226,25 @@ const Calendar = () => {
         modules={[Navigation]}
         slidesPerView={4}
         grabCursor={true}
-        initialSlide={0}
         onSlideChange={() => {
           const index = (swiperRef.current as any).swiper.realIndex + 1;
           const realIndex = index > 0 ? index - 1 : 0;
 
-          setCurrentMonth(daysInRange[realIndex].month);
-          setCurrentYear(daysInRange[realIndex].year);
+          if (daysInRange[realIndex]?.month) {
+            setCurrentMonth(daysInRange[realIndex].month);
+          } else {
+            setCurrentMonth(
+              new Date(Number(searchParams.get('dateTime'))).getMonth(),
+            );
+          }
+
+          if (daysInRange[realIndex]?.year) {
+            setCurrentYear(daysInRange[realIndex].year);
+          } else {
+            setCurrentYear(
+              new Date(Number(searchParams.get('dateTime'))).getFullYear(),
+            );
+          }
         }}
         breakpoints={{
           340: {
