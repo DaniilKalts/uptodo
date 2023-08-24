@@ -80,8 +80,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Have a meeting',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 19, 8, 53).getTime(),
-          todayAt: new Date(2023, 7, 19, 17, 30).getTime(),
+          createdAt: new Date(2023, 7, 21, 8, 53).getTime(),
+          todayAt: new Date(2023, 7, 21, 17, 30).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'beige-light',
@@ -94,8 +94,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Do workout',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 19, 18, 45).getTime(),
-          todayAt: new Date(2023, 7, 19, 19, 15).getTime(),
+          createdAt: new Date(2023, 7, 22, 18, 45).getTime(),
+          todayAt: new Date(2023, 7, 22, 19, 15).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'cyan-light',

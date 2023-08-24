@@ -8,7 +8,6 @@ export type TaskType = {
   todayAt: number;
   completedAt: number;
   category: {
-    // icon: CategoryIconType;
     bgColor: string;
     label: string;
   };

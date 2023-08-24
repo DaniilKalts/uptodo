@@ -18,6 +18,7 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "dayjs": "^1.11.9",
     "eslint-config-next": "^13.4.6",
+    "exceljs": "^4.3.0",
     "framer-motion": "^10.12.16",
     "next": "13.4.6",
     "postcss": "8.4.24",
