@@ -65,8 +65,6 @@ const schema = yup.object().shape({
     .max(20, 'Task title must not exceed 20 characters'),
   taskDescription: yup
     .string()
-    .required('Description is required')
-    .min(20, 'Task description must be at least 20 characters long')
     .max(200, 'Task description must not exceed 200 characters'),
   taskDate: yup.date().required(),
   taskCategory: yup.object(),
@@ -133,7 +131,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
   const [selectedDate, setSelectedDate] = useState(taskDate);
 
   const [selectedMinutes, setSelectedMinutes] = useState<number>(0);
-  const [potentialMinutes, setPotentialMinutes] = useState<number>(0);
+  const [potentialMinutes, setPotentialMinutes] = useState<number>(60);
   const [timeOption, setTimeOption] = useState<string>(
     new Date().getHours() < 12 ? 'AM' : 'PM',
   );
@@ -427,7 +425,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       !(
         Math.floor(
           (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24),
-        ) >= 364
+        ) >= 365
       )
     ) {
       return 'cursor-pointer bg-purple';
@@ -438,7 +436,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         date.getTime() < new Date(new Date().setHours(0, 0, 0, 0)).getTime() ||
         Math.floor(
           (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24),
-        ) >= 364
+        ) >= 365
       ) {
         return 'cursor-not-allowed bg-gray-800 opacity-50';
       }
@@ -448,7 +446,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     if (
       Math.floor(
         (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24),
-      ) >= 364
+      ) >= 365
     ) {
       if (selectedDate.getMonth() === date.getMonth()) {
         return 'cursor-not-allowed bg-gray-800 opacity-50';
@@ -546,7 +544,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
                   Math.floor(
                     (date.getTime() - new Date().getTime()) /
                       (1000 * 60 * 60 * 24),
-                  ) >= 364
+                  ) >= 365
                 ) {
                   return;
                 }
@@ -590,7 +588,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             setPotentialMinutes(selectedMinutes);
             setPotentialDate(taskDate);
             setSelectedDate(taskDate);
-            setTimeOption(new Date().getHours() < 13 ? 'AM' : 'PM');
+            setTimeOption(new Date().getHours() < 12 ? 'AM' : 'PM');
             setStep(null);
           }}
         />
@@ -610,20 +608,22 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
 
     const hoursSwiper: null | React.JSX.Element = (
       <TimerSwiper
-        maxValue={11}
-        initialSlide={Math.floor(potentialMinutes / 60)}
-        setTime={(seconds: number) =>
-          setPotentialMinutes((prev) => seconds * 60 + (prev % 60))
+        minValue={1}
+        maxValue={12}
+        initialSlide={Math.floor(potentialMinutes / 60 || 1) - 1}
+        setTime={(hours: number) =>
+          setPotentialMinutes((prev) => hours * 60 + (prev % 60))
         }
       />
     );
 
     const minutesSwiper: null | React.JSX.Element = (
       <TimerSwiper
+        minValue={0}
         maxValue={59}
         initialSlide={potentialMinutes % 60}
-        setTime={(seconds: number) =>
-          setPotentialMinutes((prev) => Math.floor(prev / 60) * 60 + seconds)
+        setTime={(minutes: number) =>
+          setPotentialMinutes((prev) => Math.floor(prev / 60) * 60 + minutes)
         }
       />
     );
@@ -673,12 +673,27 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             updatedDate.setSeconds(0);
             updatedDate.setMilliseconds(0);
             updatedDate.setMinutes(minutes);
-            updatedDate.setHours(timeOption === 'PM' ? hours + 12 : hours);
-            setPotentialDate(updatedDate);
 
+            if (timeOption === 'PM') {
+              if (hours < 12) {
+                updatedDate.setHours(hours + 12);
+              } else {
+                updatedDate.setHours(12);
+              }
+            }
+            if (timeOption === 'AM') {
+              if (hours < 12) {
+                updatedDate.setHours(hours);
+              } else {
+                updatedDate.setHours(0);
+              }
+            }
+
+            setPotentialDate(updatedDate);
             setSelectedMinutes(potentialMinutes);
-            setCustomValue('taskDate', updatedDate);
             setSelectedDate(updatedDate);
+            setCustomValue('taskDate', updatedDate);
+
             setStep(null);
           }}
           filled

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/indent */
 
 'use client';
 
@@ -31,25 +30,26 @@ const override: CSSProperties = {
 const Incompleted = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [mounted, setMounted] = useState(false);
 
   const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
     searchParams.get('sortType') as 'time' | 'priority',
   );
+
   const timeOptions = ['By time (earliest)', 'By time (latest)'];
   const [timeSortValue, setTimeSortValue] = useState<string>(
     timeOptions.includes(searchParams.get('sortValue') as string)
       ? (searchParams.get('sortValue') as string)
-      : 'By time (earliest)',
+      : timeOptions[0],
   );
 
   const priorityOptions = ['By priority (increase)', 'By priority (decrease)'];
   const [prioritySortValue, setPrioritySortValue] = useState<string>(
     priorityOptions.includes(searchParams.get('sortValue') as string)
       ? (searchParams.get('sortValue') as string)
-      : 'By priority (increase)',
+      : priorityOptions[0],
   );
 
   const storeIncompletedTasks = useTasksStore(
@@ -61,10 +61,6 @@ const Incompleted = () => {
 
   const deadlineStatus = (task: TaskType) => {
     const myDate = new Date();
-    myDate.setHours(new Date().getHours());
-    myDate.setMinutes(new Date().getMinutes());
-    myDate.setSeconds(new Date().getSeconds());
-    myDate.setMilliseconds(new Date().getMilliseconds());
 
     if (timeSortValue === 'By time (earliest)') {
       if (
@@ -145,10 +141,9 @@ const Incompleted = () => {
   };
 
   function isMatchingDate(inputDate: Date) {
-    const todayAtDate =
-      Number(searchParams.get('dateTime')) || new Date().getTime();
-
-    const today = new Date(todayAtDate);
+    const today = new Date(
+      Number(searchParams.get('dateTime')) || new Date().getTime(),
+    );
 
     return (
       inputDate.getDate() === today.getDate() &&

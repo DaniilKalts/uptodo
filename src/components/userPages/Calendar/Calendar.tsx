@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-// import { TaskType } from '@/types';
 
 import qs from 'query-string';
 
@@ -44,10 +42,10 @@ const Calendar = () => {
   }
 
   function getDaysInRange() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const currentDay = currentDate.getDate();
+    const presentDate = new Date();
+    const presentYear = presentDate.getFullYear();
+    const presentMonth = presentDate.getMonth();
+    const presentDay = presentDate.getDate();
 
     const daysArray = [];
     const daysOfWeekAbbreviated = [
@@ -60,8 +58,14 @@ const Calendar = () => {
       'Sat',
     ];
 
-    for (let dayOffset = 0; dayOffset <= 364; dayOffset += 1) {
-      const date = new Date(year, month, currentDay + dayOffset);
+    const daysBeforeAndAfter = 365;
+
+    for (
+      let dayOffset = -daysBeforeAndAfter;
+      dayOffset <= daysBeforeAndAfter;
+      dayOffset++
+    ) {
+      const date = new Date(presentYear, presentMonth, presentDay + dayOffset);
       const dayOfWeekAbbreviated = daysOfWeekAbbreviated[date.getDay()];
 
       daysArray.push({
@@ -80,7 +84,9 @@ const Calendar = () => {
         new Date(todayAtDate).getMonth() === date.getMonth() &&
         new Date(todayAtDate).getFullYear() === date.getFullYear()
       ) {
-        (swiperRef.current as any).swiper.slideTo(dayOffset);
+        (swiperRef.current as any).swiper.slideTo(
+          dayOffset + daysBeforeAndAfter,
+        );
       }
     }
 
@@ -176,7 +182,7 @@ const Calendar = () => {
     if (targetIndex > 0) {
       (swiperRef.current as any).swiper.slideTo(targetIndex);
     }
-  }, [searchParams]);
+  }, [daysInRange, searchParams]);
 
   return (
     <section className="mx-auto max-w-xl bg-gray-700 py-3">
@@ -232,18 +238,22 @@ const Calendar = () => {
 
           if (daysInRange[realIndex]?.month) {
             setCurrentMonth(daysInRange[realIndex].month);
-          } else {
+          } else if (searchParams.get('dateTime')) {
             setCurrentMonth(
               new Date(Number(searchParams.get('dateTime'))).getMonth(),
             );
+          } else {
+            setCurrentMonth(new Date().getMonth());
           }
 
           if (daysInRange[realIndex]?.year) {
             setCurrentYear(daysInRange[realIndex].year);
-          } else {
+          } else if (searchParams.get('dateTime')) {
             setCurrentYear(
               new Date(Number(searchParams.get('dateTime'))).getFullYear(),
             );
+          } else {
+            setCurrentYear(new Date().getFullYear());
           }
         }}
         breakpoints={{

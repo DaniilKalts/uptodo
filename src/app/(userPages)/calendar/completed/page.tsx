@@ -1,9 +1,11 @@
-/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable react-hooks/exhaustive-deps */
 
 'use client';
 
 import React, { useState, useEffect, CSSProperties } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+import qs from 'query-string';
 
 import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
@@ -26,26 +28,34 @@ const override: CSSProperties = {
 };
 
 const Completed = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [mounted, setMounted] = useState(false);
+
   const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
     'time',
+  );
+
+  const timeOptions = ['By time (earliest)', 'By time (latest)'];
+  const [timeSortValue, setTimeSortValue] = useState<string>(
+    timeOptions.includes(searchParams.get('sortValue') as string)
+      ? (searchParams.get('sortValue') as string)
+      : timeOptions[0],
+  );
+
+  const priorityOptions = ['By priority (increase)', 'By priority (decrease)'];
+  const [prioritySortValue, setPrioritySortValue] = useState<string>(
+    priorityOptions.includes(searchParams.get('sortValue') as string)
+      ? (searchParams.get('sortValue') as string)
+      : priorityOptions[0],
   );
 
   const storeCompletedTasks = useTasksStore((state) => state.completedTasks);
   const addIncompletedTask = useTasksStore((state) => state.addIncompletedTask);
 
   const [completedTasks, setCompletedTasks] = useState<TaskType[]>([]);
-
-  const [timeSortValue, setTimeSortValue] =
-    useState<string>('By time (earliest)');
-  const timeOptions = ['By time (earliest)', 'By time (latest)'];
-
-  const [prioritySortValue, setPrioritySortValue] = useState<string>(
-    'By priority (increase)',
-  );
-  const priorityOptions = ['By priority (increase)', 'By priority (decrease)'];
 
   const loadingIndicator = () => {
     setIsLoading(true);
@@ -63,7 +73,7 @@ const Completed = () => {
           (taskA, taskB) => taskA.completedAt! - taskB.completedAt!,
         ),
       );
-    } else {
+    } else if (timeSortValue === timeOptions[1]) {
       setCompletedTasks((prev) =>
         [...prev].sort(
           (taskA, taskB) => taskB.completedAt! - taskA.completedAt!,
@@ -86,24 +96,10 @@ const Completed = () => {
     }
   };
 
-  useEffect(() => {
-    if (timeOptions.includes(searchParams.get('sortType') as string)) {
-      setCurrentSelect('time');
-      setTimeSortValue(searchParams.get('sortType') as string);
-    }
-
-    if (priorityOptions.includes(searchParams.get('sortType') as string)) {
-      setCurrentSelect('priority');
-      setPrioritySortValue(searchParams.get('sortType') as string);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   function isMatchingDate(inputDate: Date) {
-    const todayAtDate =
-      Number(searchParams.get('dateTime')) || new Date().getTime();
-
-    const today = new Date(todayAtDate);
+    const today = new Date(
+      Number(searchParams.get('dateTime')) || new Date().getTime(),
+    );
 
     return (
       inputDate.getDate() === today.getDate() &&
@@ -112,28 +108,103 @@ const Completed = () => {
     );
   }
 
-  useEffect(() => {
-    const sortedTasks = storeCompletedTasks.filter((incompletedTask) =>
-      isMatchingDate(new Date(incompletedTask.todayAt)),
-    );
-    setCompletedTasks(sortedTasks);
+  const queryTimeParamsHandler = () => {
+    if (currentSelect === 'time' && mounted) {
+      const query = { sortType: 'time', sortValue: timeSortValue };
+      const newRoute = window.location.href;
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      const url = qs.stringifyUrl(
+        {
+          url: newRoute,
+          query,
+        },
+        { skipNull: true },
+      );
+
+      router.push(url);
+    }
+  };
+
+  const queryPriorityParamsHandler = () => {
+    if (currentSelect === 'priority' && mounted) {
+      const query = { sortType: 'priority', sortValue: prioritySortValue };
+      const newRoute = window.location.href;
+
+      const url = qs.stringifyUrl(
+        {
+          url: newRoute,
+          query,
+        },
+        { skipNull: true },
+      );
+
+      router.push(url);
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMounted(true);
+    }, 1500);
+  }, []);
+
+  useEffect(() => {
+    const sortedTasks = storeCompletedTasks.filter((completedTask) =>
+      isMatchingDate(new Date(completedTask.todayAt)),
+    );
+
+    if (currentSelect === 'priority') {
+      if (prioritySortValue === priorityOptions[0]) {
+        sortedTasks.sort((taskA, taskB) => taskA.priority - taskB.priority);
+      } else if (prioritySortValue === priorityOptions[1]) {
+        sortedTasks.sort((taskA, taskB) => taskB.priority - taskA.priority);
+      }
+    }
+
+    if (currentSelect === 'time') {
+      if (timeSortValue === timeOptions[0]) {
+        sortedTasks.sort(
+          (taskA, taskB) => taskA.completedAt - taskB.completedAt,
+        );
+      } else if (timeSortValue === timeOptions[1]) {
+        sortedTasks.sort(
+          (taskA, taskB) => taskB.completedAt - taskA.completedAt,
+        );
+      }
+    }
+
+    setCompletedTasks(sortedTasks);
   }, [storeCompletedTasks, searchParams]);
 
   useEffect(() => {
+    if (searchParams.get('sortType') === 'time' && !mounted) {
+      return;
+    }
+
     setCurrentSelect('priority');
     sortByPriority();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    queryPriorityParamsHandler();
   }, [prioritySortValue]);
 
   useEffect(() => {
+    if (searchParams.get('sortType') === 'priority' && !mounted) {
+      return;
+    }
+
     setCurrentSelect('time');
     sortByTime();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    queryTimeParamsHandler();
   }, [timeSortValue]);
+
+  useEffect(() => {
+    if (currentSelect === 'priority') {
+      queryPriorityParamsHandler();
+    } else {
+      queryTimeParamsHandler();
+    }
+  }, [currentSelect]);
 
   return (
     <Container>

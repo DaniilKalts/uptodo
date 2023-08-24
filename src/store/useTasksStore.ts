@@ -24,8 +24,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Watch Kungdu Panda 4',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 23, 6, 0).getTime(),
-          todayAt: new Date(2023, 7, 23, 7, 15).getTime(),
+          createdAt: new Date(2023, 7, 19, 6, 0).getTime(),
+          todayAt: new Date(2023, 7, 19, 7, 15).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'sky-blue',
@@ -38,8 +38,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Do math homework',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 23, 8, 45).getTime(),
-          todayAt: new Date(2023, 7, 23, 9, 0).getTime(),
+          createdAt: new Date(2023, 7, 19, 8, 45).getTime(),
+          todayAt: new Date(2023, 7, 19, 9, 0).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'blue-light',
@@ -52,8 +52,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Go swimming',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 23, 8, 48).getTime(),
-          todayAt: new Date(2023, 7, 23, 14, 0).getTime(),
+          createdAt: new Date(2023, 7, 19, 8, 48).getTime(),
+          todayAt: new Date(2023, 7, 19, 14, 0).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'mint-light',
@@ -66,8 +66,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Buy grocery',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 23, 8, 51).getTime(),
-          todayAt: new Date(2023, 7, 23, 15, 45).getTime(),
+          createdAt: new Date(2023, 7, 19, 8, 51).getTime(),
+          todayAt: new Date(2023, 7, 19, 15, 45).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'lemon-chiffon',
@@ -80,8 +80,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Have a meeting',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 23, 8, 53).getTime(),
-          todayAt: new Date(2023, 7, 23, 17, 30).getTime(),
+          createdAt: new Date(2023, 7, 19, 8, 53).getTime(),
+          todayAt: new Date(2023, 7, 19, 17, 30).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'beige-light',
@@ -94,8 +94,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Do workout',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 23, 18, 45).getTime(),
-          todayAt: new Date(2023, 7, 23, 19, 15).getTime(),
+          createdAt: new Date(2023, 7, 19, 18, 45).getTime(),
+          todayAt: new Date(2023, 7, 19, 19, 15).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'cyan-light',

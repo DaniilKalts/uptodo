@@ -63,32 +63,22 @@ export default function RootLayout({
       <Container>
         <section className="mx-auto max-w-[575px]">
           <div className="mx-auto mt-7 flex w-full justify-center gap-4 rounded-md bg-gray-500 p-4 min-[475px]:gap-8 min-[525px]:w-11/12 min-[575px]:w-10/12">
-            {currentPathName.includes('incompleted') ? (
-              <Button
-                label="Incompleted"
-                onClick={() => onClick('incompleted')}
-                filled
-              />
-            ) : (
-              <Button
-                label="Incompleted"
-                onClick={() => onClick('incompleted')}
-                outline="gray"
-              />
-            )}
-            {currentPathName.includes('/completed') ? (
-              <Button
-                label="Completed"
-                onClick={() => onClick('completed')}
-                filled
-              />
-            ) : (
-              <Button
-                label="Completed"
-                onClick={() => onClick('completed')}
-                outline="gray"
-              />
-            )}
+            <Button
+              label="Incompleted"
+              onClick={() => onClick('incompleted')}
+              filled={currentPathName.includes('/incompleted')}
+              outline={
+                currentPathName.includes('/incompleted') ? undefined : 'gray'
+              }
+            />
+            <Button
+              label="Completed"
+              onClick={() => onClick('completed')}
+              filled={currentPathName.includes('/completed')}
+              outline={
+                currentPathName.includes('/completed') ? undefined : 'gray'
+              }
+            />
           </div>
         </section>
       </Container>
