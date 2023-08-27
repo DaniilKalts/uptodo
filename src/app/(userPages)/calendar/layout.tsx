@@ -3,7 +3,7 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import qs from 'query-string';
@@ -41,16 +41,6 @@ export default function RootLayout({
 
     router.push(url);
   };
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div className="pb-40 md:pb-44">

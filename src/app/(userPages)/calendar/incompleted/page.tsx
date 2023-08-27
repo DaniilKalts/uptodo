@@ -31,7 +31,7 @@ const Incompleted = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [mounted, setMounted] = useState(false);
 
   const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
@@ -59,50 +59,49 @@ const Incompleted = () => {
 
   const [incompletedTasks, setIncompletedTasks] = useState<TaskType[]>([]);
 
+  function isYesterdayOrBefore(date: Date) {
+    const currentDate = new Date();
+
+    if (
+      !(
+        date.getDate() === currentDate.getDate() &&
+        date.getMonth() === currentDate.getMonth() &&
+        date.getFullYear() === currentDate.getFullYear()
+      )
+    ) {
+      return currentDate > date;
+    }
+  }
+
   const deadlineStatus = (task: TaskType) => {
     const myDate = new Date();
 
-    if (timeSortValue === 'By time (earliest)') {
-      if (
-        task ===
-        incompletedTasks.findLast(
-          (incompletedTask) => incompletedTask.todayAt < myDate.getTime(),
-        )
-      ) {
-        return 'present';
-      }
-      if (
-        task.todayAt <
-        incompletedTasks.findLast(
-          (incompletedTask) => incompletedTask.todayAt < myDate.getTime(),
-        )?.todayAt!
-      ) {
-        return 'late';
-      }
-
-      return 'future';
+    if (isYesterdayOrBefore(new Date(task.todayAt))) {
+      return 'late';
     }
 
-    if (timeSortValue === 'By time (latest)') {
-      if (
-        task ===
-        incompletedTasks.find(
-          (incompletedTask) => incompletedTask.todayAt < new Date().getTime(),
-        )
-      ) {
-        return 'present';
-      }
-      if (
-        task.todayAt <
-        incompletedTasks.find(
-          (incompletedTask) => incompletedTask.todayAt < new Date().getTime(),
-        )?.todayAt!
-      ) {
-        return 'late';
-      }
+    const sortedTasks = [...incompletedTasks].sort(
+      (taskA, taskB) => taskA.todayAt - taskB.todayAt,
+    );
 
-      return 'future';
+    if (
+      task ===
+      sortedTasks.findLast(
+        (incompletedTask) => incompletedTask.todayAt < myDate.getTime(),
+      )
+    ) {
+      return 'present';
     }
+    if (
+      task.todayAt <
+      sortedTasks.findLast(
+        (incompletedTask) => incompletedTask.todayAt < myDate.getTime(),
+      )?.todayAt!
+    ) {
+      return 'late';
+    }
+
+    return 'future';
   };
 
   const loadingIndicator = () => {
@@ -321,7 +320,7 @@ const Incompleted = () => {
               </>
             ) : (
               <h3 className="text-center text-lg font-medium text-gray-dark dark:text-white-pale">
-                You have no incompleted tasks for this day! &#128528;
+                You have no incompleted tasks for this day! &#128517;
               </h3>
             )}
           </motion.main>

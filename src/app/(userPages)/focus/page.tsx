@@ -26,12 +26,12 @@ import {
   MusickIcon,
   HealthIcon,
   UniversityIcon,
-} from '../../../components/UI/Icons/Categories';
+} from '@/components/UI/Icons/Categories';
 
-import { Select } from '../../../components/UI';
+import { Select } from '@/components/UI';
 
-import TimerModal from '../../../components/UI/Modals/TimerModal';
-import Container from '../../../components/UI/Container';
+import TimerModal from '@/components/UI/Modals/TimerModal';
+import Container from '@/components/UI/Container';
 
 const override: CSSProperties = {
   display: 'block',

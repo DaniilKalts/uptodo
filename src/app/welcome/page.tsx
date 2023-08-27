@@ -9,8 +9,8 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 
 import { motion } from 'framer-motion';
 
-import { Button } from '../../components/UI';
-import Container from '../../components/UI/Container';
+import Button from '@/components/UI/Button';
+import Container from '@/components/UI/Container';
 
 const Welcome = () => {
   const router = useRouter();

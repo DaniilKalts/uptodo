@@ -14,7 +14,7 @@ type DayType = {
   month: number;
   year: number;
   dayOfWeek: string;
-  anyIncompletedTasks: boolean;
+  anyTasks: boolean;
 };
 
 const Calendar = () => {
@@ -24,6 +24,7 @@ const Calendar = () => {
   const storeIncompletedTasks = useTasksStore(
     (state) => state.incompletedTasks,
   );
+  const storeCompletedTasks = useTasksStore((state) => state.completedTasks);
 
   const [daysInRange, setDaysInRange] = useState<DayType[]>([]);
 
@@ -33,7 +34,7 @@ const Calendar = () => {
   const swiperRef = React.useRef(null);
 
   function isMatchingDate(inputDate: Date) {
-    return !!storeIncompletedTasks.find(
+    return !![...storeIncompletedTasks, ...storeCompletedTasks].find(
       (task) =>
         new Date(task.todayAt).getDate() === inputDate.getDate() &&
         new Date(task.todayAt).getMonth() === inputDate.getMonth() &&
@@ -58,7 +59,7 @@ const Calendar = () => {
       'Sat',
     ];
 
-    const daysBeforeAndAfter = 365;
+    const daysBeforeAndAfter = 90;
 
     for (
       let dayOffset = -daysBeforeAndAfter;
@@ -73,7 +74,7 @@ const Calendar = () => {
         month: date.getMonth(),
         year: date.getFullYear(),
         dayOfWeek: dayOfWeekAbbreviated,
-        anyIncompletedTasks: isMatchingDate(date),
+        anyTasks: isMatchingDate(date),
       });
 
       const todayAtDate =
@@ -305,7 +306,7 @@ const Calendar = () => {
               <h6 className="text-base font-bold text-white min-[475px]:text-lg">
                 {date.day}
               </h6>
-              {date.anyIncompletedTasks && (
+              {date.anyTasks && (
                 <div className="mt-[2px] h-[6px] w-[6px] rounded-full bg-white"></div>
               )}
             </div>

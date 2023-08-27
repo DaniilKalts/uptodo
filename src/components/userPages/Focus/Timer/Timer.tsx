@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import Button from '../../../UI/Button';
+import Button from '@/components/UI/Button';
 
 import expiredSound from '../../../../../public/sounds/expiredSound.mp3';
 

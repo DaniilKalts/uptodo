@@ -26,7 +26,13 @@ import useTasksStore from '@/store/useTasksStore';
 import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
 import TimeSwiper from '@/components/userPages/Focus/Timer/TimeSwiper';
 
-import { TagIcon, ClockIcon, FlagIcon, SendIcon } from './Icons';
+import {
+  TagIcon,
+  ClockIcon,
+  FlagIcon,
+  SendIcon,
+} from '@/components/UI/Modals/NewTaskModal/Icons';
+
 import {
   GroceryIcon,
   MovieIcon,
@@ -39,10 +45,10 @@ import {
   DesignIcon,
   SocialIcon,
   AddIcon,
-} from '../../Icons/Categories';
+} from '@/components/UI/Icons/Categories';
 
-import { Button, Input, Textarea } from '../../index';
-import Modal from '../Modal';
+import { Button, Input, Textarea } from '@/components/UI';
+import Modal from '@/components/UI/Modals/Modal';
 
 interface NewTaskInputs extends FieldValues {
   taskTitle: string;
@@ -133,6 +139,9 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
   const [selectedMinutes, setSelectedMinutes] = useState<number>(0);
   const [potentialMinutes, setPotentialMinutes] = useState<number>(60);
   const [timeOption, setTimeOption] = useState<string>(
+    new Date().getHours() < 12 ? 'AM' : 'PM',
+  );
+  const [potentialTimeOption, setPotentialTimeOption] = useState<string>(
     new Date().getHours() < 12 ? 'AM' : 'PM',
   );
 
@@ -346,15 +355,15 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       <footer className="mt-10 flex items-center justify-between">
         <div className="flex items-center gap-7">
           <ClockIcon
-            onClick={() => setStep(1)}
+            onClick={() => setStep(STEPS.DATE)}
             customClasses={getCustomClassName(!!taskDate)}
           />
           <TagIcon
-            onClick={() => setStep(3)}
+            onClick={() => setStep(STEPS.CATEGORY)}
             customClasses={getCustomClassName(!!taskCategory)}
           />
           <FlagIcon
-            onClick={() => setStep(4)}
+            onClick={() => setStep(STEPS.PRIORITY)}
             customClasses={getCustomClassName(!!taskPriority)}
           />
         </div>
@@ -425,7 +434,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       !(
         Math.floor(
           (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24),
-        ) >= 365
+        ) >= 90
       )
     ) {
       return 'cursor-pointer bg-purple';
@@ -436,7 +445,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         date.getTime() < new Date(new Date().setHours(0, 0, 0, 0)).getTime() ||
         Math.floor(
           (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24),
-        ) >= 365
+        ) >= 90
       ) {
         return 'cursor-not-allowed bg-gray-800 opacity-50';
       }
@@ -446,7 +455,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     if (
       Math.floor(
         (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24),
-      ) >= 365
+      ) >= 90
     ) {
       if (selectedDate.getMonth() === date.getMonth()) {
         return 'cursor-not-allowed bg-gray-800 opacity-50';
@@ -454,7 +463,10 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       return 'cursor-not-allowed opacity-50';
     }
 
-    return date.getTime() < new Date().getTime()
+    const midnightDate = new Date();
+    midnightDate.setHours(0, 0, 0, 0);
+
+    return date.getTime() < midnightDate.getTime()
       ? 'cursor-not-allowed'
       : 'cursor-pointer';
   };
@@ -544,7 +556,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
                   Math.floor(
                     (date.getTime() - new Date().getTime()) /
                       (1000 * 60 * 60 * 24),
-                  ) >= 365
+                  ) >= 90
                 ) {
                   return;
                 }
@@ -588,14 +600,14 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             setPotentialMinutes(selectedMinutes);
             setPotentialDate(taskDate);
             setSelectedDate(taskDate);
-            setTimeOption(new Date().getHours() < 12 ? 'AM' : 'PM');
+            setPotentialTimeOption(timeOption);
             setStep(null);
           }}
         />
         <Button
           label="Choose Time"
           onClick={() => {
-            setStep(2);
+            setStep(STEPS.TIME);
           }}
           filled
         />
@@ -648,8 +660,8 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             Early/Late
           </p>
           <TimeSwiper
-            initialSlide={['AM', 'PM'].indexOf(timeOption)}
-            setTime={setTimeOption}
+            initialSlide={['AM', 'PM'].indexOf(potentialTimeOption)}
+            setTime={setPotentialTimeOption}
           />
         </div>
       </div>
@@ -660,7 +672,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         <Button
           label="Cancel"
           onClick={() => {
-            setStep(1);
+            setStep(STEPS.DATE);
           }}
         />
         <Button
@@ -674,14 +686,14 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             updatedDate.setMilliseconds(0);
             updatedDate.setMinutes(minutes);
 
-            if (timeOption === 'PM') {
+            if (potentialTimeOption === 'PM') {
               if (hours < 12) {
                 updatedDate.setHours(hours + 12);
               } else {
                 updatedDate.setHours(12);
               }
             }
-            if (timeOption === 'AM') {
+            if (potentialTimeOption === 'AM') {
               if (hours < 12) {
                 updatedDate.setHours(hours);
               } else {
@@ -690,6 +702,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             }
 
             setPotentialDate(updatedDate);
+            setTimeOption(potentialTimeOption);
             setSelectedMinutes(potentialMinutes);
             setSelectedDate(updatedDate);
             setCustomValue('taskDate', updatedDate);

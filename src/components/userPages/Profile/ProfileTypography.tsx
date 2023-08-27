@@ -15,7 +15,7 @@ const ProfileTypography: React.FC<ProfileTypographyInterface> = ({
   link,
   svg,
 }) => {
-  const body = (
+  const bodyContent = (
     <>
       <div className="flex items-center gap-3">
         {svg}
@@ -59,7 +59,7 @@ const ProfileTypography: React.FC<ProfileTypographyInterface> = ({
           className="group flex w-full items-center justify-between py-3"
           href={link}
         >
-          {body}
+          {bodyContent}
         </Link>
       )}
       {!link && onClick && (
@@ -67,7 +67,7 @@ const ProfileTypography: React.FC<ProfileTypographyInterface> = ({
           className="group flex w-full cursor-pointer items-center justify-between py-3"
           onClick={onClick}
         >
-          {body}
+          {bodyContent}
         </div>
       )}
     </>

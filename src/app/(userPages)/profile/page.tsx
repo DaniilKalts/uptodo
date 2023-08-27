@@ -39,6 +39,13 @@ const Profile = () => {
   const [incompletedCount, setIcompletedCount] = useState<number>(0);
   const [completedCount, setCompletedCount] = useState<number>(0);
 
+  function getPriorityLabel(priority: number) {
+    const priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
+    const index = Math.min(Math.floor(priority / 3), 3);
+
+    return priorityLabels[index];
+  }
+
   const exportExcelFile = () => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Your all Tasks List');
@@ -90,7 +97,7 @@ const Profile = () => {
         createdAt: new Date(task.createdAt),
         completedAt: 'Not finished yet',
         category: task.category.label,
-        priority: String(`${task.priority}/10`),
+        priority: getPriorityLabel(task.priority),
       });
     });
 
@@ -102,7 +109,7 @@ const Profile = () => {
         createdAt: new Date(task.createdAt),
         completedAt: new Date(task.completedAt),
         category: task.category.label,
-        priority: String(`${task.priority}/10`),
+        priority: getPriorityLabel(task.priority),
       });
     });
 
@@ -140,7 +147,7 @@ const Profile = () => {
               Profile
             </h6>
             <Image
-              src="/images/home/demo_avatar.svg"
+              src="/images/home/kalts_daniil.jpg"
               className="mb-4 rounded-full min-[475px]:w-32"
               width={96}
               height={96}

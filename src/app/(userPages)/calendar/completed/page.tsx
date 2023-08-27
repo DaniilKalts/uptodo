@@ -260,8 +260,8 @@ const Completed = () => {
                       >
                         <CompletedTask
                           task={task}
-                          onIcomplete={() => {
-                            addIncompletedTask({ ...task });
+                          onIncomplete={() => {
+                            addIncompletedTask({ ...task, completedAt: 0 });
                             toast.success('Added to Incompleted!');
                           }}
                         />
@@ -272,7 +272,7 @@ const Completed = () => {
               </>
             ) : (
               <h3 className="text-center text-lg text-gray-dark dark:text-white-pale">
-                There is no completed tasks yet. &#128528;
+                There is no completed tasks yet. &#128517;
               </h3>
             )}
           </motion.main>

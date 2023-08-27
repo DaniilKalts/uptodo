@@ -16,8 +16,8 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillGithub } from 'react-icons/ai';
 
-import { Input, Button } from '../../../components/UI';
-import Container from '../../../components/UI/Container';
+import { Input, Button } from '@/components/UI';
+import Container from '@/components/UI/Container';
 
 interface RegisterInputs extends FieldValues {
   userName: string;

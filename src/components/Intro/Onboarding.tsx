@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
-import Container from '../UI/Container';
+import Container from '@/components/UI/Container';
 
 interface OnboardingProps {
   step: number;

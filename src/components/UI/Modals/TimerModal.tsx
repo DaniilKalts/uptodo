@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 
 import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
 
-import Modal from './Modal';
-import Button from '../Button';
+import Modal from '@/components/UI/Modals/Modal';
+import Button from '@/components/UI/Button';
 
 interface TimerModalInterface {
   isOpen: boolean;

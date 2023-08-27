@@ -8,6 +8,10 @@ interface TaskStoreInterface {
   completedTasks: TaskType[];
   addIncompletedTask: (incompletedTask: TaskType) => void;
   addCompletedTask: (completedTask: TaskType) => void;
+  removeIncompletedTask: (incompletedTaskId: number) => void;
+  removeCompletedTask: (completedTaskId: number) => void;
+  updateIncompletedTask: (updatedIncompletedTask: TaskType) => void;
+  updateCompletedTask: (updatedCompletedTask: TaskType) => void;
 }
 
 type MyPersist = (
@@ -24,8 +28,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Watch Kungdu Panda 4',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 19, 6, 0).getTime(),
-          todayAt: new Date(2023, 7, 19, 7, 15).getTime(),
+          createdAt: new Date(2023, 7, 28, 6, 0).getTime(),
+          todayAt: new Date(2023, 7, 28, 7, 15).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'sky-blue',
@@ -38,8 +42,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Do math homework',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 19, 8, 45).getTime(),
-          todayAt: new Date(2023, 7, 19, 9, 0).getTime(),
+          createdAt: new Date(2023, 7, 28, 8, 45).getTime(),
+          todayAt: new Date(2023, 7, 28, 9, 0).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'blue-light',
@@ -52,8 +56,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Go swimming',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 19, 8, 48).getTime(),
-          todayAt: new Date(2023, 7, 19, 14, 0).getTime(),
+          createdAt: new Date(2023, 7, 28, 8, 48).getTime(),
+          todayAt: new Date(2023, 7, 28, 14, 0).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'mint-light',
@@ -66,8 +70,8 @@ const useTasksStore = create<TaskStoreInterface, []>(
           title: 'Buy grocery',
           description:
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus accusamus maiores doloremque sed, ad dicta vel modi repudiandae? Obcaecati numquam voluptate nostrum velit excepturi voluptatum repellat ullam doloribus nihil cupiditate.',
-          createdAt: new Date(2023, 7, 19, 8, 51).getTime(),
-          todayAt: new Date(2023, 7, 19, 15, 45).getTime(),
+          createdAt: new Date(2023, 7, 28, 8, 51).getTime(),
+          todayAt: new Date(2023, 7, 28, 15, 45).getTime(),
           completedAt: 0,
           category: {
             bgColor: 'lemon-chiffon',
@@ -122,6 +126,30 @@ const useTasksStore = create<TaskStoreInterface, []>(
           completedTasks: [completedTask, ...state.completedTasks].sort(
             (taskA: TaskType, taskB: TaskType) => taskA.todayAt - taskB.todayAt,
           ),
+        })),
+      removeIncompletedTask: (incompletedTaskId: number) =>
+        set((state) => ({
+          incompletedTasks: [...state.incompletedTasks].filter(
+            (task: TaskType) => task.id !== incompletedTaskId,
+          ),
+        })),
+      removeCompletedTask: (completedTaskId: number) =>
+        set((state) => ({
+          completedTasks: [...state.completedTasks].filter(
+            (task: TaskType) => task.id !== completedTaskId,
+          ),
+        })),
+      updateIncompletedTask: (updatedIncompletedTask: TaskType) =>
+        set((state) => ({
+          incompletedTasks: [...state.incompletedTasks]
+            .filter((task: TaskType) => task.id !== updatedIncompletedTask.id)
+            .concat(updatedIncompletedTask),
+        })),
+      updateCompletedTask: (updatedCompletedTask: TaskType) =>
+        set((state) => ({
+          completedTasks: [...state.completedTasks]
+            .filter((task: TaskType) => task.id !== updatedCompletedTask.id)
+            .concat(updatedCompletedTask),
         })),
     }),
     { name: 'tasks' },

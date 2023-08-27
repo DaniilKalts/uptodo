@@ -5,7 +5,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Lato } from 'next/font/google';
 
-import ToasterProvider from '../providers/ToasterProvider';
+import ToasterProvider from '@/providers/ToasterProvider';
 
 const lato = Lato({
   subsets: ['latin'],
