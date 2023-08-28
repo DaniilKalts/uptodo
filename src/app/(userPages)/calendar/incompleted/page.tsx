@@ -12,19 +12,17 @@ import useTasksStore from '@/store/useTasksStore';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { PuffLoader } from 'react-spinners';
+import { ClockLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
 
 import IncompletedTask from '@/components/userPages/Calendar/IncompletedTask';
 
-import Container from '@/components/UI/Container';
-import { Select } from '@/components/UI';
+import { Container, Select } from '@/components/UI';
 
 const override: CSSProperties = {
   display: 'block',
   margin: '0 auto',
-  borderColor: 'red',
-  marginTop: '28px',
+  marginTop: '40px',
 };
 
 const Incompleted = () => {
@@ -249,11 +247,11 @@ const Incompleted = () => {
     <Container>
       <div className="mx-auto flex flex-col items-center justify-center">
         {isLoading ? (
-          <PuffLoader
+          <ClockLoader
             color={'#8875FF'}
             loading={isLoading}
             cssOverride={override}
-            size={150}
+            size={125}
             aria-label="Loading Spinner"
             data-testid="loader"
           />

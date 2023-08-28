@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import { TaskType } from '@/types';
+
 import qs from 'query-string';
 
 import useTasksStore from '@/store/useTasksStore';
@@ -14,7 +16,7 @@ type DayType = {
   month: number;
   year: number;
   dayOfWeek: string;
-  anyTasks: boolean;
+  anyTasks: 'bg-white' | 'bg-red-700' | 'bg-green-400';
 };
 
 const Calendar = () => {
@@ -34,12 +36,41 @@ const Calendar = () => {
   const swiperRef = React.useRef(null);
 
   function isMatchingDate(inputDate: Date) {
-    return !![...storeIncompletedTasks, ...storeCompletedTasks].find(
-      (task) =>
+    const matchingIncompletedTasks: TaskType[] = [];
+
+    [...storeIncompletedTasks].forEach((task) => {
+      if (
         new Date(task.todayAt).getDate() === inputDate.getDate() &&
         new Date(task.todayAt).getMonth() === inputDate.getMonth() &&
-        new Date(task.todayAt).getFullYear() === inputDate.getFullYear(),
-    );
+        new Date(task.todayAt).getFullYear() === inputDate.getFullYear()
+      ) {
+        matchingIncompletedTasks.push(task);
+      }
+    });
+
+    const matchingCompletedTasks: TaskType[] = [];
+
+    [...storeCompletedTasks].forEach((task) => {
+      if (
+        new Date(task.todayAt).getDate() === inputDate.getDate() &&
+        new Date(task.todayAt).getMonth() === inputDate.getMonth() &&
+        new Date(task.todayAt).getFullYear() === inputDate.getFullYear()
+      ) {
+        matchingCompletedTasks.push(task);
+      }
+    });
+
+    if (matchingIncompletedTasks.length && matchingCompletedTasks.length) {
+      return 'bg-white';
+    }
+    if (matchingIncompletedTasks.length) {
+      return 'bg-red-700';
+    }
+    if (matchingCompletedTasks.length) {
+      return 'bg-green-400';
+    }
+
+    return '';
   }
 
   function getDaysInRange() {
@@ -307,7 +338,9 @@ const Calendar = () => {
                 {date.day}
               </h6>
               {date.anyTasks && (
-                <div className="mt-[2px] h-[6px] w-[6px] rounded-full bg-white"></div>
+                <div
+                  className={`mt-[2px] h-[6px] w-[6px] rounded-full ${date.anyTasks}`}
+                ></div>
               )}
             </div>
           </SwiperSlide>

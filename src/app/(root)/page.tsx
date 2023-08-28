@@ -9,8 +9,8 @@ import { useMediaQuery } from 'react-responsive';
 
 import { motion } from 'framer-motion';
 
-import Logo from '@/components/Intro/Logo';
-import Onboarding from '@/components/Intro/Onboarding';
+import Logo from '@/components/userPages/Intro/Logo';
+import Onboarding from '@/components/userPages/Intro/Onboarding';
 import Button from '@/components/UI/Button';
 
 import step1 from '../../../public/images/intro/step1.svg';

@@ -13,3 +13,10 @@ export type TaskType = {
   };
   priority: number;
 };
+
+export type CategoryType = {
+  icon: CategoryIconType;
+  bgColor: string;
+  label: string;
+  IconStyles: string;
+};

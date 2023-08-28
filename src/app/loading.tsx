@@ -1,12 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { CSSProperties } from 'react';
+
+import { PuffLoader } from 'react-spinners';
+
+const override: CSSProperties = {
+  display: 'block',
+  margin: '0 auto',
+  marginTop: '28px',
+};
 
 const Loading = () => (
-  <div className="flex h-screen w-screen items-center justify-center">
-    <div className="text-xl text-gray-dark dark:text-white-pale">
-      Loading...
-    </div>
+  <div className="fixed left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 transform">
+    <PuffLoader
+      color={'#8875FF'}
+      cssOverride={override}
+      size={150}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
   </div>
 );
 

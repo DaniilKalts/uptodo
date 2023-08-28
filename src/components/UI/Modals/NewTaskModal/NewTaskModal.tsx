@@ -6,7 +6,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { CategoryIconType, TaskType } from '@/types';
+import { CategoryIconType, CategoryType, TaskType } from '@/types';
+
+import { categories } from '@/utils/Categories';
 
 import qs from 'query-string';
 
@@ -33,20 +35,6 @@ import {
   SendIcon,
 } from '@/components/UI/Modals/NewTaskModal/Icons';
 
-import {
-  GroceryIcon,
-  MovieIcon,
-  HomeIcon,
-  HealthIcon,
-  MusickIcon,
-  UniversityIcon,
-  WorkIcon,
-  WorkoutIcon,
-  DesignIcon,
-  SocialIcon,
-  AddIcon,
-} from '@/components/UI/Icons/Categories';
-
 import { Button, Input, Textarea } from '@/components/UI';
 import Modal from '@/components/UI/Modals/Modal';
 
@@ -54,12 +42,7 @@ interface NewTaskInputs extends FieldValues {
   taskTitle: string;
   taskDescription: string;
   taskDate: Date;
-  taskCategory: {
-    icon: CategoryIconType;
-    bgColor: string;
-    label: string;
-    IconStyles: string;
-  } | null;
+  taskCategory: CategoryType | null;
   taskPriority: number | null;
 }
 
@@ -145,91 +128,13 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     new Date().getHours() < 12 ? 'AM' : 'PM',
   );
 
-  const [potentialCategory, setPotentialCategory] = useState<{
-    icon: CategoryIconType;
-    bgColor: string;
-    label: string;
-    IconStyles: string;
-  } | null>(taskCategory);
+  const [potentialCategory, setPotentialCategory] =
+    useState<CategoryType | null>(taskCategory);
   const [potentialPriority, setPotentialPriority] = useState<null | number>(
     taskPriority,
   );
 
   let modalTitle: string = '';
-
-  const categories: {
-    icon: CategoryIconType;
-    bgColor: string;
-    label: string;
-    IconStyles: string;
-  }[] = [
-    {
-      icon: GroceryIcon,
-      bgColor: 'lemon-chiffon',
-      label: 'Grocery',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: WorkIcon,
-      bgColor: 'beige-light',
-      label: 'Work',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: WorkoutIcon,
-      bgColor: 'cyan-light',
-      label: 'Sport',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: DesignIcon,
-      bgColor: 'aquamarine-mist',
-      label: 'Design',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: UniversityIcon,
-      bgColor: 'blue-light',
-      label: 'University',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: SocialIcon,
-      bgColor: 'raspberry-sorbet',
-      label: 'Social',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: MusickIcon,
-      bgColor: 'pink-light',
-      label: 'Musick',
-      IconStyles: 'w-7 h-7 min-[475px]:w-9 min-[475px]:h-9',
-    },
-    {
-      icon: HealthIcon,
-      bgColor: 'mint-light',
-      label: 'Health',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: MovieIcon,
-      bgColor: 'sky-blue',
-      label: 'Movie',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: HomeIcon,
-      bgColor: 'coral-pink',
-      label: 'Home',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: AddIcon,
-      bgColor: 'turquoise-haze',
-      label: 'Create New',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-  ];
 
   const getCategoryBgColor = (bgIconColor: string) => {
     switch (bgIconColor) {

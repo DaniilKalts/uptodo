@@ -5,9 +5,10 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { CategoryIconType, TaskType } from '@/types';
-
+import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
+
+import { categories } from '@/utils/Categories';
 
 import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
 import TimeSwiper from '@/components/userPages/Focus/Timer/TimeSwiper';
@@ -43,12 +44,10 @@ import {
   MusickIcon,
   WorkIcon,
   WorkoutIcon,
-  AddIcon,
 } from '@/components/UI/Icons/Categories';
 
-import Container from '@/components/UI/Container';
+import { Container, Button, Input, Textarea } from '@/components/UI';
 import Modal from '@/components/UI/Modals/Modal';
-import { Button, Input, Textarea } from '@/components/UI';
 
 interface TaskIdPageProps {
   params: {
@@ -185,80 +184,6 @@ const Task = ({ params }: TaskIdPageProps) => {
   const [potentialPriority, setPotentialPriority] = useState<null | number>(
     null,
   );
-
-  const categories: {
-    icon: CategoryIconType;
-    bgColor: string;
-    label: string;
-    IconStyles: string;
-  }[] = [
-    {
-      icon: GroceryIcon,
-      bgColor: 'lemon-chiffon',
-      label: 'Grocery',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: WorkIcon,
-      bgColor: 'beige-light',
-      label: 'Work',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: WorkoutIcon,
-      bgColor: 'cyan-light',
-      label: 'Sport',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: DesignIcon,
-      bgColor: 'aquamarine-mist',
-      label: 'Design',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: UniversityIcon,
-      bgColor: 'blue-light',
-      label: 'University',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: SocialIcon,
-      bgColor: 'raspberry-sorbet',
-      label: 'Social',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: MusickIcon,
-      bgColor: 'pink-light',
-      label: 'Musick',
-      IconStyles: 'w-7 h-7 min-[475px]:w-9 min-[475px]:h-9',
-    },
-    {
-      icon: HealthIcon,
-      bgColor: 'mint-light',
-      label: 'Health',
-      IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
-    },
-    {
-      icon: MovieIcon,
-      bgColor: 'sky-blue',
-      label: 'Movie',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: HomeIcon,
-      bgColor: 'coral-pink',
-      label: 'Home',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-    {
-      icon: AddIcon,
-      bgColor: 'turquoise-haze',
-      label: 'Create New',
-      IconStyles: 'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10',
-    },
-  ];
 
   const getTimeString = (time: number) => String(time).padStart(2, '0');
   const getCategoryIcon = (label: string, iustonStyles: string) => {
@@ -974,7 +899,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
   return (
     <Container>
-      <div className="mx-auto mt-8 max-w-lg gap-4">
+      <div className="mx-auto mt-8 max-w-lg gap-4 pb-40">
         <header className="relative flex items-center justify-between">
           <div className="group">
             <div
@@ -1160,7 +1085,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   onClick={() => {}}
                   customClasses={'text-white-pale w-7 h-7'}
                 />
-                <h5 className="text-lg text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+                <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
                   Task Time :
                 </h5>
               </div>
@@ -1169,7 +1094,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   setStep(STEPS.DATE);
                   setIsOpen(true);
                 }}
-                className="cursor-pointer rounded-lg bg-gray-600 px-4 py-4 text-sm text-white hover:bg-gray-500 min-[475px]:px-6 min-[475px]:text-base"
+                className="cursor-pointer rounded-lg bg-gray-600 px-4 py-3 text-sm text-white hover:bg-gray-500 min-[475px]:px-6 min-[475px]:py-4 min-[475px]:text-base"
               >
                 Today At:{' '}
                 {`${getTimeString(
@@ -1185,7 +1110,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   onClick={() => {}}
                   customClasses={'text-white-pale w-7 h-7'}
                 />
-                <h5 className="text-lg text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+                <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
                   Task Category :
                 </h5>
               </div>
@@ -1209,7 +1134,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   onClick={() => {}}
                   customClasses={'text-white-pale w-7 h-7'}
                 />
-                <h5 className="text-lg text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+                <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
                   Task Prioroty :
                 </h5>
               </div>
@@ -1263,7 +1188,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                     fill="currentColor"
                   />
                 </svg>
-                <h5 className="text-lg text-red group-hover:text-red-dark min-[475px]:text-xl">
+                <h5 className="text-base text-red group-hover:text-red-dark min-[475px]:text-xl">
                   Delete Task
                 </h5>
               </div>

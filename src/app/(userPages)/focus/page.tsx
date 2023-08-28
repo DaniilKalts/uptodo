@@ -28,15 +28,12 @@ import {
   UniversityIcon,
 } from '@/components/UI/Icons/Categories';
 
-import { Select } from '@/components/UI';
-
+import { Container, Select } from '@/components/UI';
 import TimerModal from '@/components/UI/Modals/TimerModal';
-import Container from '@/components/UI/Container';
 
 const override: CSSProperties = {
   display: 'block',
   margin: '0 auto',
-  borderColor: 'red',
   marginTop: '28px',
 };
 

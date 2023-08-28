@@ -8,9 +8,8 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import qs from 'query-string';
 
-import Container from '@/components/UI/Container';
-import { Button } from '@/components/UI';
 import Calendar from '@/components/userPages/Calendar/Calendar';
+import { Container, Button } from '@/components/UI';
 
 export default function RootLayout({
   children,
