@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
+import qs from 'query-string';
+
 import { TaskType } from '@/types';
 
 import {
@@ -29,7 +31,19 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
   const router = useRouter();
 
   const navigateToTask = () => {
-    router.push(`/tasks/${task.id}`);
+    const query = {
+      previousPage: 'calendar',
+    };
+
+    const url = qs.stringifyUrl(
+      {
+        url: `${window.location.origin}/tasks/${task.id}`,
+        query,
+      },
+      { skipNull: true },
+    );
+
+    router.push(url);
   };
 
   const { title, todayAt, category, priority } = task;

@@ -3,12 +3,14 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
 
 import { categories } from '@/utils/Categories';
+
+import qs from 'query-string';
 
 import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
 import TimeSwiper from '@/components/userPages/Focus/Timer/TimeSwiper';
@@ -94,6 +96,7 @@ type TaskPropsValue =
 
 const Task = ({ params }: TaskIdPageProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [task, setTask] = useState<TaskType | undefined>();
 
@@ -370,13 +373,6 @@ const Task = ({ params }: TaskIdPageProps) => {
             });
 
             setIsOpen(false);
-
-            if (
-              task.title !== taskTitle ||
-              task.description !== taskDescription
-            ) {
-              toast.success('Successfully Eddited Title & Description');
-            }
           }}
           disabled={
             !taskTitle ||
@@ -727,10 +723,6 @@ const Task = ({ params }: TaskIdPageProps) => {
             });
 
             setIsOpen(false);
-
-            if (task.todayAt !== updatedDate.getTime()) {
-              toast.success('Successfully Eddited Date');
-            }
           }}
           filled
         />
@@ -803,7 +795,9 @@ const Task = ({ params }: TaskIdPageProps) => {
               task.category.label !== potentialCategory?.label ||
               task.category.bgColor !== potentialCategory?.bgColor
             ) {
-              toast.success('Successfully Eddited Category');
+              toast.success('Successfully Eddited Category', {
+                duration: 3000,
+              });
             }
           }}
           filled
@@ -856,10 +850,6 @@ const Task = ({ params }: TaskIdPageProps) => {
             });
 
             setIsOpen(false);
-
-            if (task.priority !== potentialPriority) {
-              toast.success('Successfully Eddited Priority');
-            }
           }}
           filled
         />
@@ -961,28 +951,122 @@ const Task = ({ params }: TaskIdPageProps) => {
           <div className="group">
             <div
               onClick={() => {
-                router.back();
+                const midnightDate = new Date(task.todayAt);
+                midnightDate.setHours(0, 0, 0, 0);
+
+                let newRoute = window.location.origin;
+
+                const previousPage = searchParams.get('previousPage') || '';
+                const query =
+                  previousPage === 'calendar'
+                    ? { dateTime: String(midnightDate.getTime()) }
+                    : {};
 
                 if (!task.completedAt && !initialTaskCompletedAt) {
                   updateIncompletedTask(task);
-                  toast.success('Successfully updated Task');
+
+                  if (
+                    initialTaskTitle !== task.title ||
+                    initialTaskDescription !== task.description ||
+                    initialTaskTodayAt !== task.todayAt ||
+                    initialTaskCompletedAt !== task.completedAt ||
+                    initialTaskCategory !== task.category ||
+                    initialTaskPriority !== task.priority
+                  ) {
+                    toast.success('Successfully updated Task', {
+                      duration: 3000,
+                    });
+                  }
+
+                  const url = qs.stringifyUrl(
+                    {
+                      url:
+                        previousPage === 'calendar'
+                          ? `${`${newRoute}/${previousPage}`}/incompleted`
+                          : `${`${newRoute}/${previousPage}`}`,
+                      query,
+                    },
+                    { skipNull: true },
+                  );
+
+                  router.push(url);
                 }
                 if (task.completedAt && initialTaskCompletedAt) {
                   updateCompletedTask(task);
-                  toast.success('Successfully updated Task');
+
+                  if (
+                    initialTaskTitle !== task.title ||
+                    initialTaskDescription !== task.description ||
+                    initialTaskTodayAt !== task.todayAt ||
+                    initialTaskCompletedAt !== task.completedAt ||
+                    initialTaskCategory !== task.category ||
+                    initialTaskPriority !== task.priority
+                  ) {
+                    toast.success('Successfully updated Task', {
+                      duration: 3000,
+                    });
+                  }
+
+                  const url = qs.stringifyUrl(
+                    {
+                      url:
+                        previousPage === 'calendar'
+                          ? `${`${newRoute}/${previousPage}`}/completed`
+                          : `${`${newRoute}/${previousPage}`}`,
+                      query,
+                    },
+                    { skipNull: true },
+                  );
+
+                  router.push(url);
                 }
 
                 if (!task.completedAt && initialTaskCompletedAt) {
                   addIncompletedTask(task);
                   removeCompletedTask(task.id);
+
                   toast.success(
                     'Successfully editted & added into Incompleted',
+                    {
+                      duration: 3000,
+                    },
                   );
+
+                  const url = qs.stringifyUrl(
+                    {
+                      url:
+                        previousPage === 'calendar'
+                          ? `${`${newRoute}/${previousPage}`}/incompleted`
+                          : `${`${newRoute}/${previousPage}`}`,
+                      query,
+                    },
+                    { skipNull: true },
+                  );
+
+                  router.push(url);
                 }
                 if (task.completedAt && !initialTaskCompletedAt) {
                   addCompletedTask(task);
                   removeIncompletedTask(task.id);
-                  toast.success('Successfully editted & added into Completed');
+
+                  toast.success('Successfully editted & added into Completed', {
+                    duration: 3000,
+                  });
+
+                  newRoute = newRoute.replace('incompleted', 'completed');
+
+                  const url = qs.stringifyUrl(
+                    {
+                      url:
+                        previousPage === 'calendar'
+                          ? `${`${newRoute}/${previousPage}`}/completed`
+                          : `${`${newRoute}/${previousPage}`}`,
+                      query,
+                    },
+                    { skipNull: true },
+                  );
+
+                  router.push(url);
                 }
               }}
               className="w-fit cursor-pointer rounded-lg bg-black-light p-2 transition-colors hover:bg-gray-800"
@@ -1007,7 +1091,10 @@ const Task = ({ params }: TaskIdPageProps) => {
                   });
 
                   setPotentialComletedAt(new Date().getTime());
-                  toast.success('Added to Completed');
+
+                  toast('Added to Completed!', {
+                    icon: '👏',
+                  });
                 }}
                 className="group mr-6 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
               >
@@ -1023,7 +1110,11 @@ const Task = ({ params }: TaskIdPageProps) => {
                   });
 
                   setPotentialComletedAt(0);
-                  toast.success('Added to Incompleted');
+
+                  toast('Added to Incompleted!', {
+                    icon: '😒',
+                    duration: 3000,
+                  });
                 }}
                 className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mr-6 min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
               >

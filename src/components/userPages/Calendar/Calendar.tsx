@@ -175,12 +175,22 @@ const Calendar = () => {
     return 'text-white';
   };
 
-  const onClick = (id: number) => {
+  const onClick = (
+    id: number,
+    anyTasks: 'bg-white' | 'bg-red-700' | 'bg-green-400',
+  ) => {
+    let newRoute = window.location.href;
     const query = { dateTime: id };
+
+    if (anyTasks === 'bg-green-400') {
+      newRoute = newRoute.replace('incompleted', 'completed');
+    } else if (!newRoute.includes('incompleted')) {
+      newRoute = newRoute.replace('completed', 'incompleted');
+    }
 
     const url = qs.stringifyUrl(
       {
-        url: window.location.href,
+        url: newRoute,
         query,
       },
       { skipNull: true },
@@ -305,7 +315,10 @@ const Calendar = () => {
           <SwiperSlide
             key={id}
             onClick={() =>
-              onClick(new Date(date.year, date.month, date.day).getTime())
+              onClick(
+                new Date(date.year, date.month, date.day).getTime(),
+                date.anyTasks,
+              )
             }
             className="px-[10px]"
           >

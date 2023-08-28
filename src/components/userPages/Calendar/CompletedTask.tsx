@@ -1,8 +1,9 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 import { TaskType } from '@/types';
 
-import { useRouter } from 'next/navigation';
+import qs from 'query-string';
 
 interface CompletedTaskInterface {
   task: TaskType;
@@ -16,7 +17,19 @@ const CompletedTask: React.FC<CompletedTaskInterface> = ({
   const router = useRouter();
 
   const navigateToTask = () => {
-    router.push(`/tasks/${task.id}`);
+    const query = {
+      previousPage: 'calendar',
+    };
+
+    const url = qs.stringifyUrl(
+      {
+        url: `${window.location.origin}/tasks/${task.id}`,
+        query,
+      },
+      { skipNull: true },
+    );
+
+    router.push(url);
   };
 
   const getTimeString = (time: number) => String(time).padStart(2, '0');
