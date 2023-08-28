@@ -21,7 +21,7 @@ const Home = () => {
           <AvatarModal
             isOpen={isAvatarModal}
             onClose={() => setIsAvatarModal((prev) => !prev)}
-            imageUrl={'/images/home/demo_avatar.svg'}
+            imageUrl={'/images/home/kalts_daniil.jpg'}
           />
         )}
         <header className="mx-auto mt-6 flex max-w-4xl items-center justify-between">
@@ -42,8 +42,8 @@ const Home = () => {
             Index
           </h4>
           <Image
-            src="/images/home/demo_avatar.svg"
-            className="w-11 cursor-pointer min-[475px]:w-12"
+            src="/images/home/kalts_daniil.jpg"
+            className="w-11 cursor-pointer rounded-full min-[475px]:w-12"
             width={48}
             height={48}
             alt="Avatar"

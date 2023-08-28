@@ -790,15 +790,6 @@ const Task = ({ params }: TaskIdPageProps) => {
             });
 
             setIsOpen(false);
-
-            if (
-              task.category.label !== potentialCategory?.label ||
-              task.category.bgColor !== potentialCategory?.bgColor
-            ) {
-              toast.success('Successfully Eddited Category', {
-                duration: 3000,
-              });
-            }
           }}
           filled
         />
@@ -973,7 +964,8 @@ const Task = ({ params }: TaskIdPageProps) => {
                     initialTaskCategory !== task.category ||
                     initialTaskPriority !== task.priority
                   ) {
-                    toast.success('Successfully updated Task', {
+                    toast('Successfully updated Task', {
+                      icon: '🔥',
                       duration: 3000,
                     });
                   }
@@ -1002,7 +994,8 @@ const Task = ({ params }: TaskIdPageProps) => {
                     initialTaskCategory !== task.category ||
                     initialTaskPriority !== task.priority
                   ) {
-                    toast.success('Successfully updated Task', {
+                    toast('Successfully updated Task', {
+                      icon: '🔥',
                       duration: 3000,
                     });
                   }
@@ -1025,12 +1018,10 @@ const Task = ({ params }: TaskIdPageProps) => {
                   addIncompletedTask(task);
                   removeCompletedTask(task.id);
 
-                  toast.success(
-                    'Successfully editted & added into Incompleted',
-                    {
-                      duration: 3000,
-                    },
-                  );
+                  toast('Successfully editted & added into Incompleted', {
+                    icon: '🔥',
+                    duration: 3000,
+                  });
 
                   const url = qs.stringifyUrl(
                     {
@@ -1049,7 +1040,8 @@ const Task = ({ params }: TaskIdPageProps) => {
                   addCompletedTask(task);
                   removeIncompletedTask(task.id);
 
-                  toast.success('Successfully editted & added into Completed', {
+                  toast('Successfully editted & added into Completed', {
+                    icon: '🔥',
                     duration: 3000,
                   });
 

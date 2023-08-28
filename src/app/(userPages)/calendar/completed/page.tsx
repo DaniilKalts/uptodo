@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { useState, useEffect, CSSProperties } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import qs from 'query-string';
@@ -12,18 +12,11 @@ import useTasksStore from '@/store/useTasksStore';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { ClockLoader } from 'react-spinners';
 import { toast } from 'react-hot-toast';
 
 import CompletedTask from '@/components/userPages/Calendar/CompletedTask';
 
 import { Container, Select } from '@/components/UI';
-
-const override: CSSProperties = {
-  display: 'block',
-  margin: '0 auto',
-  marginTop: '40px',
-};
 
 const Completed = () => {
   const router = useRouter();
@@ -208,14 +201,9 @@ const Completed = () => {
     <Container>
       <div className="mx-auto flex flex-col items-center justify-center">
         {isLoading ? (
-          <ClockLoader
-            color={'#8875FF'}
-            loading={isLoading}
-            cssOverride={override}
-            size={125}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
+          <h1 className="mt-12 text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+            Loading...
+          </h1>
         ) : (
           <motion.main
             animate={{ opacity: 1, y: 0 }}
