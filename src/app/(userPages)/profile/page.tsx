@@ -147,7 +147,7 @@ const Profile = () => {
               Profile
             </h6>
             <Image
-              src="/images/home/kalts_daniil.jpg"
+              src="/images/home/kalts_daniil2.jpg"
               className="mb-4 rounded-full min-[475px]:w-32"
               width={96}
               height={96}

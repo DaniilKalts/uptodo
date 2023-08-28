@@ -99,7 +99,7 @@ const Incompleted = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 500);
   };
 
   const sortByTime = () => {
@@ -251,7 +251,7 @@ const Incompleted = () => {
             transition={{ duration: 0.25 }}
             className="mt-7 flex w-full max-w-[575px] flex-col items-center"
           >
-            {incompletedTasks.length ? (
+            {incompletedTasks.length && !isLoading ? (
               <>
                 <section className="w-full min-[525px]:w-11/12 min-[575px]:w-10/12">
                   <div className="flex flex-wrap items-center gap-6 min-[600px]:flex-nowrap">
@@ -297,6 +297,10 @@ const Incompleted = () => {
                               completedAt: new Date().getTime(),
                             });
                             toast.success('Added to Completed!');
+                          }}
+                          highligtTitleConfig={{
+                            searchWords: [],
+                            textToHighlight: task.title,
                           }}
                         />
                       </motion.div>

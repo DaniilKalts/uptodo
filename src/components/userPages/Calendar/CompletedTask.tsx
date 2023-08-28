@@ -3,22 +3,32 @@ import { useRouter } from 'next/navigation';
 
 import { TaskType } from '@/types';
 
+import Highlighter from 'react-highlight-words';
+
 import qs from 'query-string';
 
 interface CompletedTaskInterface {
   task: TaskType;
   onIncomplete: () => void;
+  highligtTitleConfig: {
+    searchWords: string[];
+    textToHighlight: string;
+  };
 }
 
 const CompletedTask: React.FC<CompletedTaskInterface> = ({
   task,
   onIncomplete,
+  highligtTitleConfig,
 }) => {
   const router = useRouter();
 
   const navigateToTask = () => {
+    const input = window.location.pathname;
+    const previousPage = input.match(/\/([^/]+)/)![1] || '';
+
     const query = {
-      previousPage: 'calendar',
+      previousPage,
     };
 
     const url = qs.stringifyUrl(
@@ -50,9 +60,12 @@ const CompletedTask: React.FC<CompletedTaskInterface> = ({
           <div className="h-[6px] w-[6px] rounded-full bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
         </div>
         <div>
-          <h6 className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl">
-            {task.title}
-          </h6>
+          <Highlighter
+            className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl"
+            searchWords={highligtTitleConfig.searchWords}
+            autoEscape={true}
+            textToHighlight={highligtTitleConfig.textToHighlight}
+          />
           <p className="text-sm text-gray-200 min-[475px]:text-base">
             Completed At:{' '}
             {`${getTimeString(

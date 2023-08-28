@@ -3,7 +3,7 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 import qs from 'query-string';
@@ -18,6 +18,8 @@ export default function RootLayout({
 }) {
   const router = useRouter();
   const currentPathName = usePathname();
+
+  const [mounted, setMounted] = useState(false);
 
   const onClick = (route: 'incompleted' | 'completed') => {
     let newRoute = window.location.href;
@@ -41,8 +43,14 @@ export default function RootLayout({
     router.push(url);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setMounted(true);
+    }, 200);
+  }, []);
+
   return (
-    <div className="pb-40 md:pb-44">
+    <div className={`${!mounted ? 'invisible opacity-0' : ''} pb-40 md:pb-44`}>
       <header className="mx-auto mb-4 mt-8 flex items-center justify-center">
         <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
           Calendar

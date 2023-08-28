@@ -1,9 +1,11 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
+import { TaskType } from '@/types';
+
 import qs from 'query-string';
 
-import { TaskType } from '@/types';
+import Highlighter from 'react-highlight-words';
 
 import {
   DesignIcon,
@@ -21,18 +23,26 @@ interface IncompletedTaskInterface {
   task: TaskType;
   deadlineStatus: 'late' | 'present' | 'future';
   onComplete: () => void;
+  highligtTitleConfig: {
+    searchWords: string[];
+    textToHighlight: string;
+  };
 }
 
 const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
   task,
   deadlineStatus,
   onComplete,
+  highligtTitleConfig,
 }) => {
   const router = useRouter();
 
   const navigateToTask = () => {
+    const input = window.location.pathname;
+    const previousPage = input.match(/\/([^/]+)/)![1] || '';
+
     const query = {
-      previousPage: 'calendar',
+      previousPage,
     };
 
     const url = qs.stringifyUrl(
@@ -46,7 +56,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
     router.push(url);
   };
 
-  const { title, todayAt, category, priority } = task;
+  const { todayAt, category, priority } = task;
 
   const getTimeString = (time: number) => String(time).padStart(2, '0');
 
@@ -141,9 +151,12 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         <div className="h-[6px] w-[6px] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 min-[475px]:h-2 min-[475px]:w-2"></div>
       </div>
       <div>
-        <h6 className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl">
-          {title}
-        </h6>
+        <Highlighter
+          className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl"
+          searchWords={highligtTitleConfig.searchWords}
+          autoEscape={true}
+          textToHighlight={highligtTitleConfig.textToHighlight}
+        />
         <p className={`text-sm ${getTodayAtColor()} min-[475px]:text-base`}>
           Today At:{' '}
           {`${getTimeString(

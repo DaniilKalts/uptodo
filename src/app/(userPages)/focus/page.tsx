@@ -38,7 +38,7 @@ const override: CSSProperties = {
 };
 
 const Focus = () => {
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
   const [isChooseTimeModal, setIsChooseTimeModal] = useState<boolean>(false);
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
 
@@ -51,7 +51,7 @@ const Focus = () => {
   });
 
   useEffect(() => {
-    setIsMounted(true);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -150,7 +150,7 @@ const Focus = () => {
                   theme="gray"
                 />
               </div>
-              {isMounted ? (
+              {mounted ? (
                 <FocusChart chartConfig={chartConfig} />
               ) : (
                 <PuffLoader
