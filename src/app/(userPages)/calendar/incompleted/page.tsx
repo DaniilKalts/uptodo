@@ -239,11 +239,7 @@ const Incompleted = () => {
   return (
     <Container>
       <div className="mx-auto flex flex-col items-center justify-center">
-        {isLoading ? (
-          <h1 className="mt-12 text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
-            Loading...
-          </h1>
-        ) : (
+        {isLoading ? null : (
           <motion.main
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 15 }}

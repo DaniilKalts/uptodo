@@ -12,7 +12,7 @@ const override: CSSProperties = {
   marginTop: '28px',
 };
 
-const Loading = () => {
+export default function Loading() {
   const isMobileDevice = useMediaQuery({ maxWidth: 475 });
 
   return (
@@ -26,6 +26,4 @@ const Loading = () => {
       />
     </div>
   );
-};
-
-export default Loading;
+}

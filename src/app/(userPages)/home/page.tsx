@@ -4,18 +4,14 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 import useTasksStore from '@/store/useTasksStore';
 import { TaskType } from '@/types';
 
 import { useDebounce } from '@/hooks/useDebounce';
 
-import qs from 'query-string';
-
 import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion';
-// import Highlighter from 'react-highlight-words';
 
 import IncompletedTask from '@/components/userPages/Calendar/IncompletedTask';
 import CompletedTask from '@/components/userPages/Calendar/CompletedTask';
@@ -24,9 +20,6 @@ import AvatarModal from '@/components/UI/Modals/AvatarModal';
 import { Container } from '@/components/UI';
 
 const Home = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
   const [isAvatarModal, setIsAvatarModal] = useState<boolean>(false);
   const showAvatar = () => {
     setIsAvatarModal((prev) => !prev);
@@ -34,9 +27,7 @@ const Home = () => {
 
   const [mounted, setMounted] = useState(false);
 
-  const [taskTitle, setTaskTitle] = useState<string>(
-    searchParams.get('taskTitle') || '',
-  );
+  const [taskTitle, setTaskTitle] = useState<string>('');
   const debouncedValue = useDebounce<string>(taskTitle, 500);
 
   const storeIncompletedTasks = useTasksStore(
@@ -78,28 +69,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const query = {
-      taskTitle: debouncedValue,
-    };
-
-    const url = qs.stringifyUrl(
-      {
-        url: window.location.href,
-        query,
-      },
-      { skipNull: true, skipEmptyString: true },
-    );
-
-    router.push(url);
-  }, [debouncedValue, router]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setMounted(true);
-    }, 0);
-  }, []);
-
-  useEffect(() => {
     const sortedTasks = storeIncompletedTasks.filter((task) => {
       const taskMidnightDate = new Date(task.todayAt);
       taskMidnightDate.setHours(0, 0, 0, 0);
@@ -107,13 +76,11 @@ const Home = () => {
       const todayMidnightDate = new Date();
       todayMidnightDate.setHours(0, 0, 0, 0);
 
-      // const searchTaskTitle = searchParams.get('taskTitle') || '';
-
       return taskMidnightDate.getTime() === todayMidnightDate.getTime();
     });
 
     setIncompletedTasks(sortedTasks);
-  }, [storeIncompletedTasks, searchParams]);
+  }, [storeIncompletedTasks]);
 
   useEffect(() => {
     const sortedTasks = storeCompletedTasks.filter((task) => {
@@ -123,22 +90,77 @@ const Home = () => {
       const todayMidnightDate = new Date();
       todayMidnightDate.setHours(0, 0, 0, 0);
 
-      // const searchTaskTitle = searchParams.get('taskTitle') || '';
-
       return taskMidnightDate.getTime() === todayMidnightDate.getTime();
     });
 
     setCompletedTasks(sortedTasks);
-  }, [storeCompletedTasks, searchParams]);
+  }, [storeCompletedTasks]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMounted(true);
+    }, 1000);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="pb-36 min-[475px]:pb-40">
+        <Container>
+          {isAvatarModal && (
+            <AvatarModal
+              isOpen={isAvatarModal}
+              onClose={() => setIsAvatarModal((prev) => !prev)}
+              imageUrl={'/images/home/kalts_daniil2.jpg'}
+            />
+          )}
+          <header className="mx-auto mt-6 flex max-w-4xl items-center justify-between">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-gray-dark dark:text-white-pale"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                fill="currentColor"
+                d="M21 7.75H3c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h18c.41 0 .75.34.75.75s-.34.75-.75.75ZM18 12.75H6c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h12c.41 0 .75.34.75.75s-.34.75-.75.75ZM14 17.75h-4c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75Z"
+              />
+            </svg>
+            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+              Index
+            </h4>
+            <Image
+              src="/images/home/kalts_daniil2.jpg"
+              className="h-11 w-11 cursor-pointer rounded-full min-[475px]:h-14 min-[475px]:w-14"
+              width={48}
+              height={48}
+              alt="Avatar"
+              onClick={showAvatar}
+            />
+          </header>
+          <main className="mt-8 flex flex-col items-center justify-center min-[475px]:mt-12 lg:mt-20">
+            <Image
+              src="/images/home/banner.svg"
+              width={250}
+              height={250}
+              className="min-[475px]:w-80"
+              alt="Banner"
+            />
+            <h6 className="mb-2 text-center text-[1.35rem] text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+              What do you want to do today?
+            </h6>
+            <p className="text-center text-[1.1rem] text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+              Tap + to add your tasks
+            </p>
+          </main>
+        </Container>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className={
-        !incompletedTasks.length && !completedTasks.length
-          ? 'pb-48'
-          : 'pb-36 min-[475px]:pb-40'
-      }
-    >
+    <div className="pb-36 min-[475px]:pb-40">
       <Container>
         {isAvatarModal && (
           <AvatarModal
@@ -173,9 +195,8 @@ const Home = () => {
             onClick={showAvatar}
           />
         </header>
-        {mounted &&
-        (storeIncompletedTasks.length || storeCompletedTasks.length) ? (
-          <main className="mx-auto mt-8 max-w-md min-[475px]:mt-12 lg:mt-20">
+        {incompletedTasks.length || completedTasks.length ? (
+          <main className="mx-auto mt-8 max-w-md min-[475px]:mt-12">
             <div className="relative mb-6">
               <svg
                 className="absolute left-7 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 transform"
@@ -237,9 +258,7 @@ const Home = () => {
                       toast.success('Added to Completed!');
                     }}
                     highligtTitleConfig={{
-                      searchWords: searchParams.get('taskTitle')
-                        ? searchParams.get('taskTitle')!.split(' ')
-                        : [],
+                      searchWords: debouncedValue.split(' '),
                       textToHighlight: task.title,
                     }}
                   />
@@ -273,9 +292,7 @@ const Home = () => {
                       toast.success('Added to Incompleted!');
                     }}
                     highligtTitleConfig={{
-                      searchWords: searchParams.get('taskTitle')
-                        ? searchParams.get('taskTitle')!.split(' ')
-                        : [],
+                      searchWords: debouncedValue.split(' '),
                       textToHighlight: task.title,
                     }}
                   />
@@ -304,15 +321,6 @@ const Home = () => {
             </p>
           </main>
         )}
-        {/* <Highlighter
-          searchWords={
-            searchParams.get('taskTitle')
-              ? searchParams.get('taskTitle')!.split(' ')
-              : []
-          }
-          autoEscape={true}
-          textToHighlight="Watch Kungdu Panda 4"
-        /> */}
       </Container>
     </div>
   );

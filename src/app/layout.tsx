@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { Lato } from 'next/font/google';
 
 import ToasterProvider from '@/providers/ToasterProvider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -23,10 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={`${lato.className} bg-white-pale dark:bg-black-pre`}>
-        <ToasterProvider />
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ToasterProvider />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
