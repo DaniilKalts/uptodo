@@ -13,7 +13,7 @@ const CalendarSkeleton = () => (
           </div>
           <div className="rounded-40 h-5 w-5 bg-gray-200 dark:bg-gray-700"></div>
         </div>
-        <div className="mt-5 grid grid-cols-4 gap-5 px-3 min-[360px]:grid-cols-5 min-[475px]:grid-cols-6 min-[575px]:grid-cols-7">
+        <div className="mt-5 grid grid-cols-4 gap-5 px-3 min-[340px]:grid-cols-5 min-[425px]:grid-cols-6 min-[525px]:grid-cols-7">
           {[1, 2, 3, 4, 5, 6, 7].map((n) => (
             <div
               key={n}

@@ -215,7 +215,11 @@ const Profile = () => {
               <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
                 Uptodo
               </h5>
-              <ProfileLink text="About US" link="profile" svg={AboutUsIcon} />
+              <ProfileLink
+                text="About US"
+                link="profile/about"
+                svg={AboutUsIcon}
+              />
               <ProfileLink text="FAQ" link="profile" svg={FaqIcon} />
               <ProfileLink
                 text="Help & Feedback"
