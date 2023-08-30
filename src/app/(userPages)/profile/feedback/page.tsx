@@ -33,8 +33,7 @@ const schema = yup.object().shape({
   message: yup
     .string()
     .required('Message is required')
-    .min(10, 'Message must be at least 10 characters long')
-    .max(800, 'Message must not exceed 800 characters'),
+    .min(10, 'Message must be at least 10 characters long'),
 });
 
 const Feedback = () => {
