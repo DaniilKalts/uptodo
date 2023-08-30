@@ -13,6 +13,7 @@ interface ButtonProps {
   isLoading?: boolean;
   outline?: 'gray' | 'purple';
   filled?: boolean;
+  iconReversed?: boolean;
   upperCase?: boolean;
   small?: boolean;
   icon?: IconType;
@@ -25,6 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   isLoading,
   outline,
   filled,
+  iconReversed,
   upperCase,
   small,
   icon: Icon,
@@ -68,8 +70,11 @@ const Button: React.FC<ButtonProps> = ({
       }
       ${outline ? outlineStyles() : ''}
       ${disabled && filled ? 'hover:bg-purple' : ''}
-      ${isLoading ? 'bg-purple opacity-70 ring-0 hover:bg-purple' : ''}
+      ${
+        isLoading && filled ? 'bg-purple opacity-70 ring-0 hover:bg-purple' : ''
+      }
       ${upperCase ? 'uppercase' : ''}
+      ${iconReversed ? 'flex-row-reverse' : ''}
       overflow-hidden
       whitespace-nowrap
       rounded-md
@@ -80,8 +85,8 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled || isLoading}
       onClick={onClick}
     >
-      {Icon && disabled && <Spinner />}
-      {Icon && !disabled && <Icon size={24} />}
+      {Icon && isLoading && <Spinner />}
+      {Icon && !isLoading && <Icon size={24} />}
       {isLoading ? 'Please wait...' : label}
     </button>
   );

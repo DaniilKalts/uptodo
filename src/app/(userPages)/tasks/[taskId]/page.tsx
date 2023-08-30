@@ -1018,7 +1018,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   addIncompletedTask(task);
                   removeCompletedTask(task.id);
 
-                  toast('Successfully editted & added into Incompleted', {
+                  toast('Successfully editted', {
                     icon: '🔥',
                     duration: 3000,
                   });
@@ -1040,7 +1040,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   addCompletedTask(task);
                   removeIncompletedTask(task.id);
 
-                  toast('Successfully editted & added into Completed', {
+                  toast('Successfully editted', {
                     icon: '🔥',
                     duration: 3000,
                   });
@@ -1088,7 +1088,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                     icon: '👏',
                   });
                 }}
-                className="group mr-6 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
+                className="group mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
               >
                 <div className="h-[6px] w-[2] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 min-[475px]:h-2 min-[475px]:w-2"></div>
               </div>
@@ -1108,7 +1108,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                     duration: 3000,
                   });
                 }}
-                className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mr-6 min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
+                className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
               >
                 <div className="h-[6px] w-2 rounded-full bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
               </div>
