@@ -11,6 +11,7 @@ interface InputProps {
   register: UseFormRegister<any>;
   label?: string;
   small?: boolean;
+  rows?: number;
   ghost?: boolean;
   errors: FieldErrors;
   errorMessage: string;
@@ -23,6 +24,7 @@ const Textarea: React.FC<InputProps> = ({
   register,
   label,
   small,
+  rows,
   ghost,
   errors,
   errorMessage,
@@ -51,7 +53,6 @@ const Textarea: React.FC<InputProps> = ({
       px-4
       py-[10px]
       text-base
-      ${value.length ? ' tracking-[0.35rem]' : ''}
       rounded-lg 
       border
       border-gray-300
@@ -86,6 +87,7 @@ const Textarea: React.FC<InputProps> = ({
         placeholder={placeholder}
         className={inputStyles()}
         autoComplete="off"
+        rows={rows}
         {...register(id, { required: 'You have to fill this field!' })}
       />
       {errors[id] && <p className="mt-1 text-red">{errorMessage}</p>}

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 'use client';
 
 import { useEffect } from 'react';
@@ -15,8 +17,7 @@ export default function Error({ error }: { error: Error }) {
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-6 pb-20 min-[475px]:pb-24">
       <h2 className="w-4/5 text-center text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
-        Something went wrong &#128532; <br />
-        We are working on this error!
+        Something went wrong &#128532;
       </h2>
       <div className="max-w-xs">
         <Button
