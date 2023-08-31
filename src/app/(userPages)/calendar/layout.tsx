@@ -12,7 +12,7 @@ import Calendar from '@/components/userPages/Calendar/Calendar';
 import CalendarSkeleton from '@/components/userPages/Calendar/CalendarSkeleton';
 import { Container, Button } from '@/components/UI';
 
-export default function RootLayout({
+export default function CalendarLayout({
   children,
 }: {
   children: React.ReactNode;

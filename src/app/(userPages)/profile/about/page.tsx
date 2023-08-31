@@ -13,7 +13,7 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 
 const About = () => (
   <Container>
-    <div className="mx-auto mt-14 max-w-3xl pb-40 min-[475px]:pb-44">
+    <div className="mx-auto mt-10 max-w-3xl pb-40 min-[475px]:mt-14 min-[475px]:pb-44">
       <h1 className="mb-6 bg-gradient-to-r from-purple-200 to-purple-700 bg-clip-text text-center text-4xl font-bold text-transparent">
         UpTodo Service
       </h1>
@@ -24,7 +24,7 @@ const About = () => (
             width={226}
             height={226}
             alt="Management"
-            className="mt-6 min-[475px]:w-56 md:w-48"
+            className="mt-2 min-[475px]:mt-6 min-[475px]:w-56 md:w-48"
             priority
           />
           <h5 className="text-2xl font-bold text-purple-light">

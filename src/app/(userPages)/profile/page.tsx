@@ -220,7 +220,7 @@ const Profile = () => {
                 link="profile/about"
                 svg={AboutUsIcon}
               />
-              <ProfileLink text="FAQ" link="profile" svg={FaqIcon} />
+              <ProfileLink text="FAQ" link="profile/faq" svg={FaqIcon} />
               <ProfileLink
                 text="Help & Feedback"
                 link="profile/feedback"

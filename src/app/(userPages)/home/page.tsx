@@ -69,29 +69,33 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const sortedTasks = storeIncompletedTasks.filter((task) => {
-      const taskMidnightDate = new Date(task.todayAt);
-      taskMidnightDate.setHours(0, 0, 0, 0);
+    const sortedTasks = storeIncompletedTasks
+      .filter((task) => {
+        const taskMidnightDate = new Date(task.todayAt);
+        taskMidnightDate.setHours(0, 0, 0, 0);
 
-      const todayMidnightDate = new Date();
-      todayMidnightDate.setHours(0, 0, 0, 0);
+        const todayMidnightDate = new Date();
+        todayMidnightDate.setHours(0, 0, 0, 0);
 
-      return taskMidnightDate.getTime() === todayMidnightDate.getTime();
-    });
+        return taskMidnightDate.getTime() === todayMidnightDate.getTime();
+      })
+      .sort((taskA, taskB) => taskA.todayAt - taskB.todayAt);
 
     setIncompletedTasks(sortedTasks);
   }, [storeIncompletedTasks]);
 
   useEffect(() => {
-    const sortedTasks = storeCompletedTasks.filter((task) => {
-      const taskMidnightDate = new Date(task.todayAt);
-      taskMidnightDate.setHours(0, 0, 0, 0);
+    const sortedTasks = storeCompletedTasks
+      .filter((task) => {
+        const taskMidnightDate = new Date(task.todayAt);
+        taskMidnightDate.setHours(0, 0, 0, 0);
 
-      const todayMidnightDate = new Date();
-      todayMidnightDate.setHours(0, 0, 0, 0);
+        const todayMidnightDate = new Date();
+        todayMidnightDate.setHours(0, 0, 0, 0);
 
-      return taskMidnightDate.getTime() === todayMidnightDate.getTime();
-    });
+        return taskMidnightDate.getTime() === todayMidnightDate.getTime();
+      })
+      .sort((taskA, taskB) => taskA.todayAt - taskB.todayAt);
 
     setCompletedTasks(sortedTasks);
   }, [storeCompletedTasks]);

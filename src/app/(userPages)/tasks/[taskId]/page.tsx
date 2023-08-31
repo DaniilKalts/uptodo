@@ -865,11 +865,27 @@ const Task = ({ params }: TaskIdPageProps) => {
           onClick={() => {
             if (!task.completedAt) {
               removeIncompletedTask(task.id);
-              router.back();
+
+              toast('Successfully Deleted', {
+                icon: '❌',
+                duration: 2000,
+              });
+
+              setTimeout(() => {
+                router.back();
+              }, 2000);
             }
             if (task.completedAt) {
               removeCompletedTask(task.id);
-              router.back();
+
+              toast('Successfully Deleted', {
+                icon: '❌',
+                duration: 2000,
+              });
+
+              setTimeout(() => {
+                router.back();
+              }, 2000);
             }
           }}
           filled
@@ -902,6 +918,30 @@ const Task = ({ params }: TaskIdPageProps) => {
                 setPotentialComletedAt(initialTaskCompletedAt);
                 setSelectedDate(new Date(initialTaskTodayAt));
                 setPotentialDate(new Date(initialTaskTodayAt));
+
+                if (new Date(initialTaskTodayAt).getHours() > 11) {
+                  setTimeOption('PM');
+                  setPotentialTimeOption('PM');
+                  setPotentialMinutes(
+                    (new Date(initialTaskTodayAt).getHours() - 12 || 12) * 60 +
+                      new Date(initialTaskTodayAt).getMinutes(),
+                  );
+                  setSelectedMinutes(
+                    (new Date(initialTaskTodayAt).getHours() - 12 || 12) * 60 +
+                      new Date(initialTaskTodayAt).getMinutes(),
+                  );
+                } else if (new Date(initialTaskTodayAt).getHours() < 12) {
+                  setTimeOption('AM');
+                  setPotentialTimeOption('AM');
+                  setPotentialMinutes(
+                    (new Date(initialTaskTodayAt).getHours() || 12) * 60 +
+                      new Date(initialTaskTodayAt).getMinutes(),
+                  );
+                  setSelectedMinutes(
+                    new Date(initialTaskTodayAt).getHours() * 60 +
+                      new Date(initialTaskTodayAt).getMinutes(),
+                  );
+                }
 
                 setCustomValue('taskTitle', initialTaskTitle);
                 setCustomValue('taskDescription', initialTaskDescription);
@@ -966,7 +1006,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   ) {
                     toast('Successfully updated Task', {
                       icon: '🔥',
-                      duration: 3000,
+                      duration: 2000,
                     });
                   }
 
@@ -981,7 +1021,9 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  router.push(url);
+                  setTimeout(() => {
+                    router.push(url);
+                  }, 2000);
                 }
                 if (task.completedAt && initialTaskCompletedAt) {
                   updateCompletedTask(task);
@@ -996,7 +1038,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   ) {
                     toast('Successfully updated Task', {
                       icon: '🔥',
-                      duration: 3000,
+                      duration: 2000,
                     });
                   }
 
@@ -1011,7 +1053,9 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  router.push(url);
+                  setTimeout(() => {
+                    router.push(url);
+                  }, 2000);
                 }
 
                 if (!task.completedAt && initialTaskCompletedAt) {
@@ -1020,7 +1064,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
                   toast('Successfully editted', {
                     icon: '🔥',
-                    duration: 3000,
+                    duration: 2000,
                   });
 
                   const url = qs.stringifyUrl(
@@ -1034,7 +1078,9 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  router.push(url);
+                  setTimeout(() => {
+                    router.push(url);
+                  }, 2000);
                 }
                 if (task.completedAt && !initialTaskCompletedAt) {
                   addCompletedTask(task);
@@ -1042,7 +1088,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
                   toast('Successfully editted', {
                     icon: '🔥',
-                    duration: 3000,
+                    duration: 2000,
                   });
 
                   newRoute = newRoute.replace('incompleted', 'completed');
@@ -1058,7 +1104,9 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  router.push(url);
+                  setTimeout(() => {
+                    router.push(url);
+                  }, 2000);
                 }
               }}
               className="w-fit cursor-pointer rounded-lg bg-black-light p-2 transition-colors hover:bg-gray-800"
@@ -1105,7 +1153,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
                   toast('Added to Incompleted!', {
                     icon: '😒',
-                    duration: 3000,
+                    duration: 2000,
                   });
                 }}
                 className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
