@@ -47,7 +47,7 @@ const CompletedTask: React.FC<CompletedTaskInterface> = ({
   return (
     <div
       onClick={navigateToTask}
-      className="relative flex cursor-pointer items-center justify-between gap-4 rounded-md bg-gray-700 p-4 hover:bg-gray-600"
+      className="relative flex cursor-pointer items-center justify-between gap-4 rounded-md bg-gray-600 p-4 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600"
     >
       <div className="flex items-center gap-4">
         <div

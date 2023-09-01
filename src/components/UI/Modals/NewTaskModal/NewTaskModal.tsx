@@ -3,7 +3,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { CategoryIconType, CategoryType, TaskType } from '@/types';
@@ -226,6 +226,27 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     return 'text-white-pale hover:text-purple';
   };
 
+  useEffect(() => {
+    if (new Date().getHours() > 11) {
+      setTimeOption('PM');
+      setPotentialTimeOption('PM');
+      setPotentialMinutes(
+        (new Date().getHours() - 12 || 12) * 60 + new Date().getMinutes(),
+      );
+      setSelectedMinutes(
+        (new Date().getHours() - 12 || 12) * 60 + new Date().getMinutes(),
+      );
+    } else if (new Date().getHours() < 12) {
+      setTimeOption('AM');
+      setPotentialTimeOption('AM');
+      setPotentialMinutes(
+        (new Date().getHours() || 12) * 60 + new Date().getMinutes(),
+      );
+      setSelectedMinutes(new Date().getHours() * 60 + new Date().getMinutes());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   let bodyContent = (
     <form
       className="w-screen max-w-md rounded-t-xl bg-gray-700 px-8 py-8 pb-5"
@@ -430,19 +451,19 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
           <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
             Sun
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Mon
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Tue
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Wed
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Thu
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Fri
           </div>
           <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
@@ -553,7 +574,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
           </p>
           {hoursSwiper}
         </div>
-        <p className="text-3xl text-gray-dark dark:text-white-pale">:</p>
+        <p className="text-3xl text-white-pale">:</p>
         <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
           <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
             Minutes

@@ -11,7 +11,7 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 
 const Faq = () => (
   <Container>
-    <section className="mx-auto max-w-screen-xl pb-28 pt-10 min-[475px]:pb-36 min-[475px]:pt-14">
+    <section className="mx-auto max-w-screen-xl pb-28 pt-10 min-[475px]:pb-44 min-[475px]:pt-14">
       <h2 className="mb-2 bg-gradient-to-r from-purple-200 to-purple-700 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent min-[475px]:mb-8">
         Frequently asked questions
       </h2>
@@ -28,7 +28,7 @@ const Faq = () => (
       <div className="grid border-t border-gray-200 pt-8 text-left dark:border-gray-700 md:grid-cols-2 md:gap-16">
         <div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-900 dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -51,7 +51,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-900 dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -74,7 +74,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-900 dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -95,8 +95,8 @@ const Faq = () => (
               collaborate on tasks with external parties.
             </p>
           </div>
-          <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-900 dark:text-white min-[475px]:text-2xl">
+          <div>
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -119,7 +119,7 @@ const Faq = () => (
         </div>
         <div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-900 dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -142,7 +142,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-900 dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -165,7 +165,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-900 dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"

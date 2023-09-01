@@ -37,12 +37,12 @@ const Textarea: React.FC<InputProps> = ({
         py-[10px]
         focus-within:px-4
         rounded-lg 
-        border       
+        border
         text-white-pale
         placeholder-gray-200
         shadow-sm
         min-[475px]:py-3
-        min-[475px]:text-${small ? 'lg' : 'xl'} 
+        min-[475px]:text-${small ? 'lg' : 'xl'}
         bg-transparent
         h-48
         resize-none

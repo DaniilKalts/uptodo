@@ -38,7 +38,7 @@ const Input: React.FC<InputProps> = ({
         focus-within:px-4
         ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
         rounded-lg 
-        border       
+        border     
         text-white-pale
         placeholder-gray-200
         shadow-sm
@@ -56,7 +56,7 @@ const Input: React.FC<InputProps> = ({
       rounded-lg 
       border
       border-gray-300
-      text-black-light 
+      text-gray-dark
       placeholder-gray-200
       shadow-sm 
       dark:bg-black-light
@@ -73,7 +73,7 @@ const Input: React.FC<InputProps> = ({
           className={`
           mb-2
           text-lg
-          text-gray-dark 
+          text-gray-dark
           dark:text-white-pale
           min-[475px]:text-xl
         `}

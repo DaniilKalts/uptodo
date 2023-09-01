@@ -58,31 +58,31 @@ const About = () => (
           </h5>
         </div>
       </div>
-      <div className="mb-12 grid border-t border-gray-200 pt-8">
-        <h2 className="mb-6 text-xl font-bold text-white min-[475px]:text-3xl">
+      <div className="mb-6 grid border-t border-gray-200 pt-8">
+        <h2 className="mb-6 text-xl font-bold text-gray-dark dark:text-white min-[475px]:text-3xl">
           Our Vision:
         </h2>
-        <p className="mb-4 text-sm font-medium text-white-pale min-[475px]:text-lg">
+        <p className="mb-4 text-sm font-medium text-gray-500 dark:text-white-pale min-[475px]:text-lg">
           At UpTodo, people typically join to effortlessly manage tasks. Our
           platform offers simplified task organization, setting deadlines, and
           tracking progress. Just like sharing a slice of pizza, we start by
           introducing you to the basics.
         </p>
-        <p className="mb-4 text-sm font-medium text-white-pale min-[475px]:text-lg">
+        <p className="mb-4 text-sm font-medium text-gray-500 dark:text-white-pale min-[475px]:text-lg">
           However, UpTodo means more than task management. It's a venture that
           fuels our passion, motivating us to wake up each day with excitement
           to keep pushing forward.
         </p>
-        <p className="mb-4 text-sm font-medium text-white-pale min-[475px]:text-lg">
+        <p className="mb-2 text-sm font-medium text-gray-500 dark:text-white-pale min-[475px]:text-lg">
           What's our drive? Let us reveal that to you.
         </p>
       </div>
       <div>
-        <h2 className="mb-6 text-xl font-bold text-white min-[475px]:text-3xl">
+        <h2 className="mb-6 text-xl font-bold text-gray-dark dark:text-white min-[475px]:text-3xl">
           Unleash Your Potential with UpTodo!
         </h2>
         <div className="grid gap-8 sm:grid-cols-2">
-          <div className="rounded-2xl bg-black-light p-5 min-[475px]:p-7">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
             <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
               Empower Task Mastery
             </h3>
@@ -92,7 +92,7 @@ const About = () => (
               achievement.
             </p>
           </div>
-          <div className="rounded-2xl bg-black-light p-5 min-[475px]:p-7">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
             <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
               Boost Your Efficiency
             </h3>
@@ -102,7 +102,7 @@ const About = () => (
               igniting a drive for success.
             </p>
           </div>
-          <div className="rounded-2xl bg-black-light p-5 min-[475px]:p-7">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
             <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
               Fuel Creative Spark
             </h3>
@@ -112,7 +112,7 @@ const About = () => (
               thinking and originality.
             </p>
           </div>
-          <div className="rounded-2xl bg-black-light p-5 min-[475px]:p-7">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
             <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
               Partner in Success
             </h3>

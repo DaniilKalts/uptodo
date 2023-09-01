@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { TaskType } from '@/types';
@@ -227,7 +227,7 @@ const Calendar = () => {
   }, [daysInRange, searchParams]);
 
   return (
-    <section className="mx-auto max-w-xl bg-gray-700 py-3">
+    <section className="mx-auto max-w-xl bg-gray-500 py-3 dark:bg-gray-700">
       <div className="flex items-center justify-between px-6">
         <svg
           className="h-6 w-6 cursor-pointer text-white-pale hover:text-white"
@@ -244,14 +244,12 @@ const Calendar = () => {
           />
         </svg>
         <div className="flex flex-col items-center">
-          <h4 className="text-lg text-gray-dark dark:text-white-pale">
+          <h4 className="text-lg text-white-pale">
             {new Date(2020, currentMonth)
               .toLocaleString('en-US', { month: 'long' })
               .toUpperCase()}
           </h4>
-          <p className="text-base text-gray-dark dark:text-gray-200">
-            {currentYear}
-          </p>
+          <p className="text-base text-gray-200">{currentYear}</p>
         </div>
         <svg
           className="h-6 w-6 cursor-pointer text-white-pale hover:text-white"

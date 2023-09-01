@@ -157,12 +157,12 @@ const Profile = () => {
               Kalts Daniil
             </h5>
             <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
-              <div className="w-2/4 rounded-md border border-gray-700 bg-gray-700 px-6 py-4">
+              <div className="w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 dark:border-gray-700 dark:bg-gray-700">
                 <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
                   {incompletedCount} Task left
                 </p>
               </div>
-              <div className="w-2/4 rounded-md border border-gray-700 bg-gray-700 px-6 py-4">
+              <div className="w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 dark:border-gray-700 dark:bg-gray-700">
                 <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
                   {completedCount} Task done
                 </p>

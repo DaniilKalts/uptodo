@@ -230,7 +230,7 @@ const Completed = () => {
                     </div>
                   </div>
                 </section>
-                <span className="mt-7 h-[3px] w-full bg-white-pale min-[525px]:w-11/12 min-[575px]:w-10/12"></span>
+                <span className="mt-7 h-[3px] w-full bg-gray-dark dark:bg-white-pale min-[525px]:w-11/12 min-[575px]:w-10/12"></span>
                 <section className="mt-7 flex w-full flex-col justify-center gap-6 min-[525px]:w-11/12 min-[575px]:w-10/12">
                   <AnimatePresence>
                     {completedTasks?.map((task) => (

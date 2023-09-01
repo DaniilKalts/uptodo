@@ -23,7 +23,7 @@ const Select: React.FC<SelectInterface> = ({
 
   const hoverClass = () => {
     if (theme === 'gray') {
-      return 'hover:bg-gray-500';
+      return 'hover:bg-gray-light dark:hover:bg-gray-500';
     }
     return 'hover:bg-purple-light';
   };
@@ -69,7 +69,7 @@ const Select: React.FC<SelectInterface> = ({
           items-center 
           justify-between 
           rounded-lg 
-          ${theme === 'gray' ? 'bg-gray-600' : 'bg-purple'}
+          ${theme === 'gray' ? 'bg-gray-500 dark:bg-gray-600' : 'bg-purple'}
           px-4 
           py-2.5 
           text-center 
@@ -105,7 +105,7 @@ const Select: React.FC<SelectInterface> = ({
         z-40 
         w-full 
         rounded-lg 
-        ${theme === 'gray' ? 'bg-gray-700' : 'bg-purple-light'}
+        ${theme === 'gray' ? 'bg-gray-600 dark:bg-gray-700' : 'bg-purple-light'}
         shadow`}
       >
         <ul className="rounded-lg text-sm">
@@ -117,7 +117,11 @@ const Select: React.FC<SelectInterface> = ({
                 inline-flex 
                 w-full 
                 cursor-pointer
-                ${theme === 'gray' ? 'bg-gray-600' : 'bg-purple'} 
+                ${
+                  theme === 'gray'
+                    ? 'bg-gray-500 dark:bg-gray-600'
+                    : 'bg-purple'
+                } 
                 px-4 
                 py-2 
                 text-base

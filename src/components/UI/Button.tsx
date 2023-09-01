@@ -33,7 +33,9 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const outlineStyles = () => {
     if (outline === 'gray') {
-      return 'bg-transparent text-white-pale outline outline-2 outline-gray-300 focus:ring-4 focus:ring-gray-300 dark:text-white';
+      return `bg-transparent ${
+        Icon ? 'text-gray-dark' : 'text-white-pale'
+      } outline outline-2 outline-gray-300 focus:ring-4 focus:ring-gray-300 dark:text-white`;
     }
     if (outline === 'purple') {
       return 'bg-transparent text-gray-dark outline outline-2 outline-purple-light focus:ring-4 focus:ring-purple-light dark:text-white';

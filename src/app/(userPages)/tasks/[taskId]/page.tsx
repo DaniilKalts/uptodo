@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { TaskType } from '@/types';
@@ -501,14 +501,14 @@ const Task = ({ params }: TaskIdPageProps) => {
             />
           </svg>
           <div className="flex flex-col items-center">
-            <h4 className="text-lg text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+            <h4 className="text-lg text-white-pale min-[475px]:text-xl">
               {selectedDate
                 .toLocaleString('en-GB', {
                   month: 'long',
                 })
                 .toUpperCase()}
             </h4>
-            <p className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-base">
+            <p className="text-sm text-gray-200 min-[475px]:text-base">
               {selectedDate.toLocaleString('en-GB', {
                 year: 'numeric',
               })}
@@ -534,19 +534,19 @@ const Task = ({ params }: TaskIdPageProps) => {
           <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
             Sun
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Mon
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Tue
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Wed
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Thu
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-gray-dark dark:text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
             Fri
           </div>
           <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
@@ -657,7 +657,7 @@ const Task = ({ params }: TaskIdPageProps) => {
           </p>
           {hoursSwiper}
         </div>
-        <p className="text-3xl text-gray-dark dark:text-white-pale">:</p>
+        <p className="text-3xl text-white-pale">:</p>
         <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
           <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
             Minutes
@@ -852,7 +852,7 @@ const Task = ({ params }: TaskIdPageProps) => {
     modalTitle = 'Delete Task';
 
     bodyContent = (
-      <h2 className="my-7 text-center text-[18px] text-white-pale min-[475px]:text-[20px]">
+      <h2 className="my-7 text-center text-[18px] text-gray-dark dark:text-white-pale min-[475px]:text-[20px]">
         Are You sure you want to delete this task? <br /> Task title :{' '}
         {task.title}
       </h2>
@@ -947,7 +947,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                 setCustomValue('taskDescription', initialTaskDescription);
                 setCustomValue('taskDate', new Date(initialTaskTodayAt));
               }}
-              className="w-fit cursor-pointer rounded-lg bg-black-light p-2 transition-colors hover:bg-gray-800"
+              className="w-fit cursor-pointer rounded-lg bg-gray-500 p-2 transition-colors hover:bg-gray-light dark:bg-black-light dark:hover:bg-gray-800"
             >
               <svg
                 className="h-7 w-7 text-white-pale"
@@ -975,7 +975,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                 />
               </svg>
             </div>
-            <div className="absolute left-0 top-[44px] z-10 inline-block rounded-lg bg-black-light px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm group-hover:opacity-100">
+            <div className="absolute left-0 top-[44px] z-10 inline-block rounded-lg bg-gray-dark px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm group-hover:opacity-100 dark:bg-black-light">
               Recover initial data
             </div>
           </div>
@@ -1109,11 +1109,11 @@ const Task = ({ params }: TaskIdPageProps) => {
                   }, 2000);
                 }
               }}
-              className="w-fit cursor-pointer rounded-lg bg-black-light p-2 transition-colors hover:bg-gray-800"
+              className="w-fit cursor-pointer rounded-lg bg-gray-500 p-2 transition-colors hover:bg-gray-light dark:bg-black-light dark:hover:bg-gray-800"
             >
               <RxCross2 className="h-7 w-7 text-white-pale" />
             </div>
-            <div className="absolute right-0 top-[44px] z-10 inline-block rounded-lg bg-black-light px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm group-hover:opacity-100">
+            <div className="absolute right-0 top-[44px] z-10 inline-block rounded-lg bg-gray-dark px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm group-hover:opacity-100 dark:bg-black-light">
               Back to previous page & Save changes
             </div>
           </div>
@@ -1136,9 +1136,9 @@ const Task = ({ params }: TaskIdPageProps) => {
                     icon: '👏',
                   });
                 }}
-                className="group mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
+                className="group mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
               >
-                <div className="h-[6px] w-[2] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 min-[475px]:h-2 min-[475px]:w-2"></div>
+                <div className="h-[6px] w-[2] rounded-full bg-gray-dark opacity-0 group-hover:opacity-100 dark:bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
               </div>
             ) : (
               <div
@@ -1156,14 +1156,14 @@ const Task = ({ params }: TaskIdPageProps) => {
                     duration: 2000,
                   });
                 }}
-                className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
+                className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
               >
-                <div className="h-[6px] w-2 rounded-full bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
+                <div className="h-[6px] w-2 rounded-full bg-gray-dark dark:bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
               </div>
             )}
             <div className="w-full">
               <div className="flex items-center justify-between">
-                <h6 className="text-lg text-white-pale min-[475px]:text-2xl">
+                <h6 className="text-lg text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
                   {task.title}
                 </h6>
                 <div className="group relative">
@@ -1172,7 +1172,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                       setStep(STEPS.TITLE_DESCRIPTION);
                       setIsOpen(true);
                     }}
-                    className="h-14 w-14 cursor-pointer text-white-pale"
+                    className="h-14 w-14 cursor-pointer text-gray-dark dark:text-white-pale"
                     width="48"
                     height="48"
                     viewBox="0 0 48 48"
@@ -1192,12 +1192,12 @@ const Task = ({ params }: TaskIdPageProps) => {
                       fill="currentColor"
                     />
                   </svg>
-                  <div className="absolute right-0 top-[44px] z-10 inline-block rounded-lg bg-black-light px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm group-hover:opacity-100">
+                  <div className="absolute right-0 top-[44px] z-10 inline-block rounded-lg bg-gray-dark px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm group-hover:opacity-100 dark:bg-black-light">
                     Edit Title & Description
                   </div>
                 </div>
               </div>
-              <p className="max-w-lg text-base text-gray-200 min-[475px]:text-lg">
+              <p className="max-w-lg text-base text-gray-600 dark:text-gray-200 min-[475px]:text-lg">
                 {lines?.map((line, index) => (
                   <React.Fragment key={index}>
                     {line}
@@ -1214,7 +1214,7 @@ const Task = ({ params }: TaskIdPageProps) => {
               <div className="flex gap-3">
                 <ClockIcon
                   onClick={() => {}}
-                  customClasses={'text-white-pale w-7 h-7'}
+                  customClasses={'text-gray-dark dark:text-white-pale w-7 h-7'}
                 />
                 <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
                   Task Time :
@@ -1225,7 +1225,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   setStep(STEPS.DATE);
                   setIsOpen(true);
                 }}
-                className="cursor-pointer rounded-lg bg-gray-600 px-4 py-3 text-sm text-white hover:bg-gray-500 min-[475px]:px-6 min-[475px]:py-4 min-[475px]:text-base"
+                className="cursor-pointer rounded-lg bg-gray-500 px-4 py-3 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[475px]:px-6 min-[475px]:py-4 min-[475px]:text-base"
               >
                 Today At:{' '}
                 {`${getTimeString(
@@ -1239,7 +1239,7 @@ const Task = ({ params }: TaskIdPageProps) => {
               <div className="flex gap-3">
                 <TagIcon
                   onClick={() => {}}
-                  customClasses={'text-white-pale w-7 h-7'}
+                  customClasses={'text-gray-dark dark:text-white-pale w-7 h-7'}
                 />
                 <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
                   Task Category :
@@ -1250,7 +1250,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   setStep(STEPS.CATEGORY);
                   setIsOpen(true);
                 }}
-                className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-600 px-4 py-2 text-sm text-white hover:bg-gray-500 min-[475px]:px-6 min-[475px]:text-base"
+                className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-500 px-4 py-2 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[475px]:px-6 min-[475px]:text-base"
               >
                 {getCategoryIcon(
                   task.category.label,
@@ -1263,7 +1263,7 @@ const Task = ({ params }: TaskIdPageProps) => {
               <div className="flex gap-3">
                 <FlagIcon
                   onClick={() => {}}
-                  customClasses={'text-white-pale w-7 h-7'}
+                  customClasses={'text-gray-dark dark:text-white-pale w-7 h-7'}
                 />
                 <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
                   Task Prioroty :
@@ -1274,7 +1274,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   setStep(STEPS.PRIORITY);
                   setIsOpen(true);
                 }}
-                className="cursor-pointer rounded-lg bg-gray-600 px-4 py-3 text-sm text-white hover:bg-gray-500 min-[475px]:px-6 min-[475px]:text-base"
+                className="cursor-pointer rounded-lg bg-gray-500 px-4 py-3 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[475px]:px-6 min-[475px]:text-base"
               >
                 {getPriorityLabel(task.priority)}
               </div>

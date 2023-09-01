@@ -87,7 +87,7 @@ const TimerModal: React.FC<TimerModalInterface> = ({
             </p>
             {minutesSwiper}
           </div>
-          <p className="text-3xl text-gray-dark dark:text-white-pale">:</p>
+          <p className="text-3xl text-white-pale">:</p>
           <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
             <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
               Seconds

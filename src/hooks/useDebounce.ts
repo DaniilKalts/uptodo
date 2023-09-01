@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // eslint-disable-next-line import/prefer-default-export
 export function useDebounce<T>(value: T, delay?: number): T {

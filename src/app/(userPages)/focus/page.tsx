@@ -107,7 +107,7 @@ const Focus = () => {
   }, [stats]);
 
   return (
-    <div className="pb-36 md:pb-40">
+    <div className="pb-36">
       <Container>
         {isChooseTimeModal && (
           <TimerModal
