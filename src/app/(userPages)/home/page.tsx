@@ -303,7 +303,7 @@ const Home = () => {
                 </motion.div>
               ))
             ) : (
-              <h1 className="mb-6 text-base text-gray-dark dark:text-white-pale min-[475px]:text-lg">
+              <h1 className="mb-4 text-base text-gray-dark dark:text-white-pale min-[475px]:text-lg">
                 There is no completed tasks yet. &#128517;
               </h1>
             )}

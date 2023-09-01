@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/indent */
 
 'use client';
@@ -168,17 +169,26 @@ const Profile = () => {
                 </p>
               </div>
             </div>
-            {(storeIncompletedTasks.length || storeCompletedTasks.length) &&
-            mounted ? (
-              <div className="mt-7 flex w-full max-w-[375px] justify-center">
+
+            <div className="mt-7 flex w-full max-w-[375px] justify-center">
+              {(storeIncompletedTasks.length || storeCompletedTasks.length) &&
+              mounted ? (
                 <Button
                   label="Export tasks to Excel File"
                   icon={SiMicrosoftexcel}
                   onClick={exportExcelFile}
                   outline="gray"
                 />
-              </div>
-            ) : null}
+              ) : (
+                <Button
+                  label="Export tasks to Excel File"
+                  icon={SiMicrosoftexcel}
+                  onClick={() => {}}
+                  outline="gray"
+                  disabled
+                />
+              )}
+            </div>
           </header>
           <main className="mt-4 flex w-full max-w-lg flex-col justify-start">
             <section className="mt-5">
