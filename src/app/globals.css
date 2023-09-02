@@ -87,3 +87,8 @@ textarea::-webkit-scrollbar-thumb {
 .swiper-button-prev {
   display: none !important;
 }
+
+/* Custom CheckBox */
+input[type='checkbox'] {
+  accent-color: #8875ff;
+}

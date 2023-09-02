@@ -25,7 +25,7 @@ const Home = () => {
     setIsAvatarModal((prev) => !prev);
   };
 
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const [taskTitle, setTaskTitle] = useState<string>('');
   const debouncedValue = useDebounce<string>(taskTitle, 500);
@@ -235,7 +235,7 @@ const Home = () => {
             <hr className="my-4 h-[2px] w-full rounded border-0 bg-gray-dark" />
             <div
               className={
-                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg bg-gray-600 px-4 py-2.5 text-center text-base font-medium text-white-pale min-[475px]:text-lg'
+                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[475px]:text-lg'
               }
             >
               Incompleted Tasks:
@@ -270,12 +270,12 @@ const Home = () => {
               ))
             ) : (
               <h1 className="mb-6 text-base text-gray-dark dark:text-white-pale min-[475px]:text-lg">
-                You have no incompleted tasks for this day! &#128517;
+                You have no incompleted tasks for this day! &#128079;
               </h1>
             )}
             <div
               className={
-                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg bg-gray-600 px-4 py-2.5 text-center text-base font-medium text-white-pale min-[475px]:text-lg'
+                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[475px]:text-lg'
               }
             >
               Completed Tasks:

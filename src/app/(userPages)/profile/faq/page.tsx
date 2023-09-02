@@ -12,7 +12,7 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 const Faq = () => (
   <Container>
     <section className="mx-auto max-w-screen-xl pb-28 pt-10 min-[475px]:pb-44 min-[475px]:pt-14">
-      <h2 className="mb-2 bg-gradient-to-r from-purple-200 to-purple-700 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent min-[475px]:mb-8">
+      <h2 className="mb-2 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent min-[475px]:mb-8">
         Frequently asked questions
       </h2>
       <div className="mb-8 flex justify-center min-[475px]:hidden">

@@ -987,7 +987,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
                 let newRoute = window.location.origin;
 
-                const previousPage = searchParams.get('previousPage') || '';
+                const previousPage = searchParams.get('previousPage') || 'home';
                 const query =
                   previousPage === 'calendar'
                     ? { dateTime: String(midnightDate.getTime()) }

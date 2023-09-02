@@ -47,7 +47,7 @@ const Settings = () => {
               </h5>
               <ProfileLink
                 text="Change app typography"
-                link="/profile"
+                link="/profile/settings/typography"
                 svg={AppTypographyIcon}
               />
               <ProfileLink

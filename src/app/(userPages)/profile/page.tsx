@@ -30,7 +30,7 @@ import {
 import { Button } from '@/components/UI';
 
 const Profile = () => {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const storeIncompletedTasks = useTasksStore(
     (state) => state.incompletedTasks,

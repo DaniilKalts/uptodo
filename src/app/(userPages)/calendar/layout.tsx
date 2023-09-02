@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import qs from 'query-string';
 
 import Calendar from '@/components/userPages/Calendar/Calendar';
-import CalendarSkeleton from '@/components/userPages/Calendar/CalendarSkeleton';
+import CalendarSkeleton from '@/components/UI/Loadings/CalendarSkeleton';
 import { Container, Button } from '@/components/UI';
 
 export default function CalendarLayout({
@@ -20,7 +20,7 @@ export default function CalendarLayout({
   const router = useRouter();
   const currentPathName = usePathname();
 
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const onClick = (route: 'incompleted' | 'completed') => {
     let newRoute = window.location.href;

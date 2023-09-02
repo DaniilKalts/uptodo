@@ -139,7 +139,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
   return (
     <div
       onClick={navigateToTask}
-      className="relative flex cursor-pointer flex-wrap items-center gap-4 rounded-md bg-gray-500 p-4 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600"
+      className="relative flex cursor-pointer flex-wrap items-center gap-4 rounded-md bg-gray-light p-4 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600"
     >
       <div
         className="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:h-6 min-[475px]:w-6"

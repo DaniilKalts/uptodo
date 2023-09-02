@@ -14,11 +14,11 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 const About = () => (
   <Container>
     <div className="mx-auto mt-10 max-w-3xl pb-40 min-[475px]:mt-14 min-[475px]:pb-44">
-      <h1 className="mb-6 bg-gradient-to-r from-purple-200 to-purple-700 bg-clip-text text-center text-4xl font-bold text-transparent">
+      <h1 className="mb-6 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent">
         UpTodo Service
       </h1>
       <div className="grid-col mb-8 grid grid-cols-1 items-baseline gap-14 min-[575px]:grid-cols-2 min-[850px]:grid-cols-3 min-[850px]:gap-8">
-        <div className="flex flex-col gap-6 max-[575px]:items-center">
+        <div className="flex flex-col items-center gap-6 max-[575px]:items-center">
           <Image
             src={step1}
             width={226}
@@ -27,11 +27,11 @@ const About = () => (
             className="mt-2 min-[475px]:mt-6 min-[475px]:w-56 md:w-48"
             priority
           />
-          <h5 className="text-2xl font-bold text-purple-light">
+          <h5 className="text-[22px] font-bold text-purple-light">
             Manage your tasks
           </h5>
         </div>
-        <div className="flex flex-col gap-6 max-[850px]:items-center max-[575px]:hidden">
+        <div className="flex flex-col items-center gap-6 max-[850px]:items-center max-[575px]:hidden">
           <Image
             src={step2}
             width={226}
@@ -40,11 +40,11 @@ const About = () => (
             className="mt-6 min-[475px]:w-56 md:w-52"
             priority
           />
-          <h5 className="text-2xl font-bold text-purple-light">
+          <h5 className="text-center text-[22px] font-bold text-purple-light">
             Create daily routine
           </h5>
         </div>
-        <div className="flex flex-col gap-6 max-[850px]:hidden">
+        <div className="flex flex-col items-center gap-6 max-[850px]:hidden">
           <Image
             src={step3}
             width={226}
@@ -53,7 +53,7 @@ const About = () => (
             className="mt-6 min-[475px]:w-56 md:w-52"
             priority
           />
-          <h5 className="text-2xl font-bold text-purple-light">
+          <h5 className="text-[22px] font-bold text-purple-light">
             Orgonaize your tasks
           </h5>
         </div>
@@ -83,7 +83,7 @@ const About = () => (
         </h2>
         <div className="grid gap-8 sm:grid-cols-2">
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
+            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
               Empower Task Mastery
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
@@ -93,7 +93,7 @@ const About = () => (
             </p>
           </div>
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
+            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
               Boost Your Efficiency
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
@@ -103,7 +103,7 @@ const About = () => (
             </p>
           </div>
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
+            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
               Fuel Creative Spark
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
@@ -113,7 +113,7 @@ const About = () => (
             </p>
           </div>
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-2xl">
+            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
               Partner in Success
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
