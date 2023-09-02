@@ -852,7 +852,7 @@ const Task = ({ params }: TaskIdPageProps) => {
     modalTitle = 'Delete Task';
 
     bodyContent = (
-      <h2 className="my-7 text-center text-[18px] text-gray-dark dark:text-white-pale min-[475px]:text-[20px]">
+      <h2 className="my-7 text-center text-[18px] text-white-pale min-[475px]:text-[20px]">
         Are You sure you want to delete this task? <br /> Task title :{' '}
         {task.title}
       </h2>

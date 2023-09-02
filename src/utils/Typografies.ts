@@ -1,18 +1,18 @@
 /* eslint-disable import/prefer-default-export */
 import {
-  Kanit,
+  Patrick_Hand,
   Ubuntu,
   Lato,
   Nunito,
-  Montserrat,
-  Raleway,
+  Ysabeau_Office,
+  Caveat_Brush,
   Josefin_Sans,
   Inconsolata,
 } from 'next/font/google';
 
-const kanit = Kanit({
+const patrickHand = Patrick_Hand({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['400'],
 });
 
 const ubuntu = Ubuntu({
@@ -30,14 +30,14 @@ const nunito = Nunito({
   weight: ['400', '500', '700'],
 });
 
-const montserrat = Montserrat({
+const ysabeauOffice = Ysabeau_Office({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
 });
 
-const raleway = Raleway({
+const caveatBrush = Caveat_Brush({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['400'],
 });
 
 const josefinSans = Josefin_Sans({
@@ -52,8 +52,8 @@ const inconsolata = Inconsolata({
 
 export const typographyDemos = [
   {
-    name: 'kanit',
-    styleName: kanit.className,
+    name: 'patrickHand',
+    styleName: patrickHand.className,
   },
   {
     name: 'ubuntu',
@@ -68,12 +68,12 @@ export const typographyDemos = [
     styleName: nunito.className,
   },
   {
-    name: 'montserrat',
-    styleName: montserrat.className,
+    name: 'ysabeauOffice',
+    styleName: ysabeauOffice.className,
   },
   {
     name: 'raleway',
-    styleName: raleway.className,
+    styleName: caveatBrush.className,
   },
   {
     name: 'josefinSans',

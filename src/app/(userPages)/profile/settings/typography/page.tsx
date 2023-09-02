@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -47,6 +49,10 @@ const Settings = () => {
                   <div
                     key={name}
                     className="group flex w-full cursor-pointer items-center justify-between gap-4 py-3"
+                    onClick={() => {
+                      changeTypographyName(name);
+                      location.reload();
+                    }}
                   >
                     <div className="flex items-center gap-3">
                       {AppTypographyIcon}
@@ -60,7 +66,6 @@ const Settings = () => {
                       id={name}
                       type="checkbox"
                       className="h-[22px] w-[22px] cursor-pointer"
-                      onChange={() => changeTypographyName(name)}
                       checked={typographyName === name}
                     />
                   </div>

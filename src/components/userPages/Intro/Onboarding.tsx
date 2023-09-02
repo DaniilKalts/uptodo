@@ -1,10 +1,18 @@
-import React from 'react';
-
+import React, { useCallback } from 'react';
+import { Lato } from 'next/font/google';
 import Image from 'next/image';
+
+import { typographyDemos } from '@/utils/Typografies';
 
 import { motion } from 'framer-motion';
 
 import Container from '@/components/UI/Container';
+import { useTypography } from '@/hooks/useTypography';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['300', '400', '700'],
+});
 
 interface OnboardingProps {
   step: number;
@@ -23,6 +31,15 @@ const Onboarding: React.FC<OnboardingProps> = ({
   text,
   footer,
 }) => {
+  const { typographyName } = useTypography();
+
+  const getTypographyFont = useCallback(
+    () =>
+      typographyDemos.find((demo) => demo.name === typographyName)?.styleName ||
+      lato.className,
+    [typographyName],
+  );
+
   const imageSize = () => {
     switch (step) {
       case 1:
@@ -38,7 +55,9 @@ const Onboarding: React.FC<OnboardingProps> = ({
 
   return (
     <Container>
-      <div className="relative flex min-h-screen flex-col items-center justify-center py-10">
+      <div
+        className={`${getTypographyFont()} relative flex min-h-screen flex-col items-center justify-center py-10`}
+      >
         {header}
         <motion.div
           animate={{ opacity: 1, x: 0 }}

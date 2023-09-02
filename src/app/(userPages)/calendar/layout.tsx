@@ -47,7 +47,7 @@ export default function CalendarLayout({
   useEffect(() => {
     setTimeout(() => {
       setMounted(true);
-    }, 1000);
+    }, 700);
   }, []);
 
   return (
