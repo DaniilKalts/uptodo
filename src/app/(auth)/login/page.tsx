@@ -1,12 +1,9 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Lato } from 'next/font/google';
-
-import { useTypography } from '@/hooks/useTypography';
-import { typographyDemos } from '@/utils/Typografies';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -25,11 +22,6 @@ interface LoginInputs extends FieldValues {
   userName: string;
   password: string;
 }
-
-const lato = Lato({
-  subsets: ['latin'],
-  weight: ['300', '400', '700'],
-});
 
 const schema = yup.object().shape({
   userName: yup
@@ -126,20 +118,9 @@ const Login = () => {
     }
   };
 
-  const { typographyName } = useTypography();
-
-  const getTypographyFont = useCallback(
-    () =>
-      typographyDemos.find((demo) => demo.name === typographyName)?.styleName ||
-      lato.className,
-    [typographyName],
-  );
-
   return (
     <Container>
-      <div
-        className={`${getTypographyFont()} relative mx-auto flex min-h-screen w-full max-w-[425px] flex-col justify-center pb-12 pt-24 md:py-10`}
-      >
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[425px] flex-col justify-center pb-12 pt-24 md:py-10">
         <header className="absolute left-0 top-8 md:hidden">
           <MdArrowBackIosNew
             className="cursor-pointer text-2xl text-white transition hover:text-white-darker"
