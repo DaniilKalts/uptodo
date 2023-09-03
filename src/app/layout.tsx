@@ -3,12 +3,12 @@ import './globals.css';
 import React from 'react';
 
 import { Metadata } from 'next';
-import { Inconsolata } from 'next/font/google';
+import { Lato } from 'next/font/google';
 
 import ToasterProvider from '@/providers/ToasterProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 
-const inconsolata = Inconsolata({
+const lato = Lato({
   subsets: ['latin'],
   weight: ['300', '400', '700'],
 });
@@ -25,9 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inconsolata.className} bg-white-pale dark:bg-black-pre`}
-      >
+      <body className={`${lato.className} bg-white-pale dark:bg-black-pre`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <ToasterProvider />
           {children}

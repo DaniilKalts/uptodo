@@ -73,8 +73,7 @@ const Textarea: React.FC<InputProps> = ({
           className={`
           mb-2
           text-lg
-          text-gray-dark 
-          dark:text-white-pale
+          text-white-pale
           min-[475px]:text-xl
         `}
         >

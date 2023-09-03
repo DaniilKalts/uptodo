@@ -53,6 +53,7 @@ const Settings = () => {
                     type="checkbox"
                     className="h-[22px] w-[22px] cursor-pointer"
                     checked={typographyName === name}
+                    onChange={() => {}}
                   />
                 </div>
               ))}

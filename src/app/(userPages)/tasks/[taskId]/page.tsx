@@ -98,6 +98,36 @@ const Task = ({ params }: TaskIdPageProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<TaskEditInputs>({
+    mode: 'all',
+    defaultValues: {
+      taskTitle: '',
+      taskDescription: '',
+      taskDate: new Date(),
+    },
+    resolver: yupResolver(schema) as unknown as Resolver<
+      TaskEditInputs,
+      ResolverOptions<TaskEditInputs>
+    >,
+  });
+
+  const taskTitle = watch('taskTitle');
+  const taskDescription = watch('taskDescription');
+  const taskDate = watch('taskDate');
+
+  const setCustomValue = (id: string, value: TaskPropsValue) => {
+    setValue(id, value, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
   const [task, setTask] = useState<TaskType | undefined>();
 
   const [initialTaskTitle, setInitialTaskTitle] = useState<string>('');
@@ -132,36 +162,6 @@ const Task = ({ params }: TaskIdPageProps) => {
   const updateCompletedTask = useTasksStore(
     (state) => state.updateCompletedTask,
   );
-
-  const {
-    register,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<TaskEditInputs>({
-    mode: 'all',
-    defaultValues: {
-      taskTitle: '',
-      taskDescription: '',
-      taskDate: new Date(),
-    },
-    resolver: yupResolver(schema) as unknown as Resolver<
-      TaskEditInputs,
-      ResolverOptions<TaskEditInputs>
-    >,
-  });
-
-  const taskTitle = watch('taskTitle');
-  const taskDescription = watch('taskDescription');
-  const taskDate = watch('taskDate');
-
-  const setCustomValue = (id: string, value: TaskPropsValue) => {
-    setValue(id, value, {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    });
-  };
 
   const [step, setStep] = useState<number | null>(null);
 

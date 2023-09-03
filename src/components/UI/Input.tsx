@@ -73,9 +73,12 @@ const Input: React.FC<InputProps> = ({
           className={`
           mb-2
           text-lg
-          text-gray-dark
-          dark:text-white-pale
-          min-[475px]:text-xl
+          text-white-pale
+          ${
+            type === 'password'
+              ? 'min-[475px]:text-[17px]'
+              : 'min-[475px]:text-xl'
+          }
         `}
         >
           {label}

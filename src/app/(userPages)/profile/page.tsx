@@ -4,17 +4,27 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-
 import Image from 'next/image';
-
-import { SiMicrosoftexcel } from 'react-icons/si';
-
-import ExcelJS from 'exceljs';
 
 import useTasksStore from '@/store/useTasksStore';
 
-import Container from '@/components/UI/Container';
+import { SiMicrosoftexcel } from 'react-icons/si';
+import ExcelJS from 'exceljs';
+import { toast } from 'react-hot-toast';
+
+import {
+  FieldValues,
+  Resolver,
+  ResolverOptions,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
 import ProfileLink from '@/components/userPages/Profile/ProfileTypography';
+import Modal from '@/components/UI/Modals/Modal';
 
 import {
   SettingsIcon,
@@ -27,10 +37,123 @@ import {
   SupportIcon,
   LogOutIcon,
 } from '@/components/userPages/Profile/Icons/Profile';
-import { Button } from '@/components/UI';
+import { Container, Button, Input } from '@/components/UI';
+
+interface AccountChangeInputs extends FieldValues {
+  accountName: string;
+  accountOldPassword: string;
+  accountNewPassword: string;
+}
+
+let oldPassword = 'Danya17!';
+
+const schema = yup.object().shape({
+  accountName: yup
+    .string()
+    .required('Username is required')
+    .min(3, 'Username must be at least 3 characters long')
+    .max(20, 'Username must not exceed 20 characters')
+    .matches(
+      /^[a-zA-Z0-9_]+$/,
+      'Username can only contain alphanumeric characters and underscores',
+    ),
+  accountOldPassword: yup
+    .string()
+    .required('Old password is required')
+    .min(8, 'Old password must be at least 8 characters long')
+    .max(20, 'Old password must not exceed 20 characters')
+    .test(
+      'matches-specific-string',
+      'This password does not match the old one',
+      (value) => value === oldPassword,
+    ),
+  accountNewPassword: yup
+    .string()
+    .required('New password is required')
+    .min(8, 'New password must be at least 8 characters long')
+    .max(20, 'New password must not exceed 20 characters')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      'New password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character',
+    ),
+});
+
+enum STEPS {
+  ACCOUNT_NAME = 1,
+  ACCOUNT_PASSWORD = 2,
+}
+
+type TaskPropsValue =
+  | null
+  | string
+  | number
+  | Date
+  | {
+      bgColor: string;
+      label: string;
+    };
 
 const Profile = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<AccountChangeInputs>({
+    mode: 'all',
+    defaultValues: {
+      accountName: 'KaltsDaniil',
+      accountOldPassword: '',
+      accountNewPassword: '',
+    },
+    resolver: yupResolver(schema) as unknown as Resolver<
+      AccountChangeInputs,
+      ResolverOptions<AccountChangeInputs>
+    >,
+  });
+
+  const accountName = watch('accountName');
+  const accountOldPassword = watch('accountOldPassword');
+  const accountNewPassword = watch('accountNewPassword');
+
+  const [initialAccountName, setInitialAccountName] =
+    useState<string>('KaltsDaniil');
+
+  const setCustomValue = (id: string, value: TaskPropsValue) => {
+    setValue(id, value, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  };
+
   const [mounted, setMounted] = useState<boolean>(false);
+  const [step, setStep] = useState<number | null>(null);
+
+  const [isOpen, setIsOpen] = useState(false);
+  let modalTitle: string = '';
+  let bodyContent = null;
+  let footerContent = null;
+
+  const onSubmit: SubmitHandler<FieldValues> = (_, event) => {
+    event?.preventDefault();
+
+    if (accountOldPassword.length && accountNewPassword.length) {
+      oldPassword = accountNewPassword;
+
+      toast('The account password is changed', {
+        icon: '🔑',
+        duration: 3000,
+      });
+
+      setCustomValue('accountOldPassword', '');
+      setCustomValue('accountNewPassword', '');
+
+      setStep(null);
+      setIsOpen(false);
+    }
+  };
 
   const storeIncompletedTasks = useTasksStore(
     (state) => state.incompletedTasks,
@@ -139,6 +262,108 @@ const Profile = () => {
     setCompletedCount(storeCompletedTasks.length);
   }, [storeCompletedTasks]);
 
+  if (step === STEPS.ACCOUNT_NAME) {
+    modalTitle = 'Change account name';
+
+    bodyContent = (
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="mt-6 w-full max-w-sm"
+      >
+        <Input
+          id="accountName"
+          type="text"
+          value={accountName}
+          placeholder="Enter your Username"
+          register={register}
+          small
+          ghost
+          errors={errors}
+          errorMessage={errors.accountName?.message as string}
+        />
+      </form>
+    );
+    footerContent = (
+      <footer className="mt-2 flex w-full items-center justify-between min-[475px]:gap-8">
+        <Button
+          label="Cancel"
+          onClick={() => {
+            setCustomValue('accountName', initialAccountName);
+
+            setStep(null);
+            setIsOpen(false);
+          }}
+        />
+        <Button
+          label="Edit"
+          onClick={() => {
+            if (accountName !== initialAccountName) {
+              toast.success('The account name is changed');
+            }
+
+            setInitialAccountName(accountName);
+            setStep(null);
+            setIsOpen(false);
+          }}
+          disabled={!!errors.accountName?.message}
+          filled
+        />
+      </footer>
+    );
+  }
+
+  if (step === STEPS.ACCOUNT_PASSWORD) {
+    modalTitle = 'Change account Password';
+
+    bodyContent = (
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 w-full max-w-sm">
+        <Input
+          id="accountOldPassword"
+          type="password"
+          value={accountOldPassword}
+          placeholder="Old Password"
+          register={register}
+          label="Enter old password"
+          small
+          ghost
+          errors={errors}
+          errorMessage={errors.accountOldPassword?.message as string}
+        />
+        <Input
+          id="accountNewPassword"
+          type="password"
+          value={accountNewPassword}
+          placeholder="New password"
+          register={register}
+          label="Enter new password"
+          small
+          ghost
+          errors={errors}
+          errorMessage={errors.accountNewPassword?.message as string}
+        />
+        <footer className="mt-8 flex w-full items-center justify-between min-[475px]:gap-8">
+          <Button
+            label="Cancel"
+            onClick={() => {
+              setCustomValue('accountOldPassword', '');
+              setCustomValue('accountNewPassword', '');
+
+              setStep(null);
+              setIsOpen(false);
+            }}
+          />
+          <Button
+            label="Edit"
+            onClick={onSubmit}
+            disabled={!!Object.keys(errors).length}
+            filled
+          />
+        </footer>
+      </form>
+    );
+    footerContent = <></>;
+  }
+
   return (
     <div className="pb-36 md:pb-40">
       <Container>
@@ -155,7 +380,7 @@ const Profile = () => {
               alt="Avatar"
             />
             <h5 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
-              Kalts Daniil
+              {initialAccountName}
             </h5>
             <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
               <div className="w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 dark:border-gray-700 dark:bg-gray-700">
@@ -207,12 +432,18 @@ const Profile = () => {
               </h5>
               <ProfileLink
                 text="Change account name"
-                link="profile"
+                onClick={() => {
+                  setStep(STEPS.ACCOUNT_NAME);
+                  setIsOpen(true);
+                }}
                 svg={ProfileNameIcon}
               />
               <ProfileLink
                 text="Change account password"
-                link="profile"
+                onClick={() => {
+                  setStep(STEPS.ACCOUNT_PASSWORD);
+                  setIsOpen(true);
+                }}
                 svg={ProfilePasswordIcon}
               />
               <ProfileLink
@@ -241,6 +472,15 @@ const Profile = () => {
             </section>
           </main>
         </div>
+        <Modal
+          title={modalTitle}
+          isOpen={isOpen}
+          body={bodyContent}
+          footer={footerContent}
+          onClose={() => setIsOpen(false)}
+          bgType="dark"
+          motionConfig={null}
+        />
       </Container>
     </div>
   );
