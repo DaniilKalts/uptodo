@@ -295,6 +295,7 @@ const Profile = () => {
           }}
         />
         <Button
+          type="submit"
           label="Edit"
           onClick={() => {
             if (accountName !== initialAccountName) {
@@ -353,6 +354,7 @@ const Profile = () => {
             }}
           />
           <Button
+            type="submit"
             label="Edit"
             onClick={onSubmit}
             disabled={!!Object.keys(errors).length}

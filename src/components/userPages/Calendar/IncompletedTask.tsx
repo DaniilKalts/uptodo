@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import { TaskType } from '@/types';
+import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
 
@@ -157,7 +158,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
           autoEscape={true}
           textToHighlight={highligtTitleConfig.textToHighlight}
         />
-        <p className={`text-sm ${getTodayAtColor()} min-[475px]:text-base`}>
+        <p className={cn('text-sm min-[475px]:text-base', getTodayAtColor())}>
           Today At:{' '}
           {`${getTimeString(
             new Date(todayAt).getHours() % 12 || 12,
@@ -168,7 +169,10 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
       </div>
       <div className="flex gap-4 min-[475px]:absolute min-[475px]:bottom-1 min-[475px]:right-2">
         <div
-          className={`flex h-10 items-center gap-3 rounded-md ${getCategoryBgColor()} px-3`}
+          className={cn(
+            'flex h-10 items-center gap-3 rounded-md px-3',
+            getCategoryBgColor(),
+          )}
         >
           {getCategoryIcon(category.label, 'w-6 h-6')}
           <p className="text-sm text-white min-[475px]:text-base">

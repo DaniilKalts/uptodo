@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { cn } from '@/utils/Cn';
+
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
 interface InputProps {
@@ -70,12 +72,10 @@ const Textarea: React.FC<InputProps> = ({
       {label && (
         <label
           htmlFor={id}
-          className={`
-          mb-2
-          text-lg
-          text-white-pale
-          min-[475px]:text-xl
-        `}
+          className={cn(
+            'mb-2 text-lg min-[475px]:text-xl',
+            ghost ? 'text-white-pale' : 'text-gray-dark dark:text-white-pale',
+          )}
         >
           {label}
         </label>

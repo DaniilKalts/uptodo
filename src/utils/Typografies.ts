@@ -1,21 +1,21 @@
 /* eslint-disable import/prefer-default-export */
 import {
-  Patrick_Hand,
   Ubuntu,
-  Lato,
   Nunito,
+  Lato,
+  Jost,
   Ysabeau_Office,
-  Caveat_Brush,
-  Josefin_Sans,
   Inconsolata,
+  Patrick_Hand,
+  Caveat_Brush,
 } from 'next/font/google';
 
-const patrickHand = Patrick_Hand({
+const ubuntu = Ubuntu({
   subsets: ['latin'],
-  weight: ['400'],
+  weight: ['400', '500', '700'],
 });
 
-const ubuntu = Ubuntu({
+const nunito = Nunito({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
 });
@@ -25,22 +25,12 @@ const lato = Lato({
   weight: ['300', '400', '700'],
 });
 
-const nunito = Nunito({
+const jost = Jost({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['300', '400', '700'],
 });
 
 const ysabeauOffice = Ysabeau_Office({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-});
-
-const caveatBrush = Caveat_Brush({
-  subsets: ['latin'],
-  weight: ['400'],
-});
-
-const josefinSans = Josefin_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
 });
@@ -50,37 +40,47 @@ const inconsolata = Inconsolata({
   weight: ['400', '500', '700'],
 });
 
+const patrickHand = Patrick_Hand({
+  subsets: ['latin'],
+  weight: ['400'],
+});
+
+const caveatBrush = Caveat_Brush({
+  subsets: ['latin'],
+  weight: ['400'],
+});
+
 export const typographyDemos = [
-  {
-    name: 'patrickHand',
-    styleName: patrickHand.className,
-  },
   {
     name: 'ubuntu',
     styleName: ubuntu.className,
-  },
-  {
-    name: 'lato',
-    styleName: lato.className,
   },
   {
     name: 'nunito',
     styleName: nunito.className,
   },
   {
+    name: 'lato',
+    styleName: lato.className,
+  },
+  {
+    name: 'jost',
+    styleName: jost.className,
+  },
+  {
     name: 'ysabeauOffice',
     styleName: ysabeauOffice.className,
   },
   {
-    name: 'raleway',
-    styleName: caveatBrush.className,
-  },
-  {
-    name: 'josefinSans',
-    styleName: josefinSans.className,
-  },
-  {
     name: 'inconsolata',
     styleName: inconsolata.className,
+  },
+  {
+    name: 'patrickHand',
+    styleName: patrickHand.className,
+  },
+  {
+    name: 'raleway',
+    styleName: caveatBrush.className,
   },
 ];

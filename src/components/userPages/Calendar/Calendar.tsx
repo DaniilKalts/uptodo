@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { TaskType } from '@/types';
+import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
 
@@ -321,27 +322,16 @@ const Calendar = () => {
             className="px-[10px]"
           >
             <div
-              className={`
-                flex
-                w-full 
-                cursor-pointer 
-                flex-col 
-                items-center 
-                justify-center 
-                rounded-md 
-                ${getDateBgColor(date)}
-                px-3 
-                py-2
-              `}
+              className={cn(
+                'flex w-full cursor-pointer flex-col items-center justify-center rounded-md px-3 py-2',
+                getDateBgColor(date),
+              )}
             >
               <h6
-                className={`
-                    text-base
-                    font-bold
-                    uppercase
-                    min-[475px]:text-lg
-                    ${getDayOfWeekColor(date.day, date.dayOfWeek)}
-                  `}
+                className={cn(
+                  'text-base font-bold uppercase min-[475px]:text-lg',
+                  getDayOfWeekColor(date.day, date.dayOfWeek),
+                )}
               >
                 {date.dayOfWeek}
               </h6>
@@ -350,7 +340,10 @@ const Calendar = () => {
               </h6>
               {date.anyTasks && (
                 <div
-                  className={`mt-[2px] h-[6px] w-[6px] rounded-full ${date.anyTasks}`}
+                  className={cn(
+                    'mt-[2px] h-[6px] w-[6px] rounded-full',
+                    date.anyTasks,
+                  )}
                 ></div>
               )}
             </div>

@@ -83,7 +83,7 @@ const About = () => (
         </h2>
         <div className="grid gap-8 sm:grid-cols-2">
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
               Empower Task Mastery
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
@@ -93,7 +93,7 @@ const About = () => (
             </p>
           </div>
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
               Boost Your Efficiency
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
@@ -103,7 +103,7 @@ const About = () => (
             </p>
           </div>
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
               Fuel Creative Spark
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
@@ -113,7 +113,7 @@ const About = () => (
             </p>
           </div>
           <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="min-[475px]:text-[22px text-purple] mb-1 text-lg font-bold">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
               Partner in Success
             </h3>
             <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">

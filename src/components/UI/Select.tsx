@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
+import { cn } from '@/utils/Cn';
+
 interface SelectInterface {
   value: string;
   setValue: (newValue: string) => void;
@@ -61,22 +63,10 @@ const Select: React.FC<SelectInterface> = ({
   return (
     <div className="relative min-w-[125px]" ref={selectRef}>
       <button
-        className={`
-          z-10 
-          inline-flex 
-          w-full 
-          flex-shrink-0 
-          items-center 
-          justify-between 
-          rounded-lg 
-          ${theme === 'gray' ? 'bg-gray-500 dark:bg-gray-600' : 'bg-purple'}
-          px-4 
-          py-2.5 
-          text-center 
-          text-base 
-          font-medium 
-          text-white-pale 
-        `}
+        className={cn(
+          'z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg px-4 py-2.5 text-center text-base font-medium text-white-pale',
+          theme === 'gray' ? 'bg-gray-500 dark:bg-gray-600' : 'bg-purple',
+        )}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {value}
@@ -98,35 +88,26 @@ const Select: React.FC<SelectInterface> = ({
       </button>
       <div
         id="dropdown-states"
-        className={`
-        ${isOpen ? 'block' : 'hidden'} 
-        absolute 
-        right-0 
-        z-40 
-        w-full 
-        rounded-lg 
-        ${theme === 'gray' ? 'bg-gray-600 dark:bg-gray-700' : 'bg-purple-light'}
-        shadow`}
+        className={cn(
+          'absolute right-0 z-40 w-full rounded-lg shadow',
+          theme === 'gray' ? 'bg-gray-600 dark:bg-gray-700' : 'bg-purple-light',
+          isOpen ? 'block' : 'hidden',
+        )}
       >
         <ul className="rounded-lg text-sm">
           {options.map((option, id) => (
             <li key={option}>
               <button
                 disabled={value === option}
-                className={`
-                inline-flex 
-                w-full 
-                cursor-pointer
-                ${
+                className={cn(
+                  'inline-flex w-full cursor-pointer px-4 py-2 text-base text-white-pale',
                   theme === 'gray'
                     ? 'bg-gray-500 dark:bg-gray-600'
-                    : 'bg-purple'
-                } 
-                px-4 
-                py-2 
-                text-base
-                text-white-pale
-                ${hoverClass()} ${roundedClass(id)} ${disabledClass()}`}
+                    : 'bg-purple',
+                  hoverClass(),
+                  roundedClass(id),
+                  disabledClass(),
+                )}
                 onClick={() => onChange(option)}
               >
                 <div className="inline-flex items-center">{option}</div>

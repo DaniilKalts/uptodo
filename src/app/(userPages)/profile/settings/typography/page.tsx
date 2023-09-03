@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { typographyDemos } from '@/utils/Typografies';
+import { cn } from '@/utils/Cn';
 
 import { AppTypographyIcon } from '@/components/userPages/Profile/Icons/Settings';
 import Container from '@/components/UI/Container';
@@ -43,7 +44,10 @@ const Settings = () => {
                   <div className="flex items-center gap-3">
                     {AppTypographyIcon}
                     <p
-                      className={`${styleName} text-base capitalize text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white min-[475px]:text-lg`}
+                      className={cn(
+                        'text-base capitalize text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white min-[475px]:text-lg',
+                        styleName,
+                      )}
                     >
                       {name} Font Family
                     </p>

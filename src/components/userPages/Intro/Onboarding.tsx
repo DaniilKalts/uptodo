@@ -1,6 +1,7 @@
 import React from 'react';
-
 import Image from 'next/image';
+
+import { cn } from '@/utils/Cn';
 
 import { motion } from 'framer-motion';
 
@@ -61,16 +62,12 @@ const Onboarding: React.FC<OnboardingProps> = ({
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
-                    className={`
-                        ${
-                          step === n
-                            ? 'bg-black-light dark:bg-white-pale'
-                            : 'bg-gray-200'
-                        } 
-                        h-[6px]
-                        w-[30%] 
-                        rounded-xl
-                      `}
+                    className={cn(
+                      'h-[6px] w-[30%] rounded-xl',
+                      step === n
+                        ? 'bg-black-light dark:bg-white-pale'
+                        : 'bg-gray-200',
+                    )}
                   ></div>
                 ))}
               </div>

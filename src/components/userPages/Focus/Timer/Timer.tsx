@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { cn } from '@/utils/Cn';
 
 import Button from '@/components/UI/Button';
 
@@ -124,28 +125,15 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
           ></circle>
         </svg>
         <p
-          className={`
-            text-5xl 
-            font-medium
-            ${
-              isTimerRunning && !isDanger
-                ? 'text-gray-dark dark:text-white-pale'
-                : ''
-            }
-            ${
+          className={cn('absolute text-5xl font-medium', {
+            'text-gray-dark dark:text-white-pale':
+              (isTimerRunning && !isDanger) ||
               (!isTimerRunning && !isDanger) ||
-              circluarIndicator === initialCircularIndicator
-                ? 'text-gray-dark dark:text-white-pale'
-                : ''
-            }
-            ${
-              isDanger && circluarIndicator !== initialCircularIndicator
-                ? 'text-red'
-                : ''
-            }
-            ${!seconds && timerSeconds > 0 ? 'blink-hard' : ''}
-            absolute
-          `}
+              circluarIndicator === initialCircularIndicator,
+            'text-red':
+              isDanger && circluarIndicator !== initialCircularIndicator,
+            'blink-hard': !seconds && timerSeconds > 0,
+          })}
         >
           {minutesString}:{secondsString}
         </p>

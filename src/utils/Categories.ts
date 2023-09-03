@@ -31,7 +31,7 @@ export const categories: CategoryType[] = [
   {
     icon: WorkoutIcon,
     bgColor: 'cyan-light',
-    label: 'Sport',
+    label: 'Workout',
     IconStyles: 'w-8 h-8 min-[475px]:w-11 min-[475px]:h-11',
   },
   {

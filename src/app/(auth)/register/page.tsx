@@ -172,6 +172,7 @@ const Register = () => {
             />
           </div>
           <Button
+            type="submit"
             label="Register"
             onClick={onSubmit}
             filled

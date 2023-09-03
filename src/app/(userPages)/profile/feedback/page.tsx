@@ -124,7 +124,6 @@ const Feedback = () => {
                 register={register}
                 label="Email"
                 small
-                ghost
                 errors={errors}
                 errorMessage={errors.email?.message as string}
               />
@@ -136,7 +135,6 @@ const Feedback = () => {
                 register={register}
                 label="User Name"
                 small
-                ghost
                 errors={errors}
                 errorMessage={errors.userName?.message as string}
               />
@@ -154,6 +152,7 @@ const Feedback = () => {
             />
             <div className="mt-2 flex flex-col items-center justify-center gap-4">
               <Button
+                type="submit"
                 label="Send Feedback"
                 onClick={() => {}}
                 outline="purple"

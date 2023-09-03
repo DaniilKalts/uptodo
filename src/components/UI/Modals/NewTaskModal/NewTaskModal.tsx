@@ -7,8 +7,8 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { CategoryIconType, CategoryType, TaskType } from '@/types';
-
 import { categories } from '@/utils/Categories';
+import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
 
@@ -472,9 +472,10 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
           {getDaysInMonth().map((date, index) => (
             <div
               key={index}
-              className={`flex h-7 w-7 items-center justify-center rounded-lg min-[475px]:h-9 min-[475px]:w-9 ${getDateStylings(
-                date,
-              )}`}
+              className={cn(
+                'flex h-7 w-7 items-center justify-center rounded-lg min-[475px]:h-9 min-[475px]:w-9',
+                getDateStylings(date),
+              )}
               onClick={() => {
                 if (
                   date.getTime() <
@@ -504,11 +505,12 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
               }}
             >
               <p
-                className={`text-sm font-semibold min-[475px]:text-base ${
+                className={cn(
+                  'text-sm font-semibold min-[475px]:text-base',
                   date.getMonth() === selectedDate.getMonth()
                     ? 'text-white-pale'
-                    : 'text-gray-200'
-                }`}
+                    : 'text-gray-200',
+                )}
               >
                 {date ? date.getDate() : ''}
               </p>
@@ -648,17 +650,16 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       <div className="mt-6 grid w-full max-w-sm grid-cols-3 max-[475px]:mx-auto max-[475px]:max-w-[300px]">
         {categories.map((category, id) => (
           <div
-            className={`mb-4 flex flex-col items-center ${
-              category.label === 'Create New'
-                ? 'cursor-not-allowed opacity-50'
-                : ''
-            }`}
+            className={cn('mb-4 flex flex-col items-center', {
+              'cursor-not-allowed opacity-50': category.label === 'Create New',
+            })}
             key={id}
           >
             <button
-              className={`flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg disabled:cursor-not-allowed min-[475px]:h-[72px] min-[475px]:w-[72px] ${getCategoryBgColor(
-                category.bgColor,
-              )} transition-colors`}
+              className={cn(
+                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[475px]:h-[72px] min-[475px]:w-[72px]',
+                getCategoryBgColor(category.bgColor),
+              )}
               disabled={category.label === 'Create New'}
               onClick={() => setPotentialCategory(category)}
             >
@@ -667,11 +668,12 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
               })}
             </button>
             <p
-              className={`mt-2 text-sm min-[385px]:text-base ${
+              className={cn(
+                'mt-2 text-sm min-[385px]:text-base',
                 category.label === potentialCategory?.label
                   ? 'text-green-300'
-                  : 'text-white'
-              }`}
+                  : 'text-white',
+              )}
             >
               {category.label}
             </p>
@@ -708,11 +710,12 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       <div className="mt-6 grid grid-cols-3 justify-center gap-4 px-2 max-[425px]:mx-auto max-[425px]:max-w-[300px] min-[425px]:grid-cols-4 min-[475px]:gap-4 min-[475px]:px-6">
         {Array.from({ length: 10 }, (_, index) => index + 1).map((rate) => (
           <div
-            className={`flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg min-[475px]:h-20 min-[475px]:w-20 ${
+            className={cn(
+              'flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg pb-1 pt-[10px] transition-colors min-[475px]:h-20 min-[475px]:w-20',
               potentialPriority !== rate
                 ? 'bg-gray-800 hover:bg-purple'
-                : 'bg-purple'
-            } pb-1 pt-[10px] transition-colors`}
+                : 'bg-purple',
+            )}
             key={rate}
             onClick={() => setPotentialPriority(rate)}
           >

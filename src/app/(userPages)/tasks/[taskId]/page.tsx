@@ -9,6 +9,7 @@ import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
 
 import { categories } from '@/utils/Categories';
+import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
 
@@ -189,40 +190,40 @@ const Task = ({ params }: TaskIdPageProps) => {
   );
 
   const getTimeString = (time: number) => String(time).padStart(2, '0');
-  const getCategoryIcon = (label: string, iustonStyles: string) => {
+  const getCategoryIcon = (label: string, iconStyles: string) => {
     if (!label) {
       return null;
     }
 
     if (label === 'Grocery') {
-      return <GroceryIcon IconStyles={iustonStyles} />;
+      return <GroceryIcon IconStyles={iconStyles} />;
     }
     if (label === 'Work') {
-      return <WorkIcon IconStyles={iustonStyles} />;
+      return <WorkIcon IconStyles={iconStyles} />;
     }
-    if (label === 'Sport') {
-      return <WorkoutIcon IconStyles={iustonStyles} />;
+    if (label === 'Workout') {
+      return <WorkoutIcon IconStyles={iconStyles} />;
     }
     if (label === 'Design') {
-      return <DesignIcon IconStyles={iustonStyles} />;
+      return <DesignIcon IconStyles={iconStyles} />;
     }
     if (label === 'University') {
-      return <UniversityIcon IconStyles={iustonStyles} />;
+      return <UniversityIcon IconStyles={iconStyles} />;
     }
     if (label === 'Social') {
-      return <SocialIcon IconStyles={iustonStyles} />;
+      return <SocialIcon IconStyles={iconStyles} />;
     }
     if (label === 'Musick') {
-      return <MusickIcon IconStyles={iustonStyles} />;
+      return <MusickIcon IconStyles={iconStyles} />;
     }
     if (label === 'Health') {
-      return <HealthIcon IconStyles={iustonStyles} />;
+      return <HealthIcon IconStyles={iconStyles} />;
     }
     if (label === 'Movie') {
-      return <MovieIcon IconStyles={iustonStyles} />;
+      return <MovieIcon IconStyles={iconStyles} />;
     }
     if (label === 'Home') {
-      return <HomeIcon IconStyles={iustonStyles} />;
+      return <HomeIcon IconStyles={iconStyles} />;
     }
   };
 
@@ -363,6 +364,7 @@ const Task = ({ params }: TaskIdPageProps) => {
           }}
         />
         <Button
+          type="submit"
           label="Edit"
           onClick={() => {
             setTask((prev) => {
@@ -555,9 +557,10 @@ const Task = ({ params }: TaskIdPageProps) => {
           {getDaysInMonth().map((date, index) => (
             <div
               key={index}
-              className={`flex h-7 w-7 items-center justify-center rounded-lg min-[475px]:h-9 min-[475px]:w-9 ${getDateStylings(
-                date,
-              )}`}
+              className={cn(
+                'flex h-7 w-7 items-center justify-center rounded-lg min-[475px]:h-9 min-[475px]:w-9',
+                getDateStylings(date),
+              )}
               onClick={() => {
                 if (
                   date.getTime() <
@@ -587,11 +590,12 @@ const Task = ({ params }: TaskIdPageProps) => {
               }}
             >
               <p
-                className={`text-sm font-semibold min-[475px]:text-base ${
+                className={cn(
+                  'text-sm font-semibold min-[475px]:text-base',
                   date.getMonth() === selectedDate.getMonth()
                     ? 'text-white-pale'
-                    : 'text-gray-200'
-                }`}
+                    : 'text-gray-200',
+                )}
               >
                 {date ? date.getDate() : ''}
               </p>
@@ -737,17 +741,16 @@ const Task = ({ params }: TaskIdPageProps) => {
       <div className="mt-6 grid w-full max-w-sm grid-cols-3 max-[475px]:mx-auto max-[475px]:max-w-[300px]">
         {categories.map((category, id) => (
           <div
-            className={`mb-4 flex flex-col items-center ${
-              category.label === 'Create New'
-                ? 'cursor-not-allowed opacity-50'
-                : ''
-            }`}
+            className={cn('mb-4 flex flex-col items-center', {
+              'cursor-not-allowed opacity-50': category.label === 'Create New',
+            })}
             key={id}
           >
             <button
-              className={`flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg disabled:cursor-not-allowed min-[475px]:h-[72px] min-[475px]:w-[72px] ${getCategoryBgColor(
-                category.bgColor,
-              )} transition-colors`}
+              className={cn(
+                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[475px]:h-[72px] min-[475px]:w-[72px]',
+                getCategoryBgColor(category.bgColor),
+              )}
               disabled={category.label === 'Create New'}
               onClick={() => setPotentialCategory(category)}
             >
@@ -756,11 +759,12 @@ const Task = ({ params }: TaskIdPageProps) => {
               })}
             </button>
             <p
-              className={`mt-2 text-sm min-[385px]:text-base ${
+              className={cn(
+                'mt-2 text-sm min-[385px]:text-base',
                 category.label === potentialCategory?.label
                   ? 'text-green-300'
-                  : 'text-white'
-              }`}
+                  : 'text-white',
+              )}
             >
               {category.label}
             </p>
@@ -804,11 +808,12 @@ const Task = ({ params }: TaskIdPageProps) => {
       <div className="mt-6 grid grid-cols-3 justify-center gap-4 px-2 max-[425px]:mx-auto max-[425px]:max-w-[300px] min-[425px]:grid-cols-4 min-[475px]:gap-4 min-[475px]:px-6">
         {Array.from({ length: 10 }, (_, index) => index + 1).map((rate) => (
           <div
-            className={`flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg min-[475px]:h-20 min-[475px]:w-20 ${
+            className={cn(
+              'flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg pb-1 pt-[10px] transition-colors min-[475px]:h-20 min-[475px]:w-20',
               potentialPriority !== rate
                 ? 'bg-gray-800 hover:bg-purple'
-                : 'bg-purple'
-            } pb-1 pt-[10px] transition-colors`}
+                : 'bg-purple',
+            )}
             key={rate}
             onClick={() => {
               setPotentialPriority(rate);
@@ -996,20 +1001,6 @@ const Task = ({ params }: TaskIdPageProps) => {
                 if (!task.completedAt && !initialTaskCompletedAt) {
                   updateIncompletedTask(task);
 
-                  if (
-                    initialTaskTitle !== task.title ||
-                    initialTaskDescription !== task.description ||
-                    initialTaskTodayAt !== task.todayAt ||
-                    initialTaskCompletedAt !== task.completedAt ||
-                    initialTaskCategory !== task.category ||
-                    initialTaskPriority !== task.priority
-                  ) {
-                    toast('Successfully updated Task', {
-                      icon: '🔥',
-                      duration: 2000,
-                    });
-                  }
-
                   const url = qs.stringifyUrl(
                     {
                       url:
@@ -1021,26 +1012,10 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  setTimeout(() => {
-                    router.push(url);
-                  }, 2000);
+                  router.push(url);
                 }
                 if (task.completedAt && initialTaskCompletedAt) {
                   updateCompletedTask(task);
-
-                  if (
-                    initialTaskTitle !== task.title ||
-                    initialTaskDescription !== task.description ||
-                    initialTaskTodayAt !== task.todayAt ||
-                    initialTaskCompletedAt !== task.completedAt ||
-                    initialTaskCategory !== task.category ||
-                    initialTaskPriority !== task.priority
-                  ) {
-                    toast('Successfully updated Task', {
-                      icon: '🔥',
-                      duration: 2000,
-                    });
-                  }
 
                   const url = qs.stringifyUrl(
                     {
@@ -1053,19 +1028,12 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  setTimeout(() => {
-                    router.push(url);
-                  }, 2000);
+                  router.push(url);
                 }
 
                 if (!task.completedAt && initialTaskCompletedAt) {
                   addIncompletedTask(task);
                   removeCompletedTask(task.id);
-
-                  toast('Successfully editted', {
-                    icon: '🔥',
-                    duration: 2000,
-                  });
 
                   const url = qs.stringifyUrl(
                     {
@@ -1078,18 +1046,11 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  setTimeout(() => {
-                    router.push(url);
-                  }, 2000);
+                  router.push(url);
                 }
                 if (task.completedAt && !initialTaskCompletedAt) {
                   addCompletedTask(task);
                   removeIncompletedTask(task.id);
-
-                  toast('Successfully editted', {
-                    icon: '🔥',
-                    duration: 2000,
-                  });
 
                   newRoute = newRoute.replace('incompleted', 'completed');
 
@@ -1104,9 +1065,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                     { skipNull: true },
                   );
 
-                  setTimeout(() => {
-                    router.push(url);
-                  }, 2000);
+                  router.push(url);
                 }
               }}
               className="w-fit cursor-pointer rounded-lg bg-gray-500 p-2 transition-colors hover:bg-gray-light dark:bg-black-light dark:hover:bg-gray-800"

@@ -1,6 +1,7 @@
 import React from 'react';
-
 import Link from 'next/link';
+
+import { cn } from '@/utils/Cn';
 
 interface ProfileTypographyInterface {
   text: string;
@@ -20,16 +21,11 @@ const ProfileTypography: React.FC<ProfileTypographyInterface> = ({
       <div className="flex items-center gap-3">
         {svg}
         <p
-          className={`
-          text-base 
-          min-[475px]:text-lg 
-          ${
-            text !== 'Log out'
-              ? 'text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white'
-              : ''
-          }
-          ${text === 'Log out' && 'text-red group-hover:text-red-dark'}
-        `}
+          className={cn('text-base min-[475px]:text-lg', {
+            'text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white':
+              text !== 'Log out',
+            'text-red group-hover:text-red-dark': text === 'Log out',
+          })}
         >
           {text}
         </p>

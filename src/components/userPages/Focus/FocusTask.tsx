@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CategoryIconType } from '@/types';
+import { cn } from '@/utils/Cn';
 
 interface FocusTaskInterface {
   icon: CategoryIconType;
@@ -43,13 +44,7 @@ const FocusTask: React.FC<FocusTaskInterface> = ({
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center">
           <div
-            className={`
-            mr-5 
-            flex 
-            justify-center 
-            ${getCategoryBgColor()}
-            p-1
-          `}
+            className={cn('mr-5 flex justify-center p-1', getCategoryBgColor())}
           >
             {icon({ IconStyles })}
           </div>

@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { cn } from '@/utils/Cn';
+
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
 interface InputProps {
@@ -35,10 +37,10 @@ const Input: React.FC<InputProps> = ({
         text-base
         px-4
         py-[10px]
-        focus-within:px-4
         ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
         rounded-lg 
-        border     
+        border
+        focus-within:px-4
         text-white-pale
         placeholder-gray-200
         shadow-sm
@@ -49,9 +51,9 @@ const Input: React.FC<InputProps> = ({
     }
 
     return `
+      text-base
       px-4
       py-[10px]
-      text-base
       ${value.length && type === 'password' ? ' tracking-[0.35rem]' : ''}
       rounded-lg 
       border
@@ -70,16 +72,13 @@ const Input: React.FC<InputProps> = ({
       {label && (
         <label
           htmlFor={id}
-          className={`
-          mb-2
-          text-lg
-          text-white-pale
-          ${
+          className={cn(
+            'mb-2 text-base',
+            ghost ? 'text-white-pale' : 'text-gray-dark dark:text-white-pale',
             type === 'password'
               ? 'min-[475px]:text-[17px]'
-              : 'min-[475px]:text-xl'
-          }
-        `}
+              : 'min-[475px]:text-xl',
+          )}
         >
           {label}
         </label>
@@ -93,7 +92,9 @@ const Input: React.FC<InputProps> = ({
         autoComplete="off"
         {...register(id, { required: 'You have to fill this field!' })}
       />
-      {errors[id] && <p className="mt-1 text-red">{errorMessage}</p>}
+      {errors[id] && (
+        <p className="mt-1 text-red max-[475px]:text-[15px]">{errorMessage}</p>
+      )}
     </div>
   );
 };

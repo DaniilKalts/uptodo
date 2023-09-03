@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cn } from '@/utils/Cn';
+
 interface FlagIconInterface {
   onClick?: () => void;
   customClasses: string;
@@ -8,7 +10,10 @@ interface FlagIconInterface {
 const FlagIcon: React.FC<FlagIconInterface> = ({ onClick, customClasses }) => (
   <svg
     onClick={onClick}
-    className={`cursor-pointer ${customClasses} transition-colors min-[475px]:h-7 min-[475px]:w-7`}
+    className={cn(
+      'cursor-pointer transition-colors min-[475px]:h-7 min-[475px]:w-7',
+      customClasses,
+    )}
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cn } from '@/utils/Cn';
+
 import { motion } from 'framer-motion';
 
 interface ModalInterface {
@@ -35,22 +37,11 @@ const Modal: React.FC<ModalInterface> = ({
   return (
     <motion.div
       {...motionConfig}
-      className={`
-        ${isOpen ? 'visible opacity-100' : 'invisible opacity-0'}
-        fixed
-        bottom-0 
-        left-0
-        right-0
-        top-0 
-        z-50 flex
-        w-full
-        items-center
-        justify-center
-        overflow-y-auto
-        overflow-x-hidden
-        ${bgClassName()}
-        px-6
-      `}
+      className={cn(
+        'fixed bottom-0 left-0 right-0 top-0 z-50 flex w-full items-center justify-center overflow-y-auto overflow-x-hidden px-6',
+        isOpen ? 'visible opacity-100' : 'invisible opacity-0',
+        bgClassName(),
+      )}
       onClick={outsideClose ? () => onClose() : () => {}}
     >
       <div

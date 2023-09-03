@@ -71,6 +71,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (_, event) => {
     event?.preventDefault();
+
     if (userName.length && password.length) {
       setIsLoading(true);
       const toastLoading = toast.loading('Loading...');
@@ -156,6 +157,7 @@ const Login = () => {
             />
           </div>
           <Button
+            type="submit"
             label="Login"
             onClick={onSubmit}
             filled
