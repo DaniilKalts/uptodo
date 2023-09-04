@@ -40,7 +40,7 @@ const FocusTask: React.FC<FocusTaskInterface> = ({
   };
 
   return (
-    <div className="mb-6 flex items-center justify-between rounded-lg border border-gray-700 bg-gray-500 px-5 py-4">
+    <div className="mb-6 flex items-center justify-between rounded-lg border border-gray-600 bg-gray-light px-5 py-4 dark:border-gray-700 dark:bg-gray-500">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center">
           <div

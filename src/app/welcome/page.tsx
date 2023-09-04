@@ -32,10 +32,10 @@ const Welcome = () => {
             />
           </header>
           <main className="flex w-full flex-col items-center justify-center">
-            <h2 className="mt-12 text-center text-[8.5vw] font-bold text-gray-dark dark:text-white-pale min-[475px]:text-4xl">
+            <h2 className="mt-8 text-center text-[8.5vw] font-bold text-gray-dark dark:text-white-pale min-[475px]:text-4xl">
               Welcome to UpTodo
             </h2>
-            <p className="relative z-10 mt-6 max-w-md text-center text-sm text-gray-dark dark:text-white-pale min-[475px]:text-[17px]">
+            <p className="relative z-10 mt-6 max-w-md text-center text-base text-gray-dark dark:text-white-pale min-[475px]:text-[17px]">
               Please login to your account or create a new account to continue
             </p>
           </main>

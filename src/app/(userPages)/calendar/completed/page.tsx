@@ -5,17 +5,16 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import qs from 'query-string';
-
 import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
+
+import qs from 'query-string';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { toast } from 'react-hot-toast';
 
 import CompletedTask from '@/components/userPages/Calendar/CompletedTask';
-
 import { Container, Select } from '@/components/UI';
 
 const Completed = () => {
@@ -200,7 +199,11 @@ const Completed = () => {
   return (
     <Container>
       <div className="mx-auto flex flex-col items-center justify-center">
-        {isLoading ? null : (
+        {isLoading ? (
+          <h3 className="mt-12 text-center text-lg font-medium text-gray-dark dark:text-white-pale">
+            Loading...
+          </h3>
+        ) : (
           <motion.main
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 15 }}
