@@ -4,7 +4,7 @@ import {
   Nunito,
   Lato,
   Jost,
-  Ysabeau_Office,
+  Space_Grotesk,
   Inconsolata,
   Patrick_Hand,
   Caveat_Brush,
@@ -30,7 +30,7 @@ const jost = Jost({
   weight: ['300', '400', '700'],
 });
 
-const ysabeauOffice = Ysabeau_Office({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
 });
@@ -68,8 +68,8 @@ export const typographyDemos = [
     styleName: jost.className,
   },
   {
-    name: 'ysabeauOffice',
-    styleName: ysabeauOffice.className,
+    name: 'spaceGrotesk',
+    styleName: spaceGrotesk.className,
   },
   {
     name: 'inconsolata',

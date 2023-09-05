@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 interface ModalInterface {
   isOpen: boolean;
   onClose: () => void;
+  modalAlign?: 'items-center' | 'items-end';
   outsideClose?: boolean;
   title?: string;
   body: React.ReactNode;
@@ -18,6 +19,7 @@ interface ModalInterface {
 const Modal: React.FC<ModalInterface> = ({
   isOpen,
   onClose,
+  modalAlign,
   outsideClose,
   title,
   body,
@@ -38,7 +40,8 @@ const Modal: React.FC<ModalInterface> = ({
     <motion.div
       {...motionConfig}
       className={cn(
-        'fixed bottom-0 left-0 right-0 top-0 z-50 flex w-full items-center justify-center overflow-y-auto overflow-x-hidden px-6',
+        'fixed bottom-0 left-0 right-0 top-0 z-50 flex w-full justify-center overflow-y-auto overflow-x-hidden px-6',
+        modalAlign || 'items-center',
         isOpen ? 'visible opacity-100' : 'invisible opacity-0',
         bgClassName(),
       )}

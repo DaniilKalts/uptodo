@@ -81,6 +81,7 @@ const schema = yup.object().shape({
 enum STEPS {
   ACCOUNT_NAME = 1,
   ACCOUNT_PASSWORD = 2,
+  ACCOUNT_IMAGE = 3,
 }
 
 type TaskPropsValue =
@@ -132,6 +133,7 @@ const Profile = () => {
   const [step, setStep] = useState<number | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  let modalAlign: 'items-center' | 'items-end' = 'items-center';
   let modalTitle: string = '';
   let bodyContent = null;
   let footerContent = null;
@@ -263,6 +265,7 @@ const Profile = () => {
   }, [storeCompletedTasks]);
 
   if (step === STEPS.ACCOUNT_NAME) {
+    modalAlign = 'items-center';
     modalTitle = 'Change account name';
 
     bodyContent = (
@@ -314,6 +317,7 @@ const Profile = () => {
   }
 
   if (step === STEPS.ACCOUNT_PASSWORD) {
+    modalAlign = 'items-center';
     modalTitle = 'Change account Password';
 
     bodyContent = (
@@ -363,6 +367,29 @@ const Profile = () => {
         </footer>
       </form>
     );
+    footerContent = <></>;
+  }
+
+  if (step === STEPS.ACCOUNT_IMAGE) {
+    modalAlign = 'items-end';
+    modalTitle = 'Change account Image';
+
+    bodyContent = (
+      <div className="mt-4 w-full bg-gray-700 pb-8">
+        <div className="flex flex-col items-start">
+          <div className="flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[475px]:text-xl">
+            Tack picture
+          </div>
+          <div className="flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[475px]:text-xl">
+            Import from gallery
+          </div>
+          <div className="flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[475px]:text-xl">
+            Import from Google Drive
+          </div>
+        </div>
+      </div>
+    );
+
     footerContent = <></>;
   }
 
@@ -450,7 +477,10 @@ const Profile = () => {
               />
               <ProfileLink
                 text="Change account Image"
-                link="profile"
+                onClick={() => {
+                  setStep(STEPS.ACCOUNT_IMAGE);
+                  setIsOpen(true);
+                }}
                 svg={ProfileImageIcon}
               />
             </section>
@@ -479,7 +509,9 @@ const Profile = () => {
           isOpen={isOpen}
           body={bodyContent}
           footer={footerContent}
+          outsideClose={modalTitle === 'Change account Image'}
           onClose={() => setIsOpen(false)}
+          modalAlign={modalAlign}
           bgType="dark"
           motionConfig={null}
         />
