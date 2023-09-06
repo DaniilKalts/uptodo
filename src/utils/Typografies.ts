@@ -1,7 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import {
   Ubuntu,
-  Nunito,
+  Mukta,
+  Dosis,
   Lato,
   Jost,
   Space_Grotesk,
@@ -15,7 +16,12 @@ const ubuntu = Ubuntu({
   weight: ['400', '500', '700'],
 });
 
-const nunito = Nunito({
+const mukta = Mukta({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+});
+
+const dosis = Dosis({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
 });
@@ -52,35 +58,39 @@ const caveatBrush = Caveat_Brush({
 
 export const typographyDemos = [
   {
-    name: 'ubuntu',
-    styleName: ubuntu.className,
-  },
-  {
-    name: 'nunito',
-    styleName: nunito.className,
-  },
-  {
-    name: 'lato',
-    styleName: lato.className,
-  },
-  {
-    name: 'jost',
-    styleName: jost.className,
-  },
-  {
-    name: 'spaceGrotesk',
+    name: 'Space_Grotesk',
     styleName: spaceGrotesk.className,
   },
   {
-    name: 'inconsolata',
+    name: 'Inconsolata',
     styleName: inconsolata.className,
   },
   {
-    name: 'patrickHand',
+    name: 'Patrick_Hand',
     styleName: patrickHand.className,
   },
   {
-    name: 'raleway',
+    name: 'Ubuntu',
+    styleName: ubuntu.className,
+  },
+  {
+    name: 'Mukta',
+    styleName: mukta.className,
+  },
+  {
+    name: 'Raleway',
     styleName: caveatBrush.className,
+  },
+  {
+    name: 'Lato',
+    styleName: lato.className,
+  },
+  {
+    name: 'Jost',
+    styleName: jost.className,
+  },
+  {
+    name: 'Dosis',
+    styleName: dosis.className,
   },
 ];

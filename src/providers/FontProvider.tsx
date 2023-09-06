@@ -25,20 +25,14 @@ const FontProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     setTimeout(() => {
       setMounted(true);
-    }, 500);
+    }, 0);
   }, []);
 
   return (
-    <div>
-      {mounted ? (
-        <div
-          className={
-            mounted ? typographyStyles || lato.className : lato.className
-          }
-        >
-          {children}
-        </div>
-      ) : null}
+    <div
+      className={mounted ? typographyStyles || lato.className : lato.className}
+    >
+      {children}
     </div>
   );
 };
