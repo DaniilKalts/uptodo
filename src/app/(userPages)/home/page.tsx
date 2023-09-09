@@ -41,6 +41,8 @@ const Home = () => {
   const addIncompletedTask = useTasksStore((state) => state.addIncompletedTask);
   const addCompletedTask = useTasksStore((state) => state.addCompletedTask);
 
+  const [accountAvatar, setAccountAvatar] = useState<string>('');
+
   const deadlineStatus = (task: TaskType) => {
     const myDate = new Date();
 
@@ -67,6 +69,53 @@ const Home = () => {
 
     return 'future';
   };
+
+  const headerContent = (
+    <header className="mx-auto mt-6 flex max-w-4xl items-center justify-between">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="text-gray-dark dark:text-white-pale"
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          fill="currentColor"
+          d="M21 7.75H3c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h18c.41 0 .75.34.75.75s-.34.75-.75.75ZM18 12.75H6c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h12c.41 0 .75.34.75.75s-.34.75-.75.75ZM14 17.75h-4c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75Z"
+        />
+      </svg>
+      <h4 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
+        Index
+      </h4>
+      <Image
+        src={accountAvatar || '/images/home/no-avatar.jpg'}
+        className="h-11 w-11 cursor-pointer rounded-full object-cover min-[500px]:h-14 min-[500px]:w-14"
+        width={48}
+        height={48}
+        alt="Avatar"
+        onClick={showAvatar}
+      />
+    </header>
+  );
+
+  const previewContent = (
+    <main className="mt-8 flex flex-col items-center justify-center min-[500px]:mt-12 lg:mt-20">
+      <Image
+        src="/images/home/banner.svg"
+        width={250}
+        height={250}
+        className="min-[500px]:w-80"
+        alt="Banner"
+      />
+      <h6 className="mb-2 text-center text-[1.35rem] text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
+        What do you want to do today?
+      </h6>
+      <p className="text-center text-[1.1rem] text-gray-dark dark:text-white-pale min-[500px]:text-xl">
+        Tap + to add your tasks
+      </p>
+    </main>
+  );
 
   useEffect(() => {
     const sortedTasks = storeIncompletedTasks
@@ -101,6 +150,8 @@ const Home = () => {
   }, [storeCompletedTasks]);
 
   useEffect(() => {
+    setAccountAvatar(localStorage.getItem('accountAvatar')!);
+
     setTimeout(() => {
       setMounted(true);
     }, 1000);
@@ -108,99 +159,35 @@ const Home = () => {
 
   if (!mounted) {
     return (
-      <div className="pb-36 min-[475px]:pb-40">
+      <div className="pb-36 min-[500px]:pb-40">
         <Container>
+          {headerContent}
           {isAvatarModal && (
             <AvatarModal
               isOpen={isAvatarModal}
               onClose={() => setIsAvatarModal((prev) => !prev)}
-              imageUrl={'/images/home/kalts_daniil2.jpg'}
+              imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
             />
           )}
-          <header className="mx-auto mt-6 flex max-w-4xl items-center justify-between">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-gray-dark dark:text-white-pale"
-              width="36"
-              height="36"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                fill="currentColor"
-                d="M21 7.75H3c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h18c.41 0 .75.34.75.75s-.34.75-.75.75ZM18 12.75H6c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h12c.41 0 .75.34.75.75s-.34.75-.75.75ZM14 17.75h-4c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75Z"
-              />
-            </svg>
-            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
-              Index
-            </h4>
-            <Image
-              src="/images/home/kalts_daniil2.jpg"
-              className="h-11 w-11 cursor-pointer rounded-full min-[475px]:h-14 min-[475px]:w-14"
-              width={48}
-              height={48}
-              alt="Avatar"
-              onClick={showAvatar}
-            />
-          </header>
-          <main className="mt-8 flex flex-col items-center justify-center min-[475px]:mt-12 lg:mt-20">
-            <Image
-              src="/images/home/banner.svg"
-              width={250}
-              height={250}
-              className="min-[475px]:w-80"
-              alt="Banner"
-            />
-            <h6 className="mb-2 text-center text-[1.35rem] text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
-              What do you want to do today?
-            </h6>
-            <p className="text-center text-[1.1rem] text-gray-dark dark:text-white-pale min-[475px]:text-xl">
-              Tap + to add your tasks
-            </p>
-          </main>
+          {previewContent}
         </Container>
       </div>
     );
   }
 
   return (
-    <div className="pb-36 min-[475px]:pb-40">
+    <div className="pb-36 min-[500px]:pb-40">
       <Container>
+        {headerContent}
         {isAvatarModal && (
           <AvatarModal
             isOpen={isAvatarModal}
             onClose={() => setIsAvatarModal((prev) => !prev)}
-            imageUrl={'/images/home/kalts_daniil2.jpg'}
+            imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
           />
         )}
-        <header className="mx-auto mt-6 flex max-w-4xl items-center justify-between">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-gray-dark dark:text-white-pale"
-            width="36"
-            height="36"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              fill="currentColor"
-              d="M21 7.75H3c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h18c.41 0 .75.34.75.75s-.34.75-.75.75ZM18 12.75H6c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h12c.41 0 .75.34.75.75s-.34.75-.75.75ZM14 17.75h-4c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75Z"
-            />
-          </svg>
-          <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
-            Index
-          </h4>
-          <Image
-            src="/images/home/kalts_daniil2.jpg"
-            className="h-11 w-11 cursor-pointer rounded-full min-[475px]:h-14 min-[475px]:w-14"
-            width={48}
-            height={48}
-            alt="Avatar"
-            onClick={showAvatar}
-          />
-        </header>
         {incompletedTasks.length || completedTasks.length ? (
-          <main className="mx-auto mt-8 max-w-md min-[475px]:mt-12">
+          <main className="mx-auto mt-8 max-w-md min-[500px]:mt-12">
             <div className="relative mb-6">
               <svg
                 className="absolute left-7 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 transform"
@@ -227,7 +214,7 @@ const Home = () => {
                   )
                 }
                 value={taskTitle}
-                className="text-lgtext-white-pale w-full rounded-lg border bg-black-light bg-transparent px-4 py-[10px] pl-14 text-black-light placeholder-gray-200 shadow-sm dark:text-white-pale min-[475px]:py-3 min-[475px]:text-xl"
+                className="text-lgtext-white-pale w-full rounded-lg border bg-black-light bg-transparent px-4 py-[10px] pl-14 text-black-light placeholder-gray-200 shadow-sm dark:text-white-pale min-[500px]:py-3 min-[500px]:text-xl"
                 placeholder="Search for your task..."
                 type="text"
               />
@@ -235,7 +222,7 @@ const Home = () => {
             <hr className="my-4 h-[2px] w-full rounded border-0 bg-gray-dark" />
             <div
               className={
-                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[475px]:text-lg'
+                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
               }
             >
               Incompleted Tasks:
@@ -269,13 +256,13 @@ const Home = () => {
                 </motion.div>
               ))
             ) : (
-              <h1 className="mb-6 text-base text-gray-dark dark:text-white-pale min-[475px]:text-lg">
+              <h1 className="mb-6 text-base text-gray-dark dark:text-white-pale min-[500px]:text-lg">
                 You have no incompleted tasks for this day! &#128079;
               </h1>
             )}
             <div
               className={
-                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[475px]:text-lg'
+                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
               }
             >
               Completed Tasks:
@@ -303,27 +290,13 @@ const Home = () => {
                 </motion.div>
               ))
             ) : (
-              <h1 className="mb-4 text-base text-gray-dark dark:text-white-pale min-[475px]:text-lg">
+              <h1 className="mb-4 text-base text-gray-dark dark:text-white-pale min-[500px]:text-lg">
                 There is no completed tasks yet. &#128517;
               </h1>
             )}
           </main>
         ) : (
-          <main className="mt-8 flex flex-col items-center justify-center min-[475px]:mt-12 lg:mt-20">
-            <Image
-              src="/images/home/banner.svg"
-              width={250}
-              height={250}
-              className="min-[475px]:w-80"
-              alt="Banner"
-            />
-            <h6 className="mb-2 text-center text-[1.35rem] text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
-              What do you want to do today?
-            </h6>
-            <p className="text-center text-[1.1rem] text-gray-dark dark:text-white-pale min-[475px]:text-xl">
-              Tap + to add your tasks
-            </p>
-          </main>
+          previewContent
         )}
       </Container>
     </div>

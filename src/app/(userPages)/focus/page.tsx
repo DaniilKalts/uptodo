@@ -126,11 +126,11 @@ const Focus = () => {
         )}
         <div className="mx-auto mt-8 flex flex-col items-center justify-center">
           <header>
-            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
               Focus Mode
             </h4>
           </header>
-          <main className="mt-4 flex w-full max-w-lg flex-col justify-start min-[475px]:mt-8">
+          <main className="mt-4 flex w-full max-w-lg flex-col justify-start min-[500px]:mt-8">
             <Timer
               timerSeconds={timerSeconds}
               onEdit={() => {
@@ -139,8 +139,8 @@ const Focus = () => {
               }}
             />
             <section>
-              <div className="mb-10 flex items-center justify-between min-[475px]:mb-6">
-                <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+              <div className="mb-10 flex items-center justify-between min-[500px]:mb-6">
+                <h4 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
                   Overview:
                 </h4>
                 <Select
@@ -163,40 +163,40 @@ const Focus = () => {
                 />
               )}
             </section>
-            <h4 className="mb-5 mt-6 text-xl text-gray-dark dark:text-white-pale min-[475px]:mt-12 min-[475px]:text-2xl">
+            <h4 className="mb-5 mt-6 text-xl text-gray-dark dark:text-white-pale min-[500px]:mt-12 min-[500px]:text-2xl">
               Time Spent:
             </h4>
             <FocusTask
               icon={WorkoutIcon}
-              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
+              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="cyan-light"
               title="Workout"
               text="You spent 1 hour on Workout today"
             />
             <FocusTask
               icon={WorkIcon}
-              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
+              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="beige-light"
               title="Work"
               text="You spent 6 hours on Work today"
             />
             <FocusTask
               icon={MusickIcon}
-              IconStyles={'w-7 h-7 min-[475px]:w-9 min-[475px]:h-9'}
+              IconStyles={'w-7 h-7 min-[500px]:w-9 min-[500px]:h-9'}
               bgIconColor="pink-light"
               title="Musick"
               text="You spent 2 hours on Musick today"
             />
             <FocusTask
               icon={HealthIcon}
-              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
+              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="mint-light"
               title="Health"
               text="You spent 1 hour on Health today"
             />
             <FocusTask
               icon={UniversityIcon}
-              IconStyles={'w-8 h-8 min-[475px]:w-10 min-[475px]:h-10'}
+              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="blue-light"
               title="University"
               text="You spent 3 hours on University today"

@@ -49,17 +49,17 @@ const FocusTask: React.FC<FocusTaskInterface> = ({
             {icon({ IconStyles })}
           </div>
           <div>
-            <h6 className="mb-1 text-base text-white-pale min-[475px]:text-xl">
+            <h6 className="mb-1 text-base text-white-pale min-[500px]:text-xl">
               {title}
             </h6>
-            <p className="text-sm text-white-pale min-[475px]:text-lg">
+            <p className="text-sm text-white-pale min-[500px]:text-lg">
               {text}
             </p>
           </div>
         </div>
-        <div className="ml-4 h-full border-l-[2px] border-gray-300 py-3 min-[475px]:ml-6 min-[475px]:border-l-[3px]">
+        <div className="ml-4 h-full border-l-[2px] border-gray-300 py-3 min-[500px]:ml-6 min-[500px]:border-l-[3px]">
           <svg
-            className="ml-4 h-7 w-7 cursor-pointer text-white-pale min-[475px]:h-8 min-[475px]:w-8"
+            className="ml-4 h-7 w-7 cursor-pointer text-white-pale min-[500px]:h-8 min-[500px]:w-8"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"

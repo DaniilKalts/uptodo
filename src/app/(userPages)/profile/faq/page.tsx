@@ -11,11 +11,11 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 
 const Faq = () => (
   <Container>
-    <section className="mx-auto max-w-screen-xl pb-28 pt-10 min-[475px]:pb-44 min-[475px]:pt-14">
-      <h2 className="mb-2 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent min-[475px]:mb-8">
+    <section className="mx-auto max-w-screen-xl pb-28 pt-10 min-[500px]:pb-44 min-[500px]:pt-14">
+      <h2 className="mb-2 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent min-[500px]:mb-8">
         Frequently asked questions
       </h2>
-      <div className="mb-8 flex justify-center min-[475px]:hidden">
+      <div className="mb-8 flex justify-center min-[500px]:hidden">
         <Image
           src={step3}
           width={226}
@@ -28,7 +28,7 @@ const Faq = () => (
       <div className="grid border-t border-gray-200 pt-8 text-left dark:border-gray-700 md:grid-cols-2 md:gap-16">
         <div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -43,7 +43,7 @@ const Faq = () => (
               </svg>
               How do I create a task in UpTodo?
             </h3>
-            <p className="text-sm text-gray-500 dark:text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-gray-500 dark:text-white-pale min-[500px]:text-base">
               To create a task in UpTodo, simply click or tap the "Add Task"
               button, enter the task details such as title, description, due
               date, and any relevant tags, then save it. The task will be added
@@ -51,7 +51,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -66,7 +66,7 @@ const Faq = () => (
               </svg>
               How do I organize my tasks in UpTodo?
             </h3>
-            <p className="text-sm text-gray-500 dark:text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-gray-500 dark:text-white-pale min-[500px]:text-base">
               UpTodo offers various organization features such as project
               folders, tags, and priority levels. You can assign tasks to
               specific folders, categorize them with tags, and set priority
@@ -74,7 +74,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -89,14 +89,14 @@ const Faq = () => (
               </svg>
               Is it possible to share tasks with others in UpTodo?
             </h3>
-            <p className="text-sm text-gray-500 dark:text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-gray-500 dark:text-white-pale min-[500px]:text-base">
               Currently, UpTodo does not support direct task sharing with
               others. However, you can export task lists or share screenshots to
               collaborate on tasks with external parties.
             </p>
           </div>
           <div>
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -111,7 +111,7 @@ const Faq = () => (
               </svg>
               Can I access UpTodo on different devices?
             </h3>
-            <p className="text-sm text-gray-500 dark:text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-gray-500 dark:text-white-pale min-[500px]:text-base">
               Yes, UpTodo is designed to be accessible across web browsers.
               Therefore, you can access wherever you want to.
             </p>
@@ -119,7 +119,7 @@ const Faq = () => (
         </div>
         <div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -134,7 +134,7 @@ const Faq = () => (
               </svg>
               How can I mark a task as complete in UpTodo?
             </h3>
-            <p className="text-sm text-gray-500 dark:text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-gray-500 dark:text-white-pale min-[500px]:text-base">
               To mark a task as complete in UpTodo, simply locate the task in
               your task list and check the checkbox or use the designated
               completion button. The task will be visually indicated as
@@ -142,7 +142,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -157,7 +157,7 @@ const Faq = () => (
               </svg>
               Is there a way to set recurring tasks in UpTodo?
             </h3>
-            <p className="text-sm text-gray-500 dark:text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-gray-500 dark:text-white-pale min-[500px]:text-base">
               As of now, UpTodo does not have a built-in feature for setting
               recurring tasks. However, you can manually duplicate or recreate
               recurring tasks by setting new due dates when the previous
@@ -165,7 +165,7 @@ const Faq = () => (
             </p>
           </div>
           <div className="mb-10">
-            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[475px]:text-2xl">
+            <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"
                 fill="currentColor"
@@ -180,7 +180,7 @@ const Faq = () => (
               </svg>
               How do I get in touch with UpTodo support for assistance?
             </h3>
-            <p className="text-sm text-gray-500 dark:text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-gray-500 dark:text-white-pale min-[500px]:text-base">
               If you need assistance or have questions about UpTodo, you can
               usually find a "Feedback" or "Help" section within the app or on
               the website. There, you'll find contact details, email support

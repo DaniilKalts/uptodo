@@ -28,7 +28,7 @@ const Navbar = () => {
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <IndexIcon isActive={currentPathName === '/home'} />
-          <span className="text-sm text-white-pale min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[500px]:text-base">
             Index
           </span>
         </Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <CalendarIcon isActive={currentPathName.includes('/calendar')} />
-          <span className="text-sm text-white-pale min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[500px]:text-base">
             Calendar
           </span>
         </Link>
@@ -45,7 +45,7 @@ const Navbar = () => {
           <button
             data-tooltip-target="tooltip-new"
             type="button"
-            className="group relative bottom-10 inline-flex h-16 w-16 items-center justify-center rounded-full bg-purple font-medium hover:bg-purple-dark min-[475px]:bottom-12 min-[475px]:h-[4.5rem] min-[475px]:w-[4.5rem]"
+            className="group relative bottom-10 inline-flex h-16 w-16 items-center justify-center rounded-full bg-purple font-medium hover:bg-purple-dark min-[500px]:bottom-12 min-[500px]:h-[4.5rem] min-[500px]:w-[4.5rem]"
             onClick={() => setIsNewTaskModal((prev) => !prev)}
           >
             <svg
@@ -71,7 +71,7 @@ const Navbar = () => {
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <FocusIcon isActive={currentPathName === '/focus'} />
-          <span className="text-sm text-white-pale min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[500px]:text-base">
             Focus
           </span>
         </Link>
@@ -80,7 +80,7 @@ const Navbar = () => {
           className="group inline-flex flex-col items-center justify-center px-5"
         >
           <ProfileIcon />
-          <span className="text-sm text-white-pale min-[475px]:text-base">
+          <span className="text-sm text-white-pale min-[500px]:text-base">
             Profile
           </span>
         </Link>

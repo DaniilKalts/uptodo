@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Image from 'next/image';
 
 import Modal from './Modal';
@@ -22,7 +21,7 @@ const AvatarModal: React.FC<AvatarModalInterface> = ({
     body={
       <Image
         src={imageUrl}
-        className="rounded-full min-[475px]:w-72"
+        className="rounded-full object-cover min-[500px]:h-72 min-[500px]:w-72"
         width={216}
         height={216}
         alt="Avatar"

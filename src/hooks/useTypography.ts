@@ -4,7 +4,7 @@ import { parseCookies, setCookie } from 'nookies';
 
 // eslint-disable-next-line import/prefer-default-export
 export function useTypography() {
-  const [typographyName, setTypographyName] = useState<any>('');
+  const [typographyName, setTypographyName] = useState<any>('Lato');
 
   useEffect(() => {
     const cookies = parseCookies();

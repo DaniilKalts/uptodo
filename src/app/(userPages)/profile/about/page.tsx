@@ -13,7 +13,7 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 
 const About = () => (
   <Container>
-    <div className="mx-auto mt-10 max-w-3xl pb-40 min-[475px]:mt-14 min-[475px]:pb-44">
+    <div className="mx-auto mt-10 max-w-3xl pb-40 min-[500px]:mt-14 min-[500px]:pb-44">
       <h1 className="mb-6 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent">
         UpTodo Service
       </h1>
@@ -24,7 +24,7 @@ const About = () => (
             width={226}
             height={226}
             alt="Management"
-            className="mt-2 min-[475px]:mt-6 min-[475px]:w-56 md:w-48"
+            className="mt-2 min-[500px]:mt-6 min-[500px]:w-56 md:w-48"
             priority
           />
           <h5 className="text-[22px] font-bold text-purple-light">
@@ -37,7 +37,7 @@ const About = () => (
             width={226}
             height={226}
             alt="Management"
-            className="mt-6 min-[475px]:w-56 md:w-52"
+            className="mt-6 min-[500px]:w-56 md:w-52"
             priority
           />
           <h5 className="text-center text-[22px] font-bold text-purple-light">
@@ -50,7 +50,7 @@ const About = () => (
             width={226}
             height={226}
             alt="Management"
-            className="mt-6 min-[475px]:w-56 md:w-52"
+            className="mt-6 min-[500px]:w-56 md:w-52"
             priority
           />
           <h5 className="text-[22px] font-bold text-purple-light">
@@ -59,64 +59,64 @@ const About = () => (
         </div>
       </div>
       <div className="mb-6 grid border-t border-gray-200 pt-8">
-        <h2 className="mb-6 text-xl font-bold text-gray-dark dark:text-white min-[475px]:text-3xl">
+        <h2 className="mb-6 text-xl font-bold text-gray-dark dark:text-white min-[500px]:text-3xl">
           Our Vision:
         </h2>
-        <p className="mb-4 text-sm font-medium text-gray-500 dark:text-white-pale min-[475px]:text-lg">
+        <p className="mb-4 text-sm font-medium text-gray-500 dark:text-white-pale min-[500px]:text-lg">
           At UpTodo, people typically join to effortlessly manage tasks. Our
           platform offers simplified task organization, setting deadlines, and
           tracking progress. Just like sharing a slice of pizza, we start by
           introducing you to the basics.
         </p>
-        <p className="mb-4 text-sm font-medium text-gray-500 dark:text-white-pale min-[475px]:text-lg">
+        <p className="mb-4 text-sm font-medium text-gray-500 dark:text-white-pale min-[500px]:text-lg">
           However, UpTodo means more than task management. It's a venture that
           fuels our passion, motivating us to wake up each day with excitement
           to keep pushing forward.
         </p>
-        <p className="mb-2 text-sm font-medium text-gray-500 dark:text-white-pale min-[475px]:text-lg">
+        <p className="mb-2 text-sm font-medium text-gray-500 dark:text-white-pale min-[500px]:text-lg">
           What's our drive? Let us reveal that to you.
         </p>
       </div>
       <div>
-        <h2 className="mb-6 text-xl font-bold text-gray-dark dark:text-white min-[475px]:text-3xl">
+        <h2 className="mb-6 text-xl font-bold text-gray-dark dark:text-white min-[500px]:text-3xl">
           Unleash Your Potential with UpTodo!
         </h2>
         <div className="grid gap-8 sm:grid-cols-2">
-          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[500px]:p-7">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[500px]:text-[22px]">
               Empower Task Mastery
             </h3>
-            <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
+            <p className="text-sm font-medium text-white-pale min-[500px]:text-lg">
               UpTodo empowers you with an intuitive platform to seamlessly
               manage tasks, amplifying your control over goals and fostering
               achievement.
             </p>
           </div>
-          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[500px]:p-7">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[500px]:text-[22px]">
               Boost Your Efficiency
             </h3>
-            <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
+            <p className="text-sm font-medium text-white-pale min-[500px]:text-lg">
               Elevate productivity through UpTodo's streamlined features.
               Prioritize tasks, set reminders, and track progress effortlessly,
               igniting a drive for success.
             </p>
           </div>
-          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[500px]:p-7">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[500px]:text-[22px]">
               Fuel Creative Spark
             </h3>
-            <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
+            <p className="text-sm font-medium text-white-pale min-[500px]:text-lg">
               Beyond task management, UpTodo nurtures creativity. It transforms
               routine tasks into inspiring projects, fostering innovative
               thinking and originality.
             </p>
           </div>
-          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[475px]:p-7">
-            <h3 className="mb-1 text-lg font-bold text-purple min-[475px]:text-[22px]">
+          <div className="rounded-2xl bg-gray-500 p-5 dark:bg-black-light min-[500px]:p-7">
+            <h3 className="mb-1 text-lg font-bold text-purple min-[500px]:text-[22px]">
               Partner in Success
             </h3>
-            <p className="text-sm font-medium text-white-pale min-[475px]:text-lg">
+            <p className="text-sm font-medium text-white-pale min-[500px]:text-lg">
               With UpTodo's insights and personalized support, navigate tasks
               and milestones confidently, forging a path to success with a
               dedicated ally.

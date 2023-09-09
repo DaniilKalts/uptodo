@@ -138,7 +138,7 @@ const Timer: React.FC<TimerInterface> = ({ timerSeconds, onEdit }) => {
           {minutesString}:{secondsString}
         </p>
       </div>
-      <p className="mb-6 mt-4 max-w-sm text-center text-base text-gray-dark dark:text-white min-[475px]:text-lg">
+      <p className="mb-6 mt-4 max-w-sm text-center text-base text-gray-dark dark:text-white min-[500px]:text-lg">
         {"While your focus mode is on, make sure, you don't leave the app"}
       </p>
       <div className="flex w-full max-w-sm items-center justify-between gap-5">

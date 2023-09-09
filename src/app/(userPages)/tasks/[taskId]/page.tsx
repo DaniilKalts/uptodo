@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
 
-import { categories } from '@/utils/Categories';
+import { categories } from '@/data/Categories';
 import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
@@ -354,7 +354,7 @@ const Task = ({ params }: TaskIdPageProps) => {
       </form>
     );
     footerContent = (
-      <footer className="mt-2 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-2 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -486,7 +486,7 @@ const Task = ({ params }: TaskIdPageProps) => {
     modalTitle = '';
 
     bodyContent = (
-      <div className="w-full min-[475px]:px-2">
+      <div className="w-full min-[500px]:px-2">
         <div className="flex items-center justify-between px-3">
           <svg
             onClick={goToPreviousMonth}
@@ -503,14 +503,14 @@ const Task = ({ params }: TaskIdPageProps) => {
             />
           </svg>
           <div className="flex flex-col items-center">
-            <h4 className="text-lg text-white-pale min-[475px]:text-xl">
+            <h4 className="text-lg text-white-pale min-[500px]:text-xl">
               {selectedDate
                 .toLocaleString('en-GB', {
                   month: 'long',
                 })
                 .toUpperCase()}
             </h4>
-            <p className="text-sm text-gray-200 min-[475px]:text-base">
+            <p className="text-sm text-gray-200 min-[500px]:text-base">
               {selectedDate.toLocaleString('en-GB', {
                 year: 'numeric',
               })}
@@ -532,33 +532,33 @@ const Task = ({ params }: TaskIdPageProps) => {
           </svg>
         </div>
         <div className="mx-auto my-3 h-[0.5px] w-full bg-white-pale"></div>
-        <div className="mb-5 grid grid-cols-7 gap-x-4 gap-y-4 min-[475px]:gap-x-7">
-          <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
+        <div className="mb-5 grid grid-cols-7 gap-x-4 gap-y-4 min-[500px]:gap-x-7">
+          <div className="text-center text-xs font-semibold uppercase text-red min-[500px]:text-base">
             Sun
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Mon
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Tue
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Wed
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Thu
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Fri
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-red min-[500px]:text-base">
             Sat
           </div>
           {getDaysInMonth().map((date, index) => (
             <div
               key={index}
               className={cn(
-                'flex h-7 w-7 items-center justify-center rounded-lg min-[475px]:h-9 min-[475px]:w-9',
+                'flex h-7 w-7 items-center justify-center rounded-lg min-[500px]:h-9 min-[500px]:w-9',
                 getDateStylings(date),
               )}
               onClick={() => {
@@ -591,7 +591,7 @@ const Task = ({ params }: TaskIdPageProps) => {
             >
               <p
                 className={cn(
-                  'text-sm font-semibold min-[475px]:text-base',
+                  'text-sm font-semibold min-[500px]:text-base',
                   date.getMonth() === selectedDate.getMonth()
                     ? 'text-white-pale'
                     : 'text-gray-200',
@@ -606,7 +606,7 @@ const Task = ({ params }: TaskIdPageProps) => {
     );
 
     footerContent = (
-      <footer className="mt-4 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-4 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -655,21 +655,21 @@ const Task = ({ params }: TaskIdPageProps) => {
 
     bodyContent = (
       <div className="mb-8 mt-12 flex w-full items-center justify-center gap-4">
-        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-          <p className="absolute -top-6 text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+          <p className="absolute -top-6 text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
             Hours
           </p>
           {hoursSwiper}
         </div>
         <p className="text-3xl text-white-pale">:</p>
-        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-          <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+          <p className="absolute -top-6 text-base text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
             Minutes
           </p>
           {minutesSwiper}
         </div>
-        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-          <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+          <p className="absolute -top-6 text-base text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
             Early/Late
           </p>
           <TimeSwiper
@@ -681,7 +681,7 @@ const Task = ({ params }: TaskIdPageProps) => {
     );
 
     footerContent = (
-      <footer className="mt-4 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-4 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -738,7 +738,7 @@ const Task = ({ params }: TaskIdPageProps) => {
     modalTitle = 'Choose Category';
 
     bodyContent = (
-      <div className="mt-6 grid w-full max-w-sm grid-cols-3 max-[475px]:mx-auto max-[475px]:max-w-[300px]">
+      <div className="mt-6 grid w-full max-w-sm grid-cols-3 max-[500px]:mx-auto max-[500px]:max-w-[300px]">
         {categories.map((category, id) => (
           <div
             className={cn('mb-4 flex flex-col items-center', {
@@ -748,7 +748,7 @@ const Task = ({ params }: TaskIdPageProps) => {
           >
             <button
               className={cn(
-                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[475px]:h-[72px] min-[475px]:w-[72px]',
+                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[500px]:h-[72px] min-[500px]:w-[72px]',
                 getCategoryBgColor(category.bgColor),
               )}
               disabled={category.label === 'Create New'}
@@ -773,7 +773,7 @@ const Task = ({ params }: TaskIdPageProps) => {
       </div>
     );
     footerContent = (
-      <footer className="mt-6 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-6 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -805,11 +805,11 @@ const Task = ({ params }: TaskIdPageProps) => {
     modalTitle = 'Edit Task Priority';
 
     bodyContent = (
-      <div className="mt-6 grid grid-cols-3 justify-center gap-4 px-2 max-[425px]:mx-auto max-[425px]:max-w-[300px] min-[425px]:grid-cols-4 min-[475px]:gap-4 min-[475px]:px-6">
+      <div className="mt-6 grid grid-cols-3 justify-center gap-4 px-2 max-[425px]:mx-auto max-[425px]:max-w-[300px] min-[425px]:grid-cols-4 min-[500px]:gap-4 min-[500px]:px-6">
         {Array.from({ length: 10 }, (_, index) => index + 1).map((rate) => (
           <div
             className={cn(
-              'flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg pb-1 pt-[10px] transition-colors min-[475px]:h-20 min-[475px]:w-20',
+              'flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg pb-1 pt-[10px] transition-colors min-[500px]:h-20 min-[500px]:w-20',
               potentialPriority !== rate
                 ? 'bg-gray-800 hover:bg-purple'
                 : 'bg-purple',
@@ -819,8 +819,8 @@ const Task = ({ params }: TaskIdPageProps) => {
               setPotentialPriority(rate);
             }}
           >
-            <FlagIcon customClasses="text-white min-[475px]:h-16 min-[475px]:w-16" />
-            <p className="mt-2 text-base text-white min-[475px]:text-lg">
+            <FlagIcon customClasses="text-white min-[500px]:h-16 min-[500px]:w-16" />
+            <p className="mt-2 text-base text-white min-[500px]:text-lg">
               {rate}
             </p>
           </div>
@@ -828,7 +828,7 @@ const Task = ({ params }: TaskIdPageProps) => {
       </div>
     );
     footerContent = (
-      <footer className="mt-6 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-6 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -857,13 +857,13 @@ const Task = ({ params }: TaskIdPageProps) => {
     modalTitle = 'Delete Task';
 
     bodyContent = (
-      <h2 className="my-7 text-center text-[18px] text-white-pale min-[475px]:text-[20px]">
+      <h2 className="my-7 text-center text-[18px] text-white-pale min-[500px]:text-[20px]">
         Are You sure you want to delete this task? <br /> Task title :{' '}
         {task.title}
       </h2>
     );
     footerContent = (
-      <footer className="flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="flex w-full items-center justify-between min-[500px]:gap-8">
         <Button label="Cancel" onClick={() => setIsOpen(false)} />
         <Button
           label="Delete"
@@ -876,6 +876,8 @@ const Task = ({ params }: TaskIdPageProps) => {
                 duration: 2000,
               });
 
+              setIsOpen(false);
+
               setTimeout(() => {
                 router.back();
               }, 2000);
@@ -887,6 +889,8 @@ const Task = ({ params }: TaskIdPageProps) => {
                 icon: '❌',
                 duration: 2000,
               });
+
+              setIsOpen(false);
 
               setTimeout(() => {
                 router.back();
@@ -1095,9 +1099,9 @@ const Task = ({ params }: TaskIdPageProps) => {
                     icon: '👏',
                   });
                 }}
-                className="group mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
+                className="group mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[500px]:mt-4 min-[500px]:h-6 min-[500px]:w-[26px]"
               >
-                <div className="h-[7px] w-[7px] rounded-full bg-gray-dark opacity-0 group-hover:opacity-100 dark:bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
+                <div className="h-[7px] w-[7px] rounded-full bg-gray-dark opacity-0 group-hover:opacity-100 dark:bg-white-pale min-[500px]:h-2 min-[500px]:w-2"></div>
               </div>
             ) : (
               <div
@@ -1115,14 +1119,14 @@ const Task = ({ params }: TaskIdPageProps) => {
                     duration: 2000,
                   });
                 }}
-                className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[475px]:mt-4 min-[475px]:h-6 min-[475px]:w-[26px]"
+                className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[500px]:mt-4 min-[500px]:h-6 min-[500px]:w-[26px]"
               >
-                <div className="h-[7px] w-[7px] rounded-full bg-gray-dark dark:bg-white-pale min-[475px]:h-2 min-[475px]:w-2"></div>
+                <div className="h-[7px] w-[7px] rounded-full bg-gray-dark dark:bg-white-pale min-[500px]:h-2 min-[500px]:w-2"></div>
               </div>
             )}
             <div className="w-full">
               <div className="flex items-center justify-between">
-                <h6 className="text-lg text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+                <h6 className="text-lg text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
                   {task.title}
                 </h6>
                 <div className="group relative">
@@ -1156,7 +1160,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   </div>
                 </div>
               </div>
-              <p className="max-w-lg text-base text-gray-600 dark:text-gray-200 min-[475px]:text-lg">
+              <p className="max-w-lg text-base text-gray-600 dark:text-gray-200 min-[500px]:text-lg">
                 {lines?.map((line, index) => (
                   <React.Fragment key={index}>
                     {line}
@@ -1175,7 +1179,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   onClick={() => {}}
                   customClasses={'text-gray-dark dark:text-white-pale w-7 h-7'}
                 />
-                <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+                <h5 className="text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
                   Task Time :
                 </h5>
               </div>
@@ -1184,7 +1188,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   setStep(STEPS.DATE);
                   setIsOpen(true);
                 }}
-                className="cursor-pointer rounded-lg bg-gray-500 px-4 py-3 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[475px]:px-6 min-[475px]:py-4 min-[475px]:text-base"
+                className="cursor-pointer rounded-lg bg-gray-500 px-4 py-3 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[500px]:px-6 min-[500px]:py-4 min-[500px]:text-base"
               >
                 Today At:{' '}
                 {`${getTimeString(
@@ -1200,7 +1204,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   onClick={() => {}}
                   customClasses={'text-gray-dark dark:text-white-pale w-7 h-7'}
                 />
-                <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+                <h5 className="text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
                   Task Category :
                 </h5>
               </div>
@@ -1209,11 +1213,11 @@ const Task = ({ params }: TaskIdPageProps) => {
                   setStep(STEPS.CATEGORY);
                   setIsOpen(true);
                 }}
-                className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-500 px-4 py-2 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[475px]:px-6 min-[475px]:text-base"
+                className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-500 px-4 py-2 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[500px]:px-6 min-[500px]:text-base"
               >
                 {getCategoryIcon(
                   task.category.label,
-                  'w-7 h-7 min-[475px]:w-9 min-[475px]:h-9',
+                  'w-7 h-7 min-[500px]:w-9 min-[500px]:h-9',
                 )}{' '}
                 {task.category.label}
               </div>
@@ -1224,7 +1228,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   onClick={() => {}}
                   customClasses={'text-gray-dark dark:text-white-pale w-7 h-7'}
                 />
-                <h5 className="text-base text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+                <h5 className="text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
                   Task Prioroty :
                 </h5>
               </div>
@@ -1233,7 +1237,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                   setStep(STEPS.PRIORITY);
                   setIsOpen(true);
                 }}
-                className="cursor-pointer rounded-lg bg-gray-500 px-4 py-3 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[475px]:px-6 min-[475px]:text-base"
+                className="cursor-pointer rounded-lg bg-gray-500 px-4 py-3 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[500px]:px-6 min-[500px]:text-base"
               >
                 {getPriorityLabel(task.priority)}
               </div>
@@ -1278,7 +1282,7 @@ const Task = ({ params }: TaskIdPageProps) => {
                     fill="currentColor"
                   />
                 </svg>
-                <h5 className="text-base text-red group-hover:text-red-dark min-[475px]:text-xl">
+                <h5 className="text-base text-red group-hover:text-red-dark min-[500px]:text-xl">
                   Delete Task
                 </h5>
               </div>

@@ -44,8 +44,8 @@ const Input: React.FC<InputProps> = ({
         text-white-pale
         placeholder-gray-200
         shadow-sm
-        min-[475px]:py-3
-        min-[475px]:text-${small ? 'lg' : 'xl'} 
+        min-[500px]:py-3
+        min-[500px]:text-${small ? 'lg' : 'xl'} 
         bg-transparent
       `;
     }
@@ -63,12 +63,12 @@ const Input: React.FC<InputProps> = ({
       shadow-sm 
       dark:bg-black-light
       dark:text-white-pale
-      min-[475px]:py-3
-      min-[475px]:text-${small ? 'lg' : 'xl'}
+      min-[500px]:py-3
+      min-[500px]:text-${small ? 'lg' : 'xl'}
     `;
   };
   return (
-    <div className="mb-4 flex flex-col min-[475px]:mb-5">
+    <div className="mb-4 flex flex-col min-[500px]:mb-5">
       {label && (
         <label
           htmlFor={id}
@@ -76,8 +76,8 @@ const Input: React.FC<InputProps> = ({
             'mb-2 text-base',
             ghost ? 'text-white-pale' : 'text-gray-dark dark:text-white-pale',
             type === 'password'
-              ? 'min-[475px]:text-[17px]'
-              : 'min-[475px]:text-xl',
+              ? 'min-[500px]:text-[17px]'
+              : 'min-[500px]:text-xl',
           )}
         >
           {label}
@@ -93,7 +93,7 @@ const Input: React.FC<InputProps> = ({
         {...register(id, { required: 'You have to fill this field!' })}
       />
       {errors[id] && (
-        <p className="mt-1 text-red max-[475px]:text-[15px]">{errorMessage}</p>
+        <p className="mt-1 text-red max-[500px]:text-[15px]">{errorMessage}</p>
       )}
     </div>
   );

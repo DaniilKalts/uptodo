@@ -54,14 +54,14 @@ export default function CalendarLayout({
     <div className={`${mounted ? 'pb-40 md:pb-44' : ''}`}>
       <div className={`${!mounted ? 'hidden' : ''}`}>
         <header className="mx-auto mb-4 mt-8 flex items-center justify-center">
-          <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+          <h4 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
             Calendar
           </h4>
         </header>
         <Calendar />
         <Container>
           <section className="mx-auto mt-7 max-w-[575px]">
-            <div className="mx-auto flex w-full justify-center gap-4 rounded-md bg-gray-500 p-4 min-[475px]:gap-8 min-[525px]:w-11/12 min-[575px]:w-10/12">
+            <div className="mx-auto flex w-full justify-center gap-4 rounded-md bg-gray-500 p-4 min-[500px]:gap-8 min-[525px]:w-11/12 min-[575px]:w-10/12">
               <Button
                 label="Incompleted"
                 onClick={() => onClick('incompleted')}

@@ -49,9 +49,9 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type || 'button'}
       className={cn(
-        'flex w-full items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-md px-4 py-3 text-base disabled:cursor-not-allowed disabled:opacity-70 min-[475px]:px-8 ',
+        'flex w-full items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-md px-4 py-3 text-base disabled:cursor-not-allowed disabled:opacity-70 min-[500px]:px-8 ',
         `max-w-${small ? 'sm' : 'md'}`,
-        `min-[475px]:text-${small ? 'base' : 'lg'}`,
+        `min-[500px]:text-${small ? 'base' : 'lg'}`,
         outlineStyles(),
         {
           'bg-purple text-white outline outline-2 outline-purple hover:bg-purple-dark hover:outline-purple-dark focus:outline-none focus:ring-4 focus:ring-purple-light':

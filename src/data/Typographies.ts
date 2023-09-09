@@ -56,7 +56,7 @@ const caveatBrush = Caveat_Brush({
   weight: ['400'],
 });
 
-export const typographyDemos = [
+export const TypographyDemos = [
   {
     name: 'Space_Grotesk',
     styleName: spaceGrotesk.className,

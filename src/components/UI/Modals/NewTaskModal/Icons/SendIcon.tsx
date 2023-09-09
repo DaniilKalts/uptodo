@@ -2,7 +2,7 @@ import React from 'react';
 
 const SendIcon: React.FC = () => (
   <svg
-    className="cursor-pointer text-purple transition-colors hover:text-purple-dark min-[475px]:h-7 min-[475px]:w-7"
+    className="cursor-pointer text-purple transition-colors hover:text-purple-dark min-[500px]:h-7 min-[500px]:w-7"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"

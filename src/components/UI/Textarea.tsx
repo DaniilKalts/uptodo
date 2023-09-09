@@ -43,8 +43,8 @@ const Textarea: React.FC<InputProps> = ({
         text-white-pale
         placeholder-gray-200
         shadow-sm
-        min-[475px]:py-3
-        min-[475px]:text-${small ? 'lg' : 'xl'}
+        min-[500px]:py-3
+        min-[500px]:text-${small ? 'lg' : 'xl'}
         bg-transparent
         h-48
         resize-none
@@ -63,17 +63,17 @@ const Textarea: React.FC<InputProps> = ({
       shadow-sm 
       dark:bg-black-light
       dark:text-white-pale
-      min-[475px]:py-3
-      min-[475px]:text-${small ? 'lg' : 'xl'}
+      min-[500px]:py-3
+      min-[500px]:text-${small ? 'lg' : 'xl'}
     `;
   };
   return (
-    <div className="mb-4 flex flex-col min-[475px]:mb-5">
+    <div className="mb-4 flex flex-col min-[500px]:mb-5">
       {label && (
         <label
           htmlFor={id}
           className={cn(
-            'mb-2 text-lg min-[475px]:text-xl',
+            'mb-2 text-lg min-[500px]:text-xl',
             ghost ? 'text-white-pale' : 'text-gray-dark dark:text-white-pale',
           )}
         >

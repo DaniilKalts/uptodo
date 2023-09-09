@@ -14,7 +14,7 @@ const ClockIcon: React.FC<ClockIconInterface> = ({
   <svg
     onClick={onClick}
     className={cn(
-      'cursor-pointer transition-colors min-[475px]:h-7 min-[475px]:w-7',
+      'cursor-pointer transition-colors min-[500px]:h-7 min-[500px]:w-7',
       customClasses,
     )}
     xmlns="http://www.w3.org/2000/svg"

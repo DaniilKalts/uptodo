@@ -38,13 +38,13 @@ const Settings = () => {
             <Link href="/profile/settings" className="group">
               {BackIcon}
             </Link>
-            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
               Theme
             </h4>
           </header>
           <main className="mt-6 flex w-full max-w-lg flex-col justify-start">
             <div className="mt-5">
-              <h5 className="text-lg text-gray-dark dark:text-gray-200 min-[475px]:text-xl">
+              <h5 className="text-lg text-gray-dark dark:text-gray-200 min-[500px]:text-xl">
                 Choose your theme:
               </h5>
               <hr className="mb-4 mt-5 h-[2px] w-full rounded border-0 bg-gray-dark" />
@@ -58,7 +58,7 @@ const Settings = () => {
                     {<Icon size={28} />}
                     <p
                       className={
-                        'text-base capitalize text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white min-[475px]:text-lg'
+                        'text-base capitalize text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white min-[500px]:text-lg'
                       }
                     >
                       {name} Theme

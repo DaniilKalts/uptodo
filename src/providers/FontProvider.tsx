@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { Lato } from 'next/font/google';
 
-import { typographyDemos } from '@/utils/Typografies';
+import { TypographyDemos } from '@/data/Typographies';
 
 import { useCookies } from 'react-cookie';
 
@@ -18,7 +18,7 @@ const FontProvider = ({ children }: { children: React.ReactNode }) => {
   const [cookies] = useCookies(['typographyName']);
   const [mounted, setMounted] = useState<boolean>(false);
 
-  const typographyStyles = typographyDemos.find(
+  const typographyStyles = TypographyDemos.find(
     (demo) => demo.name === cookies?.typographyName,
   )?.styleName;
 

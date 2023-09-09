@@ -329,13 +329,13 @@ const Calendar = () => {
             >
               <h6
                 className={cn(
-                  'text-base font-bold uppercase min-[475px]:text-lg',
+                  'text-base font-bold uppercase min-[500px]:text-lg',
                   getDayOfWeekColor(date.day, date.dayOfWeek),
                 )}
               >
                 {date.dayOfWeek}
               </h6>
-              <h6 className="text-base font-bold text-white min-[475px]:text-lg">
+              <h6 className="text-base font-bold text-white min-[500px]:text-lg">
                 {date.day}
               </h6>
               {date.anyTasks && (

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { typographyDemos } from '@/utils/Typografies';
+import { TypographyDemos } from '@/data/Typographies';
 import { cn } from '@/utils/Cn';
 
 import { AppTypographyIcon } from '@/components/userPages/Profile/Icons/Settings';
@@ -23,17 +23,17 @@ const Settings = () => {
             <Link href="/profile/settings" className="group">
               {BackIcon}
             </Link>
-            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            <h4 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
               Typography
             </h4>
           </header>
           <main className="mt-6 flex w-full max-w-lg flex-col justify-start">
             <div className="mt-5">
-              <h5 className="text-lg text-gray-dark dark:text-gray-200 min-[475px]:text-xl">
+              <h5 className="text-lg text-gray-dark dark:text-gray-200 min-[500px]:text-xl">
                 Choose your font:
               </h5>
               <hr className="mb-4 mt-5 h-[2px] w-full rounded border-0 bg-gray-dark" />
-              {typographyDemos.map(({ name, styleName }) => (
+              {TypographyDemos.map(({ name, styleName }) => (
                 <div
                   key={name}
                   className="group flex w-full cursor-pointer items-center justify-between gap-4 py-3"
@@ -45,7 +45,7 @@ const Settings = () => {
                     {AppTypographyIcon}
                     <p
                       className={cn(
-                        'text-base capitalize text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white min-[475px]:text-lg',
+                        'text-base capitalize text-gray-dark group-hover:text-black dark:text-white-pale dark:group-hover:text-white min-[500px]:text-lg',
                         styleName,
                       )}
                     >

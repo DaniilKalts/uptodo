@@ -25,7 +25,7 @@ const Select: React.FC<SelectInterface> = ({
 
   const hoverClass = () => {
     if (theme === 'gray') {
-      return 'hover:bg-gray-light dark:hover:bg-gray-500';
+      return 'hover:bg-gray-500 dark:hover:bg-gray-500';
     }
     return 'hover:bg-purple-light';
   };
@@ -42,7 +42,7 @@ const Select: React.FC<SelectInterface> = ({
 
   const disabledClass = () => {
     if (theme === 'gray') {
-      return 'disabled:bg-gray-700';
+      return 'disabled:bg-gray-600 dark:disabled:bg-gray-700';
     }
     return 'disabled:bg-purple-dark';
   };
@@ -65,7 +65,7 @@ const Select: React.FC<SelectInterface> = ({
       <button
         className={cn(
           'z-10 inline-flex w-full flex-shrink-0 items-center justify-between rounded-lg px-4 py-2.5 text-center text-base font-medium text-white-pale',
-          theme === 'gray' ? 'bg-gray-500 dark:bg-gray-600' : 'bg-purple',
+          theme === 'gray' ? 'bg-gray-light dark:bg-gray-600' : 'bg-purple',
         )}
         onClick={() => setIsOpen((prev) => !prev)}
       >
@@ -102,7 +102,7 @@ const Select: React.FC<SelectInterface> = ({
                 className={cn(
                   'inline-flex w-full cursor-pointer px-4 py-2 text-base text-white-pale',
                   theme === 'gray'
-                    ? 'bg-gray-500 dark:bg-gray-600'
+                    ? 'bg-gray-light dark:bg-gray-600'
                     : 'bg-purple',
                   hoverClass(),
                   roundedClass(id),

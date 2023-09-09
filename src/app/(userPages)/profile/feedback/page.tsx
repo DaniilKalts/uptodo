@@ -96,22 +96,22 @@ const Feedback = () => {
   };
 
   return (
-    <div className="pb-[140px] max-[475px]:pb-[9rem]">
+    <div className="pb-[140px] max-[500px]:pb-[9rem]">
       <Container>
-        <div className="flex h-auto items-center justify-center max-[475px]:mt-8">
+        <div className="flex h-auto items-center justify-center max-[500px]:mt-8">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mx-auto flex w-full max-w-[525px] flex-col overflow-auto rounded-lg border p-6 dark:bg-black-light min-[475px]:p-8"
+            className="mx-auto flex w-full max-w-[525px] flex-col overflow-auto rounded-lg border p-6 dark:bg-black-light min-[500px]:p-8"
           >
             <div className="flex w-full items-center justify-between max-[525px]:mb-2">
-              <h2 className="text-[26px] font-medium text-purple min-[475px]:text-3xl">
+              <h2 className="text-[26px] font-medium text-purple min-[500px]:text-3xl">
                 Feedback
               </h2>
               <p className="text-5xl max-[525px]:absolute max-[525px]:right-4 max-[525px]:top-4">
                 &#128640;
               </p>
             </div>
-            <p className="max-w-xs text-base text-gray-dark dark:text-white-pale min-[475px]:text-lg">
+            <p className="max-w-xs text-base text-gray-dark dark:text-white-pale min-[500px]:text-lg">
               If you had any issues or you liked our product, please share with
               us!
             </p>

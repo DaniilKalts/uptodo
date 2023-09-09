@@ -31,13 +31,13 @@ const TimeSwiper: React.FC<TimerSwiperInterface> = ({
     >
       {['AM', 'PM'].map((timeValue) => (
         <SwiperSlide key={timeValue}>
-          <p className="pointer-events-none absolute top-0 text-xl text-gray-dark min-[475px]:text-2xl">
+          <p className="pointer-events-none absolute top-0 text-xl text-gray-dark min-[500px]:text-2xl">
             {timeValue === 'PM' && 'AM'}
           </p>
-          <p className="pointer-events-none text-3xl text-white-pale min-[475px]:text-4xl">
+          <p className="pointer-events-none text-3xl text-white-pale min-[500px]:text-4xl">
             {timeValue}
           </p>
-          <p className="pointer-events-none absolute bottom-0 text-xl text-gray-dark min-[475px]:text-2xl">
+          <p className="pointer-events-none absolute bottom-0 text-xl text-gray-dark min-[500px]:text-2xl">
             {timeValue === 'AM' && 'PM'}
           </p>
         </SwiperSlide>

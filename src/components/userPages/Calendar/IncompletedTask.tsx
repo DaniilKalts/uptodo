@@ -143,22 +143,22 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
       className="relative flex cursor-pointer flex-wrap items-center gap-4 rounded-md bg-gray-light p-4 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600"
     >
       <div
-        className="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[475px]:h-6 min-[475px]:w-6"
+        className="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[500px]:h-6 min-[500px]:w-6"
         onClick={(e) => {
           e.stopPropagation();
           onComplete();
         }}
       >
-        <div className="h-[6px] w-[6px] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 min-[475px]:h-2 min-[475px]:w-2"></div>
+        <div className="h-[6px] w-[6px] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 min-[500px]:h-2 min-[500px]:w-2"></div>
       </div>
       <div>
         <Highlighter
-          className="mb-[2px] text-base text-white-pale min-[475px]:mb-[6px] min-[475px]:text-xl"
+          className="mb-[2px] text-base text-white-pale min-[500px]:mb-[6px] min-[500px]:text-xl"
           searchWords={highligtTitleConfig.searchWords}
           autoEscape={true}
           textToHighlight={highligtTitleConfig.textToHighlight}
         />
-        <p className={cn('text-sm min-[475px]:text-base', getTodayAtColor())}>
+        <p className={cn('text-sm min-[500px]:text-base', getTodayAtColor())}>
           Today At:{' '}
           {`${getTimeString(
             new Date(todayAt).getHours() % 12 || 12,
@@ -167,7 +167,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
           }`}
         </p>
       </div>
-      <div className="flex gap-4 min-[475px]:absolute min-[475px]:bottom-1 min-[475px]:right-2">
+      <div className="flex gap-4 min-[500px]:absolute min-[500px]:bottom-1 min-[500px]:right-2">
         <div
           className={cn(
             'flex h-10 items-center gap-3 rounded-md px-3',
@@ -175,7 +175,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
           )}
         >
           {getCategoryIcon(category.label, 'w-6 h-6')}
-          <p className="text-sm text-white min-[475px]:text-base">
+          <p className="text-sm text-white min-[500px]:text-base">
             {category.label}
           </p>
         </div>
@@ -198,7 +198,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
                 fill="currentColor"
               />
             </svg>
-            <p className="text-sm text-white-pale min-[475px]:text-base">
+            <p className="text-sm text-white-pale min-[500px]:text-base">
               {priority}
             </p>
           </div>

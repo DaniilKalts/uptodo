@@ -32,14 +32,14 @@ const Welcome = () => {
             />
           </header>
           <main className="flex w-full flex-col items-center justify-center">
-            <h2 className="mt-8 text-center text-[8.5vw] font-bold text-gray-dark dark:text-white-pale min-[475px]:text-4xl">
+            <h2 className="mt-8 text-center text-[8.5vw] font-bold text-gray-dark dark:text-white-pale min-[500px]:text-4xl">
               Welcome to UpTodo
             </h2>
-            <p className="relative z-10 mt-6 max-w-md text-center text-base text-gray-dark dark:text-white-pale min-[475px]:text-[17px]">
+            <p className="relative z-10 mt-6 max-w-md text-center text-base text-gray-dark dark:text-white-pale min-[500px]:text-[17px]">
               Please login to your account or create a new account to continue
             </p>
           </main>
-          <footer className="mt-12 flex w-fit items-center justify-between gap-6 px-2 max-[475px]:w-full min-[475px]:gap-8">
+          <footer className="mt-12 flex w-fit items-center justify-between gap-6 px-2 max-[500px]:w-full min-[500px]:gap-8">
             <Link href="login" className="w-full max-w-sm">
               <Button label="Login" onClick={() => {}} filled upperCase small />
             </Link>

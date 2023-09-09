@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { CategoryIconType, CategoryType, TaskType } from '@/types';
-import { categories } from '@/utils/Categories';
+import { categories } from '@/data/Categories';
 import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
@@ -252,7 +252,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       className="w-screen max-w-md rounded-t-xl bg-gray-700 px-8 py-8 pb-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h3 className="mb-6 text-xl font-bold text-white-pale min-[475px]:text-2xl">
+      <h3 className="mb-6 text-xl font-bold text-white-pale min-[500px]:text-2xl">
         Add Task
       </h3>
       <main className="mx-auto mt-4">
@@ -401,7 +401,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     modalTitle = '';
 
     bodyContent = (
-      <div className="w-full min-[475px]:px-2">
+      <div className="w-full min-[500px]:px-2">
         <div className="flex items-center justify-between px-3">
           <svg
             onClick={goToPreviousMonth}
@@ -418,14 +418,14 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             />
           </svg>
           <div className="flex flex-col items-center">
-            <h4 className="text-lg text-gray-dark dark:text-white-pale min-[475px]:text-xl">
+            <h4 className="text-lg text-gray-dark dark:text-white-pale min-[500px]:text-xl">
               {selectedDate
                 .toLocaleString('en-GB', {
                   month: 'long',
                 })
                 .toUpperCase()}
             </h4>
-            <p className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-base">
+            <p className="text-sm text-gray-dark dark:text-gray-200 min-[500px]:text-base">
               {selectedDate.toLocaleString('en-GB', {
                 year: 'numeric',
               })}
@@ -447,33 +447,33 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
           </svg>
         </div>
         <div className="mx-auto my-3 h-[0.5px] w-full bg-white-pale"></div>
-        <div className="mb-5 grid grid-cols-7 gap-x-4 gap-y-4 min-[475px]:gap-x-7">
-          <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
+        <div className="mb-5 grid grid-cols-7 gap-x-4 gap-y-4 min-[500px]:gap-x-7">
+          <div className="text-center text-xs font-semibold uppercase text-red min-[500px]:text-base">
             Sun
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Mon
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Tue
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Wed
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Thu
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-white-pale min-[500px]:text-base">
             Fri
           </div>
-          <div className="text-center text-xs font-semibold uppercase text-red min-[475px]:text-base">
+          <div className="text-center text-xs font-semibold uppercase text-red min-[500px]:text-base">
             Sat
           </div>
           {getDaysInMonth().map((date, index) => (
             <div
               key={index}
               className={cn(
-                'flex h-7 w-7 items-center justify-center rounded-lg min-[475px]:h-9 min-[475px]:w-9',
+                'flex h-7 w-7 items-center justify-center rounded-lg min-[500px]:h-9 min-[500px]:w-9',
                 getDateStylings(date),
               )}
               onClick={() => {
@@ -506,7 +506,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             >
               <p
                 className={cn(
-                  'text-sm font-semibold min-[475px]:text-base',
+                  'text-sm font-semibold min-[500px]:text-base',
                   date.getMonth() === selectedDate.getMonth()
                     ? 'text-white-pale'
                     : 'text-gray-200',
@@ -521,7 +521,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     );
 
     footerContent = (
-      <footer className="mt-4 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-4 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -570,21 +570,21 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
 
     bodyContent = (
       <div className="mb-8 mt-12 flex w-full items-center justify-center gap-4">
-        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-          <p className="absolute -top-6 text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+          <p className="absolute -top-6 text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
             Hours
           </p>
           {hoursSwiper}
         </div>
         <p className="text-3xl text-white-pale">:</p>
-        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-          <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+          <p className="absolute -top-6 text-base text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
             Minutes
           </p>
           {minutesSwiper}
         </div>
-        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-          <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+        <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+          <p className="absolute -top-6 text-base text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
             Early/Late
           </p>
           <TimeSwiper
@@ -596,7 +596,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     );
 
     footerContent = (
-      <footer className="mt-4 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-4 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -647,7 +647,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     modalTitle = 'Choose Category';
 
     bodyContent = (
-      <div className="mt-6 grid w-full max-w-sm grid-cols-3 max-[475px]:mx-auto max-[475px]:max-w-[300px]">
+      <div className="mt-6 grid w-full max-w-sm grid-cols-3 max-[500px]:mx-auto max-[500px]:max-w-[300px]">
         {categories.map((category, id) => (
           <div
             className={cn('mb-4 flex flex-col items-center', {
@@ -657,7 +657,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
           >
             <button
               className={cn(
-                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[475px]:h-[72px] min-[475px]:w-[72px]',
+                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[500px]:h-[72px] min-[500px]:w-[72px]',
                 getCategoryBgColor(category.bgColor),
               )}
               disabled={category.label === 'Create New'}
@@ -683,7 +683,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     );
 
     footerContent = (
-      <footer className="mt-4 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-4 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -707,11 +707,11 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     modalTitle = 'Task Priority';
 
     bodyContent = (
-      <div className="mt-6 grid grid-cols-3 justify-center gap-4 px-2 max-[425px]:mx-auto max-[425px]:max-w-[300px] min-[425px]:grid-cols-4 min-[475px]:gap-4 min-[475px]:px-6">
+      <div className="mt-6 grid grid-cols-3 justify-center gap-4 px-2 max-[425px]:mx-auto max-[425px]:max-w-[300px] min-[425px]:grid-cols-4 min-[500px]:gap-4 min-[500px]:px-6">
         {Array.from({ length: 10 }, (_, index) => index + 1).map((rate) => (
           <div
             className={cn(
-              'flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg pb-1 pt-[10px] transition-colors min-[475px]:h-20 min-[475px]:w-20',
+              'flex h-[74px] w-[74px] cursor-pointer flex-col items-center rounded-lg pb-1 pt-[10px] transition-colors min-[500px]:h-20 min-[500px]:w-20',
               potentialPriority !== rate
                 ? 'bg-gray-800 hover:bg-purple'
                 : 'bg-purple',
@@ -719,8 +719,8 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             key={rate}
             onClick={() => setPotentialPriority(rate)}
           >
-            <FlagIcon customClasses="text-white min-[475px]:h-16 min-[475px]:w-16" />
-            <p className="mt-2 text-base text-white min-[475px]:text-lg">
+            <FlagIcon customClasses="text-white min-[500px]:h-16 min-[500px]:w-16" />
+            <p className="mt-2 text-base text-white min-[500px]:text-lg">
               {rate}
             </p>
           </div>
@@ -729,7 +729,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     );
 
     footerContent = (
-      <footer className="mt-6 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-6 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {

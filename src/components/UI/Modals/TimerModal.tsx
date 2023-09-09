@@ -81,15 +81,15 @@ const TimerModal: React.FC<TimerModalInterface> = ({
       title="Choose time to focus"
       body={
         <div className="mb-8 mt-12 flex items-center justify-center gap-4">
-          <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-            <p className="absolute -top-6 text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+          <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+            <p className="absolute -top-6 text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
               Minutes
             </p>
             {minutesSwiper}
           </div>
           <p className="text-3xl text-white-pale">:</p>
-          <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[475px]:h-24 min-[475px]:w-24">
-            <p className="absolute -top-6 text-base text-white-pale min-[475px]:-top-7 min-[475px]:text-lg">
+          <div className="relative flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center bg-gray-800 font-bold min-[500px]:h-24 min-[500px]:w-24">
+            <p className="absolute -top-6 text-base text-white-pale min-[500px]:-top-7 min-[500px]:text-lg">
               Seconds
             </p>
             {secondsSwiper}

@@ -61,7 +61,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[475px]:text-lg"
+          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[500px]:text-lg"
         >
           Skip
         </Link>
@@ -69,7 +69,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="mt-10 flex w-full items-center justify-center min-[475px]:w-fit md:absolute md:bottom-12 md:right-10">
+      <footer className="mt-10 flex w-full items-center justify-center min-[500px]:w-fit md:absolute md:bottom-12 md:right-10">
         <Button
           label="Next"
           onClick={() => {
@@ -100,7 +100,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[475px]:text-lg"
+          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[500px]:text-lg"
         >
           Skip
         </Link>
@@ -108,7 +108,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="mt-10 flex w-full items-center justify-between  min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
+      <footer className="mt-10 flex w-full items-center justify-between  min-[500px]:w-fit min-[500px]:gap-8 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Back"
           onClick={() => {
@@ -146,7 +146,7 @@ export default function Home() {
       <header className="absolute left-0 top-12">
         <Link
           href="welcome"
-          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[475px]:text-lg"
+          className="cursor-pointer text-base text-gray-300 hover:text-gray-800 dark:hover:text-gray-400 min-[500px]:text-lg"
         >
           Skip
         </Link>
@@ -154,7 +154,7 @@ export default function Home() {
     );
 
     const FooterContent = (
-      <footer className="mt-16 flex w-full items-center justify-between min-[475px]:w-fit min-[475px]:gap-8 md:absolute md:bottom-12 md:right-10">
+      <footer className="mt-16 flex w-full items-center justify-between min-[500px]:w-fit min-[500px]:gap-8 md:absolute md:bottom-12 md:right-10">
         <Button
           label="Back"
           onClick={() => {

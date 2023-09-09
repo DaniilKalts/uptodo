@@ -1,14 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/indent */
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 import useTasksStore from '@/store/useTasksStore';
+import { cn } from '@/utils/Cn';
 
 import { SiMicrosoftexcel } from 'react-icons/si';
+import { BsFillCameraFill } from 'react-icons/bs';
 import ExcelJS from 'exceljs';
 import { toast } from 'react-hot-toast';
 
@@ -22,6 +25,8 @@ import {
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+import useDrivePicker from 'react-google-drive-picker';
 
 import ProfileLink from '@/components/userPages/Profile/ProfileTypography';
 import Modal from '@/components/UI/Modals/Modal';
@@ -114,6 +119,8 @@ const Profile = () => {
     >,
   });
 
+  const [accountAvatar, setAccountAvatar] = useState<string>('');
+
   const accountName = watch('accountName');
   const accountOldPassword = watch('accountOldPassword');
   const accountNewPassword = watch('accountNewPassword');
@@ -155,6 +162,125 @@ const Profile = () => {
       setStep(null);
       setIsOpen(false);
     }
+  };
+
+  const [avatarSelect, setAvatarSelect] = useState<
+    '' | 'tack' | 'gallery' | 'googleDrive'
+  >('');
+
+  // Tack picture
+  const videoRef = useRef(null);
+  const [isTackingPicture, setIsTackingPicture] = useState<boolean>(false);
+  const [demoAccountAvatar, setDemoAccountAvatar] = useState<string>('');
+
+  // Function to start the camera and set up video feed
+  const startCamera = async () => {
+    if (
+      isTackingPicture ||
+      (demoAccountAvatar && accountAvatar !== demoAccountAvatar)
+    ) {
+      return;
+    }
+
+    setIsTackingPicture(true);
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: false,
+      });
+      (videoRef.current as any).srcObject = stream;
+    } catch (error) {
+      toast.error(`Error accessing camera: ${error}`);
+    }
+  };
+
+  // Function to stop the camera
+  const stopCamera = () => {
+    if (!isTackingPicture) {
+      return;
+    }
+
+    const stream = (videoRef.current as any).srcObject as MediaStream;
+
+    if (stream) {
+      const tracks = stream.getTracks();
+
+      tracks.forEach((track) => {
+        track.stop();
+      });
+
+      (videoRef.current as any).srcObject = null;
+      setIsTackingPicture(false);
+    }
+  };
+
+  // Function to take a photo
+  const takePhoto = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = (videoRef.current as any).videoWidth;
+    canvas.height = (videoRef.current as any).videoHeight;
+    const context = canvas.getContext('2d');
+
+    // Flip the image horizontally
+    context?.translate(canvas.width, 0);
+    context?.scale(-1, 1);
+
+    context?.drawImage(
+      videoRef.current as any,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+    );
+
+    // Convert the canvas image to a data URL
+    const dataURL = canvas.toDataURL('image/png');
+    setDemoAccountAvatar(dataURL as any);
+
+    stopCamera();
+  };
+
+  // Import from gallery
+  const fileRef = useRef(null);
+
+  // Function to handle file selection
+  const handleFileSelect = (e: any) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setDemoAccountAvatar(imageUrl);
+    }
+  };
+
+  function convertDriveLink(shareableLink: string) {
+    const fileIdMatch = shareableLink.match(/\/file\/d\/(.+?)\/view/);
+    if (fileIdMatch && fileIdMatch.length > 1) {
+      const fileId = fileIdMatch[1];
+      return `https://drive.google.com/uc?id=${fileId}`;
+    }
+    return shareableLink;
+  }
+
+  // Import from Google Drive
+  const [openPicker] = useDrivePicker();
+  const handleOpenPicker = () => {
+    console.log(process.env);
+
+    openPicker({
+      clientId: '',
+      developerKey: '',
+      viewId: 'DOCS',
+      showUploadView: true,
+      showUploadFolders: true,
+      supportDrives: true,
+      multiselect: true,
+      callbackFunction: (driveData) => {
+        if (driveData.docs) {
+          setDemoAccountAvatar(convertDriveLink(driveData.docs[0].url));
+        }
+      },
+    });
   };
 
   const storeIncompletedTasks = useTasksStore(
@@ -239,8 +365,8 @@ const Profile = () => {
       });
     });
 
-    workbook.xlsx.writeBuffer().then((data) => {
-      const blob = new Blob([data], {
+    workbook.xlsx.writeBuffer().then((excelData) => {
+      const blob = new Blob([excelData], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       });
       const url = window.URL.createObjectURL(blob);
@@ -253,6 +379,9 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem('accountAvatar')) {
+      setAccountAvatar(localStorage.getItem('accountAvatar')!);
+    }
     setMounted(true);
   }, []);
 
@@ -263,6 +392,13 @@ const Profile = () => {
   useEffect(() => {
     setCompletedCount(storeCompletedTasks.length);
   }, [storeCompletedTasks]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      stopCamera();
+      setAvatarSelect('');
+    }
+  }, [isOpen]);
 
   if (step === STEPS.ACCOUNT_NAME) {
     modalAlign = 'items-center';
@@ -287,7 +423,7 @@ const Profile = () => {
       </form>
     );
     footerContent = (
-      <footer className="mt-2 flex w-full items-center justify-between min-[475px]:gap-8">
+      <footer className="mt-2 flex w-full items-center justify-between min-[500px]:gap-8">
         <Button
           label="Cancel"
           onClick={() => {
@@ -346,7 +482,7 @@ const Profile = () => {
           errors={errors}
           errorMessage={errors.accountNewPassword?.message as string}
         />
-        <footer className="mt-8 flex w-full items-center justify-between min-[475px]:gap-8">
+        <footer className="mt-8 flex w-full items-center justify-between min-[500px]:gap-8">
           <Button
             label="Cancel"
             onClick={() => {
@@ -375,15 +511,105 @@ const Profile = () => {
     modalTitle = 'Change account Image';
 
     bodyContent = (
-      <div className="mt-4 w-full bg-gray-700 pb-8">
+      <div className="mt-4 w-full bg-gray-700 pb-6">
+        <div>
+          {isTackingPicture ? (
+            <>
+              <video
+                style={{ transform: 'scaleX(-1)' }}
+                ref={videoRef}
+                autoPlay
+              />
+              <div className="mx-auto my-6 w-full max-w-xs">
+                <Button
+                  label="Take Photo"
+                  icon={BsFillCameraFill}
+                  filled
+                  onClick={takePhoto}
+                />
+              </div>
+              <hr className="mb-4 mt-5 h-[2px] w-full rounded border-0 bg-gray-light" />
+            </>
+          ) : null}
+          {!isTackingPicture &&
+            demoAccountAvatar &&
+            demoAccountAvatar !== accountAvatar && (
+              <>
+                <Image
+                  className="max-h-[340px] w-full object-cover"
+                  width={250}
+                  height={250}
+                  src={demoAccountAvatar}
+                  alt="Captured"
+                />
+                <footer className="my-6 flex items-center gap-6">
+                  <Button
+                    label="Cancel"
+                    outline="gray"
+                    onClick={() => {
+                      setDemoAccountAvatar('');
+                      startCamera();
+                    }}
+                  />
+                  <Button
+                    label="Edit"
+                    filled
+                    onClick={() => {
+                      toast.success('The avatar has been editted');
+                      setAccountAvatar(demoAccountAvatar);
+                      setIsOpen(false);
+                      localStorage.setItem('accountAvatar', demoAccountAvatar);
+                    }}
+                  />
+                </footer>
+                <hr className="mb-4 mt-5 h-[2px] w-full rounded border-0 bg-gray-light" />
+              </>
+            )}
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileSelect}
+          />
+        </div>
         <div className="flex flex-col items-start">
-          <div className="flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[475px]:text-xl">
+          <div
+            onClick={() => {
+              setAvatarSelect('tack');
+              startCamera();
+            }}
+            className={cn(
+              'flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[500px]:text-xl',
+              { 'text-purple': avatarSelect === 'tack' },
+            )}
+          >
             Tack picture
           </div>
-          <div className="flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[475px]:text-xl">
+          <div
+            onClick={() => {
+              setAvatarSelect('gallery');
+              stopCamera();
+              (fileRef.current as any).click();
+            }}
+            className={cn(
+              'flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[500px]:text-xl',
+              { 'text-purple': avatarSelect === 'gallery' },
+            )}
+          >
             Import from gallery
           </div>
-          <div className="flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[475px]:text-xl">
+          <div
+            onClick={() => {
+              setAvatarSelect('googleDrive');
+              stopCamera();
+              handleOpenPicker();
+            }}
+            className={cn(
+              'flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[500px]:text-xl',
+              { 'text-purple': avatarSelect === 'googleDrive' },
+            )}
+          >
             Import from Google Drive
           </div>
         </div>
@@ -398,27 +624,27 @@ const Profile = () => {
       <Container>
         <div className="mx-auto mt-8 flex flex-col items-center justify-center">
           <header className="flex w-full flex-col items-center justify-center">
-            <h6 className="mb-4 text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            <h6 className="mb-4 text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
               Profile
             </h6>
             <Image
-              src="/images/home/kalts_daniil2.jpg"
-              className="mb-4 rounded-full min-[475px]:w-32"
+              src={accountAvatar || '/images/home/no-avatar.jpg'}
+              className="mb-4 h-24 w-24 rounded-full object-cover min-[500px]:h-32 min-[500px]:w-32"
               width={96}
               height={96}
               alt="Avatar"
             />
-            <h5 className="text-xl text-gray-dark dark:text-white-pale min-[475px]:text-2xl">
+            <h5 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
               {initialAccountName}
             </h5>
             <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
               <div className="w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 dark:border-gray-700 dark:bg-gray-700">
-                <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
+                <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
                   {incompletedCount} Task left
                 </p>
               </div>
               <div className="w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 dark:border-gray-700 dark:bg-gray-700">
-                <p className="text-center text-[15px] text-white-pale min-[475px]:text-lg">
+                <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
                   {completedCount} Task done
                 </p>
               </div>
@@ -446,7 +672,7 @@ const Profile = () => {
           </header>
           <main className="mt-4 flex w-full max-w-lg flex-col justify-start">
             <section className="mt-5">
-              <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
+              <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[500px]:text-lg">
                 Settings
               </h5>
               <ProfileLink
@@ -456,7 +682,7 @@ const Profile = () => {
               />
             </section>
             <section className="mt-5">
-              <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
+              <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[500px]:text-lg">
                 Account
               </h5>
               <ProfileLink
@@ -485,7 +711,7 @@ const Profile = () => {
               />
             </section>
             <section className="mt-5">
-              <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[475px]:text-lg">
+              <h5 className="text-sm text-gray-dark dark:text-gray-200 min-[500px]:text-lg">
                 Uptodo
               </h5>
               <ProfileLink
@@ -507,6 +733,7 @@ const Profile = () => {
         <Modal
           title={modalTitle}
           isOpen={isOpen}
+          noPaddingX={modalTitle === 'Change account Image'}
           body={bodyContent}
           footer={footerContent}
           outsideClose={modalTitle === 'Change account Image'}
