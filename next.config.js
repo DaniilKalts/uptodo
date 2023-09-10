@@ -12,6 +12,20 @@ const nextConfig = {
         },
       ],
     });
+    config.module.rules.push({
+      test: /\.(png|jpg|jpeg|gif|svg)$/i,
+      use: [
+        {
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: '[name]-[hash].[ext]',
+            publicPath: '/_next/static/images/',
+            outputPath: 'static/images/',
+          },
+        },
+      ],
+    });
     return config;
   },
   images: {

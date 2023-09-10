@@ -257,6 +257,8 @@ const Profile = () => {
     const fileIdMatch = shareableLink.match(/\/file\/d\/(.+?)\/view/);
     if (fileIdMatch && fileIdMatch.length > 1) {
       const fileId = fileIdMatch[1];
+      console.log(fileId);
+
       return `https://drive.google.com/uc?id=${fileId}`;
     }
     return shareableLink;
@@ -265,18 +267,18 @@ const Profile = () => {
   // Import from Google Drive
   const [openPicker] = useDrivePicker();
   const handleOpenPicker = () => {
-    console.log(process.env);
-
     openPicker({
-      clientId: '',
-      developerKey: '',
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+      developerKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY!,
       viewId: 'DOCS',
       showUploadView: true,
       showUploadFolders: true,
       supportDrives: true,
-      multiselect: true,
       callbackFunction: (driveData) => {
         if (driveData.docs) {
+          console.log(driveData.docs);
+          console.log(convertDriveLink(driveData.docs[0].url));
+
           setDemoAccountAvatar(convertDriveLink(driveData.docs[0].url));
         }
       },
@@ -531,40 +533,39 @@ const Profile = () => {
               <hr className="mb-4 mt-5 h-[2px] w-full rounded border-0 bg-gray-light" />
             </>
           ) : null}
-          {!isTackingPicture &&
-            demoAccountAvatar &&
-            demoAccountAvatar !== accountAvatar && (
-              <>
-                <Image
-                  className="max-h-[340px] w-full object-cover"
-                  width={250}
-                  height={250}
-                  src={demoAccountAvatar}
-                  alt="Captured"
+          {!isTackingPicture && demoAccountAvatar && (
+            <>
+              <Image
+                className="max-h-[340px] w-full object-cover"
+                width={250}
+                height={250}
+                src={demoAccountAvatar}
+                alt="Captured"
+              />
+              <footer className="my-6 flex items-center gap-6">
+                <Button
+                  label="Cancel"
+                  outline="gray"
+                  onClick={() => {
+                    setDemoAccountAvatar('');
+                    setAvatarSelect('');
+                    startCamera();
+                  }}
                 />
-                <footer className="my-6 flex items-center gap-6">
-                  <Button
-                    label="Cancel"
-                    outline="gray"
-                    onClick={() => {
-                      setDemoAccountAvatar('');
-                      startCamera();
-                    }}
-                  />
-                  <Button
-                    label="Edit"
-                    filled
-                    onClick={() => {
-                      toast.success('The avatar has been editted');
-                      setAccountAvatar(demoAccountAvatar);
-                      setIsOpen(false);
-                      localStorage.setItem('accountAvatar', demoAccountAvatar);
-                    }}
-                  />
-                </footer>
-                <hr className="mb-4 mt-5 h-[2px] w-full rounded border-0 bg-gray-light" />
-              </>
-            )}
+                <Button
+                  label="Edit"
+                  filled
+                  onClick={() => {
+                    toast.success('The avatar has been editted');
+                    setAccountAvatar(demoAccountAvatar);
+                    setIsOpen(false);
+                    localStorage.setItem('accountAvatar', demoAccountAvatar);
+                  }}
+                />
+              </footer>
+              <hr className="mb-4 mt-5 h-[2px] w-full rounded border-0 bg-gray-light" />
+            </>
+          )}
           <input
             ref={fileRef}
             type="file"

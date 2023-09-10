@@ -59,7 +59,11 @@ const Modal: React.FC<ModalInterface> = ({
       onClick={outsideClose ? () => onClose() : () => {}}
     >
       <div
-        className={footer ? 'w-full max-w-[500px] bg-gray-700 px-5 py-5' : ''}
+        className={
+          footer
+            ? 'max-h-full w-full max-w-[500px] overflow-y-auto bg-gray-700 px-5 py-5'
+            : ''
+        }
         onClick={(e) => e.stopPropagation()}
       >
         {title ? (
