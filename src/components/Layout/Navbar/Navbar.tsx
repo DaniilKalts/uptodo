@@ -19,7 +19,10 @@ const Navbar = () => {
       {isNewTaskModal && (
         <NewTaskModal
           isOpen={isNewTaskModal}
-          onClose={() => setIsNewTaskModal((prev) => !prev)}
+          onClose={() => {
+            document.body.style.overflowY = 'auto';
+            setIsNewTaskModal((prev) => !prev);
+          }}
         />
       )}
       <div className="mx-auto grid h-full max-w-lg grid-cols-5 font-medium">

@@ -560,6 +560,7 @@ const Profile = () => {
                     setAccountAvatar(demoAccountAvatar);
                     setIsOpen(false);
                     localStorage.setItem('accountAvatar', demoAccountAvatar);
+                    setDemoAccountAvatar('');
                   }}
                 />
               </footer>
@@ -578,7 +579,11 @@ const Profile = () => {
           <div
             onClick={() => {
               setAvatarSelect('tack');
-              startCamera();
+              if (isTackingPicture) {
+                stopCamera();
+              } else if (!isTackingPicture) {
+                startCamera();
+              }
             }}
             className={cn(
               'flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-white-pale transition-colors hover:text-purple min-[500px]:text-xl',
@@ -738,7 +743,10 @@ const Profile = () => {
           body={bodyContent}
           footer={footerContent}
           outsideClose={modalTitle === 'Change account Image'}
-          onClose={() => setIsOpen(false)}
+          onClose={() => {
+            document.body.style.overflowY = 'auto';
+            setIsOpen(false);
+          }}
           modalAlign={modalAlign}
           bgType="dark"
           motionConfig={null}

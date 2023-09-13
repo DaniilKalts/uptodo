@@ -18,7 +18,7 @@ Chart.register(CategoryScale);
 Chart.register(ChartDataLabels);
 
 const FocusChart: React.FC<FocusChartInterface> = ({ chartConfig }) => {
-  const isMobileDevice = useMediaQuery({ maxWidth: 475 });
+  const isMobileDevice = useMediaQuery({ maxWidth: 500 });
 
   return (
     <>

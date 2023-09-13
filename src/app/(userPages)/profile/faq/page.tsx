@@ -12,18 +12,14 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 const Faq = () => (
   <Container>
     <section className="mx-auto max-w-screen-xl pb-28 pt-10 min-[500px]:pb-44 min-[500px]:pt-14">
-      <h2 className="mb-2 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent min-[500px]:mb-8">
+      <h2 className="mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent max-[500px]:hidden">
         Frequently asked questions
       </h2>
-      <div className="mb-8 flex justify-center min-[500px]:hidden">
-        <Image
-          src={step3}
-          width={226}
-          height={226}
-          alt="Management"
-          className="mt-6"
-          priority
-        />
+      <div className="mb-8 flex flex-col items-center justify-center gap-6 min-[500px]:hidden">
+        <Image src={step3} width={226} height={226} alt="Management" priority />
+        <h5 className="text-center text-[22px] font-bold text-purple-light">
+          Frequently asked questions
+        </h5>
       </div>
       <div className="grid border-t border-gray-200 pt-8 text-left dark:border-gray-700 md:grid-cols-2 md:gap-16">
         <div>
@@ -95,7 +91,7 @@ const Faq = () => (
               collaborate on tasks with external parties.
             </p>
           </div>
-          <div>
+          <div className="mb-10">
             <h3 className="mb-4 flex items-center text-lg font-bold text-gray-dark dark:text-white min-[500px]:text-2xl">
               <svg
                 className="mr-2 h-6 w-6 flex-shrink-0 text-gray-500 dark:text-gray-400"

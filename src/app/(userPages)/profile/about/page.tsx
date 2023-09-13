@@ -13,10 +13,7 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 
 const About = () => (
   <Container>
-    <div className="mx-auto mt-10 max-w-3xl pb-40 min-[500px]:mt-14 min-[500px]:pb-44">
-      <h1 className="mb-6 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-bold text-transparent">
-        UpTodo Service
-      </h1>
+    <div className="mx-auto mt-10 max-w-3xl pb-40 min-[500px]:pb-44">
       <div className="grid-col mb-8 grid grid-cols-1 items-baseline gap-14 min-[575px]:grid-cols-2 min-[850px]:grid-cols-3 min-[850px]:gap-8">
         <div className="flex flex-col items-center gap-6 max-[575px]:items-center">
           <Image

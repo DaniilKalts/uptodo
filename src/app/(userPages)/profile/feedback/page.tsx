@@ -101,7 +101,7 @@ const Feedback = () => {
         <div className="flex h-auto items-center justify-center max-[500px]:mt-8">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mx-auto flex w-full max-w-[525px] flex-col overflow-auto rounded-lg border p-6 dark:bg-black-light min-[500px]:p-8"
+            className="mx-auto flex w-full max-w-[525px] flex-col overflow-auto rounded-lg p-2 min-[500px]:border min-[500px]:p-8 min-[500px]:dark:bg-black-light"
           >
             <div className="flex w-full items-center justify-between max-[525px]:mb-2">
               <h2 className="text-[26px] font-medium text-purple min-[500px]:text-3xl">
@@ -161,7 +161,9 @@ const Feedback = () => {
                 isLoading={isLoading}
                 icon={AiOutlineSend}
               />
-              <p className="text-base">We will get back to you very soon!</p>
+              <p className="text-sm min-[500px]:text-base">
+                We will get back to you very soon!
+              </p>
             </div>
           </form>
         </div>

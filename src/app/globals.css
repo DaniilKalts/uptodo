@@ -9,17 +9,19 @@
 }
 
 /* Modifying scrollbar UI */
-::-webkit-scrollbar {
-  width: 12px;
-}
+@media screen and (min-width: 500px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
 
-::-webkit-scrollbar-track {
-  width: 12px;
-}
+  ::-webkit-scrollbar-track {
+    width: 12px;
+  }
 
-::-webkit-scrollbar-thumb {
-  width: 12px;
-  background-color: #ffffffdd;
+  ::-webkit-scrollbar-thumb {
+    width: 12px;
+    background-color: #ffffffdd;
+  }
 }
 
 textarea {

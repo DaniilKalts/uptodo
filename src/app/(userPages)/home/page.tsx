@@ -165,7 +165,10 @@ const Home = () => {
           {isAvatarModal && (
             <AvatarModal
               isOpen={isAvatarModal}
-              onClose={() => setIsAvatarModal((prev) => !prev)}
+              onClose={() => {
+                document.body.style.overflowY = 'auto';
+                setIsAvatarModal((prev) => !prev);
+              }}
               imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
             />
           )}
@@ -182,7 +185,10 @@ const Home = () => {
         {isAvatarModal && (
           <AvatarModal
             isOpen={isAvatarModal}
-            onClose={() => setIsAvatarModal((prev) => !prev)}
+            onClose={() => {
+              document.body.style.overflowY = 'auto';
+              setIsAvatarModal((prev) => !prev);
+            }}
             imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
           />
         )}

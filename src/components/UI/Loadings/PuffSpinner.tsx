@@ -13,7 +13,7 @@ const override: CSSProperties = {
 };
 
 const PuffSpinner = () => {
-  const isMobileDevice = useMediaQuery({ maxWidth: 475 });
+  const isMobileDevice = useMediaQuery({ maxWidth: 500 });
 
   return (
     <div className="fixed left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 transform">

@@ -69,7 +69,7 @@ const schema = yup.object().shape({
     .string()
     .required('Title is required')
     .min(3, 'Task title must be at least 3 characters long')
-    .max(20, 'Task title must not exceed 20 characters'),
+    .max(25, 'Task title must not exceed 25 characters'),
   taskDescription: yup
     .string()
     .max(200, 'Task description must not exceed 200 characters'),
@@ -1295,7 +1295,10 @@ const Task = ({ params }: TaskIdPageProps) => {
         isOpen={isOpen}
         body={bodyContent}
         footer={footerContent}
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          document.body.style.overflowY = 'auto';
+          setIsOpen(false);
+        }}
         bgType="dark"
         motionConfig={null}
       />
