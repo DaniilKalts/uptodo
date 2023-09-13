@@ -42,7 +42,7 @@ export default function CalendarLayout({
   };
 
   return (
-    <>
+    <div className="pb-40 md:pb-44">
       <header className="mx-auto mb-4 mt-8 flex items-center justify-center">
         <h4 className="text-xl text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
           Calendar
@@ -72,6 +72,6 @@ export default function CalendarLayout({
         </section>
       </Container>
       {children}
-    </>
+    </div>
   );
 }

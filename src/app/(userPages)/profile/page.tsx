@@ -399,6 +399,8 @@ const Profile = () => {
     if (!isOpen) {
       stopCamera();
       setAvatarSelect('');
+
+      document.body.style.overflowY = 'auto';
     }
   }, [isOpen]);
 
@@ -743,10 +745,7 @@ const Profile = () => {
           body={bodyContent}
           footer={footerContent}
           outsideClose={modalTitle === 'Change account Image'}
-          onClose={() => {
-            document.body.style.overflowY = 'auto';
-            setIsOpen(false);
-          }}
+          onClose={() => setIsOpen(false)}
           modalAlign={modalAlign}
           bgType="dark"
           motionConfig={null}

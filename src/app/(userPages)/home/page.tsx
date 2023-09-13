@@ -18,6 +18,7 @@ import CompletedTask from '@/components/userPages/Calendar/CompletedTask';
 
 import AvatarModal from '@/components/UI/Modals/AvatarModal';
 import { Container } from '@/components/UI';
+import PuffSpinner from '@/components/UI/Loadings/PuffSpinner';
 
 const Home = () => {
   const [isAvatarModal, setIsAvatarModal] = useState<boolean>(false);
@@ -172,7 +173,7 @@ const Home = () => {
               imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
             />
           )}
-          {previewContent}
+          {<PuffSpinner />}
         </Container>
       </div>
     );
@@ -192,7 +193,7 @@ const Home = () => {
             imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
           />
         )}
-        {incompletedTasks.length || completedTasks.length ? (
+        {(incompletedTasks.length || completedTasks.length) && mounted ? (
           <main className="mx-auto mt-8 max-w-md min-[500px]:mt-12">
             <div className="relative mb-6">
               <svg

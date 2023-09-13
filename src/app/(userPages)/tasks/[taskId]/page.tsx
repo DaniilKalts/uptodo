@@ -318,6 +318,12 @@ const Task = ({ params }: TaskIdPageProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeIncompletedTasks, storeCompletedTasks, params.taskId]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      document.body.style.overflowY = 'auto';
+    }
+  }, [isOpen]);
+
   if (!task) {
     return null;
   }
