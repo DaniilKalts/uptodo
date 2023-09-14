@@ -23,9 +23,7 @@ const FontProvider = ({ children }: { children: React.ReactNode }) => {
   )?.styleName;
 
   useEffect(() => {
-    setTimeout(() => {
-      setMounted(true);
-    }, 0);
+    setMounted(true);
   }, []);
 
   return (

@@ -1132,7 +1132,7 @@ const Task = ({ params }: TaskIdPageProps) => {
             )}
             <div className="w-full">
               <div className="flex items-center justify-between">
-                <h6 className="text-lg text-gray-dark dark:text-white-pale min-[500px]:text-2xl">
+                <h6 className="text-lg text-gray-dark dark:text-white-pale min-[500px]:text-[22px]">
                   {task.title}
                 </h6>
                 <div className="group relative">
@@ -1177,7 +1177,7 @@ const Task = ({ params }: TaskIdPageProps) => {
             </div>
           </div>
         </div>
-        <div className="mt-12">
+        <div className="mt-8">
           <div className="flex flex-col gap-9">
             <div className="flex items-center justify-between">
               <div className="flex gap-3">

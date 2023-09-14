@@ -154,10 +154,7 @@ const Home = () => {
 
   useEffect(() => {
     setAccountAvatar(localStorage.getItem('accountAvatar')!);
-
-    setTimeout(() => {
-      setMounted(true);
-    }, 1000);
+    setMounted(true);
   }, []);
 
   if (!mounted) {
@@ -175,9 +172,6 @@ const Home = () => {
               imageUrl={accountAvatar}
             />
           )}
-          <div className="fixed left-1/2 top-[48.5%] -translate-x-1/2 -translate-y-1/2 transform">
-            <h3 className="text-lg min-[500px]:text-xl">Loading...</h3>
-          </div>
         </Container>
       </div>
     );
