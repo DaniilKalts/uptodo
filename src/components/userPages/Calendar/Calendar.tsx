@@ -36,8 +36,16 @@ const Calendar = () => {
 
   const [daysInRange, setDaysInRange] = useState<DayType[]>([]);
 
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(
+    new Date(
+      Number(searchParams.get('dateTime')) || new Date().getTime(),
+    ).getMonth(),
+  );
+  const [currentYear, setCurrentYear] = useState(
+    new Date(
+      Number(searchParams.get('dateTime')) || new Date().getTime(),
+    ).getFullYear(),
+  );
 
   const swiperRef = React.useRef(null);
 
@@ -395,7 +403,7 @@ const Calendar = () => {
         ))}
       </Swiper>
       {!mounted ? (
-        <div className="flex items-start">
+        <div className="grid h-[72px] grid-cols-4 items-start gap-5 overflow-hidden px-[10px] min-[340px]:grid-cols-5 min-[425px]:grid-cols-6 min-[525px]:grid-cols-7">
           {preDaysInRange().map((date, id) => (
             <div
               key={id}
@@ -405,34 +413,30 @@ const Calendar = () => {
                   date.anyTasks,
                 )
               }
-              className="px-[10px]"
+              className={cn(
+                'flex cursor-pointer flex-col items-center justify-center rounded-md px-3 py-2',
+                getDateBgColor(date),
+              )}
             >
-              <div
+              <h6
                 className={cn(
-                  'flex w-[62.28px] cursor-pointer flex-col items-center justify-center rounded-md px-3 py-2',
-                  getDateBgColor(date),
+                  'text-base font-bold uppercase min-[500px]:text-lg',
+                  getDayOfWeekColor(date.day, date.dayOfWeek),
                 )}
               >
-                <h6
+                {date.dayOfWeek}
+              </h6>
+              <h6 className="text-base font-bold text-white min-[500px]:text-lg">
+                {date.day}
+              </h6>
+              {date.anyTasks && (
+                <div
                   className={cn(
-                    'text-base font-bold uppercase min-[500px]:text-lg',
-                    getDayOfWeekColor(date.day, date.dayOfWeek),
+                    'mt-[2px] h-[6px] w-[6px] rounded-full',
+                    date.anyTasks,
                   )}
-                >
-                  {date.dayOfWeek}
-                </h6>
-                <h6 className="text-base font-bold text-white min-[500px]:text-lg">
-                  {date.day}
-                </h6>
-                {date.anyTasks && (
-                  <div
-                    className={cn(
-                      'mt-[2px] h-[6px] w-[6px] rounded-full',
-                      date.anyTasks,
-                    )}
-                  ></div>
-                )}
-              </div>
+                ></div>
+              )}
             </div>
           ))}
         </div>

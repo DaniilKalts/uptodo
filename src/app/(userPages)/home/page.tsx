@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/indent */
 
 'use client';
@@ -41,7 +42,9 @@ const Home = () => {
   const addIncompletedTask = useTasksStore((state) => state.addIncompletedTask);
   const addCompletedTask = useTasksStore((state) => state.addCompletedTask);
 
-  const [accountAvatar, setAccountAvatar] = useState<string>('');
+  const [accountAvatar, setAccountAvatar] = useState<string>(
+    '/images/home/no-avatar.jpg',
+  );
 
   const deadlineStatus = (task: TaskType) => {
     const myDate = new Date();
@@ -169,7 +172,7 @@ const Home = () => {
                 document.body.style.overflowY = 'auto';
                 setIsAvatarModal((prev) => !prev);
               }}
-              imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
+              imageUrl={accountAvatar}
             />
           )}
           <div className="fixed left-1/2 top-[48.5%] -translate-x-1/2 -translate-y-1/2 transform">
@@ -233,7 +236,7 @@ const Home = () => {
                 'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
               }
             >
-              Incompleted Tasks:
+              Today's Incompleted Tasks:
             </div>
             {incompletedTasks.length ? (
               incompletedTasks?.map((task) => (
@@ -265,7 +268,7 @@ const Home = () => {
               ))
             ) : (
               <h1 className="mb-6 text-base text-gray-dark dark:text-white-pale min-[500px]:text-lg">
-                You have no incompleted tasks for this day! &#128079;
+                You have no incompleted tasks! &#128079;
               </h1>
             )}
             <div
@@ -273,7 +276,7 @@ const Home = () => {
                 'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
               }
             >
-              Completed Tasks:
+              Today's Completed Tasks:
             </div>
             {completedTasks.length ? (
               completedTasks?.map((task) => (
@@ -299,7 +302,7 @@ const Home = () => {
               ))
             ) : (
               <h1 className="mb-4 text-base text-gray-dark dark:text-white-pale min-[500px]:text-lg">
-                There is no completed tasks yet. &#128517;
+                You have no completed tasks! &#128517;
               </h1>
             )}
           </main>

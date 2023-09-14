@@ -146,7 +146,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
       )}
     >
       <div
-        className="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[500px]:h-6 min-[500px]:w-6"
+        className="max-[500px]:group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[500px]:h-6 min-[500px]:w-6"
         onClick={(e) => {
           e.stopPropagation();
           onComplete();

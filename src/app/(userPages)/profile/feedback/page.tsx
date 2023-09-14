@@ -96,7 +96,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="pb-[140px] max-[500px]:pb-[9rem]">
+    <div className="pb-44 max-[500px]:pb-36 min-[500px]:pt-16">
       <Container>
         <div className="flex h-auto items-center justify-center max-[500px]:mt-8">
           <form
