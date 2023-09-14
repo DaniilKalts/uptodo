@@ -21,7 +21,7 @@ const AvatarModal: React.FC<AvatarModalInterface> = ({
     body={
       <Image
         src={imageUrl}
-        className="h-56 w-56 rounded-full object-cover min-[500px]:h-72 min-[500px]:w-72"
+        className="h-60 w-60 rounded-full object-cover min-[500px]:h-72 min-[500px]:w-72"
         width={216}
         height={216}
         alt="Avatar"

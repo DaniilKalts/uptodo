@@ -1,9 +1,12 @@
 'use client';
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
-import PuffSpinner from '@/components/UI/Loadings/PuffSpinner';
+import PuffSpinner from '@/components/UI/Loaders/PuffSpinner';
 
 export default function Loading() {
-  return <PuffSpinner />;
+  const currentPathName = usePathname();
+
+  return currentPathName.includes('/calendar') ? null : <PuffSpinner />;
 }

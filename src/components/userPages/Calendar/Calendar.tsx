@@ -1,4 +1,7 @@
 /* eslint-disable no-plusplus */
+
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -23,6 +26,8 @@ type DayType = {
 const Calendar = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const storeIncompletedTasks = useTasksStore(
     (state) => state.incompletedTasks,
@@ -227,6 +232,45 @@ const Calendar = () => {
     }
   }, [daysInRange, searchParams]);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const preDaysInRange = () => {
+    const presentDate = new Date(
+      Number(searchParams.get('dateTime')) || new Date().getTime(),
+    );
+    const presentYear = presentDate.getFullYear();
+    const presentMonth = presentDate.getMonth();
+    const presentDay = presentDate.getDate();
+
+    const daysArray: DayType[] = [];
+    const daysOfWeekAbbreviated = [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+    ];
+
+    for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
+      const date = new Date(presentYear, presentMonth, presentDay + dayOffset);
+      const dayOfWeekAbbreviated = daysOfWeekAbbreviated[date.getDay()];
+
+      daysArray.push({
+        day: date.getDate(),
+        month: date.getMonth(),
+        year: date.getFullYear(),
+        dayOfWeek: dayOfWeekAbbreviated,
+        anyTasks: '' as any,
+      });
+    }
+
+    return daysArray;
+  };
+
   return (
     <section className="mx-auto max-w-xl bg-gray-500 py-3 dark:bg-gray-700">
       <div className="flex items-center justify-between px-6">
@@ -350,6 +394,49 @@ const Calendar = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      {!mounted ? (
+        <div className="flex items-start">
+          {preDaysInRange().map((date, id) => (
+            <div
+              key={id}
+              onClick={() =>
+                onClick(
+                  new Date(date.year, date.month, date.day).getTime(),
+                  date.anyTasks,
+                )
+              }
+              className="px-[10px]"
+            >
+              <div
+                className={cn(
+                  'flex w-[62.28px] cursor-pointer flex-col items-center justify-center rounded-md px-3 py-2',
+                  getDateBgColor(date),
+                )}
+              >
+                <h6
+                  className={cn(
+                    'text-base font-bold uppercase min-[500px]:text-lg',
+                    getDayOfWeekColor(date.day, date.dayOfWeek),
+                  )}
+                >
+                  {date.dayOfWeek}
+                </h6>
+                <h6 className="text-base font-bold text-white min-[500px]:text-lg">
+                  {date.day}
+                </h6>
+                {date.anyTasks && (
+                  <div
+                    className={cn(
+                      'mt-[2px] h-[6px] w-[6px] rounded-full',
+                      date.anyTasks,
+                    )}
+                  ></div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 };

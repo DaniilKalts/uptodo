@@ -21,7 +21,7 @@ const Incompleted = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [mounted, setMounted] = useState(false);
 
   const [currentSelect, setCurrentSelect] = useState<'time' | 'priority'>(
@@ -98,7 +98,7 @@ const Incompleted = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 1000);
   };
 
   const sortByTime = () => {

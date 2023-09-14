@@ -51,7 +51,7 @@ const Completed = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 1000);
   };
 
   const sortByTime = () => {

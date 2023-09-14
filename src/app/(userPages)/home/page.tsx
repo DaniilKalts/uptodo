@@ -18,7 +18,6 @@ import CompletedTask from '@/components/userPages/Calendar/CompletedTask';
 
 import AvatarModal from '@/components/UI/Modals/AvatarModal';
 import { Container } from '@/components/UI';
-import PuffSpinner from '@/components/UI/Loadings/PuffSpinner';
 
 const Home = () => {
   const [isAvatarModal, setIsAvatarModal] = useState<boolean>(false);
@@ -173,7 +172,9 @@ const Home = () => {
               imageUrl={accountAvatar || '/images/home/no-avatar.jpg'}
             />
           )}
-          {<PuffSpinner />}
+          <div className="fixed left-1/2 top-[48.5%] -translate-x-1/2 -translate-y-1/2 transform">
+            <h3 className="text-lg min-[500px]:text-xl">Loading...</h3>
+          </div>
         </Container>
       </div>
     );
