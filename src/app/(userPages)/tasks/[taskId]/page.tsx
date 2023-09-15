@@ -877,8 +877,8 @@ const Task = ({ params }: TaskIdPageProps) => {
             if (!task.completedAt) {
               removeIncompletedTask(task.id);
 
-              toast('Successfully Deleted', {
-                icon: '❌',
+              toast('Successfully deleted', {
+                icon: '🗑️',
                 duration: 2000,
               });
 
@@ -891,8 +891,8 @@ const Task = ({ params }: TaskIdPageProps) => {
             if (task.completedAt) {
               removeCompletedTask(task.id);
 
-              toast('Successfully Deleted', {
-                icon: '❌',
+              toast('Successfully deleted', {
+                icon: '🗑️',
                 duration: 2000,
               });
 
@@ -1122,7 +1122,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
                   toast('Added to Incompleted!', {
                     icon: '😒',
-                    duration: 2000,
+                    duration: 1500,
                   });
                 }}
                 className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[500px]:mt-4 min-[500px]:h-6 min-[500px]:w-[26px]"

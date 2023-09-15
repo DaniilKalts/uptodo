@@ -88,9 +88,11 @@ const schema = yup.object().shape({
 });
 
 enum STEPS {
-  ACCOUNT_NAME = 1,
-  ACCOUNT_PASSWORD = 2,
-  ACCOUNT_IMAGE = 3,
+  AVATAR_EDIT = 1,
+  ACCOUNT_NAME = 2,
+  ACCOUNT_PASSWORD = 3,
+  ACCOUNT_IMAGE = 4,
+  DELETE_ACCOUNT_IMAGE = 5,
 }
 
 type TaskPropsValue =
@@ -157,7 +159,7 @@ const Profile = () => {
 
       toast('The account password is changed', {
         icon: '🔑',
-        duration: 3000,
+        duration: 2000,
       });
 
       setCustomValue('accountOldPassword', '');
@@ -224,7 +226,7 @@ const Profile = () => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<number>(0);
 
   const onCropComplete = useCallback(
-    (_croppedArea: any, croppedAreaPixels: React.SetStateAction<number>) => {
+    (_croppedArea: any, croppedAreaPixels: any) => {
       setCroppedAreaPixels(croppedAreaPixels);
     },
     [],
@@ -240,13 +242,16 @@ const Profile = () => {
 
       setAccountAvatar(croppedImage as string);
 
-      toast.success('The avatar has been editted');
+      toast('The avatar has been editted', {
+        icon: '📸',
+        duration: 2000,
+      });
       setIsOpen(false);
 
       localStorage.setItem('accountAvatar', demoAccountAvatar);
       setDemoAccountAvatar('');
     } catch (e) {
-      console.error(e);
+      console.log(e);
     }
   }, [croppedAreaPixels]);
 
@@ -435,6 +440,43 @@ const Profile = () => {
     }
   }, [isOpen]);
 
+  if (step === STEPS.AVATAR_EDIT) {
+    modalAlign = 'items-center';
+    modalTitle = 'Your account Image';
+
+    bodyContent = (
+      <div className="mb-6 mt-8">
+        <Image
+          src={accountAvatar || '/images/home/no-avatar.jpg'}
+          className="mb-4 h-60 w-60 rounded-full object-cover min-[500px]:h-72 min-[500px]:w-72"
+          width={96}
+          height={96}
+          alt="Avatar"
+        />
+      </div>
+    );
+    footerContent = (
+      <footer className="flex items-center gap-6">
+        <Button
+          label="Cancel"
+          onClick={() => {
+            setStep(null);
+            setIsOpen(false);
+          }}
+          disabled={!!errors.accountName?.message}
+        />
+        <Button
+          label="Edit"
+          onClick={() => {
+            setStep(STEPS.ACCOUNT_IMAGE);
+          }}
+          disabled={!!errors.accountName?.message}
+          filled
+        />
+      </footer>
+    );
+  }
+
   if (step === STEPS.ACCOUNT_NAME) {
     modalAlign = 'items-center';
     modalTitle = 'Change account name';
@@ -568,13 +610,6 @@ const Profile = () => {
           ) : null}
           {!isTackingPicture && demoAccountAvatar && (
             <>
-              {/* <Image
-                className="max-h-[340px] w-full object-cover"
-                width={250}
-                height={250}
-                src={demoAccountAvatar}
-                alt="Captured"
-              /> */}
               <div className="relative h-[340px] max-h-[340px] w-full object-cover">
                 <Cropper
                   image={demoAccountAvatar}
@@ -583,7 +618,9 @@ const Profile = () => {
                   aspect={1 / 1}
                   cropShape="round"
                   onCropChange={setCrop}
-                  onCropComplete={onCropComplete}
+                  onCropComplete={(_croppedArea, croppedAreaPixels) => {
+                    onCropComplete(_croppedArea, croppedAreaPixels);
+                  }}
                   onZoomChange={setZoom}
                 />
               </div>
@@ -659,11 +696,63 @@ const Profile = () => {
           >
             Import from Google Drive
           </div>
+          <div
+            onClick={() => {
+              stopCamera();
+              setStep(STEPS.DELETE_ACCOUNT_IMAGE);
+            }}
+            className={
+              'flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-red transition-colors hover:text-red-dark min-[500px]:text-xl'
+            }
+          >
+            Delete account Image
+          </div>
         </div>
       </div>
     );
 
     footerContent = <></>;
+  }
+
+  if (step === STEPS.DELETE_ACCOUNT_IMAGE) {
+    modalAlign = 'items-center';
+    modalTitle = 'Delete account Image';
+
+    bodyContent = (
+      <section className="my-7 flex flex-col items-center">
+        <Image
+          src={accountAvatar || '/images/home/no-avatar.jpg'}
+          className="mb-4 h-60 w-60 rounded-full object-cover grayscale min-[500px]:h-72 min-[500px]:w-72"
+          width={96}
+          height={96}
+          alt="Avatar"
+        />
+        <h2 className="mt-3 text-center text-[18px] text-white-pale min-[500px]:px-4 min-[500px]:text-[20px]">
+          Are you sure you want to delete your account Image?
+        </h2>
+      </section>
+    );
+
+    footerContent = (
+      <footer className="flex w-full items-center justify-between min-[500px]:gap-8">
+        <Button label="Cancel" onClick={() => setStep(STEPS.ACCOUNT_IMAGE)} />
+        <Button
+          label="Delete"
+          onClick={() => {
+            localStorage.setItem('accountAvatar', '');
+            setAccountAvatar('');
+            setDemoAccountAvatar('');
+            setIsOpen(false);
+
+            toast('The account image is deleted', {
+              icon: '🗑️',
+              duration: 2000,
+            });
+          }}
+          filled
+        />
+      </footer>
+    );
   }
 
   return (
@@ -675,8 +764,12 @@ const Profile = () => {
               Profile
             </h6>
             <Image
+              onClick={() => {
+                setStep(STEPS.AVATAR_EDIT);
+                setIsOpen(true);
+              }}
               src={accountAvatar || '/images/home/no-avatar.jpg'}
-              className="mb-4 h-24 w-24 rounded-full object-cover min-[500px]:h-32 min-[500px]:w-32"
+              className="mb-4 h-24 w-24 cursor-pointer rounded-full object-cover hover:opacity-90 min-[500px]:h-32 min-[500px]:w-32"
               width={96}
               height={96}
               alt="Avatar"

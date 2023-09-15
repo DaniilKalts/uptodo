@@ -81,7 +81,7 @@ const Login = () => {
 
         toast.remove(toastLoading);
         toast.error('Invalid email or password!', {
-          duration: 3000,
+          duration: 2000,
         });
 
         router.push('home');
@@ -98,7 +98,7 @@ const Login = () => {
       // signIn('google');
     } catch (err) {
       toast.error('Something went wrong!', {
-        duration: 3000,
+        duration: 2000,
       });
     } finally {
       setIsGoogleLoading(false);
@@ -112,7 +112,7 @@ const Login = () => {
       // signIn('github');
     } catch (err) {
       toast.error('Something went wrong!', {
-        duration: 3000,
+        duration: 2000,
       });
     } finally {
       setIsGithubLoading(false);

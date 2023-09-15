@@ -87,7 +87,7 @@ const Register = () => {
 
         toast.remove(toastLoading);
         toast.error('Failed to register!', {
-          duration: 3000,
+          duration: 2000,
         });
 
         reset();
@@ -102,7 +102,7 @@ const Register = () => {
       // signIn('google');
     } catch (err) {
       toast.error('Something went wrong!', {
-        duration: 3000,
+        duration: 2000,
       });
     } finally {
       setIsGoogleLoading(false);
@@ -116,7 +116,7 @@ const Register = () => {
       // signIn('github');
     } catch (err) {
       toast.error('Something went wrong!', {
-        duration: 3000,
+        duration: 2000,
       });
     } finally {
       setIsGithubLoading(false);
