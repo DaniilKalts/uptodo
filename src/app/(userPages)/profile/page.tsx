@@ -1,19 +1,21 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/indent */
 
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 
 import useTasksStore from '@/store/useTasksStore';
 import { cn } from '@/utils/Cn';
 
-import { SiMicrosoftexcel } from 'react-icons/si';
-import { BsFillCameraFill } from 'react-icons/bs';
 import ExcelJS from 'exceljs';
 import { toast } from 'react-hot-toast';
+
+import { SiMicrosoftexcel } from 'react-icons/si';
+import { BsFillCameraFill } from 'react-icons/bs';
 
 import {
   FieldValues,
@@ -26,6 +28,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import Cropper from 'react-easy-crop';
 import useDrivePicker from 'react-google-drive-picker';
 
 import ProfileLink from '@/components/userPages/Profile/ProfileTypography';
@@ -43,6 +46,7 @@ import {
   LogOutIcon,
 } from '@/components/userPages/Profile/Icons/Profile';
 import { Container, Button, Input } from '@/components/UI';
+import getCroppedImg from '@/utils/EasyCrop';
 
 interface AccountChangeInputs extends FieldValues {
   accountName: string;
@@ -215,6 +219,37 @@ const Profile = () => {
     }
   };
 
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<number>(0);
+
+  const onCropComplete = useCallback(
+    (_croppedArea: any, croppedAreaPixels: React.SetStateAction<number>) => {
+      setCroppedAreaPixels(croppedAreaPixels);
+    },
+    [],
+  );
+
+  const showCroppedImage = useCallback(async () => {
+    try {
+      const croppedImage = await getCroppedImg(
+        demoAccountAvatar,
+        croppedAreaPixels as number,
+        0,
+      );
+
+      setAccountAvatar(croppedImage as string);
+
+      toast.success('The avatar has been editted');
+      setIsOpen(false);
+
+      localStorage.setItem('accountAvatar', demoAccountAvatar);
+      setDemoAccountAvatar('');
+    } catch (e) {
+      console.error(e);
+    }
+  }, [croppedAreaPixels]);
+
   // Function to take a photo
   const takePhoto = () => {
     const canvas = document.createElement('canvas');
@@ -257,7 +292,6 @@ const Profile = () => {
     const fileIdMatch = shareableLink.match(/\/file\/d\/(.+?)\/view/);
     if (fileIdMatch && fileIdMatch.length > 1) {
       const fileId = fileIdMatch[1];
-      console.log(fileId);
 
       return `https://drive.google.com/uc?id=${fileId}`;
     }
@@ -276,9 +310,6 @@ const Profile = () => {
       supportDrives: true,
       callbackFunction: (driveData) => {
         if (driveData.docs) {
-          console.log(driveData.docs);
-          console.log(convertDriveLink(driveData.docs[0].url));
-
           setDemoAccountAvatar(convertDriveLink(driveData.docs[0].url));
         }
       },
@@ -537,13 +568,25 @@ const Profile = () => {
           ) : null}
           {!isTackingPicture && demoAccountAvatar && (
             <>
-              <Image
+              {/* <Image
                 className="max-h-[340px] w-full object-cover"
                 width={250}
                 height={250}
                 src={demoAccountAvatar}
                 alt="Captured"
-              />
+              /> */}
+              <div className="relative h-[340px] max-h-[340px] w-full object-cover">
+                <Cropper
+                  image={demoAccountAvatar}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1 / 1}
+                  cropShape="round"
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                />
+              </div>
               <footer className="my-6 flex items-center gap-6">
                 <Button
                   label="Cancel"
@@ -558,11 +601,7 @@ const Profile = () => {
                   label="Edit"
                   filled
                   onClick={() => {
-                    toast.success('The avatar has been editted');
-                    setAccountAvatar(demoAccountAvatar);
-                    setIsOpen(false);
-                    localStorage.setItem('accountAvatar', demoAccountAvatar);
-                    setDemoAccountAvatar('');
+                    showCroppedImage();
                   }}
                 />
               </footer>

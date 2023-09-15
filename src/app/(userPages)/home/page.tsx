@@ -154,7 +154,10 @@ const Home = () => {
 
   useEffect(() => {
     setAccountAvatar(localStorage.getItem('accountAvatar')!);
-    setMounted(true);
+
+    setTimeout(() => {
+      setMounted(true);
+    }, 100);
   }, []);
 
   if (!mounted) {
