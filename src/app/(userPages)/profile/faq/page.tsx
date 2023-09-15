@@ -3,6 +3,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 
 import { Container } from '@/components/UI';
@@ -12,14 +13,25 @@ import step3 from '../../../../../public/images/intro/step3.svg';
 const Faq = () => (
   <Container>
     <section className="mx-auto max-w-screen-xl pb-40 pt-10 min-[500px]:pb-44 min-[500px]:pt-14">
-      <h2 className="mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent max-[500px]:hidden">
-        Frequently Asked Questions
-      </h2>
-      <div className="mb-8 flex flex-col items-center justify-center gap-6 min-[500px]:hidden">
+      <div className="mb-8 flex flex-col items-center justify-center max-[500px]:hidden">
+        <h2 className="mb-4 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent">
+          Frequently Asked Questions
+        </h2>
+        <Link href="/profile/feedback" className="font-medium hover:underline">
+          Contact Us to ask your personal Question!
+        </Link>
+      </div>
+      <div className="mb-8 flex flex-col items-center justify-center min-[500px]:hidden">
         <Image src={step3} width={226} height={226} alt="Management" priority />
-        <h5 className="text-center text-[22px] font-bold text-purple-light">
+        <h5 className="mb-3 mt-6 text-center text-[22px] font-bold text-purple-light">
           Frequently Asked Questions
         </h5>
+        <Link
+          href="/profile/feedback"
+          className="text-sm font-medium underline"
+        >
+          Contact Us to ask your personal Question!
+        </Link>
       </div>
       <div className="grid border-t border-gray-light pt-8 text-left dark:border-gray-700 md:grid-cols-2 md:gap-12">
         <div itemType="https://schema.org/FAQPage">

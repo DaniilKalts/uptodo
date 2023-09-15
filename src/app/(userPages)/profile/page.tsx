@@ -248,7 +248,7 @@ const Profile = () => {
       });
       setIsOpen(false);
 
-      localStorage.setItem('accountAvatar', demoAccountAvatar);
+      localStorage.setItem('accountAvatar', croppedImage as string);
       setDemoAccountAvatar('');
     } catch (e) {
       console.log(e);
@@ -610,19 +610,29 @@ const Profile = () => {
           ) : null}
           {!isTackingPicture && demoAccountAvatar && (
             <>
-              <div className="relative h-[340px] max-h-[340px] w-full object-cover">
-                <Cropper
-                  image={demoAccountAvatar}
-                  crop={crop}
-                  zoom={zoom}
-                  aspect={1 / 1}
-                  cropShape="round"
-                  onCropChange={setCrop}
-                  onCropComplete={(_croppedArea, croppedAreaPixels) => {
-                    onCropComplete(_croppedArea, croppedAreaPixels);
-                  }}
-                  onZoomChange={setZoom}
-                />
+              <div className="relative h-[280px] max-h-[340px] w-full object-cover">
+                {demoAccountAvatar.includes('https://drive.google.com') ? (
+                  <Image
+                    className="mx-auto max-h-[275px] w-[275px] rounded-full object-cover"
+                    width={250}
+                    height={250}
+                    src={demoAccountAvatar}
+                    alt="Captured"
+                  />
+                ) : (
+                  <Cropper
+                    image={demoAccountAvatar}
+                    crop={crop}
+                    zoom={zoom}
+                    aspect={1 / 1}
+                    cropShape="round"
+                    onCropChange={setCrop}
+                    onCropComplete={(_croppedArea, croppedAreaPixels) => {
+                      onCropComplete(_croppedArea, croppedAreaPixels);
+                    }}
+                    onZoomChange={setZoom}
+                  />
+                )}
               </div>
               <footer className="my-6 flex items-center gap-6">
                 <Button
@@ -638,7 +648,22 @@ const Profile = () => {
                   label="Edit"
                   filled
                   onClick={() => {
-                    showCroppedImage();
+                    if (
+                      !demoAccountAvatar.includes('https://drive.google.com/')
+                    ) {
+                      showCroppedImage();
+                    } else {
+                      setAccountAvatar(demoAccountAvatar);
+
+                      toast('The avatar has been editted', {
+                        icon: '📸',
+                        duration: 2000,
+                      });
+                      setIsOpen(false);
+
+                      localStorage.setItem('accountAvatar', demoAccountAvatar);
+                      setDemoAccountAvatar('');
+                    }
                   }}
                 />
               </footer>
@@ -769,7 +794,7 @@ const Profile = () => {
                 setIsOpen(true);
               }}
               src={accountAvatar || '/images/home/no-avatar.jpg'}
-              className="mb-4 h-24 w-24 cursor-pointer rounded-full object-cover hover:opacity-90 min-[500px]:h-32 min-[500px]:w-32"
+              className="mb-4 h-[104px] w-[104px] cursor-pointer rounded-full object-cover hover:opacity-90 min-[500px]:h-32 min-[500px]:w-32"
               width={96}
               height={96}
               alt="Avatar"
