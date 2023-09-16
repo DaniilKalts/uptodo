@@ -12,6 +12,8 @@ import { categories } from '@/data/Categories';
 import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
 import TimeSwiper from '@/components/userPages/Focus/Timer/TimeSwiper';
@@ -72,7 +74,7 @@ const schema = yup.object().shape({
     .max(25, 'Task title must not exceed 25 characters'),
   taskDescription: yup
     .string()
-    .max(200, 'Task description must not exceed 200 characters'),
+    .max(1000, 'Task description must not exceed 1000 characters'),
   taskDate: yup.date().required(),
 });
 
@@ -1105,9 +1107,9 @@ const Task = ({ params }: TaskIdPageProps) => {
                     icon: '👏',
                   });
                 }}
-                className="max-[500px]:group mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[500px]:mt-4 min-[500px]:h-6 min-[500px]:w-[26px]"
+                className="group mr-4 mt-[18px] flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[500px]:mt-4 min-[500px]:h-6 min-[500px]:w-[26px]"
               >
-                <div className="h-[7px] w-[7px] rounded-full bg-gray-dark opacity-0 group-hover:opacity-100 dark:bg-white-pale min-[500px]:h-2 min-[500px]:w-2"></div>
+                <div className="h-[7px] w-[7px] rounded-full bg-gray-dark opacity-0 group-hover:opacity-100 dark:bg-white-pale max-[500px]:hidden min-[500px]:h-2 min-[500px]:w-2"></div>
               </div>
             ) : (
               <div
@@ -1125,12 +1127,12 @@ const Task = ({ params }: TaskIdPageProps) => {
                     duration: 1500,
                   });
                 }}
-                className="mr-4 mt-[18px] flex h-5 w-[22px] cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[500px]:mt-4 min-[500px]:h-6 min-[500px]:w-[26px]"
+                className="mr-4 mt-[18px] flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-gray-dark bg-transparent dark:border-white-pale min-[500px]:mt-4 min-[500px]:h-6 min-[500px]:w-[26px]"
               >
                 <div className="h-[7px] w-[7px] rounded-full bg-gray-dark dark:bg-white-pale min-[500px]:h-2 min-[500px]:w-2"></div>
               </div>
             )}
-            <div className="w-full">
+            <div className="w-[85%] min-[500px]:w-full">
               <div className="flex items-center justify-between">
                 <h6 className="text-lg text-gray-dark dark:text-white-pale min-[500px]:text-[22px]">
                   {task.title}
@@ -1166,14 +1168,17 @@ const Task = ({ params }: TaskIdPageProps) => {
                   </div>
                 </div>
               </div>
-              <p className="max-w-lg text-base text-gray-600 dark:text-gray-200 min-[500px]:text-lg">
-                {lines?.map((line, index) => (
-                  <React.Fragment key={index}>
+              {lines?.map((line, index) => (
+                <React.Fragment key={index}>
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    className="react-markdown-container max-w-lg text-base text-gray-500 dark:text-white-pale min-[500px]:text-lg"
+                  >
                     {line}
-                    {index !== lines.length - 1 && <br />}
-                  </React.Fragment>
-                ))}
-              </p>
+                  </ReactMarkdown>
+                  {!line.length && <br />}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </div>

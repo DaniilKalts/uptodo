@@ -1,0 +1,55 @@
+/* enlarging size of loading toast spinner */
+.go1858758034 {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Modifying Scrollbar UI */
+@media screen and (min-width: 500px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 12px;
+    background-color: #ffffffdd;
+  }
+}
+
+/* Modifying Textarea UI and some more stuff */
+textarea {
+  resize: vertical;
+}
+
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  width: 8px;
+  background-color: #4c4c4c;
+}
+
+/* Blink effect for timerExpired time string */
+.blink-hard {
+  animation: blinker 1s step-end 27;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Custom CheckBox */
+input[type='checkbox'] {
+  accent-color: #8875ff;
+}

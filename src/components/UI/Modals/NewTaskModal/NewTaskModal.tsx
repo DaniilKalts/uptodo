@@ -54,7 +54,7 @@ const schema = yup.object().shape({
     .max(25, 'Task title must not exceed 25 characters'),
   taskDescription: yup
     .string()
-    .max(200, 'Task description must not exceed 200 characters'),
+    .max(1000, 'Task description must not exceed 1000 characters'),
   taskDate: yup.date().required(),
   taskCategory: yup.object(),
   taskPriority: yup.number().required(),

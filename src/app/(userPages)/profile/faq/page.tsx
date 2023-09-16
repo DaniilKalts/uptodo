@@ -18,7 +18,7 @@ const Faq = () => (
           Frequently Asked Questions
         </h2>
         <Link href="/profile/feedback" className="font-medium hover:underline">
-          Contact Us to ask your personal Question!
+          Contact Us to ask your personal Questions!
         </Link>
       </div>
       <div className="mb-8 flex flex-col items-center justify-center min-[500px]:hidden">
@@ -30,10 +30,10 @@ const Faq = () => (
           href="/profile/feedback"
           className="text-sm font-medium underline"
         >
-          Contact Us to ask your personal Question!
+          Contact Us to ask your personal Questions!
         </Link>
       </div>
-      <div className="grid border-t border-gray-light pt-8 text-left dark:border-gray-700 md:grid-cols-2 md:gap-12">
+      <div className="grid border-t border-gray-light pt-8 text-left dark:border-gray-600 md:grid-cols-2 md:gap-12">
         <div itemType="https://schema.org/FAQPage">
           <ul className="grid gap-6" data-list="faq">
             <li className="group" itemType="https://schema.org/Question">

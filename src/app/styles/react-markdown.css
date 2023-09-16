@@ -1,0 +1,131 @@
+/* Markdown Stylings */
+
+.react-markdown-container * {
+  overflow-wrap: break-word;
+}
+
+.react-markdown-container h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.react-markdown-container h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.react-markdown-container h3 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.react-markdown-container h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.react-markdown-container h5 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.react-markdown-container h6 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.react-markdown-container a {
+  text-decoration: none;
+  color: #8875ff;
+}
+
+.react-markdown-container a:hover {
+  text-decoration: underline;
+}
+
+.react-markdown-container ul,
+.react-markdown-container ol {
+  margin-left: 24px;
+}
+
+.react-markdown-container li {
+  margin-bottom: 2px;
+}
+
+.react-markdown-container ul {
+  list-style-type: disc;
+}
+
+.react-markdown-container ol {
+  list-style-type: decimal;
+}
+
+.react-markdown-container hr {
+  border: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.react-markdown-container blockquote {
+  border-left: 4px solid #8875ff;
+  padding-left: 16px;
+}
+
+.react-markdown-container code {
+  font-family: Monaco, monospace;
+  background-color: rgb(236, 236, 236);
+  padding: 2px 4px;
+  border: 1px solid rgb(55, 53, 47);
+  border-radius: 4px;
+  color: rgb(55, 53, 47);
+}
+
+.react-markdown-container pre {
+  background-color: rgb(247 246 243);
+  padding: 16px;
+  border: 1px solid rgb(55, 53, 47);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.react-markdown-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.react-markdown-container th,
+.react-markdown-container td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.react-markdown-container th {
+  background-color: #f0f0f0;
+  color: #121212;
+}
+
+@media screen and (max-width: 500px) {
+  .react-markdown-container h1 {
+    font-size: 28px;
+  }
+
+  .react-markdown-container h2 {
+    font-size: 24px;
+  }
+
+  .react-markdown-container h3 {
+    font-size: 20px;
+  }
+
+  .react-markdown-container h4 {
+    font-size: 18px;
+  }
+
+  .react-markdown-container h5 {
+    font-size: 16px;
+  }
+
+  .react-markdown-container h6 {
+    font-size: 14px;
+  }
+}

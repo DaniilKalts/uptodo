@@ -146,13 +146,13 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
       )}
     >
       <div
-        className="max-[500px]:group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[500px]:h-6 min-[500px]:w-6"
+        className="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-white-pale bg-transparent min-[500px]:h-6 min-[500px]:w-6"
         onClick={(e) => {
           e.stopPropagation();
           onComplete();
         }}
       >
-        <div className="h-[6px] w-[6px] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 min-[500px]:h-2 min-[500px]:w-2"></div>
+        <div className="h-[6px] w-[6px] rounded-full bg-white-pale opacity-0 group-hover:opacity-100 max-[500px]:hidden min-[500px]:h-2 min-[500px]:w-2"></div>
       </div>
       <div>
         <Highlighter
