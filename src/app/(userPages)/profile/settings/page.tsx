@@ -52,8 +52,8 @@ const Settings = () => (
               svg={AppLanguageIcon}
             />
             <ProfileLink
-              text="Import from Google calendar"
-              link="/profile"
+              text="Export tasks in specific format"
+              link="/profile/settings/export-format"
               svg={GoogleCalendarIcon}
             />
           </div>

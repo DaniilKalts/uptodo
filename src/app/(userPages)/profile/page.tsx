@@ -11,10 +11,8 @@ import Image from 'next/image';
 import useTasksStore from '@/store/useTasksStore';
 import { cn } from '@/utils/Cn';
 
-import ExcelJS from 'exceljs';
 import { toast } from 'react-hot-toast';
 
-import { SiMicrosoftexcel } from 'react-icons/si';
 import { BsFillCameraFill } from 'react-icons/bs';
 
 import {
@@ -142,7 +140,6 @@ const Profile = () => {
     });
   };
 
-  const [mounted, setMounted] = useState<boolean>(false);
   const [step, setStep] = useState<number | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -329,98 +326,10 @@ const Profile = () => {
   const [incompletedCount, setIcompletedCount] = useState<number>(0);
   const [completedCount, setCompletedCount] = useState<number>(0);
 
-  function getPriorityLabel(priority: number) {
-    const priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
-    const index = Math.min(Math.floor(priority / 3), 3);
-
-    return priorityLabels[index];
-  }
-
-  const exportExcelFile = () => {
-    const workbook = new ExcelJS.Workbook();
-    const sheet = workbook.addWorksheet('Your all Tasks List');
-    sheet.properties.defaultRowHeight = 80;
-
-    sheet.columns = [
-      {
-        header: 'Id',
-        key: 'id',
-        width: 10,
-      },
-      {
-        header: 'Title',
-        key: 'title',
-        width: 10,
-      },
-      {
-        header: 'Description',
-        key: 'description',
-        width: 10,
-      },
-      {
-        header: 'CreatedAt',
-        key: 'createdAt',
-        width: 10,
-      },
-      {
-        header: 'CompletedAt',
-        key: 'completedAt',
-        width: 10,
-      },
-      {
-        header: 'Category',
-        key: 'category',
-        width: 10,
-      },
-      {
-        header: 'Priority',
-        key: 'priority',
-        width: 10,
-      },
-    ];
-
-    storeIncompletedTasks.forEach((task) => {
-      sheet.addRow({
-        id: task.id,
-        title: task.title,
-        description: task.description || 'No description',
-        createdAt: new Date(task.createdAt),
-        completedAt: 'Not finished yet',
-        category: task.category.label,
-        priority: getPriorityLabel(task.priority),
-      });
-    });
-
-    storeCompletedTasks.forEach((task) => {
-      sheet.addRow({
-        id: task.id,
-        title: task.title,
-        description: task.description || 'No description',
-        createdAt: new Date(task.createdAt),
-        completedAt: new Date(task.completedAt),
-        category: task.category.label,
-        priority: getPriorityLabel(task.priority),
-      });
-    });
-
-    workbook.xlsx.writeBuffer().then((excelData) => {
-      const blob = new Blob([excelData], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      });
-      const url = window.URL.createObjectURL(blob);
-      const anchor = document.createElement('a');
-      anchor.href = url;
-      anchor.download = 'download.xlsx';
-      anchor.click();
-      window.URL.revokeObjectURL(url);
-    });
-  };
-
   useEffect(() => {
     if (localStorage.getItem('accountAvatar')) {
       setAccountAvatar(localStorage.getItem('accountAvatar')!);
     }
-    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -803,36 +712,16 @@ const Profile = () => {
               {initialAccountName}
             </h5>
             <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
-              <div className="w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 dark:border-gray-700 dark:bg-gray-700">
+              <div className="w-2/4 cursor-pointer rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors hover:bg-gray-light dark:border-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600">
                 <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
                   {incompletedCount} Task left
                 </p>
               </div>
-              <div className="w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 dark:border-gray-700 dark:bg-gray-700">
+              <div className="w-2/4 cursor-pointer rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors hover:bg-gray-light dark:border-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600">
                 <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
                   {completedCount} Task done
                 </p>
               </div>
-            </div>
-
-            <div className="mt-7 flex w-full max-w-[375px] justify-center">
-              {(storeIncompletedTasks.length || storeCompletedTasks.length) &&
-              mounted ? (
-                <Button
-                  label="Export tasks to Excel File"
-                  icon={SiMicrosoftexcel}
-                  onClick={exportExcelFile}
-                  outline="gray"
-                />
-              ) : (
-                <Button
-                  label="Export tasks to Excel File"
-                  icon={SiMicrosoftexcel}
-                  onClick={() => {}}
-                  outline="gray"
-                  disabled
-                />
-              )}
             </div>
           </header>
           <main className="mt-4 flex w-full max-w-lg flex-col justify-start">
