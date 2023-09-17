@@ -888,7 +888,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
               setTimeout(() => {
                 router.back();
-              }, 2000);
+              }, 1500);
             }
             if (task.completedAt) {
               removeCompletedTask(task.id);
@@ -902,7 +902,7 @@ const Task = ({ params }: TaskIdPageProps) => {
 
               setTimeout(() => {
                 router.back();
-              }, 2000);
+              }, 1500);
             }
           }}
           filled
@@ -1009,6 +1009,10 @@ const Task = ({ params }: TaskIdPageProps) => {
                   previousPage === 'calendar'
                     ? { dateTime: String(midnightDate.getTime()) }
                     : {};
+
+                if (previousPage === 'profile') {
+                  router.push(previousPage);
+                }
 
                 if (!task.completedAt && !initialTaskCompletedAt) {
                   updateIncompletedTask(task);

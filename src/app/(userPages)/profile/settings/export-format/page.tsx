@@ -282,9 +282,7 @@ const ExportFormat = () => {
                   }}
                   outline="purple"
                   disabled={
-                    !(
-                      incompletedTasksSheet.length || completedTasksSheet.length
-                    )
+                    !incompletedTasksSheet.length && !completedTasksSheet.length
                   }
                   isLoading={isLoading}
                   icon={BiExport}

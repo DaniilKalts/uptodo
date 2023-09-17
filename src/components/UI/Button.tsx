@@ -49,7 +49,8 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type || 'button'}
       className={cn(
-        'flex w-full items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-md px-4 py-3 text-base disabled:cursor-not-allowed disabled:opacity-70 min-[500px]:px-8 ',
+        'flex w-full items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-md px-4 py-3 disabled:cursor-not-allowed disabled:opacity-70 min-[500px]:px-8 ',
+        small ? 'text-sm' : 'text-base',
         `max-w-${small ? 'sm' : 'md'}`,
         `min-[500px]:text-${small ? 'base' : 'lg'}`,
         outlineStyles(),
@@ -59,7 +60,7 @@ const Button: React.FC<ButtonProps> = ({
           'bg-transparent text-gray-300 hover:text-gray-800 dark:hover:text-gray-400':
             label === 'Back',
           'bg-transparent text-purple hover:text-purple-dark':
-            label === 'Cancel',
+            label === 'Cancel' && !outline,
           'hover:bg-purple': disabled && filled,
           'bg-purple opacity-70 ring-0 hover:bg-purple': isLoading && filled,
           uppercase: upperCase,

@@ -6,6 +6,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 
 import useTasksStore from '@/store/useTasksStore';
@@ -45,6 +46,7 @@ import {
 } from '@/components/userPages/Profile/Icons/Profile';
 import { Container, Button, Input } from '@/components/UI';
 import getCroppedImg from '@/utils/EasyCrop';
+import { TaskType } from '@/types';
 
 interface AccountChangeInputs extends FieldValues {
   accountName: string;
@@ -86,11 +88,13 @@ const schema = yup.object().shape({
 });
 
 enum STEPS {
-  AVATAR_EDIT = 1,
-  ACCOUNT_NAME = 2,
-  ACCOUNT_PASSWORD = 3,
-  ACCOUNT_IMAGE = 4,
-  DELETE_ACCOUNT_IMAGE = 5,
+  INCOMPLETED_TASKS = 1,
+  COMPLETED_TASKS = 2,
+  AVATAR_EDIT = 3,
+  ACCOUNT_NAME = 4,
+  ACCOUNT_PASSWORD = 5,
+  ACCOUNT_IMAGE = 6,
+  DELETE_ACCOUNT_IMAGE = 7,
 }
 
 type TaskPropsValue =
@@ -323,8 +327,8 @@ const Profile = () => {
   );
   const storeCompletedTasks = useTasksStore((state) => state.completedTasks);
 
-  const [incompletedCount, setIcompletedCount] = useState<number>(0);
-  const [completedCount, setCompletedCount] = useState<number>(0);
+  const [incompletedTasks, setIcompletedTasks] = useState<TaskType[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<TaskType[]>([]);
 
   useEffect(() => {
     if (localStorage.getItem('accountAvatar')) {
@@ -333,11 +337,24 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    setIcompletedCount(storeIncompletedTasks.length);
+    if (storeIncompletedTasks.length) {
+      setIcompletedTasks(
+        storeIncompletedTasks.sort(
+          (taskA: TaskType, taskB: TaskType) => taskA.todayAt - taskB.todayAt,
+        ),
+      );
+    }
   }, [storeIncompletedTasks]);
 
   useEffect(() => {
-    setCompletedCount(storeCompletedTasks.length);
+    if (storeCompletedTasks.length) {
+      setCompletedTasks(
+        storeCompletedTasks.sort(
+          (taskA: TaskType, taskB: TaskType) =>
+            taskA.completedAt - taskB.completedAt,
+        ),
+      );
+    }
   }, [storeCompletedTasks]);
 
   useEffect(() => {
@@ -348,6 +365,162 @@ const Profile = () => {
       document.body.style.overflowY = 'auto';
     }
   }, [isOpen]);
+
+  if (step === STEPS.INCOMPLETED_TASKS) {
+    modalAlign = 'items-center';
+    modalTitle = 'Tasks Left';
+
+    bodyContent = (
+      <div className="my-8 grid w-full gap-5 min-[500px]:grid-cols-2">
+        {incompletedTasks.map((task, id) => (
+          <div
+            key={task.id}
+            className="flex w-full flex-col justify-between rounded-lg border border-gray-400 border-gray-700 bg-gray-800 px-4 py-5"
+          >
+            <div className="mb-5">
+              <h4 className="mb-3 text-sm font-bold text-purple min-[500px]:text-base">
+                {id + 1}.{task.title}
+              </h4>
+              <p className="text-xs text-gray-100 min-[500px]:text-sm">
+                {task.description &&
+                  task.description?.split('\n')?.map((line, index) => (
+                    <React.Fragment key={index}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
+              </p>
+            </div>
+            <div>
+              <div className="flex items-center justify-between text-gray-100">
+                <p className="text-xs text-purple-light min-[500px]:text-sm">
+                  {new Date(task.todayAt).toLocaleString('en-GB', {
+                    month: 'long',
+                  })}{' '}
+                  {new Date(task.todayAt).getDate()},{' '}
+                  {new Date(task.todayAt)
+                    .getHours()
+                    .toString()
+                    .padStart(2, '0')}
+                  :
+                  {new Date(task.todayAt)
+                    .getMinutes()
+                    .toString()
+                    .padStart(2, '0')}
+                </p>
+                <Link
+                  href={`/tasks/${task.id}?previousPage=profile`}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-gray-800 ring-purple hover:ring-2 min-[500px]:h-8 min-[500px]:w-8"
+                  aria-label="edit note"
+                  role="button"
+                >
+                  <Image
+                    className="w-[80%]"
+                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/4-by-3-multiple-styled-cards-svg1dark.svg"
+                    width={96}
+                    height={96}
+                    alt="edit"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+    footerContent = (
+      <footer className="flex items-center justify-center gap-6">
+        <Button
+          label="Cancel"
+          onClick={() => {
+            setStep(null);
+            setIsOpen(false);
+          }}
+          small
+          outline="gray"
+          disabled={!!errors.accountName?.message}
+        />
+      </footer>
+    );
+  }
+
+  if (step === STEPS.COMPLETED_TASKS) {
+    modalAlign = 'items-center';
+    modalTitle = 'Tasks Done';
+
+    bodyContent = (
+      <div className="my-8 grid w-full gap-5 min-[500px]:grid-cols-2">
+        {completedTasks.map((task, id) => (
+          <div
+            key={task.id}
+            className="flex w-full flex-col justify-between rounded-lg border border-gray-400 border-gray-700 bg-gray-800 px-4 py-5"
+          >
+            <div className="mb-5">
+              <h4 className="mb-3 text-sm font-bold text-purple min-[500px]:text-base">
+                {id + 1}.{task.title}
+              </h4>
+              <p className="text-xs text-gray-100 min-[500px]:text-sm">
+                {task.description &&
+                  task.description?.split('\n')?.map((line, index) => (
+                    <React.Fragment key={index}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
+              </p>
+            </div>
+            <div>
+              <div className="flex items-center justify-between text-gray-100">
+                <p className="text-xs text-purple-light min-[500px]:text-sm">
+                  {new Date(task.completedAt).toLocaleString('en-GB', {
+                    month: 'long',
+                  })}{' '}
+                  {new Date(task.completedAt).getDate()},{' '}
+                  {new Date(task.completedAt)
+                    .getHours()
+                    .toString()
+                    .padStart(2, '0')}
+                  :
+                  {new Date(task.completedAt)
+                    .getMinutes()
+                    .toString()
+                    .padStart(2, '0')}
+                </p>
+                <Link
+                  href={`/tasks/${task.id}?previousPage=profile`}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-gray-800 ring-purple hover:ring-2 min-[500px]:h-8 min-[500px]:w-8"
+                  aria-label="edit note"
+                  role="button"
+                >
+                  <Image
+                    className="w-[80%]"
+                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/4-by-3-multiple-styled-cards-svg1dark.svg"
+                    width={96}
+                    height={96}
+                    alt="edit"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+    footerContent = (
+      <footer className="flex items-center justify-center gap-6">
+        <Button
+          label="Cancel"
+          onClick={() => {
+            setStep(null);
+            setIsOpen(false);
+          }}
+          outline="gray"
+          small
+          disabled={!!errors.accountName?.message}
+        />
+      </footer>
+    );
+  }
 
   if (step === STEPS.AVATAR_EDIT) {
     modalAlign = 'items-center';
@@ -712,14 +885,44 @@ const Profile = () => {
               {initialAccountName}
             </h5>
             <div className="mt-6 flex w-full max-w-[375px] items-center justify-between gap-5">
-              <div className="w-2/4 cursor-pointer rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors hover:bg-gray-light dark:border-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600">
+              <div
+                onClick={() => {
+                  if (incompletedTasks.length) {
+                    setStep(STEPS.INCOMPLETED_TASKS);
+                    setIsOpen(true);
+                  }
+                }}
+                className={cn(
+                  'w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors dark:border-gray-700 dark:bg-gray-700',
+                  {
+                    'cursor-pointer hover:bg-gray-light dark:hover:bg-gray-600':
+                      incompletedTasks.length,
+                    'cursor-no-drop': !incompletedTasks.length,
+                  },
+                )}
+              >
                 <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
-                  {incompletedCount} Task left
+                  {incompletedTasks.length} Task Left
                 </p>
               </div>
-              <div className="w-2/4 cursor-pointer rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors hover:bg-gray-light dark:border-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600">
+              <div
+                onClick={() => {
+                  if (completedTasks.length) {
+                    setStep(STEPS.COMPLETED_TASKS);
+                    setIsOpen(true);
+                  }
+                }}
+                className={cn(
+                  'w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors dark:border-gray-700 dark:bg-gray-700',
+                  {
+                    'cursor-pointer hover:bg-gray-light dark:hover:bg-gray-600':
+                      completedTasks.length,
+                    'cursor-no-drop': !completedTasks.length,
+                  },
+                )}
+              >
                 <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
-                  {completedCount} Task done
+                  {completedTasks.length} Task Done
                 </p>
               </div>
             </div>
