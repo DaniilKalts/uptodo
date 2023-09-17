@@ -5,7 +5,7 @@
 }
 
 /* Modifying Scrollbar UI */
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 768px) {
   ::-webkit-scrollbar {
     width: 12px;
   }

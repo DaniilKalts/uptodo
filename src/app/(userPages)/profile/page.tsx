@@ -371,17 +371,17 @@ const Profile = () => {
     modalTitle = 'Tasks Left';
 
     bodyContent = (
-      <div className="my-8 grid w-full gap-5 min-[500px]:grid-cols-2">
-        {incompletedTasks.map((task, id) => (
+      <div className="my-8 grid w-full gap-5 sm:grid-cols-2">
+        {incompletedTasks.map((task) => (
           <div
             key={task.id}
             className="flex w-full flex-col justify-between rounded-lg border border-gray-400 border-gray-700 bg-gray-800 px-4 py-5"
           >
-            <div className="mb-5">
-              <h4 className="mb-3 text-sm font-bold text-purple min-[500px]:text-base">
-                {id + 1}.{task.title}
+            <div className="mb-6">
+              <h4 className="mb-3 text-base font-bold text-purple min-[500px]:text-lg md:text-xl">
+                {task.title}
               </h4>
-              <p className="text-xs text-gray-100 min-[500px]:text-sm">
+              <p className="break-words text-sm text-gray-100 min-[500px]:text-base md:text-lg">
                 {task.description &&
                   task.description?.split('\n')?.map((line, index) => (
                     <React.Fragment key={index}>
@@ -389,11 +389,12 @@ const Profile = () => {
                       <br />
                     </React.Fragment>
                   ))}
+                {!task.description && 'No description'}
               </p>
             </div>
             <div>
               <div className="flex items-center justify-between text-gray-100">
-                <p className="text-xs text-purple-light min-[500px]:text-sm">
+                <p className="text-sm text-purple-light min-[500px]:text-base">
                   {new Date(task.todayAt).toLocaleString('en-GB', {
                     month: 'long',
                   })}{' '}
@@ -449,17 +450,17 @@ const Profile = () => {
     modalTitle = 'Tasks Done';
 
     bodyContent = (
-      <div className="my-8 grid w-full gap-5 min-[500px]:grid-cols-2">
-        {completedTasks.map((task, id) => (
+      <div className="my-8 grid w-full gap-5 sm:grid-cols-2">
+        {completedTasks.map((task) => (
           <div
             key={task.id}
             className="flex w-full flex-col justify-between rounded-lg border border-gray-400 border-gray-700 bg-gray-800 px-4 py-5"
           >
-            <div className="mb-5">
-              <h4 className="mb-3 text-sm font-bold text-purple min-[500px]:text-base">
-                {id + 1}.{task.title}
+            <div className="mb-6">
+              <h4 className="mb-3 text-base font-bold text-purple min-[500px]:text-lg md:text-xl">
+                {task.title}
               </h4>
-              <p className="text-xs text-gray-100 min-[500px]:text-sm">
+              <p className="break-words text-sm text-gray-100 min-[500px]:text-base md:text-lg">
                 {task.description &&
                   task.description?.split('\n')?.map((line, index) => (
                     <React.Fragment key={index}>
@@ -467,11 +468,12 @@ const Profile = () => {
                       <br />
                     </React.Fragment>
                   ))}
+                {!task.description && 'No description'}
               </p>
             </div>
             <div>
               <div className="flex items-center justify-between text-gray-100">
-                <p className="text-xs text-purple-light min-[500px]:text-sm">
+                <p className="text-sm text-purple-light min-[500px]:text-base">
                   {new Date(task.completedAt).toLocaleString('en-GB', {
                     month: 'long',
                   })}{' '}
@@ -893,7 +895,7 @@ const Profile = () => {
                   }
                 }}
                 className={cn(
-                  'w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors dark:border-gray-700 dark:bg-gray-700',
+                  'w-2/4 rounded-md border border-gray-500 bg-gray-500 px-5 py-4 transition-colors dark:border-gray-700 dark:bg-gray-700 min-[500px]:px-6',
                   {
                     'cursor-pointer hover:bg-gray-light dark:hover:bg-gray-600':
                       incompletedTasks.length,
@@ -902,7 +904,7 @@ const Profile = () => {
                 )}
               >
                 <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
-                  {incompletedTasks.length} Task Left
+                  {incompletedTasks.length} Tasks Left
                 </p>
               </div>
               <div
@@ -913,7 +915,7 @@ const Profile = () => {
                   }
                 }}
                 className={cn(
-                  'w-2/4 rounded-md border border-gray-500 bg-gray-500 px-6 py-4 transition-colors dark:border-gray-700 dark:bg-gray-700',
+                  'w-2/4 rounded-md border border-gray-500 bg-gray-500 px-5 py-4 transition-colors dark:border-gray-700 dark:bg-gray-700 min-[500px]:px-6',
                   {
                     'cursor-pointer hover:bg-gray-light dark:hover:bg-gray-600':
                       completedTasks.length,
@@ -922,7 +924,7 @@ const Profile = () => {
                 )}
               >
                 <p className="text-center text-[15px] text-white-pale min-[500px]:text-lg">
-                  {completedTasks.length} Task Done
+                  {completedTasks.length} Tasks Done
                 </p>
               </div>
             </div>

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-restricted-syntax */
 
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import useTasksStore from '@/store/useTasksStore';
@@ -18,12 +19,12 @@ import { SiMicrosoftexcel } from 'react-icons/si';
 
 import { Container, Button } from '@/components/UI';
 import BackIcon from '@/components/UI/Icons/BackIcon';
+import { TaskType } from '@/types';
 
 type ExportFileType = 'CSV' | 'EXCEL' | 'JSON' | 'TXT';
 
 const ExportFormat = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const targetRef = useRef();
 
   const [format, setFormat] = useState<ExportFileType>('EXCEL');
 
@@ -53,28 +54,51 @@ const ExportFormat = () => {
     return priorityLabels[index];
   }
 
-  const incompletedTasksSheet = useTasksStore((state) =>
-    state.incompletedTasks.map((task) => ({
-      id: task.id,
-      title: task.title,
-      description: task.description || 'No description',
-      createdAt: new Date(task.createdAt),
-      completedAt: 'Not finished yet',
-      category: task.category.label,
-      priority: getPriorityLabel(task.priority),
-    })),
+  const storeIncompletedTasksSheet = useTasksStore(
+    (state) => state.incompletedTasks,
   );
-  const completedTasksSheet = useTasksStore((state) =>
-    state.completedTasks.map((task) => ({
-      id: task.id,
-      title: task.title,
-      description: task.description || 'No description',
-      createdAt: new Date(task.createdAt),
-      completedAt: new Date(task.completedAt),
-      category: task.category.label,
-      priority: getPriorityLabel(task.priority),
-    })),
+  const storeCompletedTasksSheet = useTasksStore(
+    (state) => state.completedTasks,
   );
+
+  const [incompletedTasksSheet, setIncompletedTasksSheet] = useState<
+    TaskType[]
+  >([]);
+  const [completedTasksSheet, setCompletedTasksSheet] = useState<TaskType[]>(
+    [],
+  );
+
+  useEffect(() => {
+    const modifiedIncompletedTasksSheet: any = storeIncompletedTasksSheet
+      .map((task) => ({
+        id: task.id,
+        title: task.title,
+        description: task.description || 'No description',
+        createdAt: new Date(task.createdAt),
+        completedAt: 'Not finished yet',
+        category: task.category.label,
+        priority: getPriorityLabel(task.priority),
+      }))
+      .sort((taskA: any, taskB: any) => taskA.todayAt - taskB.todayAt);
+
+    setIncompletedTasksSheet(modifiedIncompletedTasksSheet);
+  }, [storeIncompletedTasksSheet]);
+
+  useEffect(() => {
+    const modifiedCompletedTasksSheet: any = storeCompletedTasksSheet
+      .map((task) => ({
+        id: task.id,
+        title: task.title,
+        description: task.description || 'No description',
+        createdAt: new Date(task.createdAt),
+        completedAt: new Date(task.completedAt),
+        category: task.category.label,
+        priority: getPriorityLabel(task.priority),
+      }))
+      .sort((taskA: any, taskB: any) => taskA.completedAt - taskB.completedAt);
+
+    setCompletedTasksSheet(modifiedCompletedTasksSheet);
+  }, [storeCompletedTasksSheet]);
 
   const loadingIndicator = () => {
     setIsLoading(true);
@@ -266,7 +290,7 @@ const ExportFormat = () => {
               ))}
             </div>
             <div className="mt-6 flex justify-end">
-              <div className="max-w-xs">
+              <div className="max-w-[340px]">
                 <Button
                   label={`Export tasks to ${format} File`}
                   onClick={() => {
