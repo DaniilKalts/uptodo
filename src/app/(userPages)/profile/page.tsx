@@ -366,35 +366,51 @@ const Profile = () => {
     }
   }, [isOpen]);
 
+  const linkRegex = /(https?:\/\/[^\s]+)/g;
+
   if (step === STEPS.INCOMPLETED_TASKS) {
     modalAlign = 'items-center';
     modalTitle = 'Tasks Left';
 
     bodyContent = (
-      <div className="my-8 grid w-full gap-5 sm:grid-cols-2">
+      <div className="my-8 grid w-full gap-5 min-[600px]:grid-cols-2">
         {incompletedTasks.map((task) => (
           <div
             key={task.id}
             className="flex w-full flex-col justify-between rounded-lg border border-gray-400 border-gray-700 bg-gray-800 px-4 py-5"
           >
             <div className="mb-6">
-              <h4 className="mb-3 text-base font-bold text-purple min-[500px]:text-lg md:text-xl">
+              <h4 className="mb-3 text-lg font-bold text-purple md:text-xl">
                 {task.title}
               </h4>
-              <p className="break-words text-sm text-gray-100 min-[500px]:text-base md:text-lg">
-                {task.description &&
-                  task.description?.split('\n')?.map((line, index) => (
-                    <React.Fragment key={index}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))}
+              <p className="break-all text-base text-gray-100 md:text-lg">
+                {task.description?.split('\n')?.map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line.split(linkRegex).map((part, i) => {
+                      if (i % 2 === 1) {
+                        return (
+                          <a
+                            key={`${index}-${i}`}
+                            href={part}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline"
+                          >
+                            {part}
+                          </a>
+                        );
+                      }
+                      return part;
+                    })}
+                    {task.description && <br />}
+                  </React.Fragment>
+                ))}
                 {!task.description && 'No description'}
               </p>
             </div>
             <div>
               <div className="flex items-center justify-between text-gray-100">
-                <p className="text-sm text-purple-light min-[500px]:text-base">
+                <p className="text-base text-purple-light min-[500px]:text-lg">
                   {new Date(task.todayAt).toLocaleString('en-GB', {
                     month: 'long',
                   })}{' '}
@@ -450,30 +466,44 @@ const Profile = () => {
     modalTitle = 'Tasks Done';
 
     bodyContent = (
-      <div className="my-8 grid w-full gap-5 sm:grid-cols-2">
+      <div className="my-8 grid w-full gap-5 min-[600px]:grid-cols-2">
         {completedTasks.map((task) => (
           <div
             key={task.id}
             className="flex w-full flex-col justify-between rounded-lg border border-gray-400 border-gray-700 bg-gray-800 px-4 py-5"
           >
             <div className="mb-6">
-              <h4 className="mb-3 text-base font-bold text-purple min-[500px]:text-lg md:text-xl">
+              <h4 className="mb-3 text-lg font-bold text-purple md:text-xl">
                 {task.title}
               </h4>
-              <p className="break-words text-sm text-gray-100 min-[500px]:text-base md:text-lg">
-                {task.description &&
-                  task.description?.split('\n')?.map((line, index) => (
-                    <React.Fragment key={index}>
-                      {line}
-                      <br />
-                    </React.Fragment>
-                  ))}
+              <p className="break-all text-base text-gray-100 md:text-lg">
+                {task.description?.split('\n')?.map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line.split(linkRegex).map((part, i) => {
+                      if (i % 2 === 1) {
+                        return (
+                          <a
+                            key={`${index}-${i}`}
+                            href={part}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline"
+                          >
+                            {part}
+                          </a>
+                        );
+                      }
+                      return part;
+                    })}
+                    {task.description && <br />}
+                  </React.Fragment>
+                ))}
                 {!task.description && 'No description'}
               </p>
             </div>
             <div>
               <div className="flex items-center justify-between text-gray-100">
-                <p className="text-sm text-purple-light min-[500px]:text-base">
+                <p className="text-base text-purple-light min-[500px]:text-lg">
                   {new Date(task.completedAt).toLocaleString('en-GB', {
                     month: 'long',
                   })}{' '}
@@ -805,17 +835,19 @@ const Profile = () => {
           >
             Import from Google Drive
           </div>
-          <div
-            onClick={() => {
-              stopCamera();
-              setStep(STEPS.DELETE_ACCOUNT_IMAGE);
-            }}
-            className={
-              'flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-red transition-colors hover:text-red-dark min-[500px]:text-xl'
-            }
-          >
-            Delete account Image
-          </div>
+          {accountAvatar ? (
+            <div
+              onClick={() => {
+                stopCamera();
+                setStep(STEPS.DELETE_ACCOUNT_IMAGE);
+              }}
+              className={
+                'flex w-full cursor-pointer justify-start py-[14px] text-center text-lg font-light text-red transition-colors hover:text-red-dark min-[500px]:text-xl'
+              }
+            >
+              Delete account Image
+            </div>
+          ) : null}
         </div>
       </div>
     );
@@ -984,7 +1016,11 @@ const Profile = () => {
                 link="profile/feedback"
                 svg={FeedbackIcon}
               />
-              <ProfileLink text="Support US" link="profile" svg={SupportIcon} />
+              <ProfileLink
+                text="Support US"
+                link="profile/support-us"
+                svg={SupportIcon}
+              />
               <ProfileLink text="Log out" link="login" svg={LogOutIcon} />
             </section>
           </main>

@@ -879,30 +879,16 @@ const Task = ({ params }: TaskIdPageProps) => {
             if (!task.completedAt) {
               removeIncompletedTask(task.id);
 
-              toast('Successfully deleted', {
-                icon: '🗑️',
-                duration: 2000,
-              });
-
               setIsOpen(false);
 
-              setTimeout(() => {
-                router.back();
-              }, 1500);
+              router.back();
             }
             if (task.completedAt) {
               removeCompletedTask(task.id);
 
-              toast('Successfully deleted', {
-                icon: '🗑️',
-                duration: 2000,
-              });
-
               setIsOpen(false);
 
-              setTimeout(() => {
-                router.back();
-              }, 1500);
+              router.back();
             }
           }}
           filled

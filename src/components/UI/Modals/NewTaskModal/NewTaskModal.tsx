@@ -204,6 +204,25 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       );
 
       router.push(url);
+
+      return;
+    }
+
+    if (
+      !window.location.href.includes('home') &&
+      !window.location.href.includes('calendar')
+    ) {
+      const query = { dateTime: taskDate.getTime() };
+
+      const url = qs.stringifyUrl(
+        {
+          url: `${window.location.origin}/calendar/incompleted`,
+          query,
+        },
+        { skipNull: true },
+      );
+
+      router.push(url);
     }
   };
 

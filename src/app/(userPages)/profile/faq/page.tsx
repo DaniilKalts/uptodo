@@ -14,7 +14,7 @@ const Faq = () => (
   <Container>
     <section className="mx-auto max-w-screen-xl pb-40 pt-10 min-[500px]:pb-44 min-[500px]:pt-14">
       <div className="mb-8 flex flex-col items-center justify-center max-[500px]:hidden">
-        <h2 className="mb-4 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-center text-4xl font-extrabold tracking-tight text-transparent">
+        <h2 className="mb-4 text-center text-4xl font-extrabold tracking-tight text-purple-light">
           Frequently Asked Questions
         </h2>
         <Link href="/profile/feedback" className="font-medium hover:underline">
@@ -28,7 +28,7 @@ const Faq = () => (
         </h5>
         <Link
           href="/profile/feedback"
-          className="text-sm font-medium underline"
+          className="text-center text-base font-medium underline"
         >
           Contact Us to ask your personal Questions!
         </Link>
