@@ -31,6 +31,10 @@ const nextConfig = {
   images: {
     domains: ['drive.google.com'],
   },
+  i18n: {
+    locales: ['en-US', 'fr'],
+    defaultLocale: 'en-US',
+  },
 };
 
 module.exports = nextConfig;

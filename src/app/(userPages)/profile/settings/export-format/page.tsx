@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+import { TaskType } from '@/types';
 import useTasksStore from '@/store/useTasksStore';
 
 import ExcelJS from 'exceljs';
@@ -19,7 +20,6 @@ import { SiMicrosoftexcel } from 'react-icons/si';
 
 import { Container, Button } from '@/components/UI';
 import BackIcon from '@/components/UI/Icons/BackIcon';
-import { TaskType } from '@/types';
 
 type ExportFileType = 'CSV' | 'EXCEL' | 'JSON' | 'TXT';
 

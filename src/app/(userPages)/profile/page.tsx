@@ -373,7 +373,7 @@ const Profile = () => {
     modalTitle = 'Tasks Left';
 
     bodyContent = (
-      <div className="my-8 grid w-full gap-5 min-[600px]:grid-cols-2">
+      <div className="my-8 grid w-full gap-5 min-[575px]:grid-cols-2">
         {incompletedTasks.map((task) => (
           <div
             key={task.id}
@@ -466,7 +466,7 @@ const Profile = () => {
     modalTitle = 'Tasks Done';
 
     bodyContent = (
-      <div className="my-8 grid w-full gap-5 min-[600px]:grid-cols-2">
+      <div className="my-8 grid w-full gap-5 min-[575px]:grid-cols-2">
         {completedTasks.map((task) => (
           <div
             key={task.id}

@@ -48,7 +48,7 @@ const Settings = () => (
             />
             <ProfileLink
               text="Change app language"
-              link="/profile"
+              link="/profile/settings/languages"
               svg={AppLanguageIcon}
             />
             <ProfileLink

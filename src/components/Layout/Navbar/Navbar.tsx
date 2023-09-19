@@ -11,7 +11,6 @@ import { IndexIcon, CalendarIcon, FocusIcon, ProfileIcon } from './Icons';
 
 const Navbar = () => {
   const currentPathName = usePathname();
-
   const [isNewTaskModal, setIsNewTaskModal] = useState<boolean>(false);
 
   return (

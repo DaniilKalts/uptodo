@@ -28,7 +28,7 @@ const Faq = () => (
         </h5>
         <Link
           href="/profile/feedback"
-          className="text-center text-base font-medium underline"
+          className="text-center text-sm font-medium underline"
         >
           Contact Us to ask your personal Questions!
         </Link>

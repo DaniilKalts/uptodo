@@ -14,6 +14,7 @@ import { cn } from '@/utils/Cn';
 import qs from 'query-string';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 import TimerSwiper from '@/components/userPages/Focus/Timer/TimerSwiper';
 import TimeSwiper from '@/components/userPages/Focus/Timer/TimeSwiper';
@@ -228,9 +229,6 @@ const Task = ({ params }: TaskIdPageProps) => {
       return <HomeIcon IconStyles={iconStyles} />;
     }
   };
-
-  const text = task?.description;
-  const lines = text?.split('\n');
 
   function getPriorityLabel(priority: number) {
     const priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
@@ -1158,17 +1156,14 @@ const Task = ({ params }: TaskIdPageProps) => {
                   </div>
                 </div>
               </div>
-              {lines?.map((line, index) => (
-                <React.Fragment key={index}>
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    className="react-markdown-container max-w-lg text-base text-gray-500 dark:text-white-pale min-[500px]:text-lg"
-                  >
-                    {line}
-                  </ReactMarkdown>
-                  {!line.length && <br />}
-                </React.Fragment>
-              ))}
+              <ReactMarkdown
+                skipHtml={false}
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw as any]}
+                className="react-markdown-container max-w-lg text-base text-gray-500 dark:text-white-pale min-[500px]:text-lg"
+              >
+                {task.description}
+              </ReactMarkdown>
             </div>
           </div>
         </div>
