@@ -8,18 +8,6 @@ import qs from 'query-string';
 
 import Highlighter from 'react-highlight-words';
 
-import {
-  DesignIcon,
-  GroceryIcon,
-  HealthIcon,
-  HomeIcon,
-  MovieIcon,
-  SocialIcon,
-  UniversityIcon,
-  WorkIcon,
-  WorkoutIcon,
-} from '@/components/UI/Icons/Categories';
-
 interface IncompletedTaskInterface {
   task: TaskType;
   deadlineStatus: 'late' | 'present' | 'future';
@@ -61,37 +49,6 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
 
   const getTimeString = (time: number) => String(time).padStart(2, '0');
 
-  const getCategoryBgColor = () => {
-    switch (category.bgColor) {
-      case 'blue-light':
-        return 'bg-blue-light';
-      case 'mint-light':
-        return 'bg-mint-light';
-      case 'lemon-light':
-        return 'bg-lemon-light';
-      case 'lemon-chiffon':
-        return 'bg-lemon-chiffon';
-      case 'beige-light':
-        return 'bg-beige-light';
-      case 'cyan-light':
-        return 'bg-cyan-light';
-      case 'pink-light':
-        return 'bg-pink-light';
-      case 'aquamarine-mist':
-        return 'bg-aquamarine-mist';
-      case 'raspberry-sorbet':
-        return 'bg-raspberry-sorbet';
-      case 'sky-blue':
-        return 'bg-sky-blue';
-      case 'coral-pink':
-        return 'bg-coral-pink';
-      case 'turquoise-haze':
-        return 'bg-turquoise-haze';
-      default:
-        return '';
-    }
-  };
-
   const getTodayAtColor = () => {
     if (deadlineStatus === 'late') {
       return 'text-red';
@@ -101,40 +58,6 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
     }
 
     return 'text-gray-200';
-  };
-
-  const getCategoryIcon = (label: string, iustonStyles: string) => {
-    if (!label) {
-      return null;
-    }
-
-    if (label === 'Grocery') {
-      return <GroceryIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'Work') {
-      return <WorkIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'Workout') {
-      return <WorkoutIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'Design') {
-      return <DesignIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'University') {
-      return <UniversityIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'Social') {
-      return <SocialIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'Health') {
-      return <HealthIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'Movie') {
-      return <MovieIcon IconStyles={iustonStyles} />;
-    }
-    if (label === 'Home') {
-      return <HomeIcon IconStyles={iustonStyles} />;
-    }
   };
 
   return (
@@ -171,13 +94,7 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         </p>
       </div>
       <div className="flex gap-4 min-[500px]:absolute min-[500px]:bottom-1 min-[500px]:right-2">
-        <div
-          className={cn(
-            'flex h-10 items-center gap-3 rounded-md px-3',
-            getCategoryBgColor(),
-          )}
-        >
-          {getCategoryIcon(category.label, 'w-6 h-6')}
+        <div className="flex h-10 items-center gap-3 rounded-md px-3">
           <p className="text-sm text-white min-[500px]:text-base">
             {category.label}
           </p>

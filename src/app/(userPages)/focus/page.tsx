@@ -20,14 +20,6 @@ import Timer from '@/components/userPages/Focus/Timer/Timer';
 import FocusChart from '@/components/userPages/Focus/FocusChart';
 import FocusTask from '@/components/userPages/Focus/FocusTask';
 
-import {
-  WorkoutIcon,
-  WorkIcon,
-  MusickIcon,
-  HealthIcon,
-  UniversityIcon,
-} from '@/components/UI/Icons/Categories';
-
 import { Container, Select } from '@/components/UI';
 import TimerModal from '@/components/UI/Modals/TimerModal';
 
@@ -169,35 +161,30 @@ const Focus = () => {
               Time Spent:
             </h4>
             <FocusTask
-              icon={WorkoutIcon}
               IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="cyan-light"
               title="Workout"
               text="You spent 1 hour on Workout today"
             />
             <FocusTask
-              icon={WorkIcon}
               IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="beige-light"
               title="Work"
               text="You spent 6 hours on Work today"
             />
             <FocusTask
-              icon={MusickIcon}
               IconStyles={'w-7 h-7 min-[500px]:w-9 min-[500px]:h-9'}
               bgIconColor="pink-light"
               title="Musick"
               text="You spent 2 hours on Musick today"
             />
             <FocusTask
-              icon={HealthIcon}
               IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="mint-light"
               title="Health"
               text="You spent 1 hour on Health today"
             />
             <FocusTask
-              icon={UniversityIcon}
               IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
               bgIconColor="blue-light"
               title="University"

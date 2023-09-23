@@ -39,19 +39,6 @@ import {
   TagIcon,
 } from '@/components/UI/Modals/NewTaskModal/Icons';
 
-import {
-  DesignIcon,
-  GroceryIcon,
-  HealthIcon,
-  HomeIcon,
-  MovieIcon,
-  SocialIcon,
-  UniversityIcon,
-  MusickIcon,
-  WorkIcon,
-  WorkoutIcon,
-} from '@/components/UI/Icons/Categories';
-
 import { Container, Button, Input, Textarea } from '@/components/UI';
 import Modal from '@/components/UI/Modals/Modal';
 
@@ -193,42 +180,6 @@ const Task = ({ params }: TaskIdPageProps) => {
   );
 
   const getTimeString = (time: number) => String(time).padStart(2, '0');
-  const getCategoryIcon = (label: string, iconStyles: string) => {
-    if (!label) {
-      return null;
-    }
-
-    if (label === 'Grocery') {
-      return <GroceryIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Work') {
-      return <WorkIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Workout') {
-      return <WorkoutIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Design') {
-      return <DesignIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'University') {
-      return <UniversityIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Social') {
-      return <SocialIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Musick') {
-      return <MusickIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Health') {
-      return <HealthIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Movie') {
-      return <MovieIcon IconStyles={iconStyles} />;
-    }
-    if (label === 'Home') {
-      return <HomeIcon IconStyles={iconStyles} />;
-    }
-  };
 
   function getPriorityLabel(priority: number) {
     const priorityLabels = ['Low', 'Medium', 'High', 'Critical'];
@@ -1174,10 +1125,6 @@ const Task = ({ params }: TaskIdPageProps) => {
                 }}
                 className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-500 px-4 py-2 text-sm text-white hover:bg-gray-light dark:bg-gray-600 dark:hover:bg-gray-500 min-[500px]:px-6 min-[500px]:text-base"
               >
-                {getCategoryIcon(
-                  task.category.label,
-                  'w-7 h-7 min-[500px]:w-9 min-[500px]:h-9',
-                )}{' '}
                 {task.category.label}
               </div>
             </div>
