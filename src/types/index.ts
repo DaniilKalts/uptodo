@@ -1,4 +1,9 @@
-export type CategoryIconType = React.FC<{ IconStyles: string }>;
+export type CategoryType = {
+  icon: any;
+  IconBgColor: string;
+  IconColor: string;
+  label: string;
+};
 
 export type TaskType = {
   id: number;
@@ -7,16 +12,6 @@ export type TaskType = {
   createdAt: number;
   todayAt: number;
   completedAt: number;
-  category: {
-    bgColor: string;
-    label: string;
-  };
+  category: CategoryType;
   priority: number;
-};
-
-export type CategoryType = {
-  icon: CategoryIconType;
-  bgColor: string;
-  label: string;
-  IconStyles: string;
 };

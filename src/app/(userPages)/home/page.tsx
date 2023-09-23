@@ -175,6 +175,7 @@ const Home = () => {
               imageUrl={accountAvatar}
             />
           )}
+          {previewContent}
         </Container>
       </div>
     );
@@ -230,7 +231,7 @@ const Home = () => {
             <hr className="my-4 h-[2px] w-full rounded border-0 bg-gray-dark" />
             <div
               className={
-                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
+                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5 text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
               }
             >
               Today's Incompleted Tasks:
@@ -270,7 +271,7 @@ const Home = () => {
             )}
             <div
               className={
-                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5  text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
+                'z-10 mb-6 mt-2 inline-flex items-center justify-between rounded-lg border-2 border-gray-light bg-white-pale px-4 py-2.5 text-center text-base font-medium text-gray-light dark:bg-gray-500 dark:text-white-pale min-[500px]:text-lg'
               }
             >
               Today's Completed Tasks:

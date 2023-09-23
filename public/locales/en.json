@@ -1,41 +1,5 @@
 {
-  "navbar": {
-    "navbarIndex": "Index",
-    "navbarCalendar": "Calendar",
-    "navbarFocus": "Focus",
-    "navbarProfile": "Profile"
-  },
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "link": "Contact Us to ask your personal Questions!",
-    "firstQuestion": "1. How do I create a task in UpTodo?",
-    "firstAnswer": "To create a task in UpTodo, follow these steps:\n1. Go to your account settings or profile section.\n2. Look for the option to create a new task.\n3. Fill in the task details and save it.\n4. Your new task will be added to your task list.",
-    "secondQuestion": "2. How do I change my password in UpTodo?",
-    "secondAnswer": "To change your password in UpTodo, go to the account settings or profile section. There, you'll find an option to change your password. Follow the prompts to update your password securely.",
-    "thirdQuestion": "3. What happens if I forget my UpTodo account password?",
-    "thirdAnswer": "If you forget your UpTodo password, you can check the message that must have come to your Gmail before. Alternatively, you can contact us in the 'Help & Feedback' section.",
-    "fourthQuestion": "4. Can I export my tasks from UpTodo to other apps?",
-    "fourthAnswer": "Yes, UpTodo allows you to export your task lists. You can export tasks in one format: EXCEL, which can be used for other task management goals.",
-    "fifthQuestion": "5. Is there a limit to the number of tasks I can create in UpTodo?",
-    "fifthAnswer": "UpTodo does not impose a strict limit on the number of tasks you can create. However, performance may be affected if you have an excessively large number of tasks. It's recommended to maintain an organized task list.",
-    "sixthQuestion": "6. Is there a way to set recurring tasks in UpTodo?",
-    "sixthAnswer": "As of now, UpTodo does not have a built-in feature for setting recurring tasks. However, you can manually duplicate or recreate recurring tasks by setting new due dates when the previous instance is completed.",
-    "seventhQuestion": "7. How do I get in touch with UpTodo support for assistance?",
-    "seventhAnswer": "If you need assistance or have questions about UpTodo, you can usually find a 'Feedback' or 'Help' section within the app or on the website. There, you'll find contact details and an email support option to reach out for help.",
-    "eighthQuestion": "8. How do I change my password in UpTodo?",
-    "eighthAnswer": "To change your password in UpTodo, go to the account settings or profile section. There, you'll find an option to change your password. Follow the prompts to update your password securely.",
-    "ninthQuestion": "9. What happens if I forget my UpTodo account password?",
-    "ninthAnswer": "If you forget your UpTodo password, you can check the message that must have come to your Gmail before. Alternatively, you can contact us in the 'Help & Feedback' section.",
-    "tenthQuestion": "10. Can I export my tasks from UpTodo to other apps?",
-    "tenthAnswer": "Yes, UpTodo allows you to export your task lists. You can export tasks in one format: EXCEL, which can be used for other task management goals.",
-    "eleventhQuestion": "11. Is there a limit to the number of tasks I can create in UpTodo?",
-    "eleventhAnswer": "UpTodo does not impose a strict limit on the number of tasks you can create. However, performance may be affected if you have an excessively large number of tasks. It's recommended to maintain an organized task list."
-  },
-  "focus": {
-    "title": "Focus Mode",
-    "description": "While your focus mode is on, make sure you don't leave the app",
-    "timerTitle": "Choose time to focus",
-    "timerMinutes": "Minutes",
-    "timerSeconds": "Seconds"
+  "products": {
+    "cart": "Add to Cart"
   }
 }

@@ -237,37 +237,6 @@ const Task = ({ params }: TaskIdPageProps) => {
     return priorityLabels[index];
   }
 
-  const getCategoryBgColor = (bgIconColor: string) => {
-    switch (bgIconColor) {
-      case 'blue-light':
-        return 'bg-blue-light';
-      case 'mint-light':
-        return 'bg-mint-light';
-      case 'lemon-light':
-        return 'bg-lemon-light';
-      case 'lemon-chiffon':
-        return 'bg-lemon-chiffon';
-      case 'beige-light':
-        return 'bg-beige-light';
-      case 'cyan-light':
-        return 'bg-cyan-light';
-      case 'pink-light':
-        return 'bg-pink-light';
-      case 'aquamarine-mist':
-        return 'bg-aquamarine-mist';
-      case 'raspberry-sorbet':
-        return 'bg-raspberry-sorbet';
-      case 'sky-blue':
-        return 'bg-sky-blue';
-      case 'coral-pink':
-        return 'bg-coral-pink';
-      case 'turquoise-haze':
-        return 'bg-turquoise-haze';
-      default:
-        return '';
-    }
-  };
-
   useEffect(() => {
     const foundTask = [...storeIncompletedTasks, ...storeCompletedTasks].find(
       (currentTask: TaskType) => currentTask.id === Number(params.taskId),
@@ -278,14 +247,14 @@ const Task = ({ params }: TaskIdPageProps) => {
       setInitialTaskDescription(foundTask.description);
       setInitialTaskTodayAt(foundTask.todayAt);
       setInitialTaskCompletedAt(foundTask.completedAt);
-      setInitialTaskCategory(foundTask.category);
+      setInitialTaskCategory(foundTask.category as any);
       setInitialTaskPriority(foundTask.priority);
 
       setTask(foundTask);
       setPotentialDate(new Date(foundTask.todayAt));
       setSelectedDate(new Date(foundTask.todayAt));
       setPotentialComletedAt(foundTask.completedAt);
-      setPotentialCategory(foundTask.category);
+      setPotentialCategory(foundTask.category as any);
       setPotentialPriority(foundTask.priority);
       setCustomValue('taskTitle', foundTask.title);
       setCustomValue('taskDescription', foundTask.description);
@@ -753,16 +722,11 @@ const Task = ({ params }: TaskIdPageProps) => {
             key={id}
           >
             <button
-              className={cn(
-                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[500px]:h-[72px] min-[500px]:w-[72px]',
-                getCategoryBgColor(category.bgColor),
-              )}
+              className="flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[500px]:h-[72px] min-[500px]:w-[72px]"
               disabled={category.label === 'Create New'}
-              onClick={() => setPotentialCategory(category)}
+              onClick={() => setPotentialCategory(category as any)}
             >
-              {category.icon({
-                IconStyles: category.IconStyles,
-              })}
+              {category.icon()}
             </button>
             <p
               className={cn(
@@ -783,7 +747,7 @@ const Task = ({ params }: TaskIdPageProps) => {
         <Button
           label="Cancel"
           onClick={() => {
-            setPotentialCategory(task.category);
+            setPotentialCategory(task.category as any);
             setIsOpen(false);
           }}
         />
@@ -792,10 +756,7 @@ const Task = ({ params }: TaskIdPageProps) => {
           onClick={() => {
             setTask((prev) => {
               const modifiedTask = prev as TaskType;
-              modifiedTask.category = potentialCategory as {
-                bgColor: string;
-                label: string;
-              };
+              modifiedTask.category = potentialCategory as any;
               return modifiedTask;
             });
 
@@ -910,8 +871,10 @@ const Task = ({ params }: TaskIdPageProps) => {
                   todayAt: initialTaskTodayAt,
                   completedAt: initialTaskCompletedAt,
                   category: {
-                    bgColor: initialTaskCategory?.bgColor as string,
-                    label: initialTaskCategory?.label as string,
+                    icon: initialTaskCategory?.bgColor as string,
+                    IconBgColor: initialTaskCategory?.bgColor as string,
+                    IconColor: initialTaskCategory?.label as string,
+                    label: '',
                   },
                   priority: initialTaskPriority as number,
                 });

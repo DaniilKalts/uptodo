@@ -13,6 +13,22 @@ const Navbar = () => {
   const currentPathName = usePathname();
   const [isNewTaskModal, setIsNewTaskModal] = useState<boolean>(false);
 
+  // const [lastRoutes, setLastRoutes] = useState<string[]>([]);
+
+  // React.useEffect(() => {
+  //   let modifiedRoutes = lastRoutes.concat(currentPathName);
+  //   if (modifiedRoutes.length > 2) {
+  //     modifiedRoutes = modifiedRoutes.slice(-2);
+  //   }
+  //   setLastRoutes(modifiedRoutes);
+
+  //   if (modifiedRoutes[0] === '/create-category') {
+  //     setIsNewTaskModal(true);
+  //   }
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [currentPathName]);
+
   return (
     <nav className="fixed bottom-0 left-0 z-40 h-20 w-full bg-gray-700 md:h-24">
       {isNewTaskModal && (

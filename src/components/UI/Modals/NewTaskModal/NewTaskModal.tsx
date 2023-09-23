@@ -6,8 +6,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { CategoryIconType, CategoryType, TaskType } from '@/types';
+import { CategoryType, TaskType } from '@/types';
 import { categories } from '@/data/Categories';
+// import useCategoriesStore from '@/store/useCategories';
 import { cn } from '@/utils/Cn';
 
 import qs from 'query-string';
@@ -67,17 +68,7 @@ enum STEPS {
   PRIORITY = 4,
 }
 
-type TaskPropsValue =
-  | null
-  | string
-  | number
-  | Date
-  | {
-      icon: CategoryIconType;
-      bgColor: string;
-      label: string;
-      IconStyles: string;
-    };
+type TaskPropsValue = null | string | number | Date | CategoryType;
 
 interface NewTaskModalInterface {
   isOpen: boolean;
@@ -114,6 +105,9 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
   const taskCategory = watch('taskCategory');
   const taskPriority = watch('taskPriority');
 
+  // const storeCategories = useCategoriesStore((state) => state.categories);
+  // const [categories, setCategories] = useState<CategoryType[]>([]);
+
   const [step, setStep] = useState<number | null>(null);
 
   const [potentialDate, setPotentialDate] = useState(taskDate);
@@ -136,37 +130,6 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
 
   let modalTitle: string = '';
 
-  const getCategoryBgColor = (bgIconColor: string) => {
-    switch (bgIconColor) {
-      case 'blue-light':
-        return 'bg-blue-light';
-      case 'mint-light':
-        return 'bg-mint-light';
-      case 'lemon-light':
-        return 'bg-lemon-light';
-      case 'lemon-chiffon':
-        return 'bg-lemon-chiffon';
-      case 'beige-light':
-        return 'bg-beige-light';
-      case 'cyan-light':
-        return 'bg-cyan-light';
-      case 'pink-light':
-        return 'bg-pink-light';
-      case 'aquamarine-mist':
-        return 'bg-aquamarine-mist';
-      case 'raspberry-sorbet':
-        return 'bg-raspberry-sorbet';
-      case 'sky-blue':
-        return 'bg-sky-blue';
-      case 'coral-pink':
-        return 'bg-coral-pink';
-      case 'turquoise-haze':
-        return 'bg-turquoise-haze';
-      default:
-        return '';
-    }
-  };
-
   const addIncompletedTask = useTasksStore((state) => state.addIncompletedTask);
 
   const onSubmit: SubmitHandler<FieldValues> = (_, event) => {
@@ -181,7 +144,9 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         todayAt: taskDate.getTime(),
         completedAt: 0,
         category: {
-          bgColor: taskCategory?.bgColor!,
+          icon: taskCategory?.icon!,
+          IconBgColor: taskCategory?.IconBgColor!,
+          IconColor: taskCategory?.IconColor!,
           label: taskCategory?.label!,
         },
         priority: taskPriority!,
@@ -244,6 +209,10 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
 
     return 'text-white-pale hover:text-purple';
   };
+
+  // useEffect(() => {
+  //   setCategories(storeCategories);
+  // }, [storeCategories]);
 
   useEffect(() => {
     if (new Date().getHours() > 11) {
@@ -669,22 +638,22 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
       <div className="mt-6 grid w-full max-w-sm grid-cols-3 max-[500px]:mx-auto max-[500px]:max-w-[300px]">
         {categories.map((category, id) => (
           <div
-            className={cn('mb-4 flex flex-col items-center', {
-              'cursor-not-allowed opacity-50': category.label === 'Create New',
-            })}
+            className="mb-4 flex flex-col items-center hover:opacity-80"
             key={id}
           >
             <button
-              className={cn(
-                'flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors disabled:cursor-not-allowed min-[500px]:h-[72px] min-[500px]:w-[72px]',
-                getCategoryBgColor(category.bgColor),
-              )}
-              disabled={category.label === 'Create New'}
-              onClick={() => setPotentialCategory(category)}
+              className="flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors min-[500px]:h-[72px] min-[500px]:w-[72px]"
+              style={{ backgroundColor: category.IconBgColor }}
+              onClick={() => {
+                if (category.label !== 'Create New') {
+                  setPotentialCategory(category);
+                } else if (category.label === 'Create New') {
+                  router.push('/create-category');
+                  onClose();
+                }
+              }}
             >
-              {category.icon({
-                IconStyles: category.IconStyles,
-              })}
+              {category.icon({ size: '2.75em', color: category.IconColor })}
             </button>
             <p
               className={cn(
@@ -713,7 +682,7 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         <Button
           label="Edit"
           onClick={() => {
-            setCustomValue('taskCategory', potentialCategory);
+            setCustomValue('taskCategory', potentialCategory as CategoryType);
             setStep(null);
           }}
           filled

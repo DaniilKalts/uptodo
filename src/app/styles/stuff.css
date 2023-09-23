@@ -20,6 +20,20 @@
   }
 }
 
+.categories-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  height: 8px;
+}
+
+.categories-scrollbar::-webkit-scrollbar-track {
+  width: 12px;
+  height: 8px;
+}
+
+.categories-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffffffdd;
+}
+
 /* Modifying Textarea UI and some more stuff */
 textarea {
   resize: vertical;
