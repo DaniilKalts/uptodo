@@ -1,7 +1,7 @@
 export type CategoryType = {
-  icon: any;
-  IconBgColor: string;
-  IconColor: string;
+  icon: string;
+  iconBgColor: string;
+  iconColor: string;
   label: string;
 };
 

@@ -1,27 +1,29 @@
 import { create, StateCreator } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
 
-import {
-  MdAdd,
-  MdWorkOutline,
-  MdDesignServices,
-  MdOutlineSchool,
-  MdPeopleOutline,
-  MdSportsGymnastics,
-} from 'react-icons/md';
+// import {
+//   MdAdd,
+//   MdWorkOutline,
+//   MdDesignServices,
+//   MdOutlineSchool,
+//   MdPeopleOutline,
+//   MdSportsGymnastics,
+// } from 'react-icons/md';
 
-import {
-  IoHomeOutline,
-  IoMusicalNotesOutline,
-  IoFilmOutline,
-  IoHeartOutline,
-  IoStorefrontOutline,
-} from 'react-icons/io5';
+// import {
+//   IoHomeOutline,
+//   IoMusicalNotesOutline,
+//   IoFilmOutline,
+//   IoHeartOutline,
+//   IoStorefrontOutline,
+// } from 'react-icons/io5';
 
 import { CategoryType } from '@/types';
 
 interface CategoriesStoreInterface {
   categories: CategoryType[];
+  addCategory: (newCategory: CategoryType) => void;
+  removeCategory: (oldCategory: CategoryType) => void;
 }
 
 type MyPersist = (
@@ -31,75 +33,87 @@ type MyPersist = (
 
 const useCategoriesStore = create<CategoriesStoreInterface, []>(
   (persist as MyPersist)(
-    (): CategoriesStoreInterface => ({
+    (set): CategoriesStoreInterface => ({
       categories: [
         {
-          icon: IoStorefrontOutline.toString(),
-          IconBgColor: '#CCFF80',
-          IconColor: '#21A300',
+          icon: 'IoStorefrontOutline',
+          iconBgColor: '#CCFF80',
+          iconColor: '#21A300',
           label: 'Grocery',
         },
         {
-          icon: MdWorkOutline.toString(),
-          IconBgColor: '#FF9680',
-          IconColor: '#A31D00',
+          icon: 'MdWorkOutline',
+          iconBgColor: '#FF9680',
+          iconColor: '#A31D00',
           label: 'Work',
         },
         {
-          icon: MdSportsGymnastics.toString(),
-          IconBgColor: '#80FFFF',
-          IconColor: '#0069A3',
+          icon: 'MdSportsGymnastics',
+          iconBgColor: '#80FFFF',
+          iconColor: '#0069A3',
           label: 'Workout',
         },
         {
-          icon: MdDesignServices.toString(),
-          IconBgColor: '#80FFD9',
-          IconColor: '#00A372',
+          icon: 'MdDesignServices',
+          iconBgColor: '#80FFD9',
+          iconColor: '#00A372',
           label: 'Design',
         },
         {
-          icon: MdOutlineSchool.toString(),
-          IconBgColor: '#809CFF',
-          IconColor: '#0055A3',
+          icon: 'MdOutlineSchool',
+          iconBgColor: '#809CFF',
+          iconColor: '#0055A3',
           label: 'University',
         },
         {
-          icon: MdPeopleOutline.toString(),
-          IconBgColor: '#FF80EB',
-          IconColor: '#A30089',
+          icon: 'MdPeopleOutline',
+          iconBgColor: '#FF80EB',
+          iconColor: '#A30089',
           label: 'Social',
         },
         {
-          icon: IoMusicalNotesOutline.toString(),
-          IconBgColor: '#FC80FF',
-          IconColor: '#A000A3',
+          icon: 'IoMusicalNotesOutline',
+          iconBgColor: '#FC80FF',
+          iconColor: '#A000A3',
           label: 'Musick',
         },
         {
-          icon: IoHeartOutline.toString(),
-          IconBgColor: '#80FFA3',
-          IconColor: '#00A3A3',
+          icon: 'IoHeartOutline',
+          iconBgColor: '#80FFA3',
+          iconColor: '#00A3A3',
           label: 'Health',
         },
         {
-          icon: IoFilmOutline.toString(),
-          IconBgColor: '#80D1FF',
-          IconColor: '#0069A3',
+          icon: 'IoFilmOutline',
+          iconBgColor: '#80D1FF',
+          iconColor: '#0069A3',
           label: 'Movie',
         },
         {
-          icon: IoHomeOutline.toString(),
-          IconBgColor: '#FF8080',
-          IconColor: '#A30000',
+          icon: 'IoHomeOutline',
+          iconBgColor: '#FF8080',
+          iconColor: '#A30000',
           label: 'Home',
         },
         {
-          icon: MdAdd.toString(),
-          IconBgColor: '#80FFD1',
-          IconColor: '#00A369',
+          icon: 'MdAdd',
+          iconBgColor: '#80FFD1',
+          iconColor: '#00A369',
           label: 'Create New',
         },
       ],
+      addCategory: (newCategory: CategoryType) =>
+        set((state) => ({
+          categories: [newCategory, ...state.categories].filter(
+            (item, index, self) => self.indexOf(item) === index,
+          ),
+        })),
+      removeCategory: (oldCategory: CategoryType) =>
+        set((state) => ({
+          categories: state.categories.filter(
+            (category) => category.icon !== oldCategory.icon,
+          ),
+        })),
     }),
     { name: 'categories' },
   ),

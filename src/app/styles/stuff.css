@@ -22,12 +22,12 @@
 
 .categories-scrollbar::-webkit-scrollbar {
   width: 12px;
-  height: 8px;
+  height: 5px;
 }
 
 .categories-scrollbar::-webkit-scrollbar-track {
   width: 12px;
-  height: 8px;
+  height: 5px;
 }
 
 .categories-scrollbar::-webkit-scrollbar-thumb {

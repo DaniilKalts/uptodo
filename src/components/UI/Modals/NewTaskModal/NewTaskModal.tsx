@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/indent */
 
@@ -6,10 +8,12 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { CategoryType, TaskType } from '@/types';
-import { categories } from '@/data/Categories';
-// import useCategoriesStore from '@/store/useCategories';
 import { cn } from '@/utils/Cn';
+import { CategoryType, TaskType } from '@/types';
+import useCategoriesStore from '@/store/useCategories';
+
+import * as AllMdIcons from 'react-icons/md';
+import * as AllIo5Icons from 'react-icons/io5';
 
 import qs from 'query-string';
 
@@ -105,8 +109,9 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
   const taskCategory = watch('taskCategory');
   const taskPriority = watch('taskPriority');
 
-  // const storeCategories = useCategoriesStore((state) => state.categories);
-  // const [categories, setCategories] = useState<CategoryType[]>([]);
+  const storeCategories = useCategoriesStore((state) => state.categories);
+  const removeCategory = useCategoriesStore((state) => state.removeCategory);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
 
   const [step, setStep] = useState<number | null>(null);
 
@@ -145,8 +150,8 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
         completedAt: 0,
         category: {
           icon: taskCategory?.icon!,
-          IconBgColor: taskCategory?.IconBgColor!,
-          IconColor: taskCategory?.IconColor!,
+          iconBgColor: taskCategory?.iconBgColor!,
+          iconColor: taskCategory?.iconColor!,
           label: taskCategory?.label!,
         },
         priority: taskPriority!,
@@ -210,9 +215,9 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
     return 'text-white-pale hover:text-purple';
   };
 
-  // useEffect(() => {
-  //   setCategories(storeCategories);
-  // }, [storeCategories]);
+  useEffect(() => {
+    setCategories(storeCategories);
+  }, [storeCategories]);
 
   useEffect(() => {
     if (new Date().getHours() > 11) {
@@ -642,18 +647,42 @@ const NewTaskModal: React.FC<NewTaskModalInterface> = ({ isOpen, onClose }) => {
             key={id}
           >
             <button
-              className="flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors min-[500px]:h-[72px] min-[500px]:w-[72px]"
-              style={{ backgroundColor: category.IconBgColor }}
+              className="relative flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors min-[500px]:h-[72px] min-[500px]:w-[72px]"
+              style={{ backgroundColor: category.iconBgColor }}
               onClick={() => {
                 if (category.label !== 'Create New') {
                   setPotentialCategory(category);
                 } else if (category.label === 'Create New') {
                   router.push('/create-category');
-                  onClose();
+                  document.body.style.overflowY = 'auto';
                 }
               }}
             >
-              {category.icon({ size: '2.75em', color: category.IconColor })}
+              {category.label !== 'Create New' ? (
+                <div
+                  onClick={() => {
+                    const confirmToRemove = confirm(
+                      'Are you sure, you want to delete this category constantly?',
+                    );
+
+                    if (confirmToRemove) {
+                      removeCategory(category);
+                    }
+                  }}
+                  className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-red"
+                >
+                  x
+                </div>
+              ) : null}
+              {category.icon.includes('Md')
+                ? AllMdIcons[category.icon as keyof typeof AllMdIcons]({
+                    color: category.iconColor,
+                    className: 'w-9 h-9 min-[500px]:w-11 min-[500px]:h-11',
+                  })
+                : AllIo5Icons[category.icon as keyof typeof AllIo5Icons]({
+                    color: category.iconColor,
+                    className: 'w-9 h-9 min-[500px]:w-11 min-[500px]:h-11',
+                  })}
             </button>
             <p
               className={cn(

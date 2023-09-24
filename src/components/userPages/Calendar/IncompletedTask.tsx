@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/indent */
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import { TaskType } from '@/types';
 import { cn } from '@/utils/Cn';
+
+import * as AllMdIcons from 'react-icons/md';
+import * as AllIo5Icons from 'react-icons/io5';
 
 import qs from 'query-string';
 
@@ -94,7 +98,19 @@ const IncompletedTask: React.FC<IncompletedTaskInterface> = ({
         </p>
       </div>
       <div className="flex gap-4 min-[500px]:absolute min-[500px]:bottom-1 min-[500px]:right-2">
-        <div className="flex h-10 items-center gap-3 rounded-md px-3">
+        <div
+          className="flex h-10 items-center gap-3 rounded-md px-3"
+          style={{ backgroundColor: category.iconBgColor }}
+        >
+          {category.icon.includes('Md')
+            ? AllMdIcons[category.icon as keyof typeof AllMdIcons]({
+                color: category.iconColor,
+                className: 'w-6 h-6 min-[500px]:w-8 min-[500px]:h-8',
+              })
+            : AllIo5Icons[category.icon as keyof typeof AllIo5Icons]({
+                color: category.iconColor,
+                className: 'w-6 h-6 min-[500px]:w-8 min-[500px]:h-8',
+              })}
           <p className="text-sm text-white min-[500px]:text-base">
             {category.label}
           </p>

@@ -161,32 +161,37 @@ const Focus = () => {
               Time Spent:
             </h4>
             <FocusTask
-              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
-              bgIconColor="cyan-light"
-              title="Workout"
-              text="You spent 1 hour on Workout today"
-            />
-            <FocusTask
-              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
-              bgIconColor="beige-light"
+              icon="MdWorkOutline"
+              bgIconColor="#FF9680"
+              iconColor="#A31D00"
               title="Work"
-              text="You spent 6 hours on Work today"
+              text="You spent 6 hour on Work today"
             />
             <FocusTask
-              IconStyles={'w-7 h-7 min-[500px]:w-9 min-[500px]:h-9'}
-              bgIconColor="pink-light"
+              icon="MdDesignServices"
+              bgIconColor="#80FFD9"
+              iconColor="#00A372"
+              title="Design"
+              text="You spent 2 hours on Design today"
+            />
+            <FocusTask
+              icon="IoMusicalNotesOutline"
+              bgIconColor="#FC80FF"
+              iconColor="#A000A3"
               title="Musick"
               text="You spent 2 hours on Musick today"
             />
             <FocusTask
-              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
-              bgIconColor="mint-light"
+              icon="MdPeopleOutline"
+              bgIconColor="#80FFA3"
+              iconColor="#00A3A3"
               title="Health"
               text="You spent 1 hour on Health today"
             />
             <FocusTask
-              IconStyles={'w-8 h-8 min-[500px]:w-10 min-[500px]:h-10'}
-              bgIconColor="blue-light"
+              icon="MdOutlineSchool"
+              bgIconColor="#809CFF"
+              iconColor="#0055A3"
               title="University"
               text="You spent 3 hours on University today"
             />

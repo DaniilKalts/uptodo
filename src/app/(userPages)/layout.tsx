@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/indent */
+
 'use client';
 
 import React from 'react';
@@ -15,7 +17,10 @@ export default function RootLayout({
   return (
     <>
       {children}
-      {currentPathName !== '/create-category' ? <Navbar /> : null}
+      {!currentPathName.includes('/tasks') &&
+      !currentPathName.includes('/create-category') ? (
+        <Navbar />
+      ) : null}
     </>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
 
@@ -7,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { cn } from '@/utils/Cn';
+import useCategoriesStore from '@/store/useCategories';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -18,12 +20,13 @@ import * as AllMdIcons from 'react-icons/md';
 import * as AllIo5Icons from 'react-icons/io5';
 
 import Highlighter from 'react-highlight-words';
+import { HexColorPicker } from 'react-colorful';
 
 import { Button, Container, Input } from '@/components/UI';
 
 interface NewCategoryInputs extends FieldValues {
   categoryName: string;
-  categoryIconName: string;
+  categoryIcon: string;
   categoryIconBgColor: string;
   categoryIconColor: string;
 }
@@ -32,18 +35,16 @@ const schema = yup.object().shape({
   categoryName: yup
     .string()
     .required('Category name is required')
-    .min(3, 'Category name  must be at least 3 characters long')
-    .max(10, 'Category name  must not exceed 10 characters')
+    .min(3, 'Category name must be at least 3 characters long')
+    .max(10, 'Category name must not exceed 10 characters')
     .matches(
       /^[a-zA-Z0-9_]+$/,
       'Category name  can only contain alphanumeric characters and underscores',
     ),
-  categoryIconName: yup
-    .string()
-    .required('Category icon name name is required'),
+  categoryIcon: yup.string().required('Category icon is required'),
   categoryIconBgColor: yup
     .string()
-    .required('Category icon color is required')
+    .required('Category icon background color is required')
     .test(
       'uniqueBgColor',
       'Category icon background color must be different from icon color',
@@ -68,6 +69,28 @@ const schema = yup.object().shape({
 const DEFAULT_COLORS = [
   '#fff',
   '#444',
+  '#CCFF80',
+  '#21A300',
+  '#FF9680',
+  '#A31D00',
+  '#80FFFF',
+  '#0069A3',
+  '#80FFD9',
+  '#00A372',
+  '#809CFF',
+  '#0055A3',
+  '#FF80EB',
+  '#A30089',
+  '#FC80FF',
+  '#A000A3',
+  '#80FFA3',
+  '#00A3A3',
+  '#80D1FF',
+  '#0069A3',
+  '#FF8080',
+  '#A30000',
+  '#80FFD1',
+  '#00A369',
   '#C9CC41',
   '#66CC41',
   '#41CCA7',
@@ -91,7 +114,7 @@ const CreateCategory = () => {
     mode: 'all',
     defaultValues: {
       categoryName: '',
-      categoryIconName: '',
+      categoryIcon: '',
       categoryIconBgColor: '#444',
       categoryIconColor: '#fff',
     },
@@ -107,7 +130,7 @@ const CreateCategory = () => {
   };
 
   const categoryName = watch('categoryName');
-  const categoryIconName = watch('categoryIconName');
+  const categoryIcon = watch('categoryIcon');
   const categoryIconColor = watch('categoryIconColor');
   const categoryIconBgColor = watch('categoryIconBgColor');
 
@@ -116,7 +139,17 @@ const CreateCategory = () => {
   const [categorySelectedIcon, setCategorySelectedIcon] = useState<any>();
   const [categorySearchIcons, setCategorySearchIcons] = useState<any[]>([]);
 
-  // const [customColor, setCustomColor] = useState('#fff');
+  const [customColor, setCustomColor] = useState('#999');
+  const [customBgColor, setCustomBgColor] = useState('#999');
+
+  const [isSelectingCustomColor, setIsSelectingCustomColor] =
+    useState<boolean>(false);
+  const [isSelectingCustomBgColor, setIsSelectingCustomBgColor] =
+    useState<boolean>(false);
+
+  const addCategory = useCategoriesStore((state) => state.addCategory);
+
+  const [isAddingCategory, setIsAddingCategory] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<FieldValues> = (_, event) => {
     event?.preventDefault();
@@ -124,21 +157,24 @@ const CreateCategory = () => {
     if (
       !Object.keys(errors).length &&
       categoryName.length &&
-      categoryIconName.length &&
+      categoryIcon.length &&
       categoryIconBgColor.length &&
       categoryIconColor.length
     ) {
-      const storedCategories = localStorage.getItem('categories') || [];
-      console.log(storedCategories);
-
-      console.log(
-        JSON.stringify({
-          icon: categorySelectedIcon.Icon.toString(),
-          IconBgColor: categoryIconBgColor,
-          IconColor: categoryIconColor,
+      if (!isAddingCategory) {
+        addCategory({
+          icon: categoryIcon,
+          iconBgColor: isSelectingCustomBgColor
+            ? customBgColor
+            : categoryIconBgColor,
+          iconColor: isSelectingCustomColor ? customColor : categoryIconColor,
           label: categoryName,
-        }),
-      );
+        });
+      }
+
+      setIsAddingCategory(true);
+
+      router.back();
     }
   };
 
@@ -147,14 +183,13 @@ const CreateCategory = () => {
       Object.entries(Object.assign(AllMdIcons, AllIo5Icons))
         .filter(
           ([iconName]) =>
-            iconName
-              .toLocaleLowerCase()
-              .search(categoryIconName.toLowerCase()) > -1,
+            iconName.toLocaleLowerCase().search(categoryIcon.toLowerCase()) >
+            -1,
         )
         .slice(0, 200) || [];
 
     setCategorySearchIcons(searchingIcons as []);
-  }, [categoryIconName]);
+  }, [categoryIcon]);
 
   return (
     <Container>
@@ -184,7 +219,11 @@ const CreateCategory = () => {
             {categorySelectedIcon ? (
               <div
                 className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-lg"
-                style={{ backgroundColor: categoryIconBgColor }}
+                style={{
+                  backgroundColor: isSelectingCustomBgColor
+                    ? customBgColor
+                    : categoryIconBgColor,
+                }}
                 onClick={() => {
                   const confirmToReplace = confirm(
                     'Are you sure, you want to replace this icon?',
@@ -192,13 +231,15 @@ const CreateCategory = () => {
 
                   if (confirmToReplace) {
                     setCategorySelectedIcon(null);
-                    setCustomValue('categoryIconName', '');
+                    setCustomValue('categoryIcon', '');
                   }
                 }}
               >
                 <categorySelectedIcon.Icon
                   className="h-7 w-7 min-[500px]:h-9 min-[500px]:w-9"
-                  color={categoryIconColor || '#fff'}
+                  color={
+                    isSelectingCustomColor ? customColor : categoryIconColor
+                  }
                 />
               </div>
             ) : (
@@ -209,9 +250,9 @@ const CreateCategory = () => {
                 >
                   Choose icon from library
                 </div>
-                {errors.categoryIconName?.message && (
+                {errors.categoryIcon?.message && (
                   <p className="mt-1 text-red max-[500px]:text-[15px]">
-                    {errors.categoryIconName?.message}
+                    {errors.categoryIcon?.message}
                   </p>
                 )}
               </>
@@ -221,14 +262,14 @@ const CreateCategory = () => {
             <div className="flex flex-col gap-4">
               <div className="-mb-3 mt-3">
                 <Input
-                  id="categoryIconName"
+                  id="categoryIcon"
                   type="text"
-                  value={categoryIconName}
+                  value={categoryIcon}
                   placeholder="Category icon name"
                   register={register}
                   small
                   errors={errors}
-                  errorMessage={errors.categoryIconName?.message as string}
+                  errorMessage={errors.categoryIcon?.message as string}
                 />
               </div>
               <div className="grid max-h-96 grid-cols-4 gap-x-5 gap-y-4 overflow-auto min-[500px]:grid-cols-5">
@@ -240,24 +281,24 @@ const CreateCategory = () => {
                       onClick={() => {
                         setIsSelecting(false);
 
-                        setCustomValue('categoryIconName', iconName);
+                        setCustomValue('categoryIcon', iconName);
                         setCategorySelectedIcon({
                           iconName,
                           Icon,
                         });
                       }}
                     >
-                      <div className="flex items-center justify-center bg-gray-dark px-8 py-4 transition-colors group-hover:bg-gray-500">
+                      <div className="flex items-center justify-center bg-gray-dark px-8 py-4 text-white transition-colors group-hover:bg-gray-500">
                         <Icon
                           className={cn(
-                            'h-7 w-7 min-[500px]:h-9 min-[500px]:w-9',
+                            'h-7 w-7  min-[500px]:h-9 min-[500px]:w-9',
                             categoryIconColor,
                           )}
                         />
                       </div>
                       <Highlighter
                         className="pt-2 text-[.7em]"
-                        searchWords={categoryIconName.split(' ')}
+                        searchWords={categoryIcon.split(' ')}
                         autoEscape={true}
                         textToHighlight={iconName.slice(2, iconName.length)}
                       />
@@ -268,19 +309,71 @@ const CreateCategory = () => {
             </div>
           ) : null}
           <div className="my-4 min-[500px]:my-5">
-            <p className="mb-4 text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
+            <p className="mb-1 text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
               Category icon color :
             </p>
-            <div className="categories-scrollbar flex gap-4 overflow-x-auto pb-3">
-              {DEFAULT_COLORS.map((color: string) => (
+            {isSelectingCustomColor ? (
+              <div className="mb-5 flex flex-col gap-5">
+                <HexColorPicker color={customColor} onChange={setCustomColor} />
+                <input
+                  placeholder="icon color"
+                  className="w-fit bg-gray-light text-white"
+                  onChange={(e) => setCustomColor(e.target.value)}
+                  value={customColor}
+                />
+              </div>
+            ) : null}
+            <div className="categories-scrollbar flex gap-4 overflow-x-auto pb-3 pt-3">
+              <div
+                onClick={() => {
+                  if (isSelectingCustomColor) {
+                    setIsSelectingCustomColor(false);
+                    setCustomValue('categoryIconColor', customColor);
+                    if (!DEFAULT_COLORS.includes(customColor)) {
+                      DEFAULT_COLORS.unshift(customColor);
+                      setCustomColor('#999');
+                    }
+                  } else {
+                    setIsSelectingCustomColor(true);
+                  }
+                }}
+              >
                 <div
-                  key={color}
-                  onClick={() => setCustomValue('categoryIconColor', color)}
+                  className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-2xl hover:opacity-90 min-[500px]:h-11 min-[500px]:w-11 min-[500px]:text-3xl"
+                  style={{ backgroundColor: customColor }}
+                >
+                  +
+                </div>
+              </div>
+              {DEFAULT_COLORS.map((color: string, id) => (
+                <div
+                  key={`${id}iconColor`}
+                  onClick={() => {
+                    setCustomColor(color);
+                    setCustomValue('categoryIconColor', color);
+                  }}
                 >
                   <div
-                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:opacity-90 min-[500px]:h-11 min-[500px]:w-11"
+                    className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:opacity-90 min-[500px]:h-11 min-[500px]:w-11"
                     style={{ backgroundColor: color }}
                   >
+                    <div
+                      onClick={() => {
+                        const confirmToRemove = confirm(
+                          'Are you sure, you want to delete this color?',
+                        );
+
+                        if (confirmToRemove) {
+                          DEFAULT_COLORS.splice(
+                            DEFAULT_COLORS.findIndex((clr) => clr === color),
+                            1,
+                          );
+                        }
+                      }}
+                      className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-red"
+                    >
+                      x
+                    </div>
                     {categoryIconColor === color ? (
                       <svg
                         className={cn(
@@ -314,19 +407,75 @@ const CreateCategory = () => {
             )}
           </div>
           <div className="mb-4">
-            <p className="mb-4 text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
+            <p className="mb-1 text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
               Category icon background color :
             </p>
-            <div className="categories-scrollbar flex gap-4 overflow-x-auto pb-3">
-              {DEFAULT_COLORS.map((color: string) => (
+            {isSelectingCustomBgColor ? (
+              <div className="mb-5 flex flex-col gap-5">
+                <HexColorPicker
+                  color={customBgColor}
+                  onChange={setCustomBgColor}
+                  className="mb-5"
+                />
+                <input
+                  placeholder="icon color"
+                  className="w-fit bg-gray-light text-white"
+                  onChange={(e) => setCustomBgColor(e.target.value)}
+                  value={customBgColor}
+                />
+              </div>
+            ) : null}
+            <div className="categories-scrollbar flex gap-4 overflow-x-auto pb-3 pt-3">
+              <div
+                onClick={() => {
+                  if (isSelectingCustomBgColor) {
+                    setIsSelectingCustomBgColor(false);
+                    setCustomValue('categoryIconBgColor', customBgColor);
+                    if (!DEFAULT_COLORS.includes(customBgColor)) {
+                      DEFAULT_COLORS.unshift(customBgColor);
+                      setCustomBgColor('#999');
+                    }
+                  } else {
+                    setIsSelectingCustomBgColor(true);
+                  }
+                }}
+              >
                 <div
-                  key={color}
-                  onClick={() => setCustomValue('categoryIconBgColor', color)}
+                  className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-2xl hover:opacity-90 min-[500px]:h-11 min-[500px]:w-11 min-[500px]:text-3xl"
+                  style={{ backgroundColor: customBgColor }}
+                >
+                  +
+                </div>
+              </div>
+              {DEFAULT_COLORS.map((color: string, id) => (
+                <div
+                  key={`${id}iconBgColor`}
+                  onClick={() => {
+                    setCustomBgColor(color);
+                    setCustomValue('categoryIconBgColor', color);
+                  }}
                 >
                   <div
-                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:opacity-90 min-[500px]:h-11 min-[500px]:w-11"
+                    className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:opacity-90 min-[500px]:h-11 min-[500px]:w-11"
                     style={{ backgroundColor: color }}
                   >
+                    <div
+                      onClick={() => {
+                        const confirmToRemove = confirm(
+                          'Are you sure, you want to delete this color?',
+                        );
+
+                        if (confirmToRemove) {
+                          DEFAULT_COLORS.splice(
+                            DEFAULT_COLORS.findIndex((clr) => clr === color),
+                            1,
+                          );
+                        }
+                      }}
+                      className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-red"
+                    >
+                      x
+                    </div>
                     {categoryIconBgColor === color ? (
                       <svg
                         className={cn(
@@ -360,20 +509,24 @@ const CreateCategory = () => {
             )}
           </div>
         </main>
-        <footer className="mx-auto mt-16 flex w-full max-w-lg items-center justify-between min-[500px]:gap-8">
-          <Button
-            label="Cancel"
-            onClick={() => {
-              router.back();
-            }}
-          />
-          <Button
-            type="submit"
-            label="Create Category"
-            onClick={onSubmit}
-            disabled={!!Object.keys(errors).length}
-            filled
-          />
+        <footer className="mx-auto mt-16 flex w-full max-w-lg items-center justify-between min-[500px]:gap-14">
+          <div className="w-2/5 min-[500px]:w-1/2">
+            <Button
+              label="Cancel"
+              onClick={() => {
+                router.back();
+              }}
+            />
+          </div>
+          <div className="w-3/5 max-[500px]:max-w-[175px] min-[500px]:w-1/2">
+            <Button
+              type="submit"
+              label="Create Category"
+              onClick={onSubmit}
+              disabled={!!Object.keys(errors).length || isAddingCategory}
+              filled
+            />
+          </div>
         </footer>
       </form>
     </Container>
