@@ -8,6 +8,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSession, signOut } from 'next-auth/react';
 
 import useTasksStore from '@/store/useTasksStore';
 import { cn } from '@/utils/Cn';
@@ -61,11 +62,7 @@ const schema = yup.object().shape({
     .string()
     .required('Username is required')
     .min(3, 'Username must be at least 3 characters long')
-    .max(20, 'Username must not exceed 20 characters')
-    .matches(
-      /^[a-zA-Z0-9_]+$/,
-      'Username can only contain alphanumeric characters and underscores',
-    ),
+    .max(20, 'Username must not exceed 20 characters'),
   accountOldPassword: yup
     .string()
     .required('Old password is required')
@@ -127,6 +124,7 @@ const Profile = () => {
     >,
   });
 
+  const session = useSession();
   const [accountAvatar, setAccountAvatar] = useState<string>('');
 
   const accountName = watch('accountName');
@@ -333,8 +331,12 @@ const Profile = () => {
   useEffect(() => {
     if (localStorage.getItem('accountAvatar')) {
       setAccountAvatar(localStorage.getItem('accountAvatar')!);
+    } else {
+      setAccountAvatar(session.data?.user?.image!);
+      setInitialAccountName(session.data?.user?.name!);
+      setCustomValue('accountName', session.data?.user?.name!);
     }
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     if (storeIncompletedTasks.length) {
@@ -1021,7 +1023,15 @@ const Profile = () => {
                 link="profile/support-us"
                 svg={SupportIcon}
               />
-              <ProfileLink text="Log out" link="login" svg={LogOutIcon} />
+              <div
+                onClick={() => signOut({ callbackUrl: '/login' })}
+                className="group flex cursor-pointer items-center gap-3 py-3"
+              >
+                {LogOutIcon}
+                <p className="text-base text-red group-hover:text-red-dark min-[500px]:text-lg">
+                  Log out
+                </p>
+              </div>
             </section>
           </main>
         </div>

@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 import useTasksStore from '@/store/useTasksStore';
 import { TaskType } from '@/types';
@@ -21,6 +22,8 @@ import AvatarModal from '@/components/UI/Modals/AvatarModal';
 import { Container } from '@/components/UI';
 
 const Home = () => {
+  const session = useSession();
+
   const [isAvatarModal, setIsAvatarModal] = useState<boolean>(false);
   const showAvatar = () => {
     setIsAvatarModal((prev) => !prev);
@@ -153,12 +156,16 @@ const Home = () => {
   }, [storeCompletedTasks]);
 
   useEffect(() => {
-    setAccountAvatar(localStorage.getItem('accountAvatar')!);
+    if (localStorage.getItem('accountAvatar')) {
+      setAccountAvatar(localStorage.getItem('accountAvatar')!);
+    } else {
+      setAccountAvatar(session.data?.user?.image!);
+    }
 
     setTimeout(() => {
       setMounted(true);
     }, 100);
-  }, []);
+  }, [session]);
 
   if (!mounted) {
     return (

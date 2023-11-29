@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -72,35 +73,39 @@ const Login = () => {
   const onSubmit: SubmitHandler<FieldValues> = (_, event) => {
     event?.preventDefault();
 
-    if (userName.length && password.length) {
-      setIsLoading(true);
-      const toastLoading = toast.loading('Loading...');
+    setIsLoading(true);
+    toast.loading('Loading...');
 
-      setTimeout(() => {
-        setIsLoading(false);
+    reset();
 
-        toast.remove(toastLoading);
-        toast.error('Invalid email or password!', {
-          duration: 2000,
-        });
+    // if (userName.length && password.length) {
+    //   setIsLoading(true);
+    //   const toastLoading = toast.loading('Loading...');
 
-        router.push('home');
+    //   setTimeout(() => {
+    //     setIsLoading(false);
 
-        reset();
-      }, 2000);
-    }
+    //     toast.remove(toastLoading);
+    //     toast.error('Invalid email or password!', {
+    //       duration: 2000,
+    //     });
+
+    //     router.push('home');
+
+    // reset();
+    //   }, 2000);
+    // }
   };
 
   const googleSignIn = async () => {
     setIsGoogleLoading(true);
 
     try {
-      // signIn('google');
+      signIn('google', { callbackUrl: '/home' });
     } catch (err) {
       toast.error('Something went wrong!', {
         duration: 2000,
       });
-    } finally {
       setIsGoogleLoading(false);
     }
   };
@@ -109,12 +114,11 @@ const Login = () => {
     setIsGithubLoading(true);
 
     try {
-      // signIn('github');
+      signIn('github', { callbackUrl: '/home' });
     } catch (err) {
       toast.error('Something went wrong!', {
         duration: 2000,
       });
-    } finally {
       setIsGithubLoading(false);
     }
   };
@@ -179,6 +183,7 @@ const Login = () => {
             onClick={googleSignIn}
             outline="purple"
             disabled={isGoogleLoading}
+            isLoading={isGoogleLoading}
             icon={FcGoogle}
           />
           <Button
@@ -186,6 +191,7 @@ const Login = () => {
             onClick={githubSignIn}
             outline="purple"
             disabled={isGithubLoading}
+            isLoading={isGithubLoading}
             icon={AiFillGithub}
           />
         </div>

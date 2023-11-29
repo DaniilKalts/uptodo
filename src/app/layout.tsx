@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import ToasterProvider from '@/providers/ToasterProvider';
 import FontProvider from '@/providers/FontProvider';
+import { SessionProvider } from '@/providers/SessionProvider';
 
 export const metadata: Metadata = {
   title: 'UpTodo 2023',
@@ -20,12 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={'bg-white-pale dark:bg-black-pre'}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <FontProvider>
-            <ToasterProvider />
-            {children}
-          </FontProvider>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <FontProvider>
+              <ToasterProvider />
+              {children}
+            </FontProvider>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

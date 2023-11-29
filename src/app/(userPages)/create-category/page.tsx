@@ -309,7 +309,7 @@ const CreateCategory = () => {
             </div>
           ) : null}
           <div className="my-4 min-[500px]:my-5">
-            <p className="mb-1 text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
+            <p className="mb-1 text-sm text-gray-dark dark:text-white-pale min-[500px]:text-xl">
               Category icon color :
             </p>
             {isSelectingCustomColor ? (
@@ -407,7 +407,7 @@ const CreateCategory = () => {
             )}
           </div>
           <div className="mb-4">
-            <p className="mb-1 text-base text-gray-dark dark:text-white-pale min-[500px]:text-xl">
+            <p className="mb-1 text-sm text-gray-dark dark:text-white-pale min-[500px]:text-xl">
               Category icon background color :
             </p>
             {isSelectingCustomBgColor ? (

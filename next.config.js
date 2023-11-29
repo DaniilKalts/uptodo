@@ -29,7 +29,11 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['drive.google.com'],
+    domains: [
+      'drive.google.com',
+      'lh3.googleusercontent.com',
+      'avatars.githubusercontent.com',
+    ],
   },
   i18n: {
     locales: ['en-US', 'fr'],
